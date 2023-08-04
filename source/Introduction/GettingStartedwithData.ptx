@@ -1,0 +1,491 @@
+<?xml version="1.0"?>
+<section xml:id="introduction_getting-started-with-data">
+  <title>Getting Started with Data</title>
+  <introduction>
+  <p>We stated above that Java supports the object-oriented programming
+            paradigm. This means that Java considers data to be the focal point of
+            the problem-solving process. In Java, as well as in any other
+            object-oriented programming language, we define a <term>class</term> to be a
+            description of what the data look like (the state) and what the data can
+            do (the behavior). Classes are analogous to abstract data types because
+            a user of a class only sees the state and behavior of a data item. Data
+            items are called <term>objects</term> in the object-oriented paradigm. An object
+            is an instance of a class.</p>
+        </introduction>
+  <subsection xml:id="introduction_primitive-data-types">
+    <title>Primitive Data Types</title>
+    <p>We will begin our review by considering the <term>primitive</term> data types. Java
+                has two main built-in numeric data types that implement integers and
+                floating-point values. These Python classes are called <c>int</c> and
+                <c>double</c>. The standard arithmetic operators, +, -, *, and / can be used with parentheses forcing the order of
+                operations away from normal operator precedence. Another very useful
+                operator is the remainder (modulo) operator (%).
+                Note that when two integers are divided, the result is an integer.
+              </p>
+              <p>To do exponentiation, you use the built-in <c>Math.pow()</c> method, which always yields a <c>double</c> result.</p>
+              <p>
+                The folllowing listing shows some arithmetic expressions and their results.
+                The <c>//</c> introduces a Java <term>comment</term>; Java ignores everything from
+                the <c>//</c> to the end of the line.
+                point.</p>
+    <program xml:id="intro_1" language="java">
+      <input>
+2 + 3 * 4        // 14
+(2 + 3) * 4      // 20
+Math.pow(2, 10)  // 1024.0
+8 / 4            // 2
+11 / 4           // 2
+11.0 / 4         // 2.75
+11 % 4           // 3
+3 / 6            // 0
+Math.pow(2, 100) // 1.2676506002282294E30
+        </input>
+    </program>
+
+    <p>The Boolean data type, implemented as the Java <c>boolean</c> atomic data type, is
+    quite useful for re presenting truth values. The possible values
+    for a <c>boolean</c> variable are <c>true</c> and <c>false</c>, with the standard
+    Boolean operators, <c>&amp;&amp;</c> (and), <c>||</c> (or), and <c>!</c> (not).</p>
+
+    <p>Boolean values are also used as results for comparison operators such as equality (==) and greater than (<m>&gt;</m>). In addition, relational operators and logical operators can be combined together to form complex logical questions. <xref ref="introduction_tab-relational"/> shows the relational and logical operators.</p>
+
+    <table xml:id="introduction_tab-relational">
+      <tabular>
+        <title>
+          <term>Table 1: Relational and Logical Operators</term>
+        </title>
+        <row header="yes">
+          <cell><term>Operation Name</term></cell>
+          <cell><term>Operator</term></cell>
+          <cell><term>Explanation</term></cell>
+        </row>
+        <row>
+          <cell>less than</cell>
+          <cell><c>&lt;</c></cell>
+          <cell>Less than operator</cell>
+        </row>
+        <row>
+          <cell>greater than</cell>
+          <cell><c>&gt;</c></cell>
+          <cell>Greater than operator</cell>
+        </row>
+        <row>
+          <cell>less than or equal</cell>
+          <cell><c>&lt;=</c></cell>
+          <cell>Less than or equal to operator</cell>
+        </row>
+        <row>
+          <cell>greater than or equal</cell>
+          <cell><c>&gt;=</c></cell>
+          <cell>Greater than or equal to operator</cell>
+        </row>
+        <row>
+          <cell>equal</cell>
+          <cell><c>==</c></cell>
+          <cell>Equality operator</cell>
+        </row>
+        <row>
+          <cell>not equal</cell>
+          <cell><c>!=</c></cell>
+          <cell>Not equal operator</cell>
+        </row>
+        <row>
+          <cell>logical and</cell>
+          <cell><c>&amp;&amp;</c></cell>
+          <cell>Both operands true for result to be true</cell>
+        </row>
+        <row>
+          <cell>logical or</cell>
+          <cell><c>||</c></cell>
+          <cell>One or the other operand is true for the result to be true</cell>
+        </row>
+        <row>
+          <cell>logical not</cell>
+          <cell><c>!</c></cell>
+          <cell>Negates the truth value, false becomes true, true becomes false</cell>
+        </row>
+      </tabular>
+    </table>
+
+    <p>Here are examples of boolean expressions using these operators. Notice that, in the last example, you <em>must</em> fully write out both conditions; unlike some languages, you cannot write it as <c>2 &lt; 7 &lt; 12</c>.</p>
+
+    <program xml:id="intro_2" language="java">
+      <input>
+5 == 10                   // false
+10 &gt; 5                    // true
+(5 &gt;= 1) &amp;&amp; (5 &lt;= 10)     // true
+(1 &lt; 5) || (10 &lt; 1)       // true
+(2 &lt; 7) &amp;&amp; (7 &lt; 12)      // true
+        </input>
+    </program>
+
+    <p>Identifiers are used in programming languages as names. In Java, identifiers consist of a sequence of Unicode letters, digits, dollar sign ($), or underscore (_). The first character must be a letter, dollar sign ($), or an underscore (_). Identifiers are case sensitive and can be of any length. Remember that it is always a good idea to use names that convey meaning so that your program code is easier to read and understand.</p>
+
+    <p>By convention, Java names consisting of more than one word use <term>camel case</term>, where the first word of the name starts with a lower case letter and the first letter of subsequent words are capitalized, such as <c>salesTax</c> and <c>partsPerMillion</c>.</p>
+
+      <p>In Java, you must <term>declare</term> a variable before you use it. You declare a variable by putting the data type before the variable name.  Assignment statements provide a way to associate a name with a value. The variable will hold the data specified on the right-hand side of the assignment operator (<c>=</c>). Consider the following session:</p>
+
+
+    <pre>jshell> int theSum = 0;
+theSum ==> 0
+
+jshell> theSum = theSum + 1;
+theSum ==> 1
+
+jshell> theSum = true;
+|  Error:
+|  incompatible types: boolean cannot be converted to int
+|  theSum = true;
+|           ^--^
+
+jshell> double doubleSum = theSum;
+doubleSum ==> 1.0
+
+</pre>
+    <p>The assignment statement <c>theSum = 0;</c> creates an integer variable called
+                <c>theSum</c> and lets it hold the value <c>0</c> (see
+                <xref ref="fig-assignment1"/>). In general, the right-hand side of the assignment
+                statement is evaluated and the resulting value is
+                assigned to the name on the left-hand side. In the second statement, the right-hand side gets the current value of <c>theSum</c> (zero) and adds one; the resulting value is re-assigned as the value of the variable (see <xref ref="fig-assignment2"/>) Once you declare a variable's data type, Java will not let you assign an
+                incompatible data type (the third assignment).  In the last example, you can see
+                that a compatible data type (<c>double</c> values are compatible with <c>int</c>) is
+                allowed, and Java implicitly converts the integer value to floating point.</p>
+
+    <figure align="center" xml:id="fig-assignment1">
+      <caption>Primitive Data Type Variables Hold Values</caption>
+      <image source="Introduction/Figures/assignment1.png" width="20%"/>
+    </figure>
+    <figure align="center" xml:id="fig-assignment2">
+      <caption>Assignment Changes the Value</caption>
+      <image source="Introduction/Figures/assignment2.png" width="20%"/>
+    </figure>
+
+    <p>The final primitive data type that we want to introduce is <c>char</c>, which contains a single 16-bit Unicode character.</p>
+  </subsection>
+
+  <subsection xml:id="introduction_strings">
+    <title>Strings</title>
+     <p>In addition to the numeric and boolean types, Java has a number of
+       data types which are <term>objects</term>.  In Java, as well as in any other object-oriented programming language, we define a <term>class</term> to be a description of what the data look like (the state) and what the data can do (the behavior). Classes are analogous to abstract data types because a user of a class only sees the state and behavior of a data item. Data items are called objects in the object-oriented paradigm. An object is an <term>instance</term> of a class.</p>
+     <p>Unlike primitive data types, where a variable stores the data value, objects are <term>reference types</term>. An object does not contain the state; it refers to the area of memory where the data resides.  For example, in this string declaration:</p>
+
+     <pre>String word = "computer";</pre>
+
+     <p>you can visualize the reference as in <xref ref="fig-reference1"/>:</p>
+
+         <figure align="center" xml:id="fig-reference1">
+      <caption>A String is a reference type</caption>
+      <image source="Introduction/Figures/reference1.png" width="50%"/>
+    </figure>
+
+    <p>Notice that the data type <c>String</c> starts with a capital letter. By convention, all class names in Java begin with a capital letter. To invoke an object's <term>method</term> (its behavior) or a <term>field</term> (its state), you use <term>dot notation</term>: give the variable name, then a dot, then the method or field desired. For example, to find the length of a String, you use the <c>length()</c> method:</p>
+
+    <pre>jshell> String word = "computer";
+word ==> "computer"
+
+jshell> word.length()
+$2 ==> 8
+      </pre>
+
+      <p>The <c>+</c> operator allows you to <term>concatenate</term> Strings. When concatenating a number with a String, the number will be converted to a String. Note that the order of operations is important:</p>
+
+      <pre>jshell> String word2 = "door" + "bell";
+word2 ==> "doorbell"
+
+jshell> String word3 = 40 + 36 + " trombones"; // numeric addition first
+word3 ==> "76 trombones"
+
+jshell> String word4 = "eyesight " + 20 + 20; // all String concatenation
+word4 ==> "eyesight 2020"</pre>
+
+    <p>Some of the methods available for Strings are shown in <xref ref="introduction_tab-stringmethods"/>.</p>
+    <table xml:id="introduction_tab-stringmethods">
+      <tabular>
+        <title>
+          <term>Table 4: Methods Provided by the Java String Class</term>
+        </title>
+        <row header="yes">
+          <cell><term>Method Name</term></cell>
+          <cell><term>Use</term></cell>
+          <cell><term>Explanation</term></cell>
+        </row>
+        <row>
+          <cell><c>length</c></cell>
+          <cell><c>str.length()</c></cell>
+          <cell>Returns the number of characters in the string</cell>
+        </row>
+        <row>
+          <cell><c>charAt</c></cell>
+          <cell><c>str.charAt(index)</c></cell>
+          <cell>Returns the character at the given index. This returns a <c>char</c> primitive, not a <c>String</c>.</cell>
+        </row>
+        <row>
+          <cell><c>substring(start, end)</c></cell>
+          <cell><c>str.substring(s, e)</c></cell>
+          <cell>Returns the portion of the string starting at given start index up to <em>but not including</em> the end index</cell>
+        </row>
+        <row>
+          <cell><c>substring(start)</c></cell>
+          <cell><c>str.substring(s)</c></cell>
+          <cell>Returns the portion of the string starting at given start index to the end of the string</cell>
+        </row>
+        <row>
+          <cell><c>toLowerCase</c></cell>
+          <cell><c>str.toLowerCase()</c></cell>
+          <cell>Returns the string with all letters in lower case</cell>
+        </row>
+        <row>
+          <cell><c>toUpperCase</c></cell>
+          <cell><c>str.toUpperCase()</c></cell>
+          <cell>Returns the string with all letters in upper case</cell>
+        </row>
+        <row>
+          <cell><c>strip</c></cell>
+          <cell><c>str.strip()</c></cell>
+          <cell>Returns a string with all leading and trailing whitespace removed</cell>
+        </row>
+        <row>
+          <cell><c>split</c></cell>
+          <cell><c>str.split(delimiter_str)</c></cell>
+          <cell>Splits a string into an array of substrings at <c>delimiter_str</c></cell>
+        </row>
+      </tabular>
+    </table>
+    <p>Of these, <c>split</c> will be very useful for processing data. <c>split</c>
+                will take a string and return an array of strings using the split
+                delimiter as a division point. The first example uses <q>-</q> as the delimiter; the second uses a semicolon followed by a space as the delimiter.</p>
+    <pre>jshell> String s1 = "1900-05-07";
+s1 ==> "1900-05-07"
+
+jshell> s1.split("-")
+$2 ==> String[3] { "1900", "05", "07" }
+
+jshell> String s2 = "abc, de, fghi";
+s2 ==> "abc, de, fghi"
+
+jshell> s2.split(", ");
+$3 ==> String[3] { "abc", "de", "fghi" }</pre>
+    </subsection>
+
+  <subsection xml:id="introduction_arrays">
+    <title>Arrays</title>
+
+    <p>An <term>array</term> is an ordered collection of zero or more primitves or other objects. To declare an array, you follow the data type with a pair of square brackets <c>[]</c>. You can initialize an array by assigning a comma-separated list of values enclosed in braces <c>{}</c>:</p>
+
+    <pre>int[] ages = {32, 47, 19, 62};
+double[] prices = {12.95, 13.88, 10.66};
+String[] words = {"ant", "bee", "cat", "dog", "elk"};</pre>
+
+<p><xref ref="fig-arrays"/> shows a diagram of the references in the preceding array declarations.</p>
+
+           <figure align="center" xml:id="fig-arrays">
+      <caption>Arrays are References</caption>
+      <image source="Introduction/Figures/array_diagram.png" width="50%"/>
+    </figure>
+
+<p>Unlike primitive values, arrays are a <term>reference</term> data type. The variable name does not contain the data; it contains a reference to where the data is stored in memory.</p>
+    <p>Note that when Python evaluates a list, the list itself is returned.
+                However, in order to remember the list for later processing, its
+                reference needs to be assigned to a variable.</p>
+    <p>Since lists are considered to be sequentially ordered, they support a
+                number of operations that can be applied to any Python sequence.
+                <xref ref="introduction_tab-sequence"/> reviews these operations and the following session
+                gives examples of their use.</p>
+    <table xml:id="introduction_tab-sequence">
+      <tabular>
+        <title>
+          <term>Table 2: Operations on Any Sequence in Python</term>
+        </title>
+        <row header="yes">
+          <cell><term>Operation Name</term></cell>
+          <cell><term>Operator</term></cell>
+          <cell><term>Explanation</term></cell>
+        </row>
+        <row>
+          <cell>indexing</cell>
+          <cell>[ ]</cell>
+          <cell>Access an element of a sequence</cell>
+        </row>
+        <row>
+          <cell>concatenation</cell>
+          <cell>+</cell>
+          <cell>Combine sequences together</cell>
+        </row>
+        <row>
+          <cell>repetition</cell>
+          <cell>*</cell>
+          <cell>Concatenate a repeated number of times</cell>
+        </row>
+        <row>
+          <cell>membership</cell>
+          <cell>in</cell>
+          <cell>Ask whether an item is in a sequence</cell>
+        </row>
+        <row>
+          <cell>length</cell>
+          <cell>len</cell>
+          <cell>Ask the number of items in the sequence</cell>
+        </row>
+        <row>
+          <cell>slicing</cell>
+          <cell>[ : ]</cell>
+          <cell>Extract a part of a sequence</cell>
+        </row>
+      </tabular>
+    </table>
+    <p>Note that the indices for lists (sequences) start counting with 0. The
+                slice operation my_list[1:3] returns a list of items starting with the
+                item indexed by 1 up to&#x2014;but not including&#x2014;the item indexed by 3.</p>
+    <p>Sometimes you will want to initialize a list. This can quickly be
+                accomplished by using repetition. For example,</p>
+    <pre>&gt;&gt;&gt; my_list = [0] * 6
+&gt;&gt;&gt; my_list
+[0, 0, 0, 0, 0, 0]</pre>
+    <p>One very important aside relating to the repetition operator is that the
+                result is a repetition of references to the data objects in the
+                sequence. This can best be seen by considering the following session:</p>
+    <program xml:id="intro_3" interactive="activecode" language="python">
+      <input>
+my_list = [1, 2, 3, 4]
+big_list = [my_list] * 3
+print(big_list)
+my_list[2] = 45
+print(big_list)
+        </input>
+    </program>
+    <p>The variable <c>big_list</c> holds a collection of three references to the
+                original list called <c>my_list</c>. Note that a change to one element of
+                <c>my_list</c> shows up in all three occurrences in <c>big_list</c>.</p>
+    <p>Lists support a number of methods that will be used to build data
+                structures. <xref ref="introduction_tab-listmethods"/> provides a summary. Examples of their
+                use follow.</p>
+    <table xml:id="introduction_tab-listmethods">
+      <tabular>
+        <title>
+          <term>Table 3: Methods Provided by Lists in Python</term>
+        </title>
+        <row header="yes">
+          <cell><term>Method Name</term></cell>
+          <cell><term>Use</term></cell>
+          <cell><term>Explanation</term></cell>
+        </row>
+        <row>
+          <cell><c>append</c></cell>
+          <cell><c>a_list.append(item)</c></cell>
+          <cell>Adds a new item to the end of a list</cell>
+        </row>
+        <row>
+          <cell><c>insert</c></cell>
+          <cell><c>a_list.insert(i,item)</c></cell>
+          <cell>Inserts an item at the ith position in a list</cell>
+        </row>
+        <row>
+          <cell><c>pop</c></cell>
+          <cell><c>a_list.pop()</c></cell>
+          <cell>Removes and returns the last item in a list</cell>
+        </row>
+        <row>
+          <cell><c>pop</c></cell>
+          <cell><c>a_list.pop(i)</c></cell>
+          <cell>Removes and returns the ith item in a list</cell>
+        </row>
+        <row>
+          <cell><c>sort</c></cell>
+          <cell><c>a_list.sort()</c></cell>
+          <cell>Sorts a list in place</cell>
+        </row>
+        <row>
+          <cell><c>reverse</c></cell>
+          <cell><c>a_list.reverse()</c></cell>
+          <cell>Modifies a list to be in reverse order</cell>
+        </row>
+        <row>
+          <cell><c>del</c></cell>
+          <cell><c>del a_list[i]</c></cell>
+          <cell>Deletes the item in the ith position</cell>
+        </row>
+        <row>
+          <cell><c>index</c></cell>
+          <cell><c>a_list.index(item)</c></cell>
+          <cell>Returns the index of the first occurrence of <c>item</c></cell>
+        </row>
+        <row>
+          <cell><c>count</c></cell>
+          <cell><c>a_list.count(item)</c></cell>
+          <cell>Returns the number of occurrences of <c>item</c></cell>
+        </row>
+        <row>
+          <cell><c>remove</c></cell>
+          <cell><c>a_list.remove(item)</c></cell>
+          <cell>Removes the first occurrence of <c>item</c></cell>
+        </row>
+      </tabular>
+    </table>
+    <program xml:id="intro_5" interactive="activecode" language="python">
+      <input>
+my_list = [1024, 3, True, 6.5]
+my_list.append(False)
+print(my_list)
+my_list.insert(2,4.5)
+print(my_list)
+print(my_list.pop())
+print(my_list)
+print(my_list.pop(1))
+print(my_list)
+my_list.pop(2)
+print(my_list)
+my_list.sort()
+print(my_list)
+my_list.reverse()
+print(my_list)
+print(my_list.count(6.5))
+print(my_list.index(4.5))
+my_list.remove(6.5)
+print(my_list)
+del my_list[0]
+print(my_list)
+        </input>
+    </program>
+    <p>You can see that some of the methods, such as <c>pop</c>, return a value
+                and also modify the list. Others, such as <c>reverse</c>, simply modify the
+                list with no return value. <c>pop</c> will default to the end of the list
+                but can also remove and return a specific item. The index range starting
+                from 0 is again used for these methods. You should also notice the
+                familiar <q>dot</q> notation for asking an object to invoke a method.
+                <c>my_list.append(False)</c> can be read as <q>ask the object <c>my_list</c> to
+                perform its <c>append</c> method and send it the value <c>False</c>.</q> Even
+                simple data objects such as integers can invoke methods in this way.</p>
+    <pre>&gt;&gt;&gt; (54).__add__(21)
+75</pre>
+    <p>In this fragment we are asking the integer object <c>54</c> to execute its
+                <c>add</c> method (called <c>__add__</c> in Python) and passing it <c>21</c> as
+                the value to add. The result is the sum, <c>75</c>. Of course, we usually
+                write this as <c>54+21</c>. We will say much more about these methods later
+                in this section.</p>
+    <p>One common Python function that is often discussed in conjunction with
+                lists is the <c>range</c> function. <c>range</c> produces a range object that
+                represents a sequence of values. By using the <c>list</c> function, it is
+                possible to see the value of the range object as a list. This is
+                illustrated below.</p>
+    <pre>&gt;&gt;&gt; range(10)
+range(0, 10)
+&gt;&gt;&gt; list(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; range(5, 10)
+range(5, 10)
+&gt;&gt;&gt; list(range(5, 10))
+[5, 6, 7, 8, 9]
+&gt;&gt;&gt; list(range(5, 10, 2))
+[5, 7, 9]
+&gt;&gt;&gt; list(range(10, 1, -1))
+[10, 9, 8, 7, 6, 5, 4, 3, 2]</pre>
+    <p>The range object represents a sequence of integers. By default, it will
+                start with 0. If you provide more parameters, it will start and end at
+                particular points and can even skip items. In our first example,
+                <c>range(10)</c>, the sequence starts with 0 and goes up to but does not
+                include 10. In our second example, <c>range(5, 10)</c> starts at 5 and goes
+                up to but does not include 10. <c>range(5, 10, 2)</c> performs similarly but
+                skips by twos (again, 10 is not included).</p>
+
+  </subsection>
+</section>

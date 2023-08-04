@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********************************************************************
+Copyright 2015 Robert A. Beezer
+
+This file is part of MathBook XML.
+
+MathBook XML is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 or version 3 of the
+License (at your option).
+
+MathBook XML is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
+*********************************************************************-->
+<!-- This file was originally part of the book     -->
+<!-- (as copied on 2015/07/12)                     -->
+<!--                                               -->
+<!--   Abstract Algebra: Theory and Applications   -->
+<!--                                               -->
+<!-- Copyright (C) 1997-2014  Thomas W. Judson     -->
+<docinfo>
+  <!-- the other option is "long" which will produce an -->
+  <!-- entire front matter section with more headings   -->
+  <author-biographies length="short"/>
+  <document-id edition="4">pswadsup</document-id>
+  <brandlogo url="https://runestone.academy"  visual="runestone.academy" source="cover.jpg"/>
+  <!-- Prefix to enhance Sage notebook contents -->
+  <initialism>DS</initialism>
+  <blurb shelf="Data Structures">A solid introduction to algorithms and data structures. Not overly rigorous to keep it very accessible and practical. This book covers the basics very well plus one advanced topic to augment most chapters if you need them.  Designed for a 15 week semester (without advanced topics) as a second course in CS, but very adaptable for other schedules.</blurb>
+  <!-- Math-related macros from "macros.tex" in previous LaTeX version -->
+  <!-- \notdivide replaces \notmid to avoid conflict with tikz - TWJ 5/6/2010 -->
+  <!-- Added operator \gf  - TWJ 2/26/2013 -->
+  <!-- Added operator \inn - TWJ 4/6/2013  -->
+  <!-- Added operator \aut - TWJ 4/6/2013  -->
+  <!-- Added operator \Hom - TWJ 8/19/2010 -->
+  <!-- this is the default, but supresses a warning -->
+  <cross-references text="type-global"/>
+</docinfo>

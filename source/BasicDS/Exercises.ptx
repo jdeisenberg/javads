@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="basic_data_strutures_exercises">
+  <title>Basic Data Structures: Exercises</title>
+<exercises>
+<exercise><p>Convert the following values to binary using the Divide by 2 algorithm. Show the
+        stack of remainders.</p>
+        <p>
+            <ul>
+                <li>17</li>
+                <li>45</li>
+                <li>96</li>
+            </ul>
+        </p>
+</exercise>
+
+
+
+<exercise><p>Convert the following infix expressions to prefix (use full
+        parentheses):</p>
+    <p><ul>
+        <li>(A + B) · ( C + D) · (E + F)</li>
+        <li>A + ((B + C) · (D + E))</li>
+        <li>A · B · C · D + E + F</li>
+    </ul></p>
+</exercise>
+
+<exercise><p>Convert the above infix expressions to postfix (use full
+        parentheses).</p></exercise>
+
+<exercise><p>Convert the above infix expressions to postfix using the direct
+        conversion algorithm. Show the stack as the conversion takes place.</p></exercise>
+
+<exercise><p>Evaluate the following postfix expressions. Show the stack as each
+        operand and operator is processed.</p>
+    <p><ul>
+            <li>-  2 3 · 4 +</li>
+            <li>1 2 + 3 + 4 + 5 +</li>
+            <li>1 2 3 4 5 · + · +</li>
+    </ul></p>
+</exercise>
+
+<exercise><p>The alternative implementation of the queue ADT is to use a list
+   such that the rear of the queue is at the end of the list. What would
+   this mean for Big-O performance?</p></exercise>
+
+<exercise><p>What is the result of carrying out both steps of the linked list
+   <c>add</c> method in reverse order? What kind of reference results? What
+   types of problems may result?</p></exercise>
+
+<exercise><p>Explain how the linked list <c>remove</c> method works when the item to
+        be removed is in the last node.</p></exercise>
+
+<exercise><p>Explain how the <c>remove</c> method works when the item is in the
+        only node in the linked list.</p></exercise>
+
+<exercise><p>Modify the infix-to-postfix algorithm so that it can handle errors.</p></exercise>
+
+<exercise><p>Modify the postfix evaluation algorithm so that it can handle errors.</p></exercise>
+
+<exercise><p>Implement a direct infix evaluator that combines the functionality of
+   infix-to-postfix conversion and the postfix evaluation algorithm.
+   Your evaluator should process infix tokens from left to right and use
+   two stacks, one for operators and one for operands, to perform the
+   evaluation.</p></exercise>
+
+<exercise><p>Turn your direct infix evaluator from the previous problem into a
+        calculator.</p></exercise>
+
+<exercise><p>Implement the queue ADT, using a list such that the rear of the
+        queue is at the end of the list.</p></exercise>
+
+<exercise><p>Design and implement an experiment to do benchmark comparisons of the
+   two queue implementations. What can you learn from such an
+   experiment?</p></exercise>
+
+<exercise><p>Modify the hot potato simulation to allow for a randomly chosen
+   counting value so that each pass is not predictable from the previous
+   one.</p></exercise>
+
+<exercise><p>Consider a real life situation. Formulate a question and then design
+        a simulation that can help to answer it. Possible situations include:</p>
+    <p><ul>
+            <li>Cars lined up at a car wash</li>
+            <li>Customers at a grocery store check-out</li>
+            <li>Airplanes taking off and landing on a runway</li>
+            <li>A bank teller</li>
+    </ul></p>
+
+    <p>Be sure to state any assumptions that you make and provide any
+        probabilistic data that must be considered as part of the scenario.</p>
+</exercise>
+
+<exercise><p>Implement a radix sorting machine. A radix sort for base 10 integers
+   is a mechanical sorting technique that utilizes a collection of bins,
+   one main bin and 10 digit bins. Each bin acts like a queue and
+   maintains its values in the order that they arrive.</p>
+   <p>The algorithm
+   begins by placing each number in the main bin. Then it considers each
+   value digit by digit. The first value is removed and placed in a
+   digit bin corresponding to the digit being considered. For example,
+   if the ones digit is being considered, 534 is placed in digit bin 4
+   and 667 is placed in digit bin 7.</p>
+   <p>Once all the values are placed in
+   the corresponding digit bins, the values are collected from bin 0 to
+   bin 9 and placed back in the main bin. The process continues with the
+   tens digit, the hundreds, and so on. After the last digit is
+   processed, the main bin contains the values in order.</p>
+</exercise>
+
+<exercise><p>Another example of the parentheses matching problem comes from
+   Hypertext Markup Language (HTML). In HTML, tags exist in both opening
+   and closing forms and must be balanced to properly describe a web
+   document. This very simple HTML document:</p>
+
+   <pre>
+       &lt;html&gt;
+          &lt;head&gt;
+             &lt;title&gt;
+                Example
+             &lt;/title&gt;
+          &lt;/head&gt;
+
+          &lt;body&gt;
+             &lt;h1&gt;Hello, world&lt;/h1&gt;
+          &lt;/body&gt;
+       &lt;/html&gt;
+   </pre>
+   <p>
+   is intended only to show the matching and nesting structure for tags
+   in the language. Write a program that can check an HTML document for
+   proper opening and closing tags.</p>
+</exercise>
+
+<exercise><p>Extend the program from Listing 3.15 to handle palindromes with
+        spaces. For example, <c>I PREFER PI</c> is a palindrome that reads the same
+        forward and backward if you ignore the blank characters.</p></exercise>
+
+<exercise><p>To implement the <c>size</c> method, we counted the number of nodes in
+   the list. An alternative strategy would be to store the number of
+   nodes in the list as an additional piece of data in the head of the
+   list. Modify the <c>UnorderedList</c> class to include this information
+   and rewrite the <c>size</c> method.</p></exercise>
+
+<exercise><p>Implement the <c>remove</c> method so that it works correctly in the
+        case where the item is not in the list.</p></exercise>
+
+<exercise><p>Modify the list classes to allow duplicates. Which methods will be
+        impacted by this change?</p></exercise>
+
+<exercise><p>Implement the <c>__str__</c> method in the <c>UnorderedList</c> class. What
+        would be a good string representation for a list?</p></exercise>
+
+<exercise><p>Implement the <c>__str__</c> method so that lists are displayed the
+        Python way (with square brackets).</p></exercise>
+
+<exercise><p>Implement the remaining operations defined in the unordered list ADT
+        (<c>append</c>, <c>index</c>, <c>pop</c>, <c>insert</c>).</p></exercise>
+
+<exercise><p>Implement a <c>slice</c> method for the <c>UnorderedList</c> class. It should
+   take two parameters, <c>start</c> and <c>stop</c>, and return a copy of the
+   list starting at the <c>start</c> position and going up to but not
+   including the <c>stop</c> position.</p></exercise>
+
+   <exercise><p>Implement the remaining operations defined in the ordered list ADT.</p></exercise>
+
+<exercise><p>Consider the relationship between unordered and ordered lists. Is it
+   possible that inheritance could be used to build a more efficient
+   implementation? Implement this inheritance hierarchy.</p></exercise>
+
+<exercise><p>Implement a stack using linked lists.</p></exercise>
+
+<exercise><p>Implement a queue using linked lists.</p></exercise>
+
+<exercise><p>Implement a deque using linked lists.</p></exercise>
+
+<exercise><p>Design and implement an experiment that will compare the performance
+   of a Python list with a list implemented as a linked list.</p></exercise>
+
+<exercise><p>Design and implement an experiment that will compare the performance
+   of the Python list-based stack and queue with the linked list
+   implementation.</p></exercise>
+
+   <exercise><p>The linked list implementation given above is called a <term>singly linked
+               list</term> because each node has a single reference to the next node in the
+           sequence. An alternative implementation is known as a <term>doubly linked
+               list</term>. In this implementation, each node has a reference to the next
+   node (commonly called <em>next</em>) as well as a reference to the preceding
+   node (commonly called <em>back</em>). The head reference also contains two
+   references, one to the first node in the linked list and one to the
+   last. Code this implementation in Python.</p></exercise>
+
+<exercise><p>Create an implementation of a queue that would have an average performance of
+        <m>O(1)</m> for <c>enqueue</c> and <c>dequeue</c> operations.</p></exercise>
+</exercises>
+
+</section>

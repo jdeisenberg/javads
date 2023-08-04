@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<section xml:id="advanced_exercises">
+  <title>Advanced Topics: Exercises</title>
+  <exercises>
+      <exercise>
+        <p>Where do skip lists get their name?</p>
+      </exercise>
+      <exercise>
+        <p>Compare the notion of a perfectly balanced binary search tree and a
+                    skip list. Can you draw pictures to describe these notions?</p>
+      </exercise>
+      <exercise>
+        <p>What would it mean if all towers in a skip list were one level high?</p>
+      </exercise>
+      <exercise>
+        <p>Given a set of 20 keys, is it possible that one of the towers could
+                    have a height of 20?</p>
+      </exercise>
+      <exercise>
+        <p>Run the octree quantization program on an image of your choice.
+                    Try some different settings for the maximum depth of the tree as well
+                    as the final number of colors.</p>
+      </exercise>
+      <exercise>
+        <p>Explain why the indices for an octree node are calculated
+                    starting with the most significant bit and going to the least
+                    significant bit.</p>
+      </exercise>
+      <exercise>
+        <p>Draw the nodes in an octree, down to level 5, after inserting
+                    the following two colors: (174, 145, 229) and (92, 145, 85).</p>
+      </exercise>
+      <exercise>
+        <p>Draw a DFA graph for the pattern ATC.</p>
+      </exercise>
+      <exercise>
+        <p>Compute the mismatched links for the pattern ATC.</p>
+      </exercise>
+      <exercise>
+        <p>Create a KMP graph for the pattern ATCCAT.</p>
+      </exercise>
+      <exercise>
+        <p>Implement the following methods for the <c>ArrayList</c> class and then
+                    analyze their performance.</p>
+        <p>
+          <ul>
+            <li>
+              <p><c>__delitem__</c>: Delete the item at the given index from the list.</p>
+            </li>
+            <li>
+              <p><c>pop</c>: Implement the pop method with and without a positional
+                            parameter.</p>
+            </li>
+            <li>
+              <p><c>index</c>: Search for a given value in the <c>ArrayList</c>. Return
+                            its position in the list if it is found and -1 if the item is not
+                            present.</p>
+            </li>
+            <li>
+              <p><c>__iter__</c>: Make the <c>ArrayList</c> iterable.</p>
+            </li>
+          </ul>
+        </p>
+      </exercise>
+
+      <exercise>
+        <p>Modify <c>encrypt</c> method of the Caesar cipher (<xref ref="lst_enc"/>)
+                    to accept a parameter that specifies the encryption key.</p>
+      </exercise>
+
+      <exercise>
+        <p>The Python list supports both concatenation and repetition. Add
+                    support for the <c>+</c> and <c>*</c> operators to the <c>ArrayList</c>.</p>
+      </exercise>
+
+      <exercise>
+        <p>Implement the <c>delete</c> method for a skip list. You can assume that
+                    the key is present.</p>
+      </exercise>
+
+      <exercise>
+        <p>Implement methods for a skip list that will allow the map to perform
+                    the following operations:</p>
+        <p>
+          <ul>
+            <li>
+              <p><c>__contains__()</c> will return a boolean result as to whether a
+                            key is present in the map.</p>
+            </li>
+            <li>
+              <p><c>keys()</c> will return a list of keys in the map.</p>
+            </li>
+            <li>
+              <p><c>values()</c> will return a list of values in the map.</p>
+            </li>
+          </ul>
+        </p>
+      </exercise>
+
+      <exercise>
+        <p>Implement the <c>__getitem__()</c> and the <c>__setitem__()</c> methods for a skip
+                    list.</p>
+      </exercise>
+
+      <exercise>
+        <p>Modify the <c>Octree</c> class to improve the performance of the
+                    <c>reduce</c> method by using a more efficient data structure for
+                    keeping track of the leaf nodes.</p>
+      </exercise>
+
+      <exercise>
+        <p>Add two methods to the <c>Octree</c> class, one to write a quantized
+                    image to a disk file and one to read a file of the same format you
+                    wrote.</p>
+      </exercise>
+
+      <exercise>
+        <p>Some versions of <c>Octree</c> quantization look at the total count for
+                    all the children of a node and use that information to decide which
+                    nodes to reduce. Modify the <c>Octree</c> implementation to use this
+                    method of node selection for reducing the tree.</p>
+      </exercise>
+
+      <exercise>
+        <p>Implement a version of the simple pattern-matcher that will locate
+                    all occurrences of the pattern in the text.</p>
+      </exercise>
+
+      <exercise>
+        <p>Modify the graph implementation from <xref ref="chapter-graphs"/>
+                    so that it can be used to represent KMP graphs. Using the
+                    <c>mismatched_links</c> method, write a method that will take a pattern
+                    and create the complete KMP graph. With the graph complete, write a
+                    program that will run an arbitrary text against the KMP graph and
+                    return whether a match exists.</p>
+      </exercise>
+   </exercises>
+</section>

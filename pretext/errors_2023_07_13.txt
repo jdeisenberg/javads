@@ -1,0 +1,25 @@
+PreTeXt project found in `/home/david/comsc076/pythonds`.
+warning: Project's CLI version could not be detected from `requirements.txt`.
+warning: Try `pretext init --refresh` to produce a compatible file.
+No change in assets requiring generating detected.  To force regeneration of assets, use `-g` flag.
+
+Preparing to build into /home/david/comsc076/pythonds/output/web.
+
+Now building HTML into /home/david/comsc076/pythonds/output/web
+
+discovering source file's directory name: /home/david/comsc076/pythonds/pretext
+verifying and expanding input directory: /home/david/comsc076/pythonds/pretext/../generated-assets
+input directory expanded to absolute path: /home/david/comsc076/pythonds/generated-assets
+verifying and expanding input directory: /home/david/comsc076/pythonds/pretext/../assets
+input directory expanded to absolute path: /home/david/comsc076/pythonds/assets
+Runestone Services (via PreTeXt repository): version 6.5.0
+Runestone Services (using newer, via online CDN query): version 7.0.3
+converting /home/david/comsc076/pythonds/pretext/main.ptx to HTML in /tmp/tmpjjzigbem
+XSL conversion of /home/david/comsc076/pythonds/pretext/main.ptx by /home/david/.ptx/xsl/pretext-html.xsl
+comprehensive messages, warnings, and errors:
+successful application of /home/david/.ptx/xsl/pretext-html.xsl
+Removing temporary directory /tmp/tmpjjzigbem
+
+Success! Run `pretext view web` to see the results.
+
+

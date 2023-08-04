@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="graphs_exercises">
+  <title>Graphs and Graphing Algorithms: Exercises</title>
+  <exercises>
+          <exercise><p>Draw the graph corresponding to the following adjacency matrix.</p>
+
+              <figure align="center" xml:id="fig-adjMatEx">
+      <caption>6 x 6 Adjacency Matrix</caption>
+      <image source="Graphs/Figures/adjMatEX.png" width="50%" alt="6 x 6 Adjacency Matrix"/>
+    </figure>
+</exercise>
+
+    <exercise><p>Draw the graph corresponding to the following list of edges.</p>
+
+<table>
+    <tabular>
+        <row header="yes">
+            <cell>From</cell><cell>To</cell><cell>Cost</cell>
+        </row>
+        <row>
+            <cell halign="center">1</cell> <cell halign="center">2</cell> <cell halign="right">10</cell>
+        </row>
+        <row>
+            <cell halign="center">1</cell> <cell halign="center">3</cell> <cell halign="right">15</cell>
+        </row>
+        <row>
+            <cell halign="center">1</cell> <cell halign="center">6</cell> <cell halign="right">5</cell>
+        </row>
+        <row>
+            <cell halign="center">2</cell> <cell halign="center">3</cell> <cell halign="right">7</cell>
+        </row>
+        <row>
+            <cell halign="center">3</cell> <cell halign="center">4</cell> <cell halign="right">7</cell>
+        </row>
+        <row>
+            <cell halign="center">3</cell> <cell halign="center">6</cell> <cell halign="right">10</cell>
+        </row>
+        <row>
+            <cell halign="center">4</cell> <cell halign="center">5</cell> <cell halign="right">7</cell>
+        </row>
+        <row>
+            <cell halign="center">6</cell> <cell halign="center">4</cell> <cell halign="right">5</cell>
+        </row>
+        <row>
+            <cell halign="center">5</cell> <cell halign="center">6</cell> <cell halign="right">13</cell>
+        </row>
+    </tabular>
+</table>
+</exercise>
+
+
+            <exercise><p>Ignoring the weights, perform a breadth-first search on the graph
+                    drawn for question 1 or 2.</p>
+
+<program xml:id="breadth_first" interactive="activecode" language="python">
+      <input>
+# Your code here.
+        </input>
+    </program>
+
+            </exercise>
+
+            <exercise xml:id="big_o_build_graph_exercise" label="big_o_build_graph">
+                    <statement><p>What is the Big-O running time of the <c>build_graph</c> function?</p></statement>
+                    <choices>
+                    <choice correct="no">
+                        <statement><m>O(n)</m></statement>
+                        <feedback><m>O(n)</m> would suggest that there is no nesting. There are several nested <c>for</c> loops.</feedback>
+                    </choice>
+                    <choice correct="yes">
+                        <statement><m>O(n^2)</m></statement>
+                        <feedback>Correct. The two consecutively nested <c>for</c> loops would dictate that this is in the realm of <m>O(n^2)</m></feedback>
+                    </choice>
+                    <choice correct="no">
+                        <statement><m>O(1)</m></statement>
+                        <feedback><m>O(1)</m> would suggest that the function is constant. Since there are multiple <c>for</c> loops intertwined, it is not in constant time.</feedback>
+                    </choice>
+                    <choice correct="no">
+                        <statement><m>O(n^3)</m></statement>
+                        <feedback><m>O(n^3)</m> would suggest that there are three consecutively nested for loops. There are only two.</feedback>
+                    </choice>
+                </choices>
+                </exercise>
+
+            <exercise><p>Derive the Big-O running time for the topological sort algorithm.</p></exercise>
+
+            <exercise><p>Derive the Big-O running time for the strongly connected components algorithm.</p></exercise>
+
+            <exercise><p>Show each step in applying Dijkstra’s algorithm to the graph
+   drawn for question 1 or 2.</p></exercise>
+
+            <exercise><p>Using Prim’s algorithm, find the minimum weight spanning tree for the graph
+   drawn for question 1 or 2.</p>
+
+<program xml:id="prims_algorithm_code" interactive="activecode" language="python">
+      <input>
+# Your code here.
+        </input>
+    </program>
+            </exercise>
+
+            <exercise><p>Draw a dependency graph illustrating the steps needed to send an
+   email. Perform a topological sort on your graph.</p></exercise>
+
+    <exercise><p>Express branching factor <m>k</m> as a function of the board size <m>>n</m>.</p></exercise>
+
+            <exercise><p>Derive an expression for the base of the exponent used in expressing the
+    running time of the knights tour.</p></exercise>
+
+            <exercise><p>Explain why the general DFS algorithm is not suitable for solving
+    the knight's tour problem.</p></exercise>
+
+            <exercise xml:id="prims_algorithm_big_o_exercise" label="prims_algorithm_big_o">
+        <statement><p>What is the Big-O running time for Prim’s minimum
+                spanning tree algorithm?</p></statement>
+        <choices>
+            <choice correct="no">
+                <statement><m>O(1)</m></statement>
+                <feedback><m>O(1)</m> would mean that the algorithm runs in constant time. This isn't true because there are several comparisons happening in the algorithm.</feedback>
+            </choice>
+            <choice correct="no">
+                <statement><m>O(n^3)</m></statement>
+                <feedback><m>O(n^3)</m> suggests that there are three consecutively nested loops. If you look at the example algorithm, you can see that there are not three nested loops.</feedback>
+            </choice>
+            <choice correct="no">
+                <statement><m>O(n)</m></statement>
+                <feedback><m>O(n)</m> is linear time. The time it takes for this program to run doesn't grow linearly.</feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><m>O(n^2)</m></statement>
+                <feedback>Correct. Since you are not only comparing the weight of a branch but also if the branch has already been connected to, this would make the Big-O of the algorithm <m>O(n^2)</m>.</feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+
+            <exercise><p>Modify the depth-first search function to produce a topological sort.</p></exercise>
+
+            <exercise><p>Modify the depth-first search to produce strongly connected
+   components.</p></exercise>
+
+            <exercise><p>Write the <c>transpose</c> method for the <c>Graph</c> class.</p></exercise>
+
+            <exercise><p>Using breadth-first search, write an algorithm that can determine the
+   shortest path from each vertex to every other vertex. This is called
+   the “all pairs shortest path problem.”</p></exercise>
+
+            <exercise><p>Using breadth-first search revise the maze program from
+   <xref ref="chapter_recursion"/> to find the shortest path out of a maze.</p></exercise>
+</exercises>
+
+</section>
+
