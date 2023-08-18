@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<section xml:id="introduction_complete-java-program">
+  <title>Writing a Complete Java Program</title>
+  <introduction>
+  <p>
+  Up to this point, we have been doing all of our work in jshell. At some point, we will have to write a complete Java program that we can run from an Integrated Development Environment (IDE) or the command line.
+  </p>
+  <p>
+  Unlike other languages, such as Python, which don't require a lot of setup to produce a program, Java is exceptionally verbose. Our plan is to present the information you need to set up a program without going into a long, laborious explanation. We're giving you a <q>magic spell</q>; recite this incantation and your program will work.
+  </p>
+
+  <p>Here's the minimal prototypical Java program:</p>
+
+<program language="java" line-numbers="yes">
+<input>
+class ExampleProgram {
+
+    public static void main(String[] args) {
+        System.out.println("Java works!");
+    }
+}
+</input>
+</program>
+
+<p>Let's go through this line by line.</p>
+
+<p>Line 1: Every program is in a Java <term>class</term> (we will see more of this in <xref ref="introduction_object-oriented-programming-in-java-defining-classes"/>). By convention, class names begin with an upper case letter. When you save this program, the file name <em>must</em> be <c>ExampleProgram.java</c>. Java is <term>case sensitive</term>, so upper and lower case names are different.  Using a file name like <c>exampleprogram.JAVA</c> will not work properly!</p>
+
+<p>The opening brace <c>{</c> at the end of the line starts a <term>block</term> of Java statements; the corresponding closing brace on line 6 ends the block.</p>
+
+<p>Line 3: This is the <q>magic spell</q> portion. Every program that you want to run <em>must</em> have a method named <c>main</c>; the operating system will start running your program by calling this method. Its argument is an array of <c>String</c>.  When you run a Java program from the command line, any arguments you put after the program name will be stored in this argument array. By convention, the array name is <c>args</c>, but you may name it anything you wish.</p>
+
+<p>The words <c>public static</c> control access to the method. The keyword <c>void</c> specifies that this method does not return any value.</p>
+
+<p>The opening brace at the end of the line starts a new block, which contains...</p>
+
+<p>Line 4: The method <term>body</term>, which, in this case, consists of a single statement that prints the words <c>Java works!</c>. As with all Java statements, it ends with a semicolon.  Read from right to left, the <c>println</c> method is a method of the <c>out</c> object (your terminal) in the <c>System</c> class.  This method prints its argument followed by a newline<mdash/><c>ln</c> stands for <em>line</em>.</p>
+</introduction>
+
+<subsection xml:id="introduction_running-a-java-program" label="introduction_running-a-java-program">
+    <title>Running a Java Program</title>
+    <p>Most Integrated Development Environments are set up so that you can compile and run your Java programs with the click of a button or a menu choice. It is also possible to run a Java program from the command line. Here is an example of running the preceding program from a Linux shell where the <c>$</c> is the command line input prompt:
+    </p>
+
+<console>
+<prompt>$ </prompt><input>javac ExampleProgram.java</input>
+<prompt>$ </prompt><input>java ExampleProgram</input>
+<output>Java works!</output>
+<prompt>$ </prompt><input>ls</input>
+<output>ExampleProgram.class  ExampleProgram.java</output>
+</console>
+
+<p>The <c>javac</c> command invokes the Java compiler. It translates the source code into <term>bytecode</term>, a form which the Java runtime system can execute.  Since there are no errors in the program, the command does not give any output (<q>no news is good news</q>).</p>
+
+<p>The <c>java</c> commad invokes the runtime; you give it the name of the <em>class</em> to run (in this case, <c>ExampleProgram</c>).</p>
+
+<p>The <c>ls</c> command lists the files in the current directory; you don't need to do this command, but it's here to show you that, after compiling, you have two files: <c>ExampleProgram.class</c> (the bytecode) and <c>ExampleProgram.java</c> (the source code).</p>
+
+
+</subsection>
+
+</section>

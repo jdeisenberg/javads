@@ -9,6 +9,8 @@
   <xi:include href="./WhyStudyAlgorithms.ptx"/>
   <xi:include href="./ReviewOfBasicJava.ptx"/>
   <xi:include href="./GettingStartedwithData.ptx"/>
+  <xi:include href="./CollectionsAndWrappers.ptx"/>
+  <xi:include href="./CompleteJavaProgram.ptx"/>
   <xi:include href="./InputandOutput.ptx"/>
   <xi:include href="./ControlStructures.ptx"/>
   <xi:include href="./ExceptionHandling.ptx"/>

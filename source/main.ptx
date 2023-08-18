@@ -2,7 +2,7 @@
 <pretext xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
   <xi:include href="./bookinfo.ptx"/>
   <book xml:id="javads" permid="jat">
-    <title>Problem Solving with Algorithms and Data Structures using Python</title>
+    <title>Problem Solving with Algorithms and Data Structures using Java</title>
     <subtitle>The Interactive Edition</subtitle>
     <frontmatter>
     <titlepage>
@@ -17,6 +17,9 @@
      <personname>Roman Yasinovskyy</personname>
      <institution>Luther College</institution>
      </author>
+     <author>
+     <personname>J David Eisenberg</personname>
+   </author>
     </titlepage>
     <xi:include href="./FrontMatter/preface.ptx"/>
     <colophon>
@@ -57,6 +60,9 @@
     David L. Ranum
 
     Roman Yasinovskyy
+
+    <p>The Java version of this book was constructed by J. David Eisenberg for the Computer Science 76 course at
+      Evergreen Valley College in San Jose, CA. Any mistakes in the book are entirely his.</p>
 
     </acknowledgement>
 

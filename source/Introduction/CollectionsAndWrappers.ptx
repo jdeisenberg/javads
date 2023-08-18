@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<section xml:id="introduction_collections-and-wrappers">
+  <title>Collections and Wrapper Classes</title>
+  <introduction>
+  <p>While fixed-length arrays are very efficient, we will need to have array-like containers that allow us to easily add and delete elements. Java provides a large number of <term>collections</term>, some of which implement the data structures we will be looking at in this book. (We'll be implementing our own versions of these data structures rather than relying on the ones that Java gives us.)</p>
+        </introduction>
+  <subsection xml:id="introduction_arraylist" label="introduction_arraylist">
+    <title>The ArrayList Class</title>
+    <p>The primary collection we'll be using is the <c>ArrayList</c>. It's not one of the built-in data types, so you have to explicitly import it:</p>
+    <console>
+    <prompt>jshell> </prompt><input>import java.util.ArrayList;</input>
+    </console>
+    <p>Here, <c>ArrayList</c> is the name of the class. It belongs to the <c>java.util</c> <term>package</term>. Java uses packages to group together related data types.</p>
+
+    <p>Let's create an <c>ArrayList</c> of <c>String</c> elements by using the <c>new</c> method. The element data type is enclosed in angle brackets. As with arrays, all the elements in an <c>ArrayList</c> must be of the same data type.</p>
+
+<console>
+<prompt>jshell> </prompt><input>ArrayList&lt;String&gt; animals = new ArrayList&lt;String&gt;();</input>
+<output>animals ==> []</output>
+</console>
+
+    <p>The <c>add</c> method appends items to the end of the list and returns <c>true</c>. A two-argument version of <c>add</c> lets you give an index position at which to add an element, but it does not return any value. As with arrays, the first element in an <c>ArrayList</c> has index zero.</p>
+
+<console>
+<prompt>jshell&gt; </prompt><input>animals.add("ibex");</input>
+<output>$5 ==> true
+&#160;</output>
+
+<prompt>jshell&gt; </prompt><input>animals.add("capybara");</input>
+<output>$6 ==> true
+&#160;</output>
+
+<prompt>jshell&gt; </prompt><input>animals.add("bison");</input>
+<output>$7 ==> true
+&#160;</output>
+
+<prompt>jshell&gt; </prompt><input>animals</input>
+<output>animals ==> [ibex, capybara, bison]
+&#160;</output>
+
+<prompt>jshell&gt; </prompt><input>animals.add(1, "giraffe");</input>
+<output>
+&#160;</output>
+<prompt>jshell&gt; </prompt><input>animals</input>
+<output>animals ==> [ibex, giraffe, capybara, bison]
+&#160;</output>
+</console>
+
+<p>Here are other commonly-used <c>ArrayList</c> methods:</p>
+
+<table xml:id="table-arraylist-methods" label="table-arraylist-methods">
+    <title>ArrayList Methods</title>
+    <tabular>
+        <row header="yes">
+            <cell>Method</cell>
+            <cell>Purpose</cell>
+        </row>
+        <row>
+            <cell><c>size()</c></cell>
+            <cell>Returns number of elements in list</cell>
+        </row>
+        <row>
+            <cell><c>get(index)</c></cell>
+            <cell>Returns the element at the given index in the list</cell>
+        </row>
+        <row>
+            <cell><c>set(index, element)</c></cell>
+            <cell>Replaces item at given index with the given element. Returns the element previously at the position.</cell>
+        </row>
+        <row>
+            <cell><c>remove(index)</c></cell>
+            <cell>Removes and returns the element at the given index</cell>
+        </row>
+        <row>
+            <cell><c>removeRange(start, finish)</c></cell>
+            <cell>Removes elements from index <c>start</c> up to, but not including, <c>finish</c></cell>
+        </row>
+        <row>
+            <cell><c>indexOf(element)</c></cell>
+            <cell>Returns index of the first occurrence of the element in the list, or -1 if element is not in list.</cell>
+        </row>
+    </tabular>
+</table>
+
+  </subsection>
+
+  <subsection xml:id="introduction_wrapper-classes" label="introduction_wrapper-classes">
+    <title>Wrapper Classes</title>
+    <p>Let's say we wanted an <c>ArrayList</c> with floating point values. If we try something like the following, we get an error:</p>
+<console>
+<prompt>jshell&gt; </prompt><input>ArrayList&lt;double&gt; prices = new ArrayList&lt;double&gt;();</input>
+<output>|  Error:
+|  unexpected type
+|    required: reference
+|    found:    double
+|  ArrayList&lt;double&gt; prices = new ArrayList&lt;double&gt;();
+|            ^----^</output>
+</console>
+
+    <p>The problem here is that the data type in the angle brackets <em>must</em> be a reference type (object), but data types such as <c>int</c> and <c>double</c> are primitives. Java solves this problem by providing classes that <q>wrap</q> a primitive value into an object:</p>
+
+<table xml:id="table-wrapper-classes" label="table-wrapper-classes">
+    <title>Wrapper Classes</title>
+    <tabular>
+        <row header="yes">
+            <cell>Wrapper Class</cell>
+            <cell>Wraps primitive</cell>
+        </row>
+        <row>
+            <cell><c>Integer</c></cell>
+            <cell><c>int</c></cell>
+        </row>
+        <row>
+            <cell><c>Double</c></cell>
+            <cell><c>double</c></cell>
+        </row>
+        <row>
+            <cell><c>Boolean</c></cell>
+            <cell><c>boolean</c></cell>
+        </row>
+        <row>
+            <cell><c>Character</c></cell>
+            <cell><c>char</c></cell>
+        </row>
+    </tabular>
+</table>
+
+<p>It is possible to use explicit methods to wrap and unwrap primitives (also referred to as <term>box</term> and <term>unbox</term>):</p>
+
+<console>
+<prompt>jshell&gt; </prompt><input>Integer objectAge = Integer.valueOf(37);</input>
+<output>objectAge ==&gt; 37
+&#160;</output>
+
+<prompt>jshell&gt; </prompt><input>int primitiveAge = objectAge.intValue();</input>
+<output>primitiveAge ==&gt; 37</output>
+</console>
+
+<p>However, modern versions of the Java compiler will automatically <q>auto-box</q> and <q>auto-unbox</q> values:</p>
+
+<console>
+<prompt>jshell&gt; </prompt><input>Integer objectAge = 37;</input>
+<output>objectAge ==> 37
+&#160;</output>
+
+<prompt>jshell&gt; </prompt><input>int primitiveAge = objectAge;</input>
+<output>primitiveAge ==> 37</output>
+</console>
+</subsection>
+
+<subsection xml:id="introduction_array-to-arraylist" label="introduction_array-to-arraylist">
+    <title>Converting an Array to an ArrayList</title>
+    <p>
+    While you can initialize an array using brace notation, as in the following:
+    </p>
+
+    <pre>double discount_rates = {0.03, 0.07, 0.105, 0.15}</pre>
+
+    <p>
+    You cannot initialize an <c>ArrayList</c> the same way. Instead, you might do something like this:
+    </p>
+
+    <program language="java">
+    <input>
+import java.util.ArrayList;
+ArrayList&lt;Double&gt; discount_rates = new ArrayList&lt;&gt;();
+discount_rates.add(0.03);
+discount_rates.add(0.07);
+discount_rates.add(0.105);
+discount_rates.add(0.15);
+</input>
+</program>
+
+    <p>Notice that the second set of angle brackets in the second line is empty. Java will implicitly use the same data type as on the left hand side of the assignment, which saves you some typing.</p>
+
+    <p>Still, this code is verbose; there must be a better way. Here is a <em>slightly</em> better way to do it.</p>
+
+<program language="java" line-numbers="yes">
+<input>
+import java.util.ArrayList;
+import java.util.Arrays; // notice the "s" at the end!!
+
+ArrayList&lt;Double&gt; discount_rates = new ArrayList&lt;&gt;(
+    Arrays.asList(
+        new Double[] {0.03, 0.07, 0.105, 0.15}
+    )
+)
+</input>
+</program>
+
+<p>You need to <c>import</c> the <c>Arrays</c> class (line 2). Reading from the <q>inside out</q>, line 6 creates a new array of <c>Double</c> on the fly; this avoids needing a temporary variable. Line 5 converts it to a <c>List</c> (another one of Java's collections), and that becomes the arument to the <c>ArrayList</c> constructor on line 4.</p>
+
+</subsection>
+
+</section>

@@ -284,208 +284,30 @@ String[] words = {"ant", "bee", "cat", "dog", "elk"};</pre>
     </figure>
 
 <p>Unlike primitive values, arrays are a <term>reference</term> data type. The variable name does not contain the data; it contains a reference to where the data is stored in memory.</p>
-    <p>Note that when Python evaluates a list, the list itself is returned.
-                However, in order to remember the list for later processing, its
-                reference needs to be assigned to a variable.</p>
-    <p>Since lists are considered to be sequentially ordered, they support a
-                number of operations that can be applied to any Python sequence.
-                <xref ref="introduction_tab-sequence"/> reviews these operations and the following session
-                gives examples of their use.</p>
-    <table xml:id="introduction_tab-sequence">
-      <tabular>
-        <title>
-          <term>Table 2: Operations on Any Sequence in Python</term>
-        </title>
-        <row header="yes">
-          <cell><term>Operation Name</term></cell>
-          <cell><term>Operator</term></cell>
-          <cell><term>Explanation</term></cell>
-        </row>
-        <row>
-          <cell>indexing</cell>
-          <cell>[ ]</cell>
-          <cell>Access an element of a sequence</cell>
-        </row>
-        <row>
-          <cell>concatenation</cell>
-          <cell>+</cell>
-          <cell>Combine sequences together</cell>
-        </row>
-        <row>
-          <cell>repetition</cell>
-          <cell>*</cell>
-          <cell>Concatenate a repeated number of times</cell>
-        </row>
-        <row>
-          <cell>membership</cell>
-          <cell>in</cell>
-          <cell>Ask whether an item is in a sequence</cell>
-        </row>
-        <row>
-          <cell>length</cell>
-          <cell>len</cell>
-          <cell>Ask the number of items in the sequence</cell>
-        </row>
-        <row>
-          <cell>slicing</cell>
-          <cell>[ : ]</cell>
-          <cell>Extract a part of a sequence</cell>
-        </row>
-      </tabular>
-    </table>
-    <p>Note that the indices for lists (sequences) start counting with 0. The
-                slice operation my_list[1:3] returns a list of items starting with the
-                item indexed by 1 up to&#x2014;but not including&#x2014;the item indexed by 3.</p>
-    <p>Sometimes you will want to initialize a list. This can quickly be
-                accomplished by using repetition. For example,</p>
-    <pre>&gt;&gt;&gt; my_list = [0] * 6
-&gt;&gt;&gt; my_list
-[0, 0, 0, 0, 0, 0]</pre>
-    <p>One very important aside relating to the repetition operator is that the
-                result is a repetition of references to the data objects in the
-                sequence. This can best be seen by considering the following session:</p>
-    <program xml:id="intro_3" interactive="activecode" language="python">
-      <input>
-my_list = [1, 2, 3, 4]
-big_list = [my_list] * 3
-print(big_list)
-my_list[2] = 45
-print(big_list)
-        </input>
-    </program>
-    <p>The variable <c>big_list</c> holds a collection of three references to the
-                original list called <c>my_list</c>. Note that a change to one element of
-                <c>my_list</c> shows up in all three occurrences in <c>big_list</c>.</p>
-    <p>Lists support a number of methods that will be used to build data
-                structures. <xref ref="introduction_tab-listmethods"/> provides a summary. Examples of their
-                use follow.</p>
-    <table xml:id="introduction_tab-listmethods">
-      <tabular>
-        <title>
-          <term>Table 3: Methods Provided by Lists in Python</term>
-        </title>
-        <row header="yes">
-          <cell><term>Method Name</term></cell>
-          <cell><term>Use</term></cell>
-          <cell><term>Explanation</term></cell>
-        </row>
-        <row>
-          <cell><c>append</c></cell>
-          <cell><c>a_list.append(item)</c></cell>
-          <cell>Adds a new item to the end of a list</cell>
-        </row>
-        <row>
-          <cell><c>insert</c></cell>
-          <cell><c>a_list.insert(i,item)</c></cell>
-          <cell>Inserts an item at the ith position in a list</cell>
-        </row>
-        <row>
-          <cell><c>pop</c></cell>
-          <cell><c>a_list.pop()</c></cell>
-          <cell>Removes and returns the last item in a list</cell>
-        </row>
-        <row>
-          <cell><c>pop</c></cell>
-          <cell><c>a_list.pop(i)</c></cell>
-          <cell>Removes and returns the ith item in a list</cell>
-        </row>
-        <row>
-          <cell><c>sort</c></cell>
-          <cell><c>a_list.sort()</c></cell>
-          <cell>Sorts a list in place</cell>
-        </row>
-        <row>
-          <cell><c>reverse</c></cell>
-          <cell><c>a_list.reverse()</c></cell>
-          <cell>Modifies a list to be in reverse order</cell>
-        </row>
-        <row>
-          <cell><c>del</c></cell>
-          <cell><c>del a_list[i]</c></cell>
-          <cell>Deletes the item in the ith position</cell>
-        </row>
-        <row>
-          <cell><c>index</c></cell>
-          <cell><c>a_list.index(item)</c></cell>
-          <cell>Returns the index of the first occurrence of <c>item</c></cell>
-        </row>
-        <row>
-          <cell><c>count</c></cell>
-          <cell><c>a_list.count(item)</c></cell>
-          <cell>Returns the number of occurrences of <c>item</c></cell>
-        </row>
-        <row>
-          <cell><c>remove</c></cell>
-          <cell><c>a_list.remove(item)</c></cell>
-          <cell>Removes the first occurrence of <c>item</c></cell>
-        </row>
-      </tabular>
-    </table>
-    <program xml:id="intro_5" interactive="activecode" language="python">
-      <input>
-my_list = [1024, 3, True, 6.5]
-my_list.append(False)
-print(my_list)
-my_list.insert(2,4.5)
-print(my_list)
-print(my_list.pop())
-print(my_list)
-print(my_list.pop(1))
-print(my_list)
-my_list.pop(2)
-print(my_list)
-my_list.sort()
-print(my_list)
-my_list.reverse()
-print(my_list)
-print(my_list.count(6.5))
-print(my_list.index(4.5))
-my_list.remove(6.5)
-print(my_list)
-del my_list[0]
-print(my_list)
-        </input>
-    </program>
-    <p>You can see that some of the methods, such as <c>pop</c>, return a value
-                and also modify the list. Others, such as <c>reverse</c>, simply modify the
-                list with no return value. <c>pop</c> will default to the end of the list
-                but can also remove and return a specific item. The index range starting
-                from 0 is again used for these methods. You should also notice the
-                familiar <q>dot</q> notation for asking an object to invoke a method.
-                <c>my_list.append(False)</c> can be read as <q>ask the object <c>my_list</c> to
-                perform its <c>append</c> method and send it the value <c>False</c>.</q> Even
-                simple data objects such as integers can invoke methods in this way.</p>
-    <pre>&gt;&gt;&gt; (54).__add__(21)
-75</pre>
-    <p>In this fragment we are asking the integer object <c>54</c> to execute its
-                <c>add</c> method (called <c>__add__</c> in Python) and passing it <c>21</c> as
-                the value to add. The result is the sum, <c>75</c>. Of course, we usually
-                write this as <c>54+21</c>. We will say much more about these methods later
-                in this section.</p>
-    <p>One common Python function that is often discussed in conjunction with
-                lists is the <c>range</c> function. <c>range</c> produces a range object that
-                represents a sequence of values. By using the <c>list</c> function, it is
-                possible to see the value of the range object as a list. This is
-                illustrated below.</p>
-    <pre>&gt;&gt;&gt; range(10)
-range(0, 10)
-&gt;&gt;&gt; list(range(10))
-[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-&gt;&gt;&gt; range(5, 10)
-range(5, 10)
-&gt;&gt;&gt; list(range(5, 10))
-[5, 6, 7, 8, 9]
-&gt;&gt;&gt; list(range(5, 10, 2))
-[5, 7, 9]
-&gt;&gt;&gt; list(range(10, 1, -1))
-[10, 9, 8, 7, 6, 5, 4, 3, 2]</pre>
-    <p>The range object represents a sequence of integers. By default, it will
-                start with 0. If you provide more parameters, it will start and end at
-                particular points and can even skip items. In our first example,
-                <c>range(10)</c>, the sequence starts with 0 and goes up to but does not
-                include 10. In our second example, <c>range(5, 10)</c> starts at 5 and goes
-                up to but does not include 10. <c>range(5, 10, 2)</c> performs similarly but
-                skips by twos (again, 10 is not included).</p>
 
+<p>You can also declare an array with the <c>new</c> operator, giving the data type and, in brackets, the number of items you want in the array. (This number can be in a variable or expression.) The items in the array will be given the appropriate default value for their data type. For objects such as <c>String</c>, the default value is <c>null</c>, which means the element does not refer to any value.</p>
+
+<console>
+<prompt>jshell> </prompt><input>int[] ages = new int[3];</input>
+<output>ages ==> int[3] { 0, 0, 0 }
+&#160;
+
+</output>
+<prompt>jshell> </prompt><input>double[] prices = new double[3];</input>
+<output>prices ==> double[4] { 0.0, 0.0, 0.0 }
+&#160;
+
+</output>
+<prompt>jshell> </prompt><input>boolean[] valid = new boolean[3];</input>
+<output>valid ==> boolean[3] { false, false, false }
+&#160;
+
+</output>
+<prompt>jshell> </prompt><input>String[] words = new String[3];</input>
+<output>words ==> String[3] { null, null, null }
+</output>
+      </console>
+
+      <p>Arrays have a fixed number of elements; they cannot shrink or expand without doing a lot of extra work. To get around this problem, we need to investigate Java collections.</p>
   </subsection>
 </section>
