@@ -2,6 +2,8 @@
 .pretext .ptx-sidebar { display: none; }
 
 
-.runestone.ac_section {
-    margin-left: -15px;
+.pretext .ptx-page > .ptx-main {
+    margin: 0;
+    border-left: 0;
 }
+

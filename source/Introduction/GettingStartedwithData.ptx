@@ -265,6 +265,66 @@ s2 ==> "abc, de, fghi"
 
 jshell> s2.split(", ");
 $3 ==> String[3] { "abc", "de", "fghi" }</pre>
+
+      <p>
+        Because strings in Java are objects, you cannot use the <c>==</c> operator to compare them. The <c>==</c> operator will test to see if the <em>references</em> are equal, not the contents of the strings themselves, as in this jshell session:
+      </p>
+
+      <console><output>
+jshell&gt; String word1 = "cat";
+word1 ==&gt; "cat"
+
+jshell&gt; String word2 = "catalog".substring(0, 3);
+word2 ==&gt; "cat"
+
+jshell&gt; word1 == word2
+$1 ==&gt; false
+          </output></console>
+
+      <p>To compare the actual content of the strings, you must use the <c>equals</c> method:</p>
+
+      <console><output>
+jshell&gt; word1.equals(word2)
+$2 ==&gt; true
+</output></console>
+
+      <p>Similarly, you cannot use <c>&lt;</c> and <c>&gt;</c> to compare strings:</p>
+      <console><output>
+jshell&gt; word1 &gt; word2
+|  Error:
+|  bad operand types for binary operator '&gt;'
+|    first type:  java.lang.String
+|    second type: java.lang.String
+|  word1 &gt; word2
+|  ^-----------^
+</output></console>
+
+<p>Instead, you must use the <c>compareTo</c> method.  Given String variables <c>a</c> and <c>b</c>, the expression <c>a.compareTo(b)</c> returns:</p>
+
+  <p>
+    <ul>
+      <li><p>A negative number if <c>a</c> lexicographically precedes (comes before) <c>b</c></p></li>
+      <li><p>Zero if <c>a</c> and <c>b</c> have the same value</p></li>
+      <li><p>A positive number if <c>a</c> lexicographically folllows <c>b</c></p></li>
+    </ul>
+  </p>
+
+  <console><output>
+jshell&gt; String word1 = "cat";
+word1 ==&gt; "cat"
+
+jshell&gt; String word2 = "elk";
+word2 ==&gt; "elk"
+
+jshell&gt; String word3 = "gnu";
+word3 ==&gt; "gnu"
+
+jshell&gt; word1.compareTo(word3)
+$15 ==&gt; -4
+
+jshell&gt; word3.compareTo(word2)
+$16 ==&gt; 2
+</output></console>
     </subsection>
 
   <subsection xml:id="introduction_arrays">

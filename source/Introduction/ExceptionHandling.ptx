@@ -1,85 +1,97 @@
 <?xml version="1.0"?>
 <section xml:id="introduction_exception-handling">
   <title>Exception Handling</title>
-  <p>There are two types of errors that typically occur when writing
+  <p>There are three types of errors that typically occur when writing
             programs. The first, known as a <em>syntax error</em>, simply means that the
             programmer has made a mistake in the structure of a statement or
-            expression. For example, it is incorrect to write a for statement and
-            forget the colon.</p>
-  <pre>&gt;&gt;&gt; for i in range(10)
-File "&lt;stdin&gt;", line 1
-    for i in range(10)
-                    ^
-SyntaxError: invalid syntax</pre>
-  <p>In this case, the Python interpreter has found that it cannot complete
-            the processing of this instruction since it does not conform to the
+            expression. For example, put these arithmetic operators together</p>
+  <pre>jshell&gt; int n = 2 + * 3;
+|  Error:
+|  illegal start of expression
+|  int n = 2 + * 3;
+|              ^
+</pre>
+  <p>In this case, the Java compiler has found that it cannot complete
+            the processing of this statement since it does not conform to the
             rules of the language. Syntax errors are usually more frequent when you
             are first learning a language.</p>
-  <p>The other type of error, known as a <em>logic error</em>, denotes a situation
-            where the program executes but gives the wrong result. This can be due
-            to an error in the underlying algorithm or an error in your translation
-            of that algorithm. In some cases, logic errors lead to very bad
-            situations such as trying to divide by zero or trying to access an item
-            in a list where the index of the item is outside the bounds of the list.
-            In this case, the logic error leads to a runtime error that causes the
-            program to terminate. These types of runtime errors are typically called
-            <term>exceptions</term>.</p>
-  <p>Most of the time, beginning programmers simply think of exceptions as
-            fatal runtime errors that cause the end of execution. However, most
-            programming languages provide a way to deal with these errors that will
-            allow the programmer to have some type of intervention if they so
-            choose. In addition, programmers can create their own exceptions if they
-            detect a situation in the program execution that warrants it.</p>
+          <p>Another type of error, known as a <em>run time error</em>; the syntax is correct, but the program cannot execute correctly:</p>
+          <console><output>
+jshell&gt; int n = 12 / 0;
+|  Exception java.lang.ArithmeticException: / by zero
+|        at (#1:1)
+</output></console>
+<p>The last type of error, known as a <em>logic error</em>, denotes a situation where the program executes but gives the wrong result. This can be due to an error in the underlying algorithm or an error in your translation of that algorithm. For example, the following code for computing the area of a rectangle uses correct Java syntax, and the arithmetic will not cause a run-time error, but the logic is wrong; area is length times width, not length plus width:</p>
+
+<program language="java">
+  <input>
+int length = 25;
+int width = 15;
+int area = length + width;
+System.out.println(area);
+</input></program>
+
+<p>In some cases, logic errors can lead to errors such as trying to divide by zero or trying to access an item in a list where the index of the item is outside the bounds of the list. In this case, the logic error leads to a runtime error that causes the program to terminate. These types of runtime errors are typically called <term>exceptions</term>.</p>
+
+  <p>Most of the time, beginning programmers simply think of exceptions as fatal runtime errors that cause the end of execution. However, most programming languages provide a way to deal with these errors that will allow the programmer to have some type of intervention if they so choose. In addition, programmers can create their own exceptions if they detect a situation in the program execution that warrants it.</p>
+
   <p>When an exception occurs, we say that it has been <em>raised</em>. You can
             <em>handle</em> the exception that has been raised by using a <c>try</c>
-            statement. For example, consider the following session that asks the
-            user for an integer and then calls the square root function from the
-            math library. If the user enters a value that is greater than or equal
-            to 0, the print will show the square root. However, if the user enters a
-            negative value, the square root function will report a <c>ValueError</c>
-            exception.</p>
-  <pre>&gt;&gt;&gt; import math
-&gt;&gt;&gt; a_number = int(input("Please enter an integer "))
-Please enter an integer -23
-&gt;&gt;&gt; print(math.sqrt(a_number))
-Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
-ValueError: math domain error</pre>
-  <p>We can handle this exception by calling the <c>print</c> function from within a
-            <c>try</c> block. A corresponding <c>except</c> block <q>catches</q> the exception
+            statement. For example, consider the following program that asks the
+            user for an integer and then tries to access an array element at that index.</p>
+
+          <program xml:id="prog_array_access" label="prog_array_access">
+            <input>
+import java.util.Scanner;
+
+class ArrayAccess {
+
+    public static void main(String[] args) {
+        int[] data = {10, 66, 47, 11, 505, 217};
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter an index: ");
+        int index = input.nextInt();
+
+        int value = data[index];
+        System.out.format("The element is %d.%n", value);
+    }
+}
+</input></program>
+
+<p>If the user enters a value that is less than the array length, the <c>System.out.println()</c> will display the value. However, if they enter a negative number or a number greater than or equal to the array length, the program will report an <c>ArrayIndexOutOfBounds</c>  exception.</p>
+<console><prompt>Enter an index: </prompt><input>7</input>
+<output>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException:
+  Index 7 out of bounds for length 6
+        at ArrayAccess.main(ArrayAccess.java:13)
+        </output></console>
+
+  <p>We can handle this exception by calling the <c>System.out.format</c> method from within a
+            <c>try</c> block. A corresponding <c>catch</c> block <q>catches</q> the exception
             and prints a message back to the user in the event that an exception
-            occurs. For example:</p>
-  <pre>&gt;&gt;&gt; try:
-...   print(math.sqrt(a_number))
-... except:
-...   print("Bad value for the square root function")
-...   print("Using the absolute value instead")
-...   print(math.sqrt(abs(a_number)))
-...
-Bad value for the square root function
-Using the absolute value instead
-4.795831523312719</pre>
-  <p>will catch the fact that an exception is raised by <c>sqrt</c> and will
-            instead print the messages back to the user and use the absolute value
-            to be sure that we are taking the square root of a non-negative number.
-            This means that the program will not terminate but instead will continue
-            on to the next statements.</p>
+            occurs. Here is the modified section of the code:</p>
+  <program language="java">
+    <input>
+try {
+    int value = data[index];
+    System.out.format("The element is %d.%n", value);
+}
+catch (Exception ex) {
+    System.out.format("Index must be from 0 to %d.%n",
+        data.length);
+    }
+}
+    </input></program>
+  <p>Now, if the user enters a number out of range, the program will catch the exception raised by the array access and will instead print a useful error message. This means that the program will not terminate but instead will continue on to the next statements.</p>
+
+  <console><prompt>Enter an index: </prompt><input>7</input>
+<output>
+Index must be from 0 to 6.
+</output></console>
+
   <p>It is also possible for a programmer to cause a runtime exception by
-            using the <c>raise</c> statement. For example, instead of calling the
-            square root function with a negative number, we could have checked the
-            value first and then raised our own exception. The code fragment below
-            shows the result of creating a new <c>RuntimeError</c> exception. Note that
-            the program would still terminate, but now the exception that caused the
-            termination is something explicitly created by the programmer.</p>
-  <pre>&gt;&gt;&gt; if a_number &lt; 0:
-...   raise RuntimeError("You can't use a negative number")
-... else:
-...   print(math.sqrt(a_number))
-...
-Traceback (most recent call last):
-  File "&lt;stdin&gt;", line 2, in &lt;module&gt;
-RuntimeError: You can't use a negative number</pre>
+    using the <c>throw</c> statement, but we will not cover it in this course. You can see details at <url href="https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html">the Java Tutorial</url>.</p>
   <p>There are many kinds of exceptions that can be raised in addition to the
-            <c>RuntimeError</c> shown above. See the Python reference manual for a list
-            of all the available exception types and for how to create your own.</p>
+    <c>ArrayIndexOutOfBoundsException</c> shown above. See <url href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Exception.html">the Java API</url> for a list of some of the exception types.</p>
 </section>

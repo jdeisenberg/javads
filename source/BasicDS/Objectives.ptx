@@ -7,8 +7,8 @@
         <p>To understand the abstract data types stack, queue, deque, and list.</p>
       </li>
       <li>
-        <p>To be able to implement the ADTs stack, queue, and deque using Python
-                    lists.</p>
+        <p>To be able to implement the stack, queue, and deque ADTs using Java
+          <c>ArrayList</c>s.</p>
       </li>
       <li>
         <p>To understand the performance of the implementations of basic linear
@@ -36,7 +36,7 @@
       </li>
       <li>
         <p>To be able to compare the performance of our linked list
-                    implementation with Python's list implementation.</p>
+                    implementation with Java's list implementation.</p>
       </li>
     </ul>
   </p>

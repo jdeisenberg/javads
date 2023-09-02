@@ -14,7 +14,7 @@
   <xi:include href="./InputandOutput.ptx"/>
   <xi:include href="./ControlStructures.ptx"/>
   <xi:include href="./ExceptionHandling.ptx"/>
-  <xi:include href="./DefiningFunctions.ptx"/>
+  <xi:include href="./DefiningMethods.ptx"/>
   <xi:include href="./ObjectOrientedProgramminginJavaDefiningClasses.ptx"/>
   <xi:include href="./Summary.ptx"/>
   <xi:include href="./KeyTerms.ptx"/>
