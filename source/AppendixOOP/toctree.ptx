@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appendix xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US" xml:id="appendix_oop">
+  <title>More About Object-Oriented Programming</title>
+  <xi:include href="./Objectives.ptx"/>
+  <xi:include href="./InheritancePolymorphism.ptx"/>
+  <xi:include href="./Interfaces.ptx"/>
+  <xi:include href="./Composition.ptx"/>
+  <xi:include href="./Exercises.ptx"/>
+</appendix>

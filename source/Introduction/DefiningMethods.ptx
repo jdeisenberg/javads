@@ -61,10 +61,33 @@ public class MySquareRoot {
 
   <exercises>
     <title>Self Check</title>
-    <p>Here's a self check that really covers everything so far.  You may have
-                heard of the infinite monkey theorem?  The theorem states that a monkey hitting keys at random on a typewriter keyboard for an infinite amount of time will almost surely type a given text, such as the complete works of William Shakespeare.  Well, suppose we replace a monkey with a Python function.  How long do you think it would take for a Python function to generate just one sentence of Shakespeare?  The sentence we'll shoot for is:  <q>methinks it is like a weasel</q></p>
-    <p>You're not going to want to run this one in the browser, so fire up your favorite Python IDE.  The way we'll simulate this is to write a function that generates a string that is 28 characters long by choosing random letters from the 26 letters in the alphabet plus the space.  We'll write another function that will score each generated string by comparing the randomly generated string to the goal.</p>
+    <p>Here's a self check that really covers everything so far.  You may have heard of the infinite monkey theorem?  The theorem states that a monkey hitting keys at random on a typewriter keyboard for an infinite amount of time will almost surely type a given text, such as the complete works of William Shakespeare.  Well, suppose we replace a monkey with a Java metho.  How long do you think it would take for a Java method to generate just one sentence of Shakespeare?  The sentence we'll shoot for is:  <q>methinks it is like a weasel</q></p>
+    <p>You're not going to want to run this one in jshell, so fire up your favorite Java IDE.  The way we'll simulate this is to write a function that generates a string that is 28 characters long by choosing random letters from the 26 letters in the alphabet plus the space.  We'll write another function that will score each generated string by comparing the randomly generated string to the goal.</p>
     <p>A third function will repeatedly call generate and score, then if 100% of the letters are correct we are done.  If the letters are not correct then we will generate a whole new string.To make it easier to follow your program's progress this third function should print out the best string generated so far and its score every 1000 tries.</p>
+    <p>In order to do this program, you will need to know how to generate random numbers. The following program generates ten random numbers in the range 0 up to (but not including) 100:</p>
+
+    <program language="java" line-numbers="yes">
+      <input>
+import java.util.Random;
+
+class TenRandomIntegers {
+    public static void main(String[] args) {
+        Random generator = new Random();
+
+        for (int i = 0; i &lt; 10; i++) {
+            int randomInt = generator.nextInt(100);
+            System.out.println(randomInt);
+        }
+    }
+}
+</input></program>
+
+<p>Line 1 imports the <c>Random</c> class from the <c>java.util</c> package.</p>
+<p>In line 5, we create an instance of the <c>Random</c> class, naming it <c>generator</c>. (It could have any name, but the one we chose is meaningful).</p>
+<p>Lines 7-10 produce the random numbers by calling the random number generator's <c>nextInt</c> method. The argument is the exclusive upper bound on the random integer; thus, this statement will generate a number from 0 (inclusive) up to, but not including, 100 (exclusive).</p>
+
+<p>Though you do not need it for this prorgram, for the sake of completeness: If you need to generate a <c>double</c>, call the <c>nextDouble()</c> method, which returns a <c>double</c> value from 0.0 (inclusive) up to, but not including, 1.00 (exclusive).</p>
+
   </exercises>
   <exercises>
     <title>Self Check Challenge</title>

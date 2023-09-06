@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="oop_objectives">
+  <title>Objectives</title>
+  <p>
+    <ul>
+      <li>
+        <p>To understand the concept of inheritance.</p>
+      </li>
+      <li>
+        <p>To understand the concept of polymorphism.</p>
+      </li>
+      <li>
+        <p>To understand the use of <c>interface</c>.</p>
+      </li>
+      <li>
+        <p>To understand use of composition for objects and how it is different from inheritance.</p>
+      </li>
+    </ul>
+  </p>
+</section>

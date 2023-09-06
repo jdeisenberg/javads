@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="oop_exercises">
+  <title>Advanced Object-Oriented Programming: Exercises</title>
+  <exercises>
+
+        <exercise><p>Construct a class hierarchy for people on a college campus. Include
+   faculty, staff, and students. What do they have in common? What
+   distinguishes them from one another?</p></exercise>
+
+        <exercise><p>Construct a class hierarchy for bank accounts.</p></exercise>
+
+
+        <exercise><p>Construct a class hierarchy for different types of computers.</p></exercise>
+
+        <exercise><p>Using the classes provided in the chapter, interactively construct a
+                circuit and test it.</p></exercise>
+
+    <exercise><p>The most simple arithmetic circuit is known as the half adder.
+            Research the simple half-adder circuit. Implement this circuit.</p></exercise>
+
+    <exercise><p>Now extend that circuit and implement an 8-bit full adder.</p></exercise>
+
+    <exercise><p>The circuit simulation shown in this chapter works in a backward
+    direction. In other words, given a circuit, the output is produced by
+    working back through the input values, which in turn cause other
+    outputs to be queried. This continues until external input lines are
+    found, at which point the user is asked for values. Modify the
+    implementation so that the action is in the forward direction; upon
+    receiving inputs the circuit produces an output.</p></exercise>
+
+    <exercise><p>Design a class to represent a playing card and another one to represent a deck of cards.
+            Using these two classes, implement your favorite card game.</p></exercise>
+</exercises>
+</section>
