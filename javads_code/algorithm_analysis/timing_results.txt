@@ -1,0 +1,76 @@
+10,000
+Trial 0: Sum 50005000: time 0.003886 sec.
+Trial 1: Sum 50005000: time 0.004009 sec.
+Trial 2: Sum 50005000: time 0.000186 sec.
+Trial 3: Sum 50005000: time 0.000185 sec.
+Trial 4: Sum 50005000: time 0.000186 sec.
+Trial 5: Sum 50005000: time 0.000187 sec.
+Trial 6: Sum 50005000: time 0.000187 sec.
+Trial 7: Sum 50005000: time 0.000187 sec.
+Trial 8: Sum 50005000: time 0.000187 sec.
+Trial 9: Sum 50005000: time 0.000186 sec.
+Trial 10: Sum 50005000: time 0.000189 sec.
+Trial 11: Sum 50005000: time 0.000186 sec.
+Trial 12: Sum 50005000: time 0.000186 sec.
+Trial 13: Sum 50005000: time 0.000123 sec.
+Trial 14: Sum 50005000: time 0.000127 sec.
+Trial 15: Sum 50005000: time 0.000124 sec.
+Trial 16: Sum 50005000: time 0.000125 sec.
+Trial 17: Sum 50005000: time 0.000125 sec.
+Trial 18: Sum 50005000: time 0.000125 sec.
+Trial 19: Sum 50005000: time 0.000125 sec.
+Trial 20: Sum 50005000: time 0.000125 sec.
+Trial 21: Sum 50005000: time 0.000124 sec.
+Trial 22: Sum 50005000: time 0.000125 sec.
+Trial 23: Sum 50005000: time 0.000124 sec.
+Trial 24: Sum 50005000: time 0.000124 sec.
+===============================================
+100,000
+Trial 18: Sum 5000050000: time 0.001283 sec.
+Trial 19: Sum 5000050000: time 0.001224 sec.
+Trial 20: Sum 5000050000: time 0.001225 sec.
+Trial 21: Sum 5000050000: time 0.001226 sec.
+Trial 22: Sum 5000050000: time 0.001225 sec.
+Trial 23: Sum 5000050000: time 0.001224 sec.
+Trial 24: Sum 5000050000: time 0.001224 sec.
+==========================================
+1,000,000
+Trial 18: Sum 500000500000: time 0.012390 sec.
+Trial 19: Sum 500000500000: time 0.012368 sec.
+Trial 20: Sum 500000500000: time 0.012350 sec.
+Trial 21: Sum 500000500000: time 0.012411 sec.
+Trial 22: Sum 500000500000: time 0.012353 sec.
+Trial 23: Sum 500000500000: time 0.012443 sec.
+Trial 24: Sum 500000500000: time 0.012447 sec.
+
+#########################################################
+quick formula
+10000
+Trial 20: Sum 50005000: time 0.000007 sec.
+Trial 21: Sum 50005000: time 0.000011 sec.
+Trial 22: Sum 50005000: time 0.000008 sec.
+Trial 23: Sum 50005000: time 0.000010 sec.
+Trial 24: Sum 50005000: time 0.000008 sec.
+
+100000
+Trial 20: Sum 5000050000: time 0.000013 sec.
+Trial 21: Sum 5000050000: time 0.000009 sec.
+Trial 22: Sum 5000050000: time 0.000015 sec.
+Trial 23: Sum 5000050000: time 0.000007 sec.
+Trial 24: Sum 5000050000: time 0.000005 sec.
+
+1000000
+Trial 20: Sum 500000500000: time 0.000009 sec.
+Trial 21: Sum 500000500000: time 0.000006 sec.
+Trial 22: Sum 500000500000: time 0.000004 sec.
+Trial 23: Sum 500000500000: time 0.000018 sec.
+Trial 24: Sum 500000500000: time 0.000004 sec.
+
+10,000,000
+Trial 20: Sum 50000005000000: time 0.000010 sec.
+Trial 21: Sum 50000005000000: time 0.000011 sec.
+Trial 22: Sum 50000005000000: time 0.000007 sec.
+Trial 23: Sum 50000005000000: time 0.000006 sec.
+Trial 24: Sum 50000005000000: time 0.000005 sec.
+
+
