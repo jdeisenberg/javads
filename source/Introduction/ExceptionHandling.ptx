@@ -85,8 +85,8 @@ catch (Exception ex) {
     </input></program>
   <p>Now, if the user enters a number out of range, the program will catch the exception raised by the array access and will instead print a useful error message. This means that the program will not terminate but instead will continue on to the next statements.</p>
 
-  <console><prompt>Enter an index: </prompt><input>7</input>
-<output>
+  <console><output>
+Enter an index: 7
 Index must be from 0 to 6.
 </output></console>
 

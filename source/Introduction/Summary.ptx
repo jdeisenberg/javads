@@ -15,14 +15,13 @@
                     problem domain by hiding the details of the data.</p>
       </li>
       <li>
-        <p>Python is a powerful, yet easy-to-use, object-oriented language.</p>
+        <p>Java is a powerful object-oriented language.</p>
       </li>
       <li>
-        <p>Lists, tuples, and strings are built in Python sequential
-                    collections.</p>
+        <p>Arrays and ArrayLists are Java sequential collections.</p>
       </li>
       <li>
-        <p>Dictionaries and sets are nonsequential collections of data.</p>
+        <p>HashMaps are nonsequential collections of data.</p>
       </li>
       <li>
         <p>Classes allow programmers to implement abstract data types.</p>
@@ -30,13 +29,6 @@
       <li>
         <p>Programmers can override standard methods as well as create new
                     methods.</p>
-      </li>
-      <li>
-        <p>Classes can be organized into hierarchies.</p>
-      </li>
-      <li>
-        <p>A class constructor should always invoke the constructor of its
-                    parent before continuing on with its own data and behavior.</p>
       </li>
     </ul>
   </p>

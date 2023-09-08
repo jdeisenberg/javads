@@ -161,11 +161,11 @@ You are about 10585 days old, Kim.
     <table xml:id="introduction_tab-fmta" label="introduction_tab-fmta">
       <tabular>
         <title>
-          <term>String Formatting Conversion Characters</term>
+          String Formatting Conversion Characters
         </title>
         <row header="yes">
-          <cell><term>Character</term></cell>
-          <cell><term>Output Format</term></cell>
+          <cell>Character</cell>
+          <cell>Output Format</cell>
         </row>
         <row>
           <cell><c>d</c></cell>
@@ -216,12 +216,12 @@ You are about 10585 days old, Kim.
     <table xml:id="introduction_tab-fmtaddsa">
       <tabular>
         <title>
-          <term>Table 10: Additional formatting options</term>
+          Table 10: Additional formatting options
         </title>
         <row header="yes">
-          <cell><term>Modifier</term></cell>
-          <cell><term>Example</term></cell>
-          <cell><term>Description</term></cell>
+          <cell>Modifier</cell>
+          <cell>Example</cell>
+          <cell>Description</cell>
         </row>
         <row>
           <cell>number</cell>

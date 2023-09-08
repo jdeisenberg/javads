@@ -34,7 +34,7 @@ class ExampleProgram {
 
 <p>The opening brace at the end of the line starts a new block, which contains...</p>
 
-<p>Line 4: The method <term>body</term>, which, in this case, consists of a single statement that prints the words <c>Java works!</c>. As with all Java statements, it ends with a semicolon.  Read from right to left, the <c>println</c> method is a method of the <c>out</c> object (your terminal) in the <c>System</c> class.  This method prints its argument followed by a newline<mdash/><c>ln</c> stands for <em>line</em>.</p>
+<p>Line 4: The <term>method body</term>, which, in this case, consists of a single statement that prints the words <c>Java works!</c>. As with all Java statements, it ends with a semicolon.  Read from right to left, the <c>println</c> method is a method of the <c>out</c> object (your terminal) in the <c>System</c> class.  This method prints its argument followed by a newline<mdash/><c>ln</c> stands for <em>line</em>.</p>
 </introduction>
 
 <subsection xml:id="introduction_running-a-java-program" label="introduction_running-a-java-program">

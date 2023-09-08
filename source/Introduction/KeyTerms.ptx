@@ -4,75 +4,76 @@
   <table>
     <tabular>
       <row>
-        <cell>abstract data type (ADT)</cell>
-        <cell>formatted strings</cell>
-        <cell>override</cell>
-      </row>
-      <row>
+        <cell>abstract data type</cell>
         <cell>abstraction</cell>
-        <cell>Has-a relationship</cell>
-        <cell>procedural abstraction</cell>
+        <cell>ADT</cell>
       </row>
       <row>
         <cell>algorithm</cell>
-        <cell>implementation-independent</cell>
-        <cell>programming</cell>
+        <cell>array</cell>
+        <cell>block</cell>
       </row>
       <row>
+        <cell>box/unbox</cell>
+        <cell>bytecode</cell>
+        <cell>camel case</cell>
+      </row>
+      <row>
+        <cell>case sensitive</cell>
         <cell>class</cell>
-        <cell>information hiding</cell>
-        <cell>prompt</cell>
+        <cell>collections</cell>
       </row>
       <row>
+        <cell>comment</cell>
         <cell>computable</cell>
-        <cell>inheritance</cell>
-        <cell><c>self</c></cell>
+        <cell>constructor</cell>
       </row>
       <row>
         <cell>data abstraction</cell>
-        <cell>inheritance hierarchy</cell>
-        <cell>set</cell>
-      </row>
-      <row>
         <cell>data structure</cell>
-        <cell>interface</cell>
-        <cell>shallow equality</cell>
-      </row>
-      <row>
-        <cell>data type</cell>
-        <cell>Is-a relationship</cell>
-        <cell>simulation</cell>
+        <cell>data types</cell>
       </row>
       <row>
         <cell>deep equality</cell>
-        <cell>list</cell>
-        <cell>string</cell>
-      </row>
-      <row>
-        <cell>dictionary</cell>
-        <cell>list comprehension</cell>
-        <cell>subclass</cell>
-      </row>
-      <row>
         <cell>encapsulation</cell>
+        <cell>exceptions</cell>
+      </row>
+      <row>
+        <cell>extended for loop</cell>
+        <cell>field</cell>
+        <cell>format specifiers</cell>
+      </row>
+      <row>
+        <cell>format string</cell>
+        <cell>formatted printing</cell>
+        <cell>HashMap</cell>
+      </row>
+      <row>
+        <cell>implementation-independent</cell>
+        <cell>indeterminate loops</cell>
+        <cell>information hiding</cell>
+      </row>
+      <row>
+        <cell>instance</cell>
+        <cell>instance method</cell>
         <cell>method</cell>
-        <cell>superclass</cell>
       </row>
       <row>
-        <cell>exception</cell>
-        <cell>mutability</cell>
-        <cell>truth table</cell>
-      </row>
-      <row>
-        <cell>f-string</cell>
         <cell>object</cell>
-        <cell>tuple</cell>
+        <cell>overloading</cell>
+        <cell>package</cell>
       </row>
       <row>
-        <cell>format operator</cell>
-        <cell></cell>
-        <cell></cell>
+        <cell>primitive</cell>
+        <cell>procedural abstraction</cell>
+        <cell>reference types</cell>
       </row>
-    </tabular>
+      <row>
+        <cell>shallow equality</cell>
+        <cell>String</cell>
+        <cell>token</cell>
+        </row>
+      </tabular>
   </table>
+
 </section>

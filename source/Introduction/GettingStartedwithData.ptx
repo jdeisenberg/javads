@@ -52,12 +52,12 @@ Math.pow(2, 100) // 1.2676506002282294E30
     <table xml:id="introduction_tab-relational">
       <tabular>
         <title>
-          <term>Table 1: Relational and Logical Operators</term>
+          Table 1: Relational and Logical Operators
         </title>
         <row header="yes">
-          <cell><term>Operation Name</term></cell>
-          <cell><term>Operator</term></cell>
-          <cell><term>Explanation</term></cell>
+          <cell>Operation Name</cell>
+          <cell>Operator</cell>
+          <cell>Explanation</cell>
         </row>
         <row>
           <cell>less than</cell>
@@ -202,12 +202,12 @@ word4 ==> "eyesight 2020"</pre>
     <table xml:id="introduction_tab-stringmethods">
       <tabular>
         <title>
-          <term>Table 4: Methods Provided by the Java String Class</term>
+          Table 4: Methods Provided by the Java String Class
         </title>
         <row header="yes">
-          <cell><term>Method Name</term></cell>
-          <cell><term>Use</term></cell>
-          <cell><term>Explanation</term></cell>
+          <cell>Method Name</cell>
+          <cell>Use</cell>
+          <cell>Explanation</cell>
         </row>
         <row>
           <cell><c>length</c></cell>
