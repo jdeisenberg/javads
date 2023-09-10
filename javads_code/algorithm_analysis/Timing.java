@@ -2,16 +2,16 @@ import java.util.Scanner;
 
 public class Timing {
     public static long sumOfN(long n) {
-        /*long theSum = 0;
+        long theSum = 0;
         for (int i = 1; i <= n; i++) {
             theSum = theSum + i;
         }
         return theSum;
-        */
+    }
         
+    public static long sumOfNImproved(long n) {
         long theSum = n * (n + 1) / 2;
         return theSum;
-        
     }
 
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class Timing {
         
         for (int trial = 0; trial < 25; trial++) {
             long startTime = System.nanoTime();
-            long result = sumOfN(n);
+            long result = sumOfNImproved(n);
             
             double elapsed = (System.nanoTime() - startTime) / 1.0E9;
             System.out.printf("Trial %d: Sum %d: time %.6f sec.%n",

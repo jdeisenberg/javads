@@ -2,15 +2,13 @@
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US" xml:id="chapter-analysis">
   <title>Algorithm Analysis</title>
   <xi:include href="./Objectives.ptx"/>
-  <!--
   <xi:include href="./WhatIsAlgorithmAnalysis.ptx"/>
   <xi:include href="./BigONotation.ptx"/>
   <xi:include href="./AnAnagramDetectionExample.ptx"/>
-  <xi:include href="./PerformanceofPythonDataStructures.ptx"/>
-  <xi:include href="./Lists.ptx"/>
-  <xi:include href="./Dictionaries.ptx"/>
+  <xi:include href="./PerformanceofJavaDataStructures.ptx"/>
+  <xi:include href="./ArrayLists.ptx"/>
+  <xi:include href="./HashMaps.ptx"/>
   <xi:include href="./Summary.ptx"/>
   <xi:include href="./KeyTerms.ptx"/>
   <xi:include href="./Exercises.ptx"/>
-  -->
 </chapter>

@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<section xml:id="algorithm-analysis_hashmaps">
+  <title>HashMaps</title>
+  <p>The second major Java data structure is the HashMap. As you
+            probably recall, HashMaps differ from ArrayLists in that you can access
+            items in a dictionary by a key rather than a position. Later in this
+            book you will see that there are many ways to implement a HashMap.
+            The thing that is most important to notice right now is that the <c>get</c> and <c>put</c> methods on a HashMap are <m>O(1)</m>. Another
+            important HashMap operation is the <c>containsKey</c> operation. Checking to
+            see whether a key is in the HashMap or not is also <m>O(1)</m>.
+            The efficiency of common HashMap operations is summarized in
+            <xref ref="algorithm-analysis_tbl-hashmapbigo"/>. One important side note on dictionary performance
+            is that the efficiencies we provide in the table are for average
+            performance. In some rare cases the <c>contains</c>, <c>get item</c>, and <c>set item</c>
+            operations can degenerate into <m>O(n)</m> performance, but we will
+            get into that in Chapter 8 when we talk about the different ways
+            that a dictionary could be implemented.</p>
+  <table xml:id="algorithm-analysis_tbl-hashmapbigo">
+    <tabular>
+      <title>
+        Table 3: Big O Efficiency of Python Dictionary Operations
+      </title>
+      <row header="yes">
+        <cell>Operation</cell>
+        <cell>Big O Efficiency</cell>
+      </row>
+      <row>
+        <cell><c>putAll</c> (copy to another HashMap)</cell>
+        <cell>O(n)</cell>
+      </row>
+      <row>
+        <cell><c>get</c></cell>
+        <cell>O(1)</cell>
+      </row>
+      <row>
+        <cell><c>put</c> (set item)</cell>
+        <cell>O(1)</cell>
+      </row>
+      <row>
+        <cell><c>remove</c></cell>
+        <cell>O(1)</cell>
+      </row>
+      <row>
+        <cell><c>containsKey</c></cell>
+        <cell>O(1)</cell>
+      </row>
+      <row>
+        <cell>iteration</cell>
+        <cell>O(n)</cell>
+      </row>
+    </tabular>
+  </table>
+
+  <p>For our last performance experiment, we will compare the performance of
+    the <c>contains</c> method for ArrayLists and the <c>containsKey</c> operation for HashMaps. In the process we
+            will confirm that the operation for ArrayLists is <m>O(n)</m> and
+            the operation for HashMaps is <m>O(1)</m>. The experiment
+            we will use to compare the two is as follows: we'll make a list with a range
+            of numbers in it, then we will pick numbers at random and check to see
+            if the numbers are in the list. If our performance tables are correct,
+            the bigger the list, the longer it should take to determine if any one
+            number is contained in the list.</p>
+  <p>We will repeat the same experiment for a HashMap that contains
+            numbers as the keys. In this experiment we should see that determining
+            whether or not a number is in the HashMap is not only much faster,
+            but the time it takes to check should remain constant even as the
+            HashMap grows larger.</p>
+  <p><xref ref="algorithm-analysis_lst-listvdict"/> implements this comparison. Notice that we are
+            performing exactly the same operation, even though they have different names:
+            <c>list.contains(number)</c> and <c>map.containsKey(number)</c>. </p>
+  <listing xml:id="algorithm-analysis_lst-listvdict"><program language="java">
+    <input>
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
+public class ListVsMap {
+
+    public static void main(String[] args) {
+
+        System.out.println("size      list       map");
+        for (int size = 10_000; size &lt; 1_000_001; size += 20_000) {
+            ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(size);
+            HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+
+            for (int key = 0; key &lt; size; key++) {
+                list.add(key);
+                map.put(key, key); // key and value are the same
+            }
+            System.gc();
+            Random generator = new Random();
+
+            long startListTime = System.nanoTime();
+            for (int i = 0; i &lt; 1000; i++) {
+                int lookFor = generator.nextInt(size);
+                boolean found = list.contains(lookFor);
+            }
+            long elapsedListTime = System.nanoTime() - startListTime;
+
+            long startMapTime = System.nanoTime();
+            for (int i = 0; i &lt; 1000; i++) {
+                Integer lookFor = generator.nextInt(size);
+                boolean found = map.containsKey(lookFor);
+            }
+            long elapsedMapTime = System.nanoTime() - startMapTime;
+            System.out.printf("%8d %9.7f %9.7f%n",
+                size, elapsedListTime / 1.0E9, elapsedMapTime / 1.0E9);
+        }
+    }
+}
+</input>
+  </program></listing>
+  <p><xref ref="i10_id2fig-listvdict"/> summarizes the results of running
+            <xref ref="algorithm-analysis_lst-listvdict"/>. You can see that the dictionary is consistently
+            faster. For the smallest size of 10,000 elements, a HashMap is
+            58.2 times faster than an ArrayList. For the largest size of 990,000
+            elements the HashMap is 3,972 times faster! You can also see that
+            the time it takes for the <c>contains</c> method on the ArrayList grows linearly
+            with the size of the list. This verifies the assertion that the <c>contains</c>
+            method on a list is <m>O(n)</m>. It can also be seen that the time
+            for the <c>containsKey</c> method on a HashMap is constant even as the
+            dictionary size grows.</p>
+  <figure align="" xml:id="i10_id2fig-listvdict">
+    <caption>Comparing Time to Find Elements for Java ArrayList and HashMap</caption>
+    <image source="AlgorithmAnalysis/Figures/list_vs_map.png" width="50%"/>
+  </figure>
+
+  <exercises>
+    <title>Self Check</title>
+    <exercise label="mcpyperform">
+      <statement>
+        <p>Q-1: Which of the ArrayList operations shown below is not O(1)?</p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement>
+            <p>myList.remove(0)</p>
+          </statement>
+          <feedback>
+            <p>When you remove the first element of a list, all the other elements of the list must be shifted forward.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>myList.remove(myList.size() - 1)</p>
+          </statement>
+          <feedback>
+            <p>Removing an element from the end of the list is a constant operation.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>myList.add()</p>
+          </statement>
+          <feedback>
+            <p>Appending to the end of the list is a constant operation</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>myList.get(10)</p>
+          </statement>
+          <feedback>
+            <p>Indexing a list is a constant operation</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>all of the above are O(1)</p>
+          </statement>
+          <feedback>
+            <p>There is one operation that requires all other list elements to be moved.</p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+    <exercise label="mcpydictperf">
+      <statement>
+        <p>Q-2: Which of the HashMap operations shown below is O(1)?</p>
+      </statement>
+      <choices>
+        <choice>
+          <statement>
+            <p>myMap.containsKey("x")</p>
+          </statement>
+          <feedback>
+            <p>in is a constant operation for a HashMap because you do not have to iterate but there is a better answer.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>myMap.remove("x")</p>
+          </statement>
+          <feedback>
+            <p>removing an element from a HashMap is a constant operation but there is a better answer.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>myMap.put("x", 22)</p>
+          </statement>
+          <feedback>
+            <p>Assignment to a HashMap key is constant but there is a better answer.</p>
+          </feedback>
+        </choice>
+        <choice correct="yes">
+          <statement>
+            <p>all of the above are O(1)</p>
+          </statement>
+          <feedback>
+            <p>The only dictionary operations that are not O(1) are those that require iteration.</p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </exercises>
+  <!--<video xml:id="pythonopsperf" youtube="zKq8iVEX6gU" width="auto"/>-->
+</section>

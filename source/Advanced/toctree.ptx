@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US" xml:id="chapter-advanced-topics">
   <title>Advanced Topics</title>
   <xi:include href="./Objectives.ptx"/>
   <!--
-  <xi:include href="./PythonListsRevisited.ptx"/>
+  <xi:include href="./ArrayListsRevisited.ptx"/>
   <xi:include href="./RecursionRevisited.ptx"/>
   <xi:include href="./DictionariesRevisited.ptx"/>
   <xi:include href="./TreesRevisited.ptx"/>

@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<section xml:id="algorithm-analysis_arraylists">
+  <title>ArrayLists</title>
+  <p>The designers of Java had many choices to make when they implemented
+            the ArrayList data structure. Each of these choices could have an impact on
+            how fast list operations perform. To help them make the right choices
+            they looked at the ways that people would most commonly use the list
+            data structure, and they optimized their implementation of a list so that
+            the most common operations were very fast. Of course they also tried to
+            make the less common operations fast, but when a trade-off had to be made
+            the performance of a less common operation was often sacrificed in favor
+            of the more common operation.</p>
+  <p>Two common operations are indexing and assigning to an index position.
+            Both of these operations take the same amount of time no matter how
+            large the list becomes. When an operation like this is independent of
+            the size of the list, it is <m>O(1)</m>.</p>
+  <p>Another very common programming task is to grow an ArrayList by using the <c>add</c> method, which
+    is <m>O(n)</m>, but in a very special way that we will examine in <xref ref="chapter-advanced-topics"/>
+    <em>update this to refer to <c>advanced_java-arraylists-revisited</c> when that section is rewritten</em>.
+  </p>
+
+  <p>Here is a table of common ArrayList operations and their Big O efficiency:</p>
+    <table xml:id="algorithm-analysis_tbl-listbigo">
+    <tabular>
+      <title>
+        Big O Efficiency of ArrayList Operations
+      </title>
+      <row header="yes">
+        <cell>Operation</cell>
+        <cell>Big O Efficiency</cell>
+      </row>
+      <row>
+        <cell><c>get(index)</c></cell>
+        <cell>O(1)</cell>
+      </row>
+      <row>
+        <cell><c>set(index)</c></cell>
+        <cell>O(1)</cell>
+      </row>
+      <row>
+  <cell><c>add n items</c></cell>
+        <cell>O(n)</cell>
+      </row>
+      <row>
+        <cell><c>remove(index)</c></cell>
+        <cell>O(n)</cell>
+      </row>
+      <row>
+        <cell><c>indexOf()</c></cell>
+        <cell>O(n)</cell>
+      </row>
+    </tabular>
+  </table>
+  <p>
+    Let's examine the <c>remove</c> method a bit more closely.  The <m>O(n)</m> is a <em>worst-case</em> number. When we remove the first number in an ArrayList, all the remaining numbers have to be moved left one position.  If we remove the last number in an ArrayList, that is a <em>best-case</em> situation, and is <m>O(1)</m>, as no elements need to be moved.
+  </p>
+
+  <p>
+    Here's the results of a program that removes the first item from an ArrayList 1000 times and compares that time to the time required to remove the last item 1000 times.
+  </p>
+
+<pre>2,000,000 items
+Remove first time: 0.3152410 sec
+Remove last time: 0.0000029 sec
+
+1,000,000 items
+Remove first time: 0.0858035 sec
+Remove last time: 0.0000022 sec
+
+100,000 items
+Remove first time: 0.0055089 sec
+Remove last time: 0.0000017 sec</pre>
+
+<p>As you see, the worst case time is proportional to the size of the list; the best case time is relatively unchanged.</p>
+
+<p><xref ref="lst_analysis_time_remove"/> is the program that we used, and there are some important things to note:</p>
+
+  <listing xml:id="lst_analysis_time_remove">
+    <program xml:id="prog_analysis_time_remove" language="java" line-numbers="yes">
+      <input>
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class RemoveItem {
+
+
+    public static double timeRemove(int len, boolean removeFirst) {
+        final int N_TRIALS = 25;
+        final int N_IGNORE = 20; // let system stabilize
+        long totalTime = 0;
+
+        ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(len);
+
+        for (int trial = 0; trial &lt; N_TRIALS; trial++) {
+            int start = list.size();
+            for (int i = start; i &lt; len; i++) {
+                list.add(i);
+            }
+            System.gc();
+
+            long startTime = System.nanoTime();
+            for (int count = 0; count &lt; 1000; count++) {
+                if (removeFirst) {
+                    list.remove(0);
+                } else {
+                    list.remove(list.size() - 1);
+                }
+            }
+
+            if (trial &gt;= N_IGNORE) {
+               totalTime = totalTime + (System.nanoTime() - startTime);
+            }
+
+        }
+        return (totalTime / (N_TRIALS - N_IGNORE)) / 1.0E9;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("2,000,000 items");
+        System.out.printf("Remove first time: %.7f sec%n",
+            timeRemove(2_000_000, true));
+        System.out.printf("Remove last time: %.7f sec%n",
+            timeRemove(2_000_000, false));
+        System.out.println();
+
+        System.out.println("1,000,000 items");
+        System.out.printf("Remove first time: %.7f sec%n",
+            timeRemove(1_000_000, true));
+        System.out.printf("Remove last time: %.7f sec%n",
+            timeRemove(1_000_000, false));
+        System.out.println();
+
+        System.out.println("100,000 items");
+        System.out.printf("Remove first time: %.7f sec%n",
+            timeRemove(100_000, true));
+        System.out.printf("Remove last time: %.7f sec%n",
+            timeRemove(100_000, false));
+        System.out.println();
+
+    }
+}
+</input>
+</program>
+</listing>
+
+
+<p>
+  In lines 8 and 9, we will run each test 25 times and average only the last 5 (in line 35), giving the cache time to stabilize as we saw in <xref ref="algorithm-analysis_lst-sum11"/>.
+</p>
+
+<p>
+  We allocate the ArrayList once before the trials, in line 12. This will be an empty list, so we have to fill it in lines 15-18. This has to be done at every trial, because each trial removes 1000 items.
+</p>
+
+<p>
+  Line 19 introduces a very important concept. When Java allocates and re-allocates memory, it is possible to have an area of memory that is no longer referred to.  The Java Virtual Machine periodically goes through memory and collects these unused areas so they can be re-used. This process is called <term>garbage collection</term>, and it can take a fair amount of time. We don't want this to happen while we are in our timing loop, so we call <c>System.gc()</c> to explicitly invoke garbage collection. This is not a sure-fire cure; the documentation for <c>gc</c> says: <q>There is no guarantee that this effort will recycle any particular number of unused objects, reclaim any particular amount of space, or complete at any particular time, if at all, before the method returns or ever.</q> Nonetheless, calling <c>System.gc</c> is our best effort to avoid garbage collection at inopportune times.
+</p>
+
+<p>Finally, because the inner loop repeats a thousand times, it is also important to point out that the list is decreasing in size by one each time through the loop. But even in the shortest list of 100,000 elements, this only reduces the overall size by <m>1\%</m> (and only <m>0.05\%</m> in the case of the 2,000,000 element list).</p>
+
+</section>

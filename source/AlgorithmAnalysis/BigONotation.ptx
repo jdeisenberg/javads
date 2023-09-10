@@ -11,10 +11,10 @@
             complicated problem and will depend on how the algorithm is implemented.</p>
   <p>A good basic unit of computation for comparing the summation algorithms
             shown earlier might be the number of assignment statements
-            performed to compute the sum. In the function <c>sum_of_n</c>, the number of
-            assignment statements is 1 (<m>the\_sum = 0</m>)
+            performed to compute the sum. In the function <c>sumOfN</c>, the number of
+            assignment statements is 1 (<m>theSum = 0</m>)
             plus the value of <em>n</em> (the number of times we perform
-            <m>the\_sum = the\_sum + i</m>). We can denote this by a function, call it <m>T</m>,
+            <m>theSum = theSum + i</m>). We can denote this by a function, call it <m>T</m>,
             where <m>T(n) = 1 + n</m>. The parameter <em>n</em> is often referred to as
             the <q>size of the problem,</q> and we can read this as <q><m>T(n)</m> is the time
             it takes to solve a problem of size <m>n</m>, namely <m>1 + n</m> steps.</q></p>
@@ -34,7 +34,7 @@
             term is what, in the end, is used for comparison. The <term>order of
                 magnitude</term> function describes the part of <m>T(n)</m> that increases
             the fastest as the value of <em>n</em> increases. Order of magnitude is often
-            called <term>Big O notation</term> (for <em>order</em>) and written as
+            called <term>Big O notation</term> (O stands for <em>order</em>) and written as
             <m>O(f(n))</m>. It provides a useful approximation of the actual
             number of steps in the computation. The function <m>f(n)</m> provides
             a simple representation of the dominant part of the original
@@ -76,11 +76,11 @@
   <table xml:id="algorithm-analysis_tbl-fntable">
     <tabular>
       <title>
-        <term>Table 1: Common Functions for Big O</term>
+        Table 1: Common Functions for Big O
       </title>
       <row header="yes">
-        <cell><term>f(n)</term></cell>
-        <cell><term>Name</term></cell>
+        <cell>f(n)</cell>
+        <cell>Name</cell>
       </row>
       <row>
         <cell><m>1</m></cell>
@@ -122,31 +122,39 @@
     <caption>Plot of Common Big O Functions</caption>
     <image source="AlgorithmAnalysis/Figures/newplot.png" width="50%"/>
   </figure>
-  <p>As a final example, suppose that we have the fragment of Python code
+  <p>As a final example, suppose that we have the fragment of Java code
             shown in <xref ref="algorithm-analysis_lst-dummycode"/>. Although this program does not really do
             anything, it is instructive to see how we can take actual code and
             analyze performance.</p>
-  <listing xml:id="algorithm-analysis_lst-dummycode"><pre>a = 5
-b = 6
-c = 10
-for i in range(n):
-    for j in range(n):
-        x = i * i
-        y = j * j
-        z = i * j
-for k in range(n):
-    w = a * k + 45
-    v = b * b
-d = 33</pre></listing>
+          <listing xml:id="algorithm-analysis_lst-dummycode"><program language="java"><input>
+        int a = 5;
+        int b = 6;
+        int c = 10;
+        int n = 1000;
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                int x = i * i;
+                int y = j * j;
+                int z = i * j;
+            }
+        }
+
+        for (int k = 0; k &lt; n; k++) {
+            int w = a * k + 45;
+            int v = b * b;
+        }
+        int d = 33;
+        </input></program></listing>
+
   <p>The number of assignment operations is the sum of four terms. The first
-            term is the constant 3, representing the three assignment statements at
+            term is the constant 4, representing the four assignment statements at
             the start of the fragment. The second term is <m>3n^{2}</m>, since
             there are three statements that are performed <m>n^{2}</m> times due
             to the nested iteration. The third term is <m>2n</m>, two statements
             iterated <em>n</em> times. Finally, the fourth term is the constant 1,
             representing the final assignment statement. This gives us
-            <m>T(n) = 3 + 3n^{2} + 2n + 1 = 3n^{2} + 2n + 4</m>. By looking at the exponents,
-            we can easily see that the <m>n^{2}</m> term will be dominant and
+            <m>T(n) = 4 + 3n^{2} + 2n + 1 = 3n^{2} + 2n + 5</m>. By looking at the exponents,
+            we can see that the <m>n^{2}</m> term will be dominant and
             therefore this fragment of code is <m>O(n^{2})</m>. Note that all of
             the other terms as well as the coefficient on the dominant term can be
             ignored as <em>n</em> grows larger.</p>
@@ -162,7 +170,7 @@ d = 33</pre></listing>
             <m>n</m> continues to grow.</p>
   <exercises>
     <title>Self Check</title>
-    <p>Write two Python functions to find the minimum number in a list.  The first function should compare each number to every other number on the list. <m>O(n^2)</m>.  The second function should be linear <m>O(n)</m>.</p>
+    <p>Write two Java methods to find the minimum number in a list.  The first function should compare each number to every other number on the list. <m>O(n^2)</m>.  The second function should be linear <m>O(n)</m>.</p>
   </exercises>
-  <video xml:id="findMinVid" youtube="p0COF_m6H1c" width="auto"/>
+  <!-- <video xml:id="findMinVid" youtube="p0COF_m6H1c" width="auto"/> -->
 </section>

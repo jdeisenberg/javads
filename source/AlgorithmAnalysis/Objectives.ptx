@@ -10,12 +10,10 @@
         <p>To be able to use Big O to describe execution time.</p>
       </li>
       <li>
-        <p>To understand the Big O execution time of common operations on
-                    Java ArrayLists and HashMaps.</p>
+        <p>To understand the Big O execution time of common operations on Java ArrayLists and HashMaps.</p>
       </li>
       <li>
-        <p>To understand how the implementation of Java data impacts algorithm
-                    analysis.</p>
+        <p>To understand how the implementation of Java data impacts algorithm analysis.</p>
       </li>
       <li>
         <p>To understand how to benchmark simple Java programs.</p>
