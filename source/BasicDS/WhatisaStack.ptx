@@ -20,14 +20,14 @@
             book whose cover is visible is the one on top. To access others in the
             stack, we need to remove the ones that are sitting on top of them.
             <xref ref="i117_id2fig-objectstack"/> shows another stack that contains a number
-            of primitive Python data objects.</p>
+            of Java <c>Integer</c> objects.</p>
   <figure align="center" xml:id="i117_id1fig-bookstack">
     <caption>A Stack of Books</caption>
     <image source="BasicDS/Figures/bookstack2.png" width="50%"/>
   </figure>
   <figure align="center" xml:id="i117_id2fig-objectstack">
-    <caption>A Stack of Primitive Python Data Objects</caption>
-    <image source="BasicDS/Figures/primitive.png" width="50%"/>
+    <caption>A Stack of Java Integers</caption>
+    <image source="BasicDS/Figures/stack_of_integers.png" width="50%"/>
   </figure>
   <p>One of the most useful properties of stacks can be observed
             as items are added and then removed. Assume you
@@ -37,7 +37,7 @@
             reverse of the order that they were placed. Stacks are fundamentally
             important, as they can be used to reverse the order of items. The order
             of insertion is the reverse of the order of removal.
-            <xref ref="fig-reversal"/> shows the Python data object stack as it was
+            <xref ref="fig-reversal"/> shows the Java Integer stack as it was
             created and then again as items are removed. Note the order of the
             objects.</p>
   <figure align="center" xml:id="fig-reversal">

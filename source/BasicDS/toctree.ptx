@@ -2,23 +2,23 @@
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US" xml:id="basic-data-structures">
   <title>Basic Data Structures</title>
   <xi:include href="./Objectives.ptx"/>
-  <!--
   <xi:include href="./WhatAreLinearStructures.ptx"/>
   <xi:include href="./WhatisaStack.ptx"/>
+
   <xi:include href="./TheStackAbstractDataType.ptx"/>
-  <xi:include href="./ImplementingaStackinPython.ptx"/>
+  <xi:include href="./ImplementingaStack.ptx"/>
   <xi:include href="./SimpleBalancedParentheses.ptx"/>
   <xi:include href="./BalancedSymbolsAGeneralCase.ptx"/>
   <xi:include href="./ConvertingDecimalNumberstoBinaryNumbers.ptx"/>
   <xi:include href="./InfixPrefixandPostfixExpressions.ptx"/>
   <xi:include href="./WhatIsaQueue.ptx"/>
   <xi:include href="./TheQueueAbstractDataType.ptx"/>
-  <xi:include href="./ImplementingaQueueinPython.ptx"/>
+  <xi:include href="./ImplementingaQueue.ptx"/>
   <xi:include href="./SimulationHotPotato.ptx"/>
   <xi:include href="./SimulationPrintingTasks.ptx"/>
   <xi:include href="./WhatIsaDeque.ptx"/>
   <xi:include href="./TheDequeAbstractDataType.ptx"/>
-  <xi:include href="./ImplementingaDequeinPython.ptx"/>
+  <xi:include href="./ImplementingaDeque.ptx"/>
   <xi:include href="./PalindromeChecker.ptx"/>
   <xi:include href="./Lists.ptx"/>
   <xi:include href="./TheUnorderedListAbstractDataType.ptx"/>
