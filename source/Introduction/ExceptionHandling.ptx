@@ -85,13 +85,30 @@ catch (Exception ex) {
     </input></program>
   <p>Now, if the user enters a number out of range, the program will catch the exception raised by the array access and will instead print a useful error message. This means that the program will not terminate but instead will continue on to the next statements.</p>
 
+  <p>The <c>ex</c> variable is an <c>Exception</c> object, and Java provides methods to allow programmers to extract information about the exception, such as an error message, the <q>stack trace</q> (the sequence of calls that happened when the exception occurred), and other information.</p>
+
   <console><output>
 Enter an index: 7
 Index must be from 0 to 6.
 </output></console>
 
   <p>It is also possible for a programmer to cause a runtime exception by
-    using the <c>throw</c> statement, but we will not cover it in this course. You can see details at <url href="https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html">the Java Tutorial</url>.</p>
+    using the <c>throw</c> statement. For example, let's say a method cannot calculate a valid return value if given a negative number. Instead of printing an error message<mdash>which may not be appropriate in a general-purpose library</mdash>it will throw an <c>IllegalArgumentException</c> and let the code that callled the method handle it with a <c>catch</c>:</p>
+
+  <program xml:id="intro_throw_exception" language="java">
+    <input>
+public static double doCalculation(double n) {
+    if (n &gt; 0) {
+        // a complicated calculation goes here
+        return ...;
+    } else {
+        throw new IllegalArgumentException("Argument " + n + " cannot be negative.");
+    }
+  }
+    </input></program>
+
+<p>The string in the <c>throw</c> statement will be the message associated with the exception.</p>
+
   <p>There are many kinds of exceptions that can be raised in addition to the
     <c>ArrayIndexOutOfBoundsException</c> shown above. See <url href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Exception.html">the Java API</url> for a list of some of the exception types.</p>
 </section>
