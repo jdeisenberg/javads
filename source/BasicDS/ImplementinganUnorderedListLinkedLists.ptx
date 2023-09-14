@@ -10,7 +10,7 @@
             <xref ref="fig-idea"/>. It appears that these values have been placed
             randomly. If we can maintain some explicit information in each item,
             namely the location of the next item (see <xref ref="fig-idea2"/>), then the
-            relative position of each item can be expressed by simply following the
+            relative position of each item can be expressed by following the
             link from one item to the next.</p>
   <figure align="center" xml:id="fig-idea">
     <caption>Items Not Constrained in Their Physical Placement</caption>
@@ -32,66 +32,75 @@
                 <term>node</term>. Each node object must hold at least two pieces of information.
                 First, the node must contain the list item itself. We will call this the
                 <term>data field</term> of the node. In addition, each node must hold a reference
-                to the next node. <xref ref="basic-ds_lst-nodeclass"/> shows the Python
-                implementation. To construct a node, you need to supply the initial data
+                to the next node. <xref ref="basic-ds_lst-nodeclass"/> shows the Java
+                implementation.</p>
+    <listing xml:id="basic-ds_lst-nodeclass"><program language="java">
+      <input>
+public class Node&lt;T&gt; {
+
+    private T data;
+    private Node next;
+
+    public Node(T data) {
+        this.data = data;
+        this.next = null;
+    }
+
+    public T getData() {
+        return this.data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public Node&lt;T&gt; getNext() {
+        return this.next;
+    }
+
+    public void setNext(Node&lt;T&gt; next) {
+        this.next = next;
+    }
+
+    public String toString() {
+        return this.data.toString();
+    }
+}
+</input>
+    </program></listing>
+    <p>To construct a node, you need to supply the initial data
                 value for the node. Evaluating the assignment statement below will yield
                 a <c>Node</c> object containing the value <c>93</c> (see <xref ref="fig-idea"/>). You
                 should note that we will typically represent a node object as shown in
-                <xref ref="fig-idea2"/>. Hidden fields <c>_data</c> and <c>_next</c> of the <c>Node</c> class
-                are turned into properties and can be accessed as <c>data</c> and <c>next</c> respectively.</p>
-    <listing xml:id="basic-ds_lst-nodeclass"><program language="python">
-      <input>
-class Node:
-    """A node of a linked list"""
+                <xref ref="fig-idea2"/>.</p>
+    <pre>
+        Node&lt;Integer&gt; temp = new Node(93);
+        System.out.println(temp.getData());
+    </pre>
 
-    def __init__(self, node_data):
-        self._data = node_data
-        self._next = None
-
-    def get_data(self):
-        """Get node data"""
-        return self._data
-
-    def set_data(self, node_data):
-        """Set node data"""
-        self._data = node_data
-
-    data = property(get_data, set_data)
-
-    def get_next(self):
-        """Get next node"""
-        return self._next
-
-    def set_next(self, node_next):
-        """Set next node"""
-        self._next = node_next
-
-    next = property(get_next, set_next)
-
-    def __str__(self):
-        """String"""
-        return str(self._data)
-</input>
-    </program></listing>
-    <p>We create <c>Node</c> objects in the usual way.</p>
-    <pre>&gt;&gt;&gt; temp = Node(93)
-&gt;&gt;&gt; temp.data
-93</pre>
-    <p>The special Python reference value <c>None</c> will play an important role
+    <note>
+        <title>Java Note</title>
+        <p>We have made the <c>data</c> and <c>next</c> properties <c>private</c>. This means the only way for other classes
+            to access and modify these properties is via the <c>getData</c>, <c>setData</c>, <c>getNext</c> and
+            <c>setNext</c> methods. This is a common pattern in Java; we <q>hide</q> the properties so that we can
+            change the underlying representation of a class; others who use the class can continue to use the same
+            methods without having to rewrite their code.</p>
+    </note>
+    <p>The special Java reference value <c>null</c> will play an important role
                 in the <c>Node</c> class and later in the linked list itself. A reference
-                to <c>None</c> will denote the fact that there is no next node. Note in the
+                to <c>null</c> will denote the fact that there is no next node. Note in the
                 constructor that a node is initially created with <c>next</c> set to
-                <c>None</c>. Since this is sometimes referred to as <q>grounding the node,</q>
+                <c>null</c>. Since this is sometimes referred to as <q>grounding the node,</q>
                 we will use the standard ground symbol to denote a reference that is
-                referring to <c>None</c>. It is always a good idea to explicitly assign
-                <c>None</c> to your initial next reference values.</p>
+                referring to <c>null</c>. It is always a good idea to explicitly assign
+                <c>null</c> to your initial next reference values.</p>
     <figure align="center" xml:id="file_106_id3">
       <caption>A Node Object Contains the Item and a Reference to the Next Node</caption>
       <image source="BasicDS/Figures/node.png" width="50%"/>
     </figure>
     <figure align="center" xml:id="file_106_id4">
       <caption>A Typical Representation for a Node</caption>
-      <image source="BasicDS/Figures/node2.png" width="50%"/>
+      <image source="BasicDS/Figures/node2.png" width="30%"/>
     </figure>
   </subsection>
   <subsection xml:id="basic-ds_the-unorderedlist-class">
@@ -104,20 +113,23 @@ class Node:
                 a reference to the first node. <xref ref="basic-ds_lst-listclass"/> shows the
                 constructor. Note that each list object will maintain a single reference
                 to the head of the list.</p>
-    <listing xml:id="basic-ds_lst-listclass"><program language="python">
+    <listing xml:id="basic-ds_lst-listclass"><program language="java">
       <input>
-class UnorderedList:
+public class UnorderedList&lt;T&gt; {
 
-    def __init__(self):
-        self.head = None
+    private Node&lt;T&gt; head;
+
+    public UnorderedList() {
+        head = null;
+    }
 </input>
     </program></listing>
     <p>Initially when we construct a list, there are no items. The assignment
                 statement</p>
-    <pre>&gt;&gt;&gt; my_list = UnorderedList()</pre>
+            <pre>UnorderedList&lt;Integer&gt; myList = new UnorderedList&lt;&gt;()</pre>
     <p>creates the linked list representation shown in
                 <xref ref="fig-initlinkedlist"/>. As we discussed in the <c>Node</c> class, the
-                special reference <c>None</c> will again be used to state that the head of
+                special reference <c>null</c> will again be used to state that the head of
                 the list does not refer to anything. Eventually, the example list given
                 earlier will be represented by a linked list as shown in
                 <xref ref="fig-linkedlist"/>. The head of the list refers to the first node
@@ -134,17 +146,18 @@ class UnorderedList:
       <caption>A Linked List of Integers</caption>
       <image source="BasicDS/Figures/linkedlist.png" width="50%"/>
     </figure>
-    <p>The <c>is_empty</c> method, shown in <xref ref="basic-ds_lst-isempty"/>, simply checks to
+    <p>The <c>isEmpty</c> method, shown in <xref ref="basic-ds_lst-isempty"/>, checks to
                 see if the head of the list is a reference to <c>None</c>. The result of
-                the boolean expression <c>self.head == None</c> will only be true if there
+                the boolean expression <c>this.head == null</c> will only be true if there
                 are no nodes in the linked list. Since a new list is empty, the
                 constructor and the check for empty must be consistent with one another.
-                This shows the advantage to using the reference <c>None</c> to denote the
-                end of the linked structure. In Python, <c>None</c> can be compared to
+                This shows the advantage to using the reference <c>null</c> to denote the
+                end of the linked structure. In Java, <c>null</c> can be compared to
                 any reference. Two references are equal if they both refer to the same
                 object. We will use this often in our remaining methods.</p>
-    <listing xml:id="basic-ds_lst-isempty"><pre>def is_empty(self):
-    return self.head == None</pre></listing>
+    <listing xml:id="basic-ds_lst-isempty"><pre>public boolean isEmpty() {
+    return this.head == null;
+}</pre></listing>
     <p>So how do we get items into our list? We need to implement the <c>add</c>
                 method. However, before we can do that, we need to address the important
                 question of where in the linked list to place the new item. Since this
@@ -161,12 +174,12 @@ class UnorderedList:
                 this new first item so that they follow.</p>
     <p>The linked list shown in <xref ref="fig-linkedlist"/> was built by calling
                 the <c>add</c> method a number of times.</p>
-    <pre>&gt;&gt;&gt; my_list.add(31)
-&gt;&gt;&gt; my_list.add(77)
-&gt;&gt;&gt; my_list.add(17)
-&gt;&gt;&gt; my_list.add(93)
-&gt;&gt;&gt; my_list.add(26)
-&gt;&gt;&gt; my_list.add(54)</pre>
+    <pre>myList.add(31);
+myList.add(77);
+myList.add(17);
+myList.add(93);
+myList.add(26);
+myList.add(54);</pre>
     <p>Note that since <c>31</c> is the first item added to the list, it will
                 eventually be the last node on the linked list as every other item is
                 added ahead of it. Also, since <c>54</c> is the last item added, it will become
@@ -180,12 +193,13 @@ class UnorderedList:
                 rest of the list has been properly attached to the new node, we can
                 modify the head of the list to refer to the new node. The assignment
                 statement in line 4 sets the head of the list.</p>
-    <listing xml:id="basic-ds_lst-add"><program language="python">
+    <listing xml:id="basic-ds_lst-add"><program language="java" line-numbers="yes">
       <input>
-def add(self, item):
-    temp = Node(item)
-    temp.set_next(self.head)
-    self.head = temp
+    public void add(T item) {
+        Node&lt;T&gt; temp = new Node&lt;T&gt;(item);
+        temp.setNext(this.head);
+        this.head = temp;
+    }
 </input>
     </program></listing>
     <figure align="center" xml:id="fig-addtohead">
@@ -213,24 +227,25 @@ def add(self, item):
                 <xref ref="basic-ds_lst-length"/> shows the Python code for counting the number of
                 nodes in the list. The external reference is called <c>current</c> and is
                 initialized to the head of the list in line 2. At the start of the
-                process we have not seen any nodes, so the count is set to <m>0</m>.
-                Lines 4&#x2013;6 actually implement the traversal. As long as the current
-                reference has not seen the end of the list (<c>None</c>), we move <c>current</c>
+                process we have not seen any nodes, so the count is set to zero.
+                Lines 4&#x2013;7 actually implement the traversal. As long as the current
+                reference has not seen the end of the list (<c>null</c>), we move <c>current</c>
                 along to the next node via the assignment statement in line 6. Again,
-                the ability to compare a reference to <c>None</c> is very useful. Every
-                time <c>current</c> moves to a new node, we add <m>1</m> to <c>count</c>.
+                the ability to compare a reference to <c>null</c> is very useful. Every
+                time <c>current</c> moves to a new node, we add 1 to <c>count</c>.
                 Finally, <c>count</c> gets returned after the iteration stops.
                 <xref ref="fig-traversal"/> shows this process as it proceeds down the list.</p>
-    <listing xml:id="basic-ds_lst-length"><program language="python">
+    <listing xml:id="basic-ds_lst-length"><program language="java" line-numbers="yes">
       <input>
-def size(self):
-    current = self.head
-    count = 0
-    while current is not None:
-        count = count + 1
-        current = current.next
-
-    return count
+    public int size() {
+        Node&lt;T&gt; current = this.head;
+        int count = 0;
+        while (current != null) {
+            count = count + 1;
+            current = current.getNext();
+        }
+        return count;
+    }
 </input>
     </program></listing>
     <figure align="center" xml:id="fig-traversal">
@@ -248,17 +263,19 @@ def size(self):
                 As in the <c>size</c> method, the traversal is initialized to start at
                 the head of the list (line 2). We continue to iterate over the list as long as there are
                 more nodes to visit. The question in line 4 asks whether
-                the data item is present in the current node. If so, we return <c>True</c> immediately.</p>
-    <listing xml:id="basic-ds_lst-search"><program language="python">
+                the data item is present in the current node. If so, we return <c>true</c> immediately.</p>
+    <listing xml:id="basic-ds_lst-search"><program language="java" line-numbers="yes">
       <input>
-def search(self, item):
-    current = self.head
-    while current is not None:
-        if current.data == item:
-            return True
-        current = current.next
-
-    return False
+    public boolean search(T item) {
+        Node&lt;T&gt; current = this.head;
+        while (current != null) {
+            if (current.getData().equals(item)) {
+                return true;
+            }
+            current = current.getNext();
+        }
+        return false;
+     }
 </input>
     </program></listing>
     <p>As an example, consider invoking the <c>search</c> method looking for the
@@ -309,7 +326,7 @@ True
                 starts out at the list head as in the other traversal examples.
                 <c>previous</c>, however, is assumed to always travel one node behind
                 <c>current</c>. For this reason, <c>previous</c> starts out with a value of
-                <c>None</c> since there is no node before the head (see
+                <c>null</c> since there is no node before the head (see
                 <xref ref="fig-removeinit"/>).</p>
     <p>In lines 6&#x2013;7 we ask whether the item stored in the current node is the
                 item we wish to remove. If so, we break out of the loop. If we
@@ -321,24 +338,27 @@ True
                 <c>current</c> before <c>current</c> moves ahead. <xref ref="fig-prevcurr"/> shows
                 the movement of <c>previous</c> and <c>current</c> as they progress down the
                 list looking for the node containing the value 17.</p>
-    <listing xml:id="basic-ds_lst-remove"><program language="python">
+    <listing xml:id="basic-ds_lst-remove"><program language="java" line-numbers="yes">
       <input>
-def remove(self, item):
-    current = self.head
-    previous = None
+    public void remove(T item) {
+        Node&lt;T&gt; current = this.head;
+        Node&lt;T&gt; previous = null;
 
-    while current is not None:
-        if current.data == item:
-            break
-        previous = current
-        current = current.next
+        while (current != null &amp;&amp; (!current.getData().equals(item))) {
+            previous = current;
+            current = current.getNext();
+        }
+        if (current == null) {
+            throw new java.util.NoSuchElementException(
+                item + " is not in  the list.");
+        }
 
-    if current is None:
-        raise ValueError("{} is not in the list".format(item))
-    if previous is None:
-        self.head = current.next
-    else:
-        previous.next = current.next
+        if (previous == null) {
+            this.head = current.getNext();
+        } else {
+            previous.setNext(current.getNext());
+        }
+    }
 </input>
     </program></listing>
     <figure align="center" xml:id="fig-removeinit">
@@ -354,12 +374,12 @@ def remove(self, item):
                 link that must be modified. However, there is a special case that needs
                 to be addressed. If the item to be removed happens to be the first item
                 in the list, then <c>current</c> will reference the first node in the
-                linked list. This also means that <c>previous</c> will be <c>None</c>. We said
+                linked list. This also means that <c>previous</c> will be <c>null</c>. We said
                 earlier that <c>previous</c> would be referring to the node whose next
                 reference needs to be modified in order to complete the removal. In this
                 case, it is not <c>previous</c> but rather the head of the list that needs
                 to be changed (see <xref ref="fig-removehead"/>). Another special case occurs if
-                the item is not in the list. In that case <c>current is None</c> evaluates to <c>True</c>
+                the item is not in the list. In that case <c>current == null</c> evaluates to <c>true</c>
                 and an error is raised.</p>
     <figure align="center" xml:id="fig-removepic1">
       <caption>Removing an Item from the Middle of the List</caption>
@@ -369,134 +389,176 @@ def remove(self, item):
       <caption>Removing the First Node from the List</caption>
       <image source="BasicDS/Figures/remove2.png" width="50%"/>
     </figure>
-    <p>Line 13 allows us to check whether we are dealing with the special case
+    <p>Line 14 allows us to check whether we are dealing with the special case
                 described above. If <c>previous</c> did not move, it will still have the
-                value <c>None</c> when the loop breaks. In that case,
+                value <c>null</c> when the loop breaks. In that case,
                 the head of the list is modified to refer to the node after
-                the current node (line 14), in effect removing the first node from the linked
-                list. However, if <c>previous</c> is not <c>None</c>, the node to be removed is
+                the current node (line 15), in effect removing the first node from the linked
+                list. However, if <c>previous</c> is not <c>null</c>, the node to be removed is
                 somewhere down the linked list structure. In this case the <c>previous</c>
                 reference is providing us with the node whose next reference must be
-                changed. Line 16 modifies the <c>next</c> property of the <c>previous</c> to
+                changed. Line 17 modifies the <c>next</c> property of the <c>previous</c> to
                 accomplish the removal. Note that in both cases the destination of the
                 reference change is <c>current.next</c>. One question that often
                 arises is whether the two cases shown here will also handle the
                 situation where the item to be removed is in the last node of the linked
                 list. We leave that for you to consider.</p>
-    <p>You can try out the <c>UnorderedList</c> class in ActiveCode 1.</p>
-    <program xml:id="unorderedlistcomplete" interactive="activecode" language="python">
+
+            <note>
+                <title>Java Note</title>
+                <p>Line 5 of <c>remove</c> deserves a closer look:</p>
+                <pre>while (current != null &amp;&amp; (!current.getData().equals(item))) {</pre>
+                <p>We want to keep looping as long as we haven't hit the end of the list and haven't found the item we want to delete. But what if <c>current</c> <em>is</em> <c>null</c>? Why doesn't the <c>getData()</c> call fail? The answer is <term>short-circuit evaluation</term>. When Java evaluates boolean expressions, it works from left to right. As soon as a final result can be determined, Java stops.  When <c>current != null</c> is <c>true</c>, Java has to evaluate the second condition to determine the result. But when <c>current</c> is <c>null</c>, the first condition returns <c>false</c>. That means that, no matter what the second condition is, the result has to be <c>false</c> (it can only be true when <em>both</em> conditions are true). Java doesn't need to look at the second condition, and immediately yields <c>false</c> for the expression. The <c>getData</c> call never happens.</p>
+
+                <p>In line 10, we wrote the <term>fully qualified name</term> <c>java.util.NoSuchElementException</c>. When a name is fully qualified, you don't need the <c>import</c> statement at the start of the file.</p>
+            </note>
+    <p><xref ref="lst_unorderedlistcomplete"/> is the complete <c>UnorderedList</c> class, with comments to document
+        the methods:</p>
+    <listing xml:id="lst_unorderedlistcomplete">
+    <program xml:id="unorderedlistcomplete" language="java">
       <input>
-class Node:
-    """A node of a linked list"""
+public class UnorderedList&lt;T&gt; {
 
-    def __init__(self, node_data):
-        self._data = node_data
-        self._next = None
+    private Node&lt;T&gt; head;
 
-    def get_data(self):
-        """Get node data"""
-        return self._data
+    /* Construct an empty list */
+    public UnorderedList() {
+        head = null;
+    }
 
-    def set_data(self, node_data):
-        """Set node data"""
-        self._data = node_data
+    /* Returns the head of the list */
+    public Node&lt;T&gt; getHead() {
+        return this.head;
+    }
 
-    data = property(get_data, set_data)
+    /* Sets the head of the list to the given Node */
+    public void setHead(Node&lt;T&gt; newHead) {
+        this.head = newHead;
+    }
 
-    def get_next(self):
-        """Get next node"""
-        return self._next
+    /* Return true if list is empty, false otherwise */
+    public boolean isEmpty() {
+        return this.head == null;
+    }
 
-    def set_next(self, node_next):
-        """Set next node"""
-        self._next = node_next
+    /*
+     * Add given item at the head of the list.
+     * Presume that the item is not already in the list.
+     */
+    public void add(T item) {
+        Node&lt;T&gt; temp = new Node&lt;T&gt;(item);
+        temp.setNext(this.head);
+        this.head = temp;
+    }
 
-    next = property(get_next, set_next)
+    /* Return the number of items in the list */
+    public int size() {
+        Node&lt;T&gt; current = this.head;
+        int count = 0;
+        while (current != null) {
+            count = count + 1;
+            current = current.getNext();
+        }
+        return count;
+    }
 
-    def __str__(self):
-        """String"""
-        return str(self._data)
+    /*
+     *  Check to see if the given item is in the list.
+     * Return true if it is, false if not.
+     */
+    public boolean search(T item) {
+        Node&lt;T&gt; current = this.head;
+        while (current != null) {
+            if (current.getData().equals(item)) {
+                return true;
+            }
+            current = current.getNext();
+        }
+        return false;
+    }
 
+    /*
+     * Remove the given item from the list.
+     * Throws a NoSuchElementException if the item is not in the list
+     */
+    public void remove(T item) {
+        Node&lt;T&gt; current = this.head;
+        Node&lt;T&gt; previous = null;
 
-class UnorderedList:
-    def __init__(self):
-        self.head = None
+        while (current != null &amp;&amp; (!current.getData().equals(item))) {
+            previous = current;
+            current = current.getNext();
+        }
+        if (current == null) {
+            throw new java.util.NoSuchElementException(
+                item + " is not in  the list.");
+        }
 
-    def is_empty(self):
-        return self.head == None
+        if (previous == null) {
+            this.head = current.getNext();
+        } else {
+            previous.setNext(current.getNext());
+        }
+    }
 
-    def add(self, item):
-        temp = Node(item)
-        temp.set_next(self.head)
-        self.head = temp
-
-    def size(self):
-        current = self.head
-        count = 0
-        while current is not None:
-            count = count + 1
-            current = current.next
-
-        return count
-
-    def search(self, item):
-        current = self.head
-        while current is not None:
-            if current.data == item:
-                return True
-            current = current.next
-
-        return False
-
-    def remove(self, item):
-        current = self.head
-        previous = None
-
-        while current is not None:
-            if current.data == item:
-                break
-            previous = current
-            current = current.next
-
-        if current is None:
-            raise ValueError("{} is not in the list".format(item))
-        if previous is None:
-            self.head = current.next
-        else:
-            previous.next = current.next
-
-
-my_list = UnorderedList()
-
-my_list.add(31)
-my_list.add(77)
-my_list.add(17)
-my_list.add(93)
-my_list.add(26)
-my_list.add(54)
-
-print(my_list.size())
-print(my_list.search(93))
-print(my_list.search(100))
-
-my_list.add(100)
-print(my_list.search(100))
-print(my_list.size())
-
-my_list.remove(54)
-print(my_list.size())
-my_list.remove(93)
-print(my_list.size())
-my_list.remove(31)
-print(my_list.size())
-print(my_list.search(93))
-
-try:
-    my_list.remove(27)
-except ValueError as ve:
-    print(ve)
+    /*
+     * Convert the list to a comma-separated series of
+     * values in brackets, starting with the head of the list.
+     */
+    public String toString() {
+        String result = "[";
+        Node&lt;T&gt; current = this.head;
+        while (current != null) {
+            result = result + current.getData().toString();
+            current = current.getNext();
+            if (current != null) {
+                result = result + ", ";
+            }
+        }
+        result = result + "]";
+        return result;
+    }
+}
         </input>
-    </program>
+        </program></listing>
+
+    <p><xref ref="lst_unorderedlist_test"/> shows a program to test the <c>UnorderedList</c> class.</p>
+
+    <listing xml:id="lst_unorderedlist_test">
+        <program xml:id="prog_unorderedlist_test" language="java"><input>
+public class TestUnorderedList {
+    public static void main(String[] args) {
+        UnorderedList&lt;Integer&gt; myList = new UnorderedList&lt;&gt;();
+        System.out.println(myList + " size: " + myList.size());
+        myList.add(31);
+        myList.add(77);
+        myList.add(17);
+        myList.add(93);
+        myList.add(26);
+        myList.add(54);
+        System.out.println(myList + " size: " + myList.size());
+
+        System.out.println("search for 17 returns " +
+            myList.search(17));
+        System.out.println("search for 1066 returns " +
+            myList.search(1066));
+
+        myList.remove(93);
+        System.out.println("after removing 93: " + myList);
+
+        myList.remove(54); // test removal of last item
+        System.out.println("after removing 54: " + myList);
+
+        try {
+            myList.remove(1066);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+}
+</input></program></listing>
+
     <p>The remaining methods <c>append</c>, <c>insert</c>, <c>index</c>, and <c>pop</c> are
                 left as exercises. Remember that each of these must take into account
                 whether the change is taking place at the head of the list or someplace
@@ -506,177 +568,9 @@ except ValueError as ve:
     <exercises>
       <title>Self Check</title>
       <p>Part I:  Implement the append method for UnorderedList.  What is the time complexity of the method you created?</p>
-      <program xml:id="self_check_list1" interactive="activecode" language="python">
-        <input>
-class Node:
-    """A node of a linked list"""
 
-    def __init__(self, node_data):
-        self._data = node_data
-        self._next = None
-
-    def get_data(self):
-        """Get node data"""
-        return self._data
-
-    def set_data(self, node_data):
-        """Set node data"""
-        self._data = node_data
-
-    data = property(get_data, set_data)
-
-    def get_next(self):
-        """Get next node"""
-        return self._next
-
-    def set_next(self, node_next):
-        """Set next node"""
-        self._next = node_next
-
-    next = property(get_next, set_next)
-
-    def __str__(self):
-        """String"""
-        return str(self._data)
-
-
-class UnorderedList:
-    def __init__(self):
-        self.head = None
-
-    def is_empty(self):
-        return self.head == None
-
-    def add(self, item):
-        temp = Node(item)
-        temp.set_next(self.head)
-        self.head = temp
-
-    def size(self):
-        current = self.head
-        count = 0
-        while current is not None:
-            count = count + 1
-            current = current.next
-
-        return count
-
-    def search(self, item):
-        current = self.head
-        while current is not None:
-            if current.data == item:
-                return True
-            current = current.next
-
-        return False
-
-    def remove(self, item):
-        current = self.head
-        previous = None
-
-        while current is not None:
-            if current.data == item:
-                break
-            previous = current
-            current = current.next
-
-        if current is None:
-            raise ValueError("{} is not in the list".format(item))
-        if previous is None:
-            self.head = current.next
-        else:
-            previous.next = current.next
-
-
-my_list = UnorderedList()
-        </input>
-      </program>
       <p>Part II:  In the previous problem, you most likely created an append method that was <m>O(n)</m>  If you add an instance variable to the UnorderedList class you can create an append method that is <m>O(1)</m>.  Modify your append method to be <m>O(1)</m>  Be Careful!  To really do this correctly you will need to consider a couple of special cases that may require you to make a modification to the add method as well.</p>
-      <program xml:id="self_check_list2" interactive="activecode" language="python">
-        <input>
-class Node:
-    """A node of a linked list"""
 
-    def __init__(self, node_data):
-        self._data = node_data
-        self._next = None
-
-    def get_data(self):
-        """Get node data"""
-        return self._data
-
-    def set_data(self, node_data):
-        """Set node data"""
-        self._data = node_data
-
-    data = property(get_data, set_data)
-
-    def get_next(self):
-        """Get next node"""
-        return self._next
-
-    def set_next(self, node_next):
-        """Set next node"""
-        self._next = node_next
-
-    next = property(get_next, set_next)
-
-    def __str__(self):
-        """String"""
-        return str(self._data)
-
-
-class UnorderedList:
-    def __init__(self):
-        self.head = None
-
-    def is_empty(self):
-        return self.head == None
-
-    def add(self, item):
-        temp = Node(item)
-        temp.set_next(self.head)
-        self.head = temp
-
-    def size(self):
-        current = self.head
-        count = 0
-        while current is not None:
-            count = count + 1
-            current = current.next
-
-        return count
-
-    def search(self, item):
-        current = self.head
-        while current is not None:
-            if current.data == item:
-                return True
-            current = current.next
-
-        return False
-
-    def remove(self, item):
-        current = self.head
-        previous = None
-
-        while current is not None:
-            if current.data == item:
-                break
-            previous = current
-            current = current.next
-
-        if current is None:
-            raise ValueError("{} is not in the list".format(item))
-        if previous is None:
-            self.head = current.next
-        else:
-            previous.next = current.next
-
-
-my_list = UnorderedList()
-        </input>
-      </program>
     </exercises>
   </subsection>
 </section>

@@ -1,0 +1,46 @@
+<table>
+  <tabular>
+    <row>
+      <cell>balanced parentheses</cell>
+      <cell>data field</cell>
+      <cell>deque</cell>
+    </row>
+    <row>
+      <cell>doubly linked list</cell>
+      <cell>escape</cell>
+      <cell>first in, first out (FIFO)</cell>
+    </row>
+    <row>
+      <cell>fully qualified name</cell>
+      <cell>generic</cell>
+      <cell>has-a</cell>
+    </row>
+    <row>
+      <cell>head</cell>
+      <cell>inheritance</cell>
+      <cell>last in, first out (LIFO)</cell>
+    </row>
+    <row>
+      <cell>linear data structures</cell>
+      <cell>linked list</cell>
+      <cell>linked list traversal</cell>
+    </row>
+    <row>
+      <cell>list</cell>
+      <cell>node</cell>
+      <cell>override</cell>
+    </row>
+    <row>
+      <cell>palindrome</cell>
+      <cell>queue</cell>
+      <cell>short-circuit evaluation</cell>
+    </row>
+    <row>
+      <cell>simulation</cell>
+      <cell>singly linked list</cell>
+      <cell>stack</cell>
+    </row>
+    <row>
+      </row>
+    </tabular>
+</table>

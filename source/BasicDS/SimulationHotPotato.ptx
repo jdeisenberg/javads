@@ -27,13 +27,13 @@
             versions of this story. Some count every third man and some allow the
             last man to escape on a horse. In any case, the idea is the same.</p>
   <p>We will implement a general <term>simulation</term> of Hot Potato. Our program
-            will input a list of names and a constant, call it <q>num,</q> to be used for
-            counting. It will return the name of the last person remaining after
+    will input a list of names and a value, call it <c>num</c> to be used for
+            counting how many times the potato is passed before the action is stopped. The method will return the name of the last person remaining after
             repetitive counting by <c>num</c>. What happens at that point is up to you.</p>
   <p>To simulate the circle, we will use a queue (see
             <xref ref="i122_id2fig-qupotatoqueue"/>). Assume that the child holding the potato will
             be at the front of the queue. Upon passing the potato, the simulation
-            will simply dequeue and then immediately enqueue that child, putting them
+            will dequeue and then immediately enqueue that child, putting them
             at the end of the line. They will then wait until all the others have
             been at the front before it will be their turn again. After <c>num</c>
             dequeue/enqueue operations, the child at the front will be removed
@@ -44,28 +44,38 @@
     <image source="BasicDS/Figures/namequeue.png" width="50%"/>
   </figure>
   <p>The program is shown in <xref ref="lst-josephussim"/>. A call to the
-            <c>hot_potato</c> function using 7 as the counting constant returns <c>'Susan'</c>.</p>
+            <c>hotPotato</c> method using 7 as the counting constant returns <c>"Susan"</c>.</p>
 <listing  xml:id="lst-josephussim">
-  <program  interactive="activecode" language="python">
+  <program language="java">
     <input>
-from pythonds3.basic import Queue
+public class HotPotatoSimulation {
 
+    public static String hotPotato(String[] nameList, int num) {
+        Queue&lt;String&gt; simQueue = new Queue&lt;&gt;();
 
-def hot_potato(name_list, num):
-    sim_queue = Queue()
-    for name in name_list:
-        sim_queue.enqueue(name)
+        for (String name: nameList) {
+            simQueue.enqueue(name);
+        }
 
-    while sim_queue.size() &gt; 1:
-        for i in range(num):
-            sim_queue.enqueue(sim_queue.dequeue())
+        while (simQueue.size() &gt; 1) {
+            // pass the potato: move person at head to tail
+            for (int pass = 0; pass &lt; num; pass++) {
+                simQueue.enqueue(simQueue.dequeue());
+            }
 
-        sim_queue.dequeue()
+            String removed = simQueue.dequeue(); // remove person at head
+            System.out.println(removed + " is out of the game.");
+        }
+        return simQueue.dequeue();
+    }
 
-    return sim_queue.dequeue()
-
-
-print(hot_potato(["Bill", "David", "Susan", "Jane", "Kent", "Brad"], 7))
+    public static void main(String[] args) {
+        String[] people = {"Bill", "David", "Susan", "Jane",
+            "Kent", "Brad"};
+        String lastPerson = hotPotato(people, 7);
+        System.out.println("Last person is " + lastPerson + ".");
+    }
+}
         </input>
   </program>
 </listing>
@@ -74,7 +84,7 @@ print(hot_potato(["Bill", "David", "Susan", "Jane", "Kent", "Brad"], 7))
             queue acts like a circle and counting continues back at the beginning
             until the value is reached. Also, notice that the list is loaded into
             the queue such that the first name on the list will be at the front of
-            the queue. <c>'Bill'</c> in this case is the first item in the list and
+            the queue. <c>"Bill"</c> in this case is the first item in the list and
             therefore moves to the front of the queue. A variation of this
             implementation, described in the exercises, allows for a random counter.</p>
 </section>

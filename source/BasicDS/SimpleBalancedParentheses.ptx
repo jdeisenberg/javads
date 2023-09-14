@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <section xml:id="basic-ds_simple-balanced-parentheses">
-  <title>Simple Balanced Parentheses</title>
+  <title>Basic Balanced Parentheses</title>
   <p>We now turn our attention to using stacks to solve real computer science
             problems. You have no doubt written arithmetic expressions such as</p>
   <p>
@@ -11,9 +11,11 @@
             with constructs like</p>
   <pre>(defun square(n)
      (* n n))</pre>
+
   <p>This defines a function called <c>square</c> that will return the square of
             its argument <c>n</c>. Lisp is notorious for using lots and lots of
             parentheses.</p>
+
   <p>In both of these examples, parentheses must appear in a balanced
             fashion. <term>Balanced parentheses</term> means that each opening symbol has a
             corresponding closing symbol and the pairs of parentheses are properly
@@ -47,6 +49,7 @@
     <caption>Matching Parentheses</caption>
     <image source="BasicDS/Figures/simpleparcheck.png" width="50%"/>
   </figure>
+
   <p>Once you agree that a stack is the appropriate data structure for
             keeping the parentheses, the statement of the algorithm is
             straightforward. Starting with an empty stack, process the parenthesis
@@ -57,43 +60,43 @@
             closing symbol, the parentheses remain balanced. If at any time there is
             no opening symbol on the stack to match a closing symbol, the string is
             not balanced properly. At the end of the string, when all symbols have
-            been processed, the stack should be empty. The Python code to implement
+            been processed, the stack should be empty. The Java code to implement
             this algorithm is shown in <xref ref="lst-parcheck1"/>.</p>
 <listing xml:id="lst-parcheck1">
-<program label="lst-parcheck1"   interactive="activecode" language="python">
+<program label="lst-parcheck1" line-numbers="yes" language="java">
     <input>
-from pythonds3.basic import Stack
+public class Parentheses {
+    public static boolean parenCheck(String symbolString) {
+        Stack&lt;Character&gt; symStack = new Stack&lt;&gt;();
 
+        for (int i = 0; i &lt; symbolString.length(); i++) {
+            Character symbol = symbolString.charAt(i);
 
-def par_checker(symbol_string):
-    s = Stack()
-    for symbol in symbol_string:
-        if symbol == "(":
-            s.push(symbol)
-        else:
-            if s.is_empty():
-                return False
-            else:
-                s.pop()
+            if (symbol == '(') {
+                symStack.push(symbol);
+            } else if (symbol == ')') {
+                if (symStack.isEmpty()) {
+                    return false;
+                } else {
+                    symStack.pop();
+                }
+            } else {
+                // not a parenthesis; skip over it
+            }
+        }
 
-    return s.is_empty()
+        return symStack.isEmpty();
+    }
 
-
-print(par_checker("((()))"))  # expected True
-print(par_checker("((()()))"))  # expected True
-print(par_checker("(()"))  # expected False
-print(par_checker(")("))  # expected False
+    public static void main(String[] args) {
+        System.out.println(parenCheck("((()))"));  // expected true
+        System.out.println(parenCheck("((()()))"));  // expected true
+        System.out.println(parenCheck("(()"));  // expected false
+        System.out.println(parenCheck(")("));  // expected false
+    }
+}
         </input>
   </program>
 </listing>
-  <p>This function, <c>par_checker</c>, assumes that a <c>Stack</c> class is
-            available and returns a Boolean result as to whether the string of
-            parentheses is balanced. If the current symbol is <c>(</c>,
-            then it is pushed on the stack (lines 7&#x2013;8).
-            Note also in line 13 that <c>pop</c> simply removes a symbol from the stack.
-            The returned value is not used since we know it must be an opening symbol seen earlier.
-            If the stack becomes empty before we reach the end of the <c>symbol_string</c>,
-            then there are too many closing parentheses and the string is not balanced,
-            so we immediately return <c>False</c> (line 11).
-            At the end (line 15), the string represents a correctly balanced sequence of parentheses as long as the stack has been completely cleaned off.</p>
+  <p>This method, <c>parenCheck</c>, assumes that a <c>Stack</c> class is available and returns a boolean result as to whether the string of parentheses is balanced. If the current symbol is <c>(</c>, then it is pushed on the stack (lines 8&#x2013;9). Note also in line 14 that <c>pop</c> removes a symbol from the stack. The returned value is not used since we know it must be an opening symbol seen earlier. If the stack becomes empty before we reach the end of the <c>symbolString</c>, then there are too many closing parentheses and the string is not balanced, so we immediately return <c>false</c> (line 12). If a symbol is not an open or close parenthesis, we ignore it (lines 16&#x2013;18), which allows more latitude in user input. At the end (line 21), the string represents a correctly balanced sequence of parentheses as long as the stack has been completely cleaned off.</p>
 </section>

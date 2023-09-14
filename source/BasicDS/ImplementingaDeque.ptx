@@ -1,106 +1,194 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_implementing-a-deque-in-python">
-  <title>Implementing a Deque in Python</title>
+<section xml:id="basic-ds_implementing-a-deque">
+  <title>Implementing a Deque in Java</title>
   <p>As we have done in previous sections, we will create a new class for the
-            implementation of the abstract data type deque. Again, the Python list
+            implementation of the abstract data type deque. Again, the Java list
             will provide a very nice set of methods upon which to build the details
             of the deque. Our implementation (<xref ref="lst-dequecode"/>) will assume that
-            the rear of the deque is at position 0 in the list.</p>
+            the tail of the deque is at position 0 in the list.</p>
   <listing xml:id="lst-dequecode">
 <program label="lst-dequecode"  language="python">
     <input>
-class Deque:
-    """Deque implementation as a list"""
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
-    def __init__(self):
-        """Create new deque"""
-        self._items = []
+public class Deque&lt;T&gt; {
 
-    def is_empty(self):
-        """Check if the deque is empty"""
-        return not bool(self._items)
+    /*
+     * The tail of the deque is at the beginning
+     * of the ArrayList; the head is the last item
+     */
+    ArrayList&lt;T&gt; items;
 
-    def add_front(self, item):
-        """Add an item to the front of the deque"""
-        self._items.append(item)
+    /*
+     * Create a new Deque
+     */
+    public Deque() {
+        this.items = new ArrayList&lt;T&gt;();
+    }
 
-    def add_rear(self, item):
-        """Add an item to the rear of the deque"""
-        self._items.insert(0, item)
+    /*
+     * Returns true if there are no items in the deque;
+     * false otherwise.
+     */
+    public boolean isEmpty() {
+        return (this.items.isEmpty());
+    }
 
-    def remove_front(self):
-        """Remove an item from the front of the deque"""
-        return self._items.pop()
+    /*
+     * Add an item to the head of the deque
+     */
+    public void addHead(T item) {
+        this.items.add(item);
+    }
 
-    def remove_rear(self):
-        """Remove an item from the rear of the deque"""
-        return self._items.pop(0)
+    /*
+     * Add an item to the tail of the deque
+     */
+    public void addTail(T item) {
+        this.items.add(0, item);
+    }
 
-    def size(self):
-        """Get the number of items in the deque"""
-        return len(self._items)
+    /*
+     * Remove the item at the head of the deque and return it.
+     * If the deque is empty, throws an exception.
+     */
+    public T removeHead() {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("Deque is empty.");
+        }
+        return this.items.remove(this.size() - 1);
+    }
+
+    /*
+     * Remove the item at the tail of the deque and return it.
+     * If the deque is empty, throws an exception.
+     */
+    public T removeTail() {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("Deque is empty.");
+        }
+        return this.items.remove(0);
+    }
+
+    /*
+     * Return the item at the head of the deque, but do not remove it.
+     * If the deque is empty, throws an exception.
+     */
+    public T peekHead() {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("Deque is empty.");
+        }
+        return this.items.get(this.size() - 1);
+    }
+
+    /*
+     * Return the item at the tail of the deque, but do not remove it.
+     * If the deque is empty, throws an exception.
+     */
+    public T peekTail() {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("Deque is empty.");
+        }
+        return this.items.get(0);
+    }
+
+    /*
+     * Returns the number of items in the deque.
+     */
+    public int size() {
+        return this.items.size();
+    }
+
+    /*
+     * Convert to string as an array from tail to head
+     */
+    public String toString() {
+
+        if (!this.items.isEmpty()) {
+            String arrString = this.items.toString();
+            return "tail " + arrString + " head";
+        } else {
+            return "&lt;&lt;empty deque&gt;&gt;";
+        }
+    }
+}
+
 </input>
   </program>
   </listing>
-  <p>In <c>remove_front</c> we use the <c>pop</c> method to remove the last element
-            from the list. However, in <c>remove_rear</c>, the <c>pop(0)</c> method must
-            remove the first element of the list. Likewise, we need to use the
-            <c>insert</c> method (line 12) in <c>add_rear</c> since the <c>append</c> method
-            assumes the addition of a new element to the end of the list.</p>
-  <p>CodeLens 1 shows the <c>Deque</c> class in
+
+  <p><xref ref="lst_deqtest"/> shows a deque in
             action as we perform the sequence of operations from
             <xref ref="basic-ds_the-deque-abstract-data-type"/>.</p>
-  <program xml:id="deqtest" interactive="codelens" language="python">
+        <listing xml:id="lst_deqtest">
+  <program xml:id="deqtest" language="java">
     <input>
-class Deque:
-    """Queue implementation as a list"""
+public class DequeTest {
 
-    def __init__(self):
-        """Create new deque"""
-        self._items = []
+    /*
+     * Show the operation, its result (if any), and the resulting deque
+     */
+    public static void display(String operation, String result, Deque d) {
+        System.out.printf("%-17s | %-7s | %s%n", operation, result,
+            d.toString());
+    }
 
-    def is_empty(self):
-        """Check if the deque is empty"""
-        return not bool(self._items)
+    public static void main(String[] args) {
 
-    def add_front(self, item):
-        """Add an item to the front of the deque"""
-        self._items.append(item)
+        Deque&lt;Integer&gt; d = new Deque&lt;&gt;();
+        display("d.isEmpty()", Boolean.toString(d.isEmpty()), d);
 
-    def add_rear(self, item):
-        """Add an item to the rear of the deque"""
-        self._items.insert(0, item)
+        d.addTail(4);
+        display("d.addTail(4)", "", d);
 
-    def remove_front(self):
-        """Remove an item from the front of the deque"""
-        return self._items.pop()
+        d.addTail(505);
+        display("d.addTail(505)", "", d);
 
-    def remove_rear(self):
-        """Remove an item from the rear of the deque"""
-        return self._items.pop(0)
+        d.addHead(1066);
+        display("d.addHead(1066)", "", d);
 
-    def size(self):
-        """Get the number of items in the deque"""
-        return len(self._items)
+        d.addHead(4711);
+        display("d.addHead(4711)", "", d);
 
-d=Deque()
-print(d.is_empty())
-d.add_rear(4)
-d.add_rear('dog')
-d.add_front('cat')
-d.add_front(True)
-print(d.size())
-print(d.is_empty())
-d.add_rear(8.4)
-print(d.remove_rear())
-print(d.remove_front())
+        display("d.size", Integer.toString(d.size()), d);
+
+        display("d.isEmpty()", Boolean.toString(d.isEmpty()), d);
+
+        d.addTail(217);
+        display("d.addTail(217)", "", d);
+
+        Integer value = d.removeTail();
+        display("d.removeTail()", Integer.toString(value), d);
+
+        value = d.removeHead();
+        display("d.removeHead()", Integer.toString(value), d);
+
+    }
+}
     </input>
   </program>
-  <p>You can see many similarities to Python code already described for
+</listing>
+
+<p>And here is its output:</p>
+<console><output>
+d.isEmpty()       | true    | &lt;&lt;empty deque&gt;&gt;
+d.addTail(4)      |         | tail [4] head
+d.addTail(505)    |         | tail [505, 4] head
+d.addHead(1066)   |         | tail [505, 4, 1066] head
+d.addHead(4711)   |         | tail [505, 4, 1066, 4711] head
+d.size            | 4       | tail [505, 4, 1066, 4711] head
+d.isEmpty()       | false   | tail [505, 4, 1066, 4711] head
+d.addTail(217)    |         | tail [217, 505, 4, 1066, 4711] head
+d.removeTail()    | 217     | tail [505, 4, 1066, 4711] head
+d.removeHead()    | 4711    | tail [505, 4, 1066] head
+</output></console>
+
+  <p>You can see many similarities to Java code already described for
             stacks and queues. You are also likely to observe that in this
-            implementation adding and removing items from the front is <m>O(1)</m> whereas
-            adding and removing from the rear is <m>O(n)</m>. This is to be expected, given
+            implementation adding and removing items from the head is <m>O(1)</m> whereas
+            adding and removing from the tail is <m>O(n)</m>. This is to be expected, given
             the common operations that appear for adding and removing items. Again,
-            the important thing is to be certain that we know where the front and
-            rear are assigned in the implementation.</p>
+            the important thing is to be certain that we know where the head and
+            tail are assigned in the implementation.</p>
 </section>

@@ -1,102 +1,153 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_implementing-a-queue-in-python">
-  <title>Implementing a Queue in Python</title>
+<section xml:id="basic-ds_implementing-a-queue">
+  <title>Implementing a Queue in Java</title>
   <p>It is again appropriate to create a new class for the implementation of
             the abstract data type queue. As before, we will use the power and
-            simplicity of the list collection to build the internal representation
+            simplicity of the ArrayList collection to build the internal representation
             of the queue.</p>
-  <p>We need to decide which end of the list to use as the rear and which to
-            use as the front. The implementation shown in <xref ref="basic-ds_lst-queuecode"/>
-            assumes that the rear is at position 0 in the list. This allows us to
-            use the <c>insert</c> function on lists to add new elements to the rear of
-            the queue. The <c>pop</c> operation can be used to remove the front element
+  <p>We need to decide which end of the list to use as the tail and which to
+            use as the head. The implementation shown in <xref ref="basic-ds_lst-queuecode"/>
+            assumes that the tail is at position 0 in the list. This allows us to
+            use the <c>add</c> function on lists to add new elements to the tail of
+            the queue. The <c>remove</c> operation can be used to remove the head element
             (the last element of the list). Recall that this also means that <c>enqueue</c>
             will be <m>O(n)</m> and <c>dequeue</c> will be <m>O(1)</m>.</p>
-  <listing xml:id="basic-ds_lst-queuecode"><pre>class Queue:
-    """Queue implementation as a list"""
+  <listing xml:id="basic-ds_lst-queuecode">
+    <program xml:id="basic-ds_prog-queuecode">
+      <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
-    def __init__(self):
-        """Create new queue"""
-        self._items = []
+public class Queue&lt;T&gt; {
 
-    def is_empty(self):
-        """Check if the queue is empty"""
-        return not bool(self._items)
+    /*
+     * The tail of the queue is at the beginning
+     * of the ArrayList; the head is the last item
+     */
+    ArrayList&lt;T&gt; items;
 
-    def enqueue(self, item):
-        """Add an item to the queue"""
-        self._items.insert(0, item)
+    /*
+     * Create a new Queue
+     */
+    public Queue() {
+        this.items = new ArrayList&lt;T&gt;();
+    }
 
-    def dequeue(self):
-        """Remove an item from the queue"""
-        return self._items.pop()
+    /*
+     * Returns true if there are no items in the queue;
+     * false otherwise.
+     */
+    public boolean isEmpty() {
+        return (this.items.isEmpty());
+    }
 
-    def size(self):
-        """Get the number of items in the queue"""
-        return len(self._items)</pre></listing>
-  <p>CodeLens 1 shows the <c>Queue</c> class in
+    /*
+     * Add an item to the tail of the queue
+     */
+    public void enqueue(T item) {
+        this.items.add(0, item);
+    }
+
+    /*
+     * Remove the item at the head of the queue and return it.
+     * If the queue is empty, throws an exception.
+     */
+    public T dequeue() {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("Queue is empty.");
+        }
+        return this.items.remove(this.size() - 1);
+    }
+
+    /*
+     * Return the item at the head of the queue, but do not remove it.
+     * If the queue is empty, throws an exception.
+     */
+    public T peek() {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("Queue is empty.");
+        }
+        return this.items.get(this.size() - 1);
+    }
+
+    /*
+     * Returns the number of items in the queue.
+     */
+    public int size() {
+        return this.items.size();
+    }
+
+    /*
+     * Convert to string as an array from tail to head
+     */
+    public String toString() {
+
+        if (!this.items.isEmpty()) {
+            String arrString = this.items.toString();
+            // remove open and closing bracket
+            return "tail -&gt;" + arrString + "-&gt; head";
+        } else {
+            return "&lt;&lt;empty queue&gt;&gt;";
+        }
+    }
+}
+
+</input></program></listing>
+  <p><xref ref="lst-queuetest"/> shows the <c>Queue</c> class in
             action as we perform the sequence of operations from
             <xref ref="basic-ds_the-queue-abstract-data-type"/>.</p>
-  <program xml:id="ququeuetest" interactive="codelens" language="python">
+          <listing xml:id="lst-queuetest">
+            <program xml:id="prog-queuetest" language="java">
     <input>
-class Queue:
-    """Queue implementation as a list"""
+public class QueueTest {
 
-    def __init__(self):
-        """Create new queue"""
-        self._items = []
+    public static void main(String[] args) {
 
-    def is_empty(self):
-        """Check if the queue is empty"""
-        return not bool(self._items)
+        Queue&lt;Integer&gt; q = new Queue&lt;&gt;();
+        System.out.println("isEmpty returns " + q.isEmpty());
 
-    def enqueue(self, item):
-        """Add an item to the queue"""
-        self._items.insert(0, item)
+        q.enqueue(4);
+        q.enqueue(27);
+        System.out.println("Queue is now: " + q);
 
-    def dequeue(self):
-        """Remove an item from the queue"""
-        return self._items.pop()
+        q.enqueue(1066);
+        System.out.println("After another enqueue, size is " +
+            q.size());
+        System.out.println("isEmpty now returns " + q.isEmpty());
 
-    def size(self):
-        """Get the number of items in the queue"""
-        return len(self._items)
+        q.enqueue(4711);
 
-q = Queue()
-q.enqueue(4)
-q.enqueue("dog")
-q.enqueue(True)
-print(q.size())
-    </input>
-  </program>
-  <p>Further manipulation of this queue would give the following results:</p>
-  <pre>&gt;&gt;&gt; q.size()
-3
-&gt;&gt;&gt; q.is_empty()
-False
-&gt;&gt;&gt; q.enqueue(8.4)
-&gt;&gt;&gt; q.dequeue()
-4
-&gt;&gt;&gt; q.dequeue()
-'dog'
-&gt;&gt;&gt; q.size()
-2</pre>
+        System.out.println("After another enqueue, queue is " + q);
+
+        Integer head = q.dequeue();
+        System.out.println("Dequeue - head was: " + head);
+        head = q.dequeue();
+        System.out.println("Dequeue again - head was: " + head);
+
+
+        System.out.println("Queue is now: " + q);
+        System.out.println("Size is now: " + q.size());
+
+    }
+}
+      </input></program></listing>
+
   <exercises>
     <title>Self Check</title>
     <exercise label="queue_1">
       <statement>
-        <p>Q-2: Suppose you have the following series of queue operations.</p>
-        <pre>q = Queue()
-q.enqueue("hello")
-q.enqueue("dog")
-q.enqueue(3)
-q.dequeue()</pre>
-        <p>What items are left on the queue?</p>
+        <p>Suppose you have the following series of queue operations.</p>
+        <pre>Queue&lt;String&gt; q = new Queue&lt;&gt;()
+q.enqueue("hello");
+q.enqueue("dog");
+q.enqueue("cat");
+q.dequeue();</pre>
+        <p>What items are left on the queue (from head to tail)?</p>
       </statement>
       <choices>
         <choice>
           <statement>
-            <p>'hello', 'dog'</p>
+            <p>"hello", "dog"</p>
           </statement>
           <feedback>
             <p>Remember the first thing added to the queue is the first thing removed.  FIFO</p>
@@ -104,23 +155,23 @@ q.dequeue()</pre>
         </choice>
         <choice correct="yes">
           <statement>
-            <p>'dog', 3</p>
+            <p>"dog", "cat"</p>
           </statement>
           <feedback>
-            <p>Yes, first in first out means that hello is gone</p>
+            <p>Yes, first in first out means that "hello" is gone</p>
           </feedback>
         </choice>
         <choice>
           <statement>
-            <p>'hello', 3</p>
+            <p>"hello", "cat"</p>
           </statement>
           <feedback>
-            <p>Queues, and Stacks are both data structures where you can only access the first and the last thing.</p>
+            <p>Queues and stacks are both data structures where you can only access the first and the last items.</p>
           </feedback>
         </choice>
         <choice>
           <statement>
-            <p>'hello', 'dog', 3</p>
+            <p>"hello", "dog", "cat"</p>
           </statement>
           <feedback>
             <p>Ooops, maybe you missed the dequeue call at the end?</p>

@@ -41,12 +41,12 @@
   <table xml:id="basic-ds_tbl-stackops">
     <tabular>
       <title>
-        <term>Table 1: Sample Stack Operations</term>
+        Sample Stack Operations
       </title>
       <row header="yes">
-        <cell><term>Stack Operation</term></cell>
-        <cell><term>Stack Contents</term></cell>
-        <cell><term>Return Value</term></cell>
+        <cell>Stack Operation</cell>
+        <cell>Stack Contents</cell>
+        <cell>Return Value</cell>
       </row>
       <row>
         <cell><c>s.is_empty()</c></cell>
@@ -59,48 +59,48 @@
         <cell></cell>
       </row>
       <row>
-        <cell><c>s.push('dog')</c></cell>
-        <cell><c>[4, 'dog']</c></cell>
+        <cell><c>s.push(27)</c></cell>
+        <cell><c>[4, 27]</c></cell>
         <cell></cell>
       </row>
       <row>
         <cell><c>s.peek()</c></cell>
-        <cell><c>[4, 'dog']</c></cell>
-        <cell><c>'dog'</c></cell>
+        <cell><c>[4, 27]</c></cell>
+        <cell><c>27</c></cell>
       </row>
       <row>
-        <cell><c>s.push(True)</c></cell>
-        <cell><c>[4, 'dog', True]</c></cell>
+        <cell><c>s.push(1066)</c></cell>
+        <cell><c>[4, 27, 1066]</c></cell>
         <cell></cell>
       </row>
       <row>
         <cell><c>s.size()</c></cell>
-        <cell><c>[4, 'dog', True]</c></cell>
+        <cell><c>[4, 27, 1066]</c></cell>
         <cell><c>3</c></cell>
       </row>
       <row>
-        <cell><c>s.is_empty()</c></cell>
-        <cell><c>[4, 'dog', True]</c></cell>
-        <cell><c>False</c></cell>
+        <cell><c>s.isEmpty()</c></cell>
+        <cell><c>[4, 27, 1066]</c></cell>
+        <cell><c>false</c></cell>
       </row>
       <row>
-        <cell><c>s.push(8.4)</c></cell>
-        <cell><c>[4, 'dog', True, 8.4]</c></cell>
+        <cell><c>s.push(4711)</c></cell>
+        <cell><c>[4, 27, 1066, 4711]</c></cell>
         <cell></cell>
       </row>
       <row>
         <cell><c>s.pop()</c></cell>
-        <cell><c>[4, 'dog', True]</c></cell>
-        <cell><c>8.4</c></cell>
+        <cell><c>[4, 27, 1066]</c></cell>
+        <cell><c>4711</c></cell>
       </row>
       <row>
         <cell><c>s.pop()</c></cell>
-        <cell><c>[4, 'dog']</c></cell>
-        <cell><c>True</c></cell>
+        <cell><c>[4, 27]</c></cell>
+        <cell><c>1066</c></cell>
       </row>
       <row>
         <cell><c>s.size()</c></cell>
-        <cell><c>[4, 'dog']</c></cell>
+        <cell><c>[4, 27]</c></cell>
         <cell><c>2</c></cell>
       </row>
     </tabular>

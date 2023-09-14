@@ -12,23 +12,31 @@
                     and returns an empty deque.</p>
       </li>
       <li>
-        <p><c>add_front(item)</c> adds a new item to the front of the deque. It
+        <p><c>addHead(item)</c> adds a new item to the head of the deque. It
                     needs the item and returns nothing.</p>
       </li>
       <li>
-        <p><c>add_rear(item)</c> adds a new item to the rear of the deque. It needs
+        <p><c>addTail(item)</c> adds a new item to the tail of the deque. It needs
                     the item and returns nothing.</p>
       </li>
       <li>
-        <p><c>remove_front()</c> removes the front item from the deque. It needs no
+        <p><c>removeHead()</c> removes the head item from the deque. It needs no
                     parameters and returns the item. The deque is modified.</p>
       </li>
       <li>
-        <p><c>remove_rear()</c> removes the rear item from the deque. It needs no
+        <p><c>removeTail()</c> removes the tail item from the deque. It needs no
                     parameters and returns the item. The deque is modified.</p>
       </li>
       <li>
-        <p><c>is_empty()</c> tests to see whether the deque is empty. It needs no
+        <p><c>peekHead()</c> returns, but does not remove, the head item from the deque. It needs no parameters
+          and does not modify the deque.</p>
+        </li>
+      <li>
+        <p><c>peekTail()</c> returns, but does not remove, the tail item from the deque. It needs no parameters
+          and does not modify the deque.</p>
+        </li>
+      <li>
+        <p><c>isEmpty()</c> tests to see whether the deque is empty. It needs no
                     parameters and returns a boolean value.</p>
       </li>
       <li>
@@ -39,69 +47,69 @@
   </p>
   <p>As an example, if we assume that <c>d</c> is a deque that has been created
             and is currently empty, then <xref ref="basic-ds_tbl-dequeoperations"/> shows the results
-            of a sequence of deque operations. Note that the contents in front are
-            listed on the right. It is very important to keep track of the front and
+            of a sequence of deque operations. Note that the contents at the head are
+            listed on the right. It is very important to keep track of the head and
             the rear as you move items in and out of the collection, as things can
             get a bit confusing.</p>
   <table xml:id="basic-ds_tbl-dequeoperations">
     <tabular>
       <title>
-        <term>Table 6: Examples of Deque Operations</term>
+        Examples of Deque Operations
       </title>
       <row header="yes">
-        <cell><term>Deque Operation</term></cell>
-        <cell><term>Deque Contents</term></cell>
-        <cell><term>Return Value</term></cell>
+        <cell>Deque Operation</cell>
+        <cell>Deque Contents</cell>
+        <cell>Return Value</cell>
       </row>
       <row>
-        <cell><c>d.is_empty()</c></cell>
+        <cell><c>d.isEmpty()</c></cell>
         <cell><c>[]</c></cell>
         <cell><c>True</c></cell>
       </row>
       <row>
-        <cell><c>d.add_rear(4)</c></cell>
+        <cell><c>d.addTail(4)</c></cell>
         <cell><c>[4]</c></cell>
         <cell></cell>
       </row>
       <row>
-        <cell><c>d.add_rear("dog")</c></cell>
-        <cell><c>['dog', 4]</c></cell>
+        <cell><c>d.addTail(505)</c></cell>
+        <cell><c>[505, 4]</c></cell>
         <cell></cell>
       </row>
       <row>
-        <cell><c>d.add_front("cat")</c></cell>
-        <cell><c>['dog', 4, 'cat']</c></cell>
+        <cell><c>d.addHead(1066)</c></cell>
+        <cell><c>[505, 4, 1066]</c></cell>
         <cell></cell>
       </row>
       <row>
-        <cell><c>d.add_front(True)</c></cell>
-        <cell><c>['dog', 4, 'cat', True]</c></cell>
+        <cell><c>d.addHead(4711)</c></cell>
+        <cell><c>[505, 4, 1066, 4711]</c></cell>
         <cell></cell>
       </row>
       <row>
         <cell><c>d.size()</c></cell>
-        <cell><c>['dog', 4, 'cat', True]</c></cell>
+        <cell><c>[505, 4, 1066, 4711]</c></cell>
         <cell><c>4</c></cell>
       </row>
       <row>
         <cell><c>d.is_empty()</c></cell>
-        <cell><c>['dog', 4, 'cat', True]</c></cell>
+        <cell><c>[505, 4, 1066, 4711]</c></cell>
         <cell><c>False</c></cell>
       </row>
       <row>
-        <cell><c>d.add_rear(8.4)</c></cell>
-        <cell><c>[8.4,'dog', 4, 'cat', True]</c></cell>
+        <cell><c>d.addTail(217)</c></cell>
+        <cell><c>[217, 505, 4, 1066, 4711]</c></cell>
         <cell></cell>
       </row>
       <row>
-        <cell><c>d.remove_rear()</c></cell>
-        <cell><c>['dog', 4, 'cat', True]</c></cell>
-        <cell><c>8.4</c></cell>
+        <cell><c>d.removeTail()</c></cell>
+        <cell><c>[505, 4, 1066, 4711]</c></cell>
+        <cell><c>217</c></cell>
       </row>
       <row>
-        <cell><c>d.remove_front()</c></cell>
-        <cell><c>['dog', 4, 'cat']</c></cell>
-        <cell><c>True</c></cell>
+        <cell><c>d.removeHead()</c></cell>
+        <cell><c>[505, 4, 1066]</c></cell>
+        <cell><c>4711</c></cell>
       </row>
     </tabular>
   </table>

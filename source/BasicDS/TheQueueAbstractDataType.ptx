@@ -3,8 +3,8 @@
   <title>The Queue Abstract Data Type</title>
   <p>The queue abstract data type is defined by the following structure and
             operations. A queue is structured, as described above, as an ordered
-            collection of items which are added at one end, called the <em>rear</em>, and
-            removed from the other end, called the <em>front</em>. Queues maintain a FIFO
+            collection of items which are added at one end, called the <em>tail</em>, and
+            removed from the other end, called the <em>head</em>. Queues maintain a FIFO (First In, First Out)
             ordering property. The queue operations are given below.</p>
   <p>
     <ul>
@@ -13,16 +13,20 @@
                     and returns an empty queue.</p>
       </li>
       <li>
-        <p><c>enqueue(item)</c> adds a new item to the rear of the queue. It needs
+        <p><c>enqueue(item)</c> adds a new item to the tail of the queue. It needs
                     the item and returns nothing.</p>
       </li>
       <li>
-        <p><c>dequeue()</c> removes the front item from the queue. It needs no
+        <p><c>dequeue()</c> removes the head item from the queue. It needs no
                     parameters and returns the item. The queue is modified.</p>
       </li>
       <li>
-        <p><c>is_empty()</c> tests to see whether the queue is empty. It needs no
-                    parameters and returns a boolean value.</p>
+        <p><c>peek()</c> returns the head item from the queue. It needs no
+          parameters. The queue is not modified.</p>
+      </li>
+      <li>
+        <p><c>isEmpty()</c> tests to see whether the queue is empty. It needs no
+          parameters and returns boolean <c>true</c> if the queue is empty, <c>false</c> otherwise.</p>
       </li>
       <li>
         <p><c>size()</c> returns the number of items in the queue. It needs no
@@ -33,22 +37,22 @@
   <p>As an example, if we assume that <c>q</c> is a queue that has been created
             and is currently empty, then <xref ref="basic-ds_tbl-queueoperations"/> shows the
             results of a sequence of queue operations. The queue contents are shown
-            such that the front is on the right. The first item enqueued was <c>4</c> so it
+            such that the head is on the right. The first item enqueued was <c>4</c> so it
             is the first item returned by <c>dequeue</c>.</p>
   <table xml:id="basic-ds_tbl-queueoperations">
     <tabular>
       <title>
-        <term>Table 5: Example Queue Operations</term>
+        Example Queue Operations
       </title>
       <row header="yes">
-        <cell><term>Queue Operation</term></cell>
-        <cell><term>Queue Contents</term></cell>
-        <cell><term>Return Value</term></cell>
+        <cell>Queue Operation</cell>
+        <cell>Queue Contents</cell>
+        <cell>Return Value</cell>
       </row>
       <row>
         <cell><c>q.is_empty()</c></cell>
         <cell><c>[]</c></cell>
-        <cell><c>True</c></cell>
+        <cell><c>true</c></cell>
       </row>
       <row>
         <cell><c>q.enqueue(4)</c></cell>
@@ -56,43 +60,43 @@
         <cell></cell>
       </row>
       <row>
-        <cell><c>q.enqueue("dog")</c></cell>
-        <cell><c>['dog',4]</c></cell>
+        <cell><c>q.enqueue(27)</c></cell>
+        <cell><c>[27,4]</c></cell>
         <cell></cell>
       </row>
       <row>
-        <cell><c>q.enqueue(True)</c></cell>
-        <cell><c>[True, 'dog', 4]</c></cell>
+        <cell><c>q.enqueue(1066)</c></cell>
+        <cell><c>[1066, 27, 4]</c></cell>
         <cell></cell>
       </row>
       <row>
         <cell><c>q.size()</c></cell>
-        <cell><c>[True, 'dog', 4]</c></cell>
+        <cell><c>[1066, 27, 4]</c></cell>
         <cell><c>3</c></cell>
       </row>
       <row>
         <cell><c>q.is_empty()</c></cell>
-        <cell><c>[True, 'dog', 4]</c></cell>
+        <cell><c>[1066, 27, 4]</c></cell>
         <cell><c>False</c></cell>
       </row>
       <row>
-        <cell><c>q.enqueue(8.4)</c></cell>
-        <cell><c>[8.4,True, 'dog', 4]</c></cell>
+        <cell><c>q.enqueue(4711)</c></cell>
+        <cell><c>[4711, 1066, 27, 4]</c></cell>
         <cell></cell>
       </row>
       <row>
         <cell><c>q.dequeue()</c></cell>
-        <cell><c>[8.4, True, 'dog']</c></cell>
+        <cell><c>[4711, 1066, 27]</c></cell>
         <cell><c>4</c></cell>
       </row>
       <row>
         <cell><c>q.dequeue()</c></cell>
-        <cell><c>[8.4, True]</c></cell>
-        <cell><c>'dog'</c></cell>
+        <cell><c>[4711, 1066]</c></cell>
+        <cell><c>27</c></cell>
       </row>
       <row>
         <cell><c>q.size()</c></cell>
-        <cell><c>[8.4, True]</c></cell>
+        <cell><c>[4711, 1066]</c></cell>
         <cell><c>2</c></cell>
       </row>
     </tabular>

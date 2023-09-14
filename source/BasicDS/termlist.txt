@@ -1,0 +1,24 @@
+singly linked list
+doubly linked list
+inheritance
+override
+linked list
+head
+node
+data field
+linked list traversal
+short-circuit evaluation
+fully qualified name
+generic
+list
+palindrome
+escape
+Balanced parentheses
+simulation
+has-a
+linear data structures
+deque
+queue
+first in, first out (FIFO)
+stack
+last in, first out (LIFO)

@@ -25,15 +25,15 @@
       </li>
       <li>
         <p><c>remove(item)</c> removes the item from the list. It needs the item
-                    and modifies the list. It will raise an error if the item is not present in the list.</p>
+                    and modifies the list. It will throw an exception if the item is not present in the list.</p>
       </li>
       <li>
         <p><c>search(item)</c> searches for the item in the list. It needs the item
-                    and returns a Boolean value.</p>
+          and returns a boolean value (<c>true</c> if found; <c>false</c> if not).</p>
       </li>
       <li>
-        <p><c>is_empty()</c> tests to see whether the list is empty. It needs no
-                    parameters and returns a Boolean value.</p>
+        <p><c>isEmpty()</c> tests to see whether the list is empty. It needs no
+                    parameters and returns a boolean value.</p>
       </li>
       <li>
         <p><c>size()</c> returns the number of items in the list. It needs no

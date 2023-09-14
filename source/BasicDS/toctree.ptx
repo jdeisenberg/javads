@@ -4,7 +4,6 @@
   <xi:include href="./Objectives.ptx"/>
   <xi:include href="./WhatAreLinearStructures.ptx"/>
   <xi:include href="./WhatisaStack.ptx"/>
-
   <xi:include href="./TheStackAbstractDataType.ptx"/>
   <xi:include href="./ImplementingaStack.ptx"/>
   <xi:include href="./SimpleBalancedParentheses.ptx"/>
@@ -28,5 +27,4 @@
   <xi:include href="./Summary.ptx"/>
   <xi:include href="./KeyTerms.ptx"/>
   <xi:include href="./Exercises.ptx"/>
-  -->
 </chapter>

@@ -12,7 +12,7 @@
       </li>
       <li>
         <p>The fundamental operations for a stack are <c>push</c>, <c>pop</c>, and
-                    <c>is_empty</c>.</p>
+                    <c>isEmpty</c>.</p>
       </li>
       <li>
         <p>Queues are simple data structures that maintain a FIFO (first in,
@@ -20,7 +20,7 @@
       </li>
       <li>
         <p>The fundamental operations for a queue are <c>enqueue</c>, <c>dequeue</c>,
-                    and <c>is_empty</c>.</p>
+                    and <c>isEmpty</c>.</p>
       </li>
       <li>
         <p>Prefix, infix, and postfix are all ways to write expressions.</p>
@@ -44,8 +44,8 @@
                     stacks and queues.</p>
       </li>
       <li>
-        <p>The fundamental operations for a deque are <c>add_front</c>, <c>add_rear</c>,
-                    <c>remove_front</c>, <c>remove_rear</c>, and <c>is_empty</c>.</p>
+        <p>The fundamental operations for a deque are <c>addHead</c>, <c>addTail</c>,
+                    <c>removeHead</c>, <c>removeTail</c>, and <c>isEmpty</c>.</p>
       </li>
       <li>
         <p>Lists are collections of items where each item holds a relative

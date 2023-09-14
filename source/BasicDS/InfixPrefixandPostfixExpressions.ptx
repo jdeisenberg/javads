@@ -7,7 +7,7 @@
             correctly. In this case we know that the variable B is being multiplied
             by the variable C since the multiplication operator &#xB7; appears between
             them in the expression. This type of notation is referred to as
-            <term>infix</term> since the operator is <em>in between</em> the two operands that it is
+            infix since the operator is <em>in between</em> the two operands that it is
             working on.</p>
   <p>Consider another infix example, A + B &#xB7; C. The operators + and &#xB7; still
             appear between the operands, but there is a problem. Which operands do
@@ -16,7 +16,7 @@
   <p>In fact, you have been reading and writing these types of expressions
             for a long time and they do not cause you any problem. The reason for
             this is that you know something about the operators + and &#xB7;. Each
-            operator has a <term>precedence</term> level. Operators of higher precedence are
+            operator has a precedence level. Operators of higher precedence are
             used before operators of lower precedence. The only thing that can
             change that order is the presence of parentheses. The precedence order
             for arithmetic operators places multiplication and division above
@@ -30,8 +30,8 @@
   <p>Although all this may be obvious to you, remember that computers need to
             know exactly what operations to perform and in what order. One way to
             write an expression that guarantees there will be no confusion with
-            respect to the order of operations is to create what is called a <term>fully
-                parenthesized</term> expression. This type of expression uses one pair of
+            respect to the order of operations is to create what is called a fully
+                parenthesized expression. This type of expression uses one pair of
             parentheses for each operator. The parentheses dictate the order of
             operations; there is no ambiguity. There is also no need to remember any
             precedence rules.</p>
@@ -45,7 +45,7 @@
             expression would be + A B. Likewise, we could move the operator to the
             end, resulting in A B +. These look a bit strange.</p>
   <p>These changes to the position of the operator with respect to the
-            operands create two new expression formats, <term>prefix</term> and <term>postfix</term>.
+            operands create two new expression formats, prefix and postfix.
             Prefix expression notation requires that all operators precede the two
             operands that they work on. Postfix, on the other hand, requires that
             its operators come after the corresponding operands. A few more examples
@@ -63,12 +63,12 @@
   <table xml:id="basic-ds_tbl-example1">
     <tabular>
       <title>
-        <term>Table 2: Examples of Infix, Prefix, and Postfix Expressions</term>
+        Examples of Infix, Prefix, and Postfix Expressions
       </title>
       <row header="yes">
-        <cell><term>Infix Expression</term></cell>
-        <cell><term>Prefix Expression</term></cell>
-        <cell><term>Postfix Expression</term></cell>
+        <cell>Infix Expression</cell>
+        <cell>Prefix Expression</cell>
+        <cell>Postfix Expression</cell>
       </row>
       <row>
         <cell>A + B</cell>
@@ -103,12 +103,12 @@
   <table xml:id="basic-ds_tbl-parexample">
     <tabular>
       <title>
-        <term>Table 3: Comparison of Infix, Prefix, and Postfix Expressions</term>
+        Comparison of Infix, Prefix, and Postfix Expressions
       </title>
       <row header="yes">
-        <cell><term>Infix Expression</term></cell>
-        <cell><term>Prefix Expression</term></cell>
-        <cell><term>Postfix Expression</term></cell>
+        <cell>Infix Expression</cell>
+        <cell>Prefix Expression</cell>
+        <cell>Postfix Expression</cell>
       </row>
       <row>
         <cell>(A + B) &#xB7; C</cell>
@@ -124,12 +124,12 @@
   <table xml:id="basic-ds_tbl-example3">
     <tabular>
       <title>
-        <term>Table 4: Additional Examples of Infix, Prefix, and Postfix Expressions</term>
+        Additional Examples of Infix, Prefix, and Postfix Expressions
       </title>
       <row header="yes">
-        <cell><term>Infix Expression</term></cell>
-        <cell><term>Prefix Expression</term></cell>
-        <cell><term>Postfix Expression</term></cell>
+        <cell>Infix Expression</cell>
+        <cell>Prefix Expression</cell>
+        <cell>Postfix Expression</cell>
       </row>
       <row>
         <cell>A + B &#xB7; C + D</cell>
@@ -175,7 +175,7 @@
                 and the matching left parenthesis were removed, the complete postfix
                 expression would result (see <xref ref="fig-moveright"/>).</p>
     <figure align="center" xml:id="fig-moveright">
-      <caption>Moving Operators to the Right for Postfix Notation</caption>
+      <title>Moving Operators to the Right for Postfix Notation</title>
       <image source="BasicDS/Figures/moveright.png" width="50%"/>
     </figure>
     <p>If we do the same thing but instead of moving the symbol to the position
@@ -183,7 +183,7 @@
                 (see <xref ref="fig-moveleft"/>). The position of the parenthesis pair is
                 actually a clue to the final position of the enclosed operator.</p>
     <figure align="center" xml:id="fig-moveleft">
-      <caption>Moving Operators to the Left for Prefix Notation</caption>
+      <title>Moving Operators to the Left for Prefix Notation</title>
       <image source="BasicDS/Figures/moveleft.png" width="50%"/>
     </figure>
     <p>So in order to convert an expression, no matter how complex, to either
@@ -195,7 +195,7 @@
                 <xref ref="fig-complexmove"/> shows the conversion to prefix and postfix
                 notations.</p>
     <figure align="center" xml:id="fig-complexmove">
-      <caption>Converting a Complex Expression to Prefix and Postfix Notations</caption>
+      <title>Converting a Complex Expression to Prefix and Postfix Notations</title>
       <image source="BasicDS/Figures/complexmove.png" width="50%"/>
     </figure>
   </subsection>
@@ -247,7 +247,7 @@
     <p>
       <ol marker="1">
         <li>
-          <p>Create an empty stack called <c>op_stack</c> for keeping operators.
+          <p>Create an empty stack called <c>opStack</c> for keeping operators.
                         Create an empty list for output.</p>
         </li>
         <li>
@@ -263,17 +263,17 @@
                                 list.</p>
               </li>
               <li>
-                <p>If the token is a left parenthesis, push it on the <c>op_stack</c>.</p>
+                <p>If the token is a left parenthesis, push it on the <c>opStack</c>.</p>
               </li>
               <li>
-                <p>If the token is a right parenthesis, pop the <c>op_stack</c> until the
+                <p>If the token is a right parenthesis, pop the <c>opStack</c> until the
                                 corresponding left parenthesis is removed. Append each operator to
                                 the end of the output list.</p>
               </li>
               <li>
                 <p>If the token is an operator, &#xB7;, /, +, or -, push it on the
-                                <c>op_stack</c>. However, first remove any operators already on the
-                                <c>op_stack</c> that have higher or equal precedence and append them
+                                <c>opStack</c>. However, first remove any operators already on the
+                                <c>opStack</c> that have higher or equal precedence and append them
                                 to the output list.</p>
               </li>
             </ul>
@@ -281,7 +281,7 @@
         </li>
         <li>
           <p>When the input expression has been completely processed, check the
-                        <c>op_stack</c>. Any operators still on the stack can be removed and
+                        <c>opStack</c>. Any operators still on the stack can be removed and
                         appended to the end of the output list.</p>
         </li>
       </ol>
@@ -293,11 +293,11 @@
                 of the infix expression the stack is popped twice, removing both
                 operators and placing + as the last operator in the postfix expression.</p>
     <figure align="center" xml:id="fig-intopost">
-      <caption>Converting A &#xB7; B + C &#xB7; D to Postfix Notation</caption>
+      <title>Converting A &#xB7; B + C &#xB7; D to Postfix Notation</title>
       <image source="BasicDS/Figures/intopost.png" width="50%"/>
     </figure>
-    <p>In order to code the algorithm in Python, we will use a dictionary
-                called <c>prec</c> to hold the precedence values for the operators,
+    <p>In order to code the algorithm in Java, we will use a HashMap
+                called <c>precedence</c> to hold the precedence values for the operators,
                 as seen in in <xref ref="lst-intopost"/>. This
                 dictionary will map each operator to an integer that can be compared
                 against the precedence levels of other operators (we have arbitrarily
@@ -306,84 +306,102 @@
                 will have higher precedence and will be placed on top of it.
                 Line 15 defines the operands to be any upper-case character or digit.</p>
   <listing xml:id="lst-intopost">
-<program label="lst-intopost"  interactive="activecode" language="python">
+<program label="prog-intopost" line-numbers="yes" language="java">
       <input>
-from pythonds3.basic import Stack
+import java.util.HashMap;
+import java.util.ArrayList;
 
-def infix_to_postfix(infix_expr):
-    prec = {}
-    prec["*"] = 3
-    prec["/"] = 3
-    prec["+"] = 2
-    prec["-"] = 2
-    prec["("] = 1
-    op_stack = Stack()
-    postfix_list = []
-    token_list = infix_expr.split()
+public class ConvertToPostfix {
 
-    for token in token_list:
-        if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token in "0123456789":
-            postfix_list.append(token)
-        elif token == "(":
-            op_stack.push(token)
-        elif token == ")":
-            top_token = op_stack.pop()
-            while top_token != "(":
-                postfix_list.append(top_token)
-                top_token = op_stack.pop()
-        else:
-            while (not op_stack.is_empty()) and (prec[op_stack.peek()] &gt;= prec[token]):
-                postfix_list.append(op_stack.pop())
-            op_stack.push(token)
+    static HashMap&lt;String, Integer&gt; precedence = new HashMap&lt;&gt;();
 
-    while not op_stack.is_empty():
-        postfix_list.append(op_stack.pop())
+    public static void initPrecedence() {
+        precedence.put("*", 3);
+        precedence.put("/", 3);
+        precedence.put("+", 2);
+        precedence.put("-", 2);
+        precedence.put("(", 1);
+    }
 
-    return " ".join(postfix_list)
+    public static String infixToPostfix(String infixExpr) {
+        final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        final String DIGITS = "0123456789";
+        final String OPERATORS = "*/+-()";
 
-print(infix_to_postfix("A * B + C * D"))
-print(infix_to_postfix("( A + B ) * C - ( D - E ) * ( F + G )"))
+        Stack&lt;String&gt; opStack = new Stack&lt;String&gt;();
+        ArrayList&lt;String&gt; postfixList = new ArrayList&lt;String&gt;();
+
+        String[] tokenList = infixExpr.split("");
+
+        for (String token: tokenList) {
+            if (LETTERS.indexOf(token) &gt;= 0 || DIGITS.indexOf(token) &gt;= 0) {
+                postfixList.add(token);
+            }
+            else if (token.equals("(")) {
+                opStack.push(token);
+            }
+            else if (token.equals(")")) {
+                // pop everything down to the matching open paren
+                String topToken = opStack.pop();
+                while (!topToken.equals("(")) {
+                    postfixList.add(topToken);
+                    topToken = opStack.pop();
+                }
+            } else if (OPERATORS.indexOf(token) &gt;= 0) {
+                // pop higher-precedence operations
+                while (!opStack.isEmpty() &amp;&amp;
+                        (precedence.get(opStack.peek()) &gt;= precedence.get(token))) {
+                    postfixList.add(opStack.pop());
+                }
+                // then push this operator
+                opStack.push(token);
+            }
+        }
+
+        // If any operators remain, add them to the postfix expression
+        while (!opStack.isEmpty()) {
+            postfixList.add(opStack.pop());
+        }
+
+        String result = "";
+        for (String s: postfixList) {
+            result = result + s + " ";
+        }
+        return result;
+
+    }
+
+    public static void main(String[] args) {
+        initPrecedence();
+        String expr = "A * B + C * D";
+        System.out.println(expr + " --&gt; " + infixToPostfix(expr));
+
+        expr = "( A + B ) * C - ( D - E ) * ( F + G )";
+        System.out.println(expr + " --&gt; " + infixToPostfix(expr));
+    }
+}
         </input>
     </program>
   </listing>
 
-    <p>A few more examples of execution in the Python shell are shown below.</p>
-    <pre>&gt;&gt;&gt; infix_to_postfix("( A + B ) * ( C + D )")
-'A B + C D + *'
-&gt;&gt;&gt; infix_to_postfix("( A + B ) * C")
-'A B + C *'
-&gt;&gt;&gt; infix_to_postfix("A + B * C")
-'A B C * +'
-&gt;&gt;&gt;</pre>
+  <p>Some notes on the program: We want only one copy of the precedence HashMap, created in line 6. There's no way to declare and initialize a HashMap in one statement, so we need a method to do that (lines 8&#x2013;14).</p>
+  <p>For purposes of readability, we create the <c>LETTERS</c>, <c>DIGITS</c>, and <c>OPERATORS</c> constants in lines 17&#x2013;19.</p>
+
   </subsection>
+
   <subsection xml:id="basic-ds_postfix-evaluation">
     <title>Postfix Evaluation</title>
-    <p>As a final stack example, we will consider the evaluation of an
-                expression that is already in postfix notation. In this case, a stack is
-                again the data structure of choice. However, as you scan the postfix
-                expression, it is the operands that must wait, not the operators as in
-                the conversion algorithm above. Another way to think about the solution
-                is that whenever an operator is seen on the input, the two most recent
-                operands will be used in the evaluation.</p>
-    <p>To see this in more detail, consider the postfix expression
-                4 5 6 &#xB7; +. As you scan the expression from left to right, you first
-                encounter the operands 4 and 5. At this point, you are still unsure what
-                to do with them until you see the next symbol. Placing each on the stack
-                ensures that they are available if an operator comes next.</p>
-    <p>In this case, the next symbol is another operand. So, as before, push it
-                and check the next symbol. Now we see an operator, &#xB7;. This means that
-                the two most recent operands need to be used in a multiplication
-                operation. By popping the stack twice, we can get the proper operands
-                and then perform the multiplication (in this case getting the result
-                30).</p>
-    <p>We can now handle this result by placing it back on the stack so that it
-                can be used as an operand for the later operators in the expression.
-                When the final operator is processed, there will be only one value left
-                on the stack. Pop and return it as the result of the expression.
-                <xref ref="fig-evalpost1"/> shows the stack contents as this entire example
-                expression is being processed.</p>
+
+    <p>As a final stack example, we will consider the evaluation of an expression that is already in postfix notation. In this case, a stack is again the data structure of choice. However, as you scan the postfix expression, it is the operands that must wait, not the operators as in the conversion algorithm above. Another way to think about the solution is that whenever an operator is seen on the input, the two most recent operands will be used in the evaluation.</p>
+
+    <p>To see this in more detail, consider the postfix expression 4 5 6 &#xB7; +. As you scan the expression from left to right, you first encounter the operands 4 and 5. At this point, you are still unsure what to do with them until you see the next symbol. Placing each on the stack ensures that they are available if an operator comes next.</p>
+
+    <p>In this case, the next symbol is another operand. So, as before, push it and check the next symbol. Now we see an operator, &#xB7;. This means that the two most recent operands need to be used in a multiplication operation. By popping the stack twice, we can get the proper operands and then perform the multiplication (in this case getting the result 30).</p>
+
+    <p>We can now handle this result by placing it back on the stack so that it can be used as an operand for the later operators in the expression. When the final operator is processed, there will be only one value left on the stack. Pop and return it as the result of the expression. <xref ref="fig-evalpost1"/> shows the stack contents as this entire example expression is being processed.</p>
+
     <figure align="center" xml:id="fig-evalpost1">
-      <caption>Stack Contents During Evaluation</caption>
+      <title>Stack Contents During Evaluation</title>
       <image source="BasicDS/Figures/evalpostfix1.png" width="50%"/>
     </figure>
     <p><xref ref="fig-evalpost2"/> shows a slightly more complex example, 7 8 + 3 2
@@ -397,7 +415,7 @@ print(infix_to_postfix("( A + B ) * C - ( D - E ) * ( F + G )"))
                 <m>15/5</m> is not the same as <m>5/15</m>, we must be sure that
                 the order of the operands is not switched. (This also applies to subtraction.)</p>
     <figure align="center" xml:id="fig-evalpost2">
-      <caption>A More Complex Example of Evaluation</caption>
+      <title>A More Complex Example of Evaluation</title>
       <image source="BasicDS/Figures/evalpostfix2.png" width="50%"/>
     </figure>
     <p>Assume the postfix expression is a string of tokens delimited by spaces.
@@ -406,32 +424,32 @@ print(infix_to_postfix("( A + B ) * C - ( D - E ) * ( F + G )"))
     <p>
       <ol marker="1">
         <li>
-          <p>Create an empty stack called <c>operand_stack</c>.</p>
+          <p>Create an empty stack called <c>operandStack</c>.</p>
         </li>
         <li>
-          <p>Convert the string to a list by using the string method <c>split</c>.</p>
+          <p>Convert the string to an array by using the string method <c>split</c>.</p>
         </li>
         <li>
-          <p>Scan the token list from left to right.</p>
+          <p>Scan the token array from left to right.</p>
           <p>
             <ul>
               <li>
                 <p>If the token is an operand, convert it from a string to an integer
-                                and push the value onto the <c>operand_stack</c>.</p>
+                                and push the value onto the <c>operandStack</c>.</p>
               </li>
               <li>
-                <p>If the token is an operator, &#xB7;, /, +, or -, it will need two
-                                operands. Pop the <c>operand_stack</c> twice. The first pop is the
+                <p>If the token is an operator, *, /, +, or -, it will need two
+                                operands. Pop the <c>operandStack</c> twice. The first pop is the
                                 second operand and the second pop is the first operand. Perform
                                 the arithmetic operation. Push the result back on the
-                                <c>operand_stack</c>.</p>
+                                <c>operandStack</c>.</p>
               </li>
             </ul>
           </p>
         </li>
         <li>
           <p>When the input expression has been completely processed, the result
-                        is on the stack. Pop the <c>operand_stack</c> and return the value.</p>
+                        is on the stack. Pop the <c>operandStack</c> and return the value.</p>
         </li>
       </ol>
     </p>
@@ -440,50 +458,67 @@ print(infix_to_postfix("( A + B ) * C - ( D - E ) * ( F + G )"))
                 function <c>do_math</c> is defined. It will take two operands and an
                 operator and then perform the proper arithmetic operation.</p>
   <listing xml:id="lst-postfixeval">
-<program label="lst-postfixeval"  xml:id="postfixeval" interactive="activecode" language="python">
+<program label="prog-postfixeval"  xml:id="prog-postfixeval" language="java">
       <input>
-from pythonds3.basic import Stack
+import java.util.HashMap;
+import java.util.ArrayList;
 
-def postfix_eval(postfix_expr):
-    operand_stack = Stack()
-    token_list = postfix_expr.split()
+public class Evaluator {
 
-    for token in token_list:
-        if token in "0123456789":
-            operand_stack.push(int(token))
-        else:
-            operand2 = operand_stack.pop()
-            operand1 = operand_stack.pop()
-            result = do_math(token, operand1, operand2)
-            operand_stack.push(result)
-    return operand_stack.pop()
+    public static Integer postfixEval(String postfixExpr) {
 
+        final String DIGITS = "012356789";
 
-def do_math(op, op1, op2):
-    if op == "*":
-        return op1 * op2
-    elif op == "/":
-        return op1 / op2
-    elif op == "+":
-        return op1 + op2
-    else:
-        return op1 - op2
+        Stack&lt;Integer&gt; operandStack = new Stack&lt;Integer&gt;();
 
+        String[] tokenList = postfixExpr.split(" ");
 
-print(postfix_eval("7 8 + 3 2 + /"))
+        for (String token: tokenList) {
+            if (DIGITS.indexOf(token) &gt;= 0) {
+                operandStack.push(Integer.valueOf(token));
+            }
+            else {
+                Integer operand2 = operandStack.pop();
+                Integer operand1 = operandStack.pop();
+                Integer result = doMath(token, operand1, operand2);
+                operandStack.push(result);
+            }
+        }
+        return operandStack.pop();
+    }
+
+    public static Integer doMath(String operator, Integer operand1, Integer operand2) {
+        if (operator.equals("*")) {
+            return operand1 * operand2;
+        }
+        else if (operator.equals("/")) {
+            return operand1 / operand2;
+        }
+        else if (operator.equals("+")) {
+            return operand1 + operand2;
+        }
+        else {
+            return operand1 - operand2;
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(postfixEval("7 8 + 3 2 + /"));
+    }
+}
         </input>
     </program>
   </listing>
     <p>It is important to note that in both the postfix conversion and the
                 postfix evaluation programs we assumed that there were no errors in the
                 input expression. Using these programs as a starting point, you can
-                easily see how error detection and reporting can be included. We leave
+                see how error detection and reporting can be included. We leave
                 this as an exercise at the end of the chapter.</p>
     <exercises>
       <title>Self Check</title>
       <exercise label="postfix1">
         <statement>
-          <p>Q-3: Without using the activecode <c>infix_to_postfix</c> function, convert the following expression to postfix  <c>10 + 3 * 5 / (16 - 4)</c> . <var/>  </p>
+          <p>Q-3: Without using the <c>infixToPostfix</c> method, convert the following expression to postfix  <c>10 + 3 * 5 / (16 - 4)</c> . <var/>  </p>
         </statement>
         <setup>
           <var>
@@ -505,7 +540,7 @@ print(postfix_eval("7 8 + 3 2 + /"))
       </exercise>
       <exercise label="postfix2">
         <statement>
-          <p>Q-4: What is the result of evaluating the following: <c>17 10 + 3 * 9 / ==</c> ? <var/>  </p>
+          <p>What is the result of evaluating the following postfix expression: <c>17 10 + 3 * 9 / ==</c> ? <var/>  </p>
         </statement>
         <setup>
           <var>
@@ -522,14 +557,15 @@ print(postfix_eval("7 8 + 3 2 + /"))
       </exercise>
       <exercise label="postfix3">
         <statement>
-          <p>Q-5: Modify the <c>infix_to_postfix</c> function so that it can convert the following expression:  <c>5 * 3 ^ (4 - 2)</c>. Run the function on the expression and paste the answer here: <var/>  </p>
+          <p>Modify the <c>infixToPostfix</c> method so that it can convert the following expression:  <c>5 * 3 ^ (4 - 2)</c>, where the caret symbol <c>^</c> stands for exponentiation. Run the program on the expression and paste the answer here: <var/>  </p>
+          <p>Note: Exponentiation is right-to-left associative: <m>2^{3^2}</m> is <m>2^9</m>, not <m>8^2</m>, but for the purposes of this exercise, presume it is left-to-right associative.</p>
         </statement>
         <setup>
           <var>
             <p>
               <BlankNode/>
             </p>
-            <condition string="^\s*5\s+3\s+4\s+2\s*-\s*\*\*\s*\*\s*$">
+            <condition string="^\s*5\s+3\s+4\s+2\s*-\s*^s*\*\s*$">
               <feedback>
                 <p>Correct.</p>
               </feedback>
@@ -538,6 +574,6 @@ print(postfix_eval("7 8 + 3 2 + /"))
         </setup>
       </exercise>
     </exercises>
-    <video xml:id="video_Stack3" youtube="LO-2q4pSsdM" width="auto"/>
+    <!--<video xml:id="video_Stack3" youtube="LO-2q4pSsdM" width="auto"/>-->
   </subsection>
 </section>

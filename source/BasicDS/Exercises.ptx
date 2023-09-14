@@ -40,7 +40,7 @@
 </exercise>
 
 <exercise><p>The alternative implementation of the queue ADT is to use a list
-   such that the rear of the queue is at the end of the list. What would
+   such that the tail of the queue is at the end of the list. What would
    this mean for Big-O performance?</p></exercise>
 
 <exercise><p>What is the result of carrying out both steps of the linked list
@@ -66,7 +66,7 @@
 <exercise><p>Turn your direct infix evaluator from the previous problem into a
         calculator.</p></exercise>
 
-<exercise><p>Implement the queue ADT, using a list such that the rear of the
+<exercise><p>Implement the queue ADT, using a list such that the tail of the
         queue is at the end of the list.</p></exercise>
 
 <exercise><p>Design and implement an experiment to do benchmark comparisons of the
@@ -141,17 +141,18 @@
    list. Modify the <c>UnorderedList</c> class to include this information
    and rewrite the <c>size</c> method.</p></exercise>
 
-<exercise><p>Implement the <c>remove</c> method so that it works correctly in the
-        case where the item is not in the list.</p></exercise>
+<exercise><p>Implement the <c>remove</c> method so that does not throw an exception in the
+        case where the item is not in the list (by leaving the list unchanged).</p></exercise>
 
-<exercise><p>Modify the list classes to allow duplicates. Which methods will be
-        impacted by this change?</p></exercise>
+<exercise><p>Modify the list classes to allow duplicates. Which methods (if any) will be
+        impacted by this change? Make sure you update the comments at the start of the methods to reflect
+        any changes in the input and output the method expects.</p></exercise>
 
-<exercise><p>Implement the <c>__str__</c> method in the <c>UnorderedList</c> class. What
+<!--<exercise><p>Implement the <c>__str__</c> method in the <c>UnorderedList</c> class. What
         would be a good string representation for a list?</p></exercise>
 
 <exercise><p>Implement the <c>__str__</c> method so that lists are displayed the
-        Python way (with square brackets).</p></exercise>
+Python way (with square brackets).</p></exercise>-->
 
 <exercise><p>Implement the remaining operations defined in the unordered list ADT
         (<c>append</c>, <c>index</c>, <c>pop</c>, <c>insert</c>).</p></exercise>
@@ -163,9 +164,9 @@
 
    <exercise><p>Implement the remaining operations defined in the ordered list ADT.</p></exercise>
 
-<exercise><p>Consider the relationship between unordered and ordered lists. Is it
-   possible that inheritance could be used to build a more efficient
-   implementation? Implement this inheritance hierarchy.</p></exercise>
+   <exercise>
+           <p>Use inheritance to implement a <c>MinMaxUnorderedList</c> that is a child of <c>UnorderedList</c> and adds a <c>minimum</c> and <c>maximum</c> property. This will allow users to access the minimum and maximum values in the list in an <m>O(1)</m> operation. This will require changes to any methods that add or remove items from the list. How will those changes affect the Big-O characteristics of those methods?</p>
+   </exercise>
 
 <exercise><p>Implement a stack using linked lists.</p></exercise>
 
@@ -174,10 +175,10 @@
 <exercise><p>Implement a deque using linked lists.</p></exercise>
 
 <exercise><p>Design and implement an experiment that will compare the performance
-   of a Python list with a list implemented as a linked list.</p></exercise>
+   of a Java ArrayList with a list implemented as a linked list.</p></exercise>
 
 <exercise><p>Design and implement an experiment that will compare the performance
-   of the Python list-based stack and queue with the linked list
+   of the Java ArrayList-based stack and queue with the linked list
    implementation.</p></exercise>
 
    <exercise><p>The linked list implementation given above is called a <term>singly linked
@@ -187,7 +188,7 @@
    node (commonly called <em>next</em>) as well as a reference to the preceding
    node (commonly called <em>back</em>). The head reference also contains two
    references, one to the first node in the linked list and one to the
-   last. Code this implementation in Python.</p></exercise>
+   last. Code this implementation in Java.</p></exercise>
 
 <exercise><p>Create an implementation of a queue that would have an average performance of
         <m>O(1)</m> for <c>enqueue</c> and <c>dequeue</c> operations.</p></exercise>

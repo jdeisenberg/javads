@@ -11,6 +11,12 @@
             Our goal
             here is to reacquaint you with the language and also reinforce some of
             the concepts that will be central to later chapters.</p>
+          <note><title>Java Note</title>
+            <p>Java is a big language, and we can cover only some of its important parts in the next few pages.
+              In the rest of the book, when there's a Java construct that we haven't covered yet, we'll put it in a
+              <q>Java Note</q> like this one.
+            </p>
+          </note>
   <p>Java is an object-oriented programming language.
   It has a powerful set of built-in data types and control
   constructs. Although Java is a compiled language, a program named <c>jshell</c> allows you

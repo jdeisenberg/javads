@@ -7,6 +7,13 @@
             element enters the queue it starts at the rear and makes its way toward
             the front, waiting until that time when it is the next element to be
             removed.</p>
+          <note>
+            <title>Nomenclature</title>
+            <p>There are many ways to refer to the removal and addition points of a queue:
+              <q>front and rear</q>; <q>front and back</q>; and <q>head and tail</q>. The
+              Java documentation uses the latter notation, and so will we.
+            </p>
+          </note>
   <p>The most recently added item in the queue must wait at the end of the
             collection. The item that has been in the collection the longest is at
             the front. This ordering principle is sometimes called <term>FIFO</term>,
@@ -19,24 +26,13 @@
             out. There is no jumping in the middle and no leaving before you have
             waited the necessary amount of time to get to the front.</p>
   <p>Computer science also has common examples of queues. <xref ref="i107_id1fig-qubasicqueue"/>
-            shows a simple queue of Python data objects. Our computer
-            laboratory has 30 computers networked with a single printer. When
-            students want to print, their print tasks <q>get in line</q> with all the
-            other printing tasks that are waiting. The first task in is the next to
-            be completed. If you are last in line, you must wait for all the other
-            tasks to print ahead of you. We will explore this interesting example in
-            more detail later.</p>
+    shows a queue of Java Strings.</p>
   <figure align="center" xml:id="i107_id1fig-qubasicqueue">
-    <caption>A Queue of Python Data Objects</caption>
+    <caption>A Queue of Java Strings</caption>
     <image source="BasicDS/Figures/basicqueue.png" width="50%"/>
   </figure>
-  <p>In addition to printing queues, operating systems use a number of
-            different queues to control processes within a computer. The scheduling
-            of what gets done next is typically based on a queuing algorithm that
-            tries to execute programs as quickly as possible and serve as many users
-            as it can. Also, as we type, sometimes keystrokes get ahead of the
-            characters that appear on the screen. This is due to the computer doing
-            other work at that moment. The keystrokes are being placed in a
-            queue-like buffer so that they can eventually be displayed on the screen
-            in the proper order.</p>
+
+  <p>Another example of a queue is a computer laboratory of 30 computers networked with a single printer. When students want to print, their print tasks <q>get in line</q> with all the other printing tasks that are waiting. The first task in is the next to be completed. If you are last in line, you must wait for all the other tasks to print ahead of you. We will explore this interesting example in more detail later.</p>
+
+  <p>In addition to printing queues, operating systems use a number of different queues to control processes within a computer. The scheduling of what gets done next is typically based on a queuing algorithm that tries to execute programs as quickly as possible and serve as many users as it can. Also, as we type, sometimes keystrokes get ahead of the characters that appear on the screen. This is due to the computer doing other work at that moment. The keystrokes are being placed in a queue-like buffer so that they can eventually be displayed on the screen in the proper order.</p>
 </section>

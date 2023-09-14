@@ -12,23 +12,145 @@
     <caption>An Ordered Linked List</caption>
     <image source="BasicDS/Figures/orderlinkedlist.png" width="50%"/>
   </figure>
-  <p>To implement the <c>OrderedList</c> class, we will use the same technique
-            as seen previously with unordered lists. Once again, an empty list will
-            be denoted by a <c>head</c> reference to <c>None</c> (see
-            <xref ref="basic-ds_lst-orderlist"/>).</p>
-  <listing xml:id="basic-ds_lst-orderlist"><pre>class OrderedList:
-    def __init__(self):
-        self.head = None</pre></listing>
-  <p>As we consider the operations for the ordered list, we should note that
-            the <c>is_empty</c> and <c>size</c> methods can be implemented the same as
-            with unordered lists since they deal only with the number of nodes in
-            the list without regard to the actual item values. Likewise, the
-            <c>remove</c> method will work just fine since we still need to find the
-            item and then link around the node to remove it. The two remaining
-            methods, <c>search</c> and <c>add</c>, will require some modification.</p>
+
+
+            <p>As we consider the operations for the ordered list, we should note that the <c>isEmpty</c> and <c>size</c> methods can be implemented the same as with unordered lists since they deal only with the number of nodes in the list without regard to the actual item values. Likewise, the <c>remove</c> method will work just fine since we still need to find the item and then link around the node to remove it. </p>
+
+            <p>The current <c>add</c> method needs to change. Instead of inserting new items at the head of the list, we must find the correct position for the insertion so that elements don't get out of order.  We can also improve the <c>search</c> method. Instead of scanning all the way to the end of the list to find if an element is in the list or not, we can take advantage of the fact that the list is in order and stop if we find an item in the list that is greater than the one we're looking for.</p>
+
+            <p>For both these changes, we will need to compare the items in the list to the item we're adding or searching for in order to get the correct position in the list. We will do this using the <c>compareTo</c> method. <c>compareTo</c> compares <c>this</c> and another object. It returns a negative number if <c>this</c> is less than the other object, zero if they are equal, and a positive number if <c>this</c> is greater than the other object. </p>
+
+            <p>Rather than copy and paste all of the code that is the same, we can use Java <term>inheritance</term> to allow
+            one class to inherit all the properties and methods of another class by using
+            the <c>extends</c> keyword. Here is the start of the class and the constructor:</p>
+
+        <program language="java" line-numbers="yes"><input>
+public class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedList&lt;T&gt; {
+    public OrderedList() {
+        super();
+    }
+}
+</input></program>
+
+<p>The first line looks very different from what you normally see in Java inheritance, as detailed in <xref ref="oop_inheritance_polymorphism"/>. Let's unpack it. Since we're using generics, we need to put a <c>&lt;T&gt;</c> on the child class (<c>OrderedList</c>) and the parent class (<c>UnorderedList</c>). We also need to tell Java that it can only allow types that have a <c>compareTo</c> method. That's what <c>extends Comparable&lt;T&gt;</c> means.</p>
+
+<p>In the constructor, we call <c>super()</c> on line 3.  This invokes the zero-argument constructor, which sets the <c>head</c> to <c>null</c>. If we had additional properties in the subclass, we would follow the call to <c>super()</c> with their initialization. The call to <c>super()</c> <em>must</em> be the first non-comment statement in the constructor!</p>
+
+<p>Because all the methods from <c>UnOrderedList</c> are inherited, we can immediately use the methods from <c>UnorderedList</c> without having to repeat them in <c>OrderedList</c>:</p>
+
+<listing xml:id="basicds_lst-test-ordered-list">
+<program xml:id="basicds_prog-test-ordered-list" language="java" line-numbers="yes"><input>
+public class TestOrderedList {
+
+    public static void main(String[] args) {
+        OrderedList&lt;Integer&gt; myList = new OrderedList&lt;&gt;();
+
+        System.out.println("Is list empty? " + myList.isEmpty());
+        myList.add(505);
+        myList.add(217);
+        myList.add(1066);
+        System.out.println("After adding 505, 217, and 1066: " + myList);
+        System.out.println("Is 505 in the list? " + myList.search(505));
+        System.out.println("Is 300 in the list? " + myList.search(300));
+    }
+}
+</input></program></listing>
+
+<p>With this output:</p>
+<console><output>
+Is list empty? true
+After adding 505, 217, and 1066: [1066, 217, 505]
+Is 505 in the list? true
+Is 300 in the list? false
+</output></console>
+
+ <p>Recall that for unordered lists, the <c>add</c> method could simply place a
+            new node at the head of the list. It was the easiest point of access.
+            Unfortunately, this will no longer work with ordered lists; we see from the output that
+            the numbers are in the wrong order. It is now
+            necessary that we discover the specific place where a new item belongs
+            in the existing ordered list.</p>
+
+  <p>Assume we have the ordered list consisting of 17, 26, 54, 77, and 93 and
+            we want to add the value 31. The <c>add</c> method must decide that the new
+            item belongs between 26 and 54. <xref ref="fig-orderinsert"/> shows the setup
+            that we need. As we explained earlier, we need to traverse the linked
+            list looking for the place where the new node will be added. We know we
+            have found that place when either we run out of nodes (<c>current</c>
+            becomes <c>null</c>) or the value of the current node becomes greater than
+            the item we wish to add. In our example, seeing the value 54 causes us
+            to stop.</p>
+
+  <figure align="center" xml:id="fig-orderinsert">
+    <caption>Adding an Item to an Ordered Linked List</caption>
+    <image source="BasicDS/Figures/linkedlistinsert.png" width="50%"/>
+  </figure>
+
+  <p>We will write a new version of <c>add</c> in the <c>OrderedList</c> class. This method will <term>override</term> the method in the parent class (<c>UnorderedList</c>). When we call the <c>add</c> method on an ordered list, Java will call our new method. </p>
+
+  <p>As we saw with unordered lists, it is necessary to have an additional
+            reference, again called <c>previous</c>, since <c>current</c> will not provide
+            access to the node that must be modified. <xref ref="basic-ds_lst-orderadd"/> shows
+            the complete <c>add</c> method. Lines 2&#x2013;3 set up the two
+            references, and lines 6&#x2013;7 again allow <c>previous</c> to follow one node
+            behind <c>current</c> every time through the iteration. The condition (line
+            5) allows the iteration to continue as long as there are more nodes and
+            the value in the current node is less the item. In either
+            case, when the iteration fails, we have found the location for the new
+            node.</p>
+
+  <p>The remainder of the method completes the two-step process shown in
+            <xref ref="fig-orderinsert"/>. Once a new node has been created for the item in line 9,
+            the only remaining question is whether the new node will be added at the
+            beginning of the linked list or some place in the middle. Again,
+            <c>previous == null</c> (line 11) can be used to provide the answer.</p>
+
+          <listing xml:id="basic-ds_lst-orderadd">
+              <program language="java" xml:id="basic-ds_prog-orderadd" line-numbers="yes">
+                  <input>
+    public void add(T item) {
+        Node&lt;T&gt; current = this.getHead();
+        Node&lt;T&gt; previous = null;
+
+        while (current != null &amp;&amp; (current.getData()).compareTo(item) &lt; 0) {
+            previous = current;
+            current = current.getNext();
+        }
+        Node&lt;T&gt; itemNode = new Node&lt;T&gt;(item);
+
+        if (previous == null)
+        {
+            itemNode.setNext(this.getHead());
+            this.setHead(itemNode);
+        } else {
+            itemNode.setNext(current);
+            previous.setNext(itemNode);
+        }
+    }
+    </input></program>
+</listing>
+
+<p>Once we recompile the <c>OrderedList</c> and run our test program (<xref ref="basicds_lst-test-ordered-list"/>) again, we get the correct results:</p>
+
+<console><output>
+Is list empty? true
+After adding 505, 217, and 1066: [217, 505, 1066]
+Is 505 in the list? true
+Is 300 in the list? false
+</output></console>
+
+<note>
+    <title>Java Note</title>
+    <p>In line 2 of <xref ref="basic-ds_lst-orderadd"/> we wrote:</p>
+        <pre>Node&lt;T&gt; current = this.getHead();</pre>
+        <p>instead of:</p>
+        <pre>Node&lt;T&gt; current = this.head;</pre>
+    <p>We needed to do this because <c>head</c> was declared <c>private</c> in <c>UnorderedList</c>; the only way to access its value is through the <c>getHead</c> method and the only way to modify the value (as in line 14) is via the <c>setHead</c> method.</p>
+</note>
+
   <p>The search of an unordered linked list required that we traverse the
             nodes one at a time until we either find the item we are looking for or
-            run out of nodes (<c>None</c>). It turns out that the same approach would
+            run out of nodes (<c>null</c>). As we said before, the same approach would
             work with the ordered list and no changes are necessary if the item
             is in the list. However, in the case where the
             item is not in the list, we can take advantage of the ordering to stop
@@ -42,7 +164,7 @@
             for, our former strategy would be to move forward. However, due to the
             fact that this is an ordered list, that will not be necessary. Once the
             value in the node becomes greater than the item we are searching for,
-            the search can stop and return <c>False</c>. There is no way the item could
+            the search can stop and return <c>false</c>. There is no way the item could
             exist further out in the linked list.</p>
   <figure align="center" xml:id="i105_id2fig-stopearly">
     <caption>Searching an Ordered Linked List</caption>
@@ -51,176 +173,98 @@
   <p><xref ref="basic-ds_lst-ordersearch"/> shows the complete <c>search</c> method. It is
             easy to incorporate the new condition discussed above by adding another check (line 6).
             We can continue to look forward in the list (line 3). If any node is ever discovered that
-            contains data greater than the item we are looking for, we will immediately return <c>False</c>. The remaining lines are identical to
+            contains data greater than the item we are looking for, we will immediately return <c>false</c>.
+            The remaining lines are identical to
             the unordered list search.</p>
-  <listing xml:id="basic-ds_lst-ordersearch"><pre>def search(self,item):
-    current = self.head
-    while current is not None:
-        if current.data == item:
-            return True
-        if current.data &gt; item:
-            return False
-        current = current.next
+  <listing xml:id="basic-ds_lst-ordersearch"><program language="java" line-numbers="yes">
+          <input>
+    public boolean search(T item) {
+        Node&lt;T&gt; current = this.getHead();
+        while (current != null) {
+            if (current.getData().equals(item)) {
+                return true;
+            }
+            if (current.getData().compareTo(item) &gt; 0) {
+                return false;
+            }
+            current = current.getNext();
+        }
+        return false;
+    }
+    </input></program></listing>
 
-    return False</pre></listing>
-  <p>The most significant method modification will take place in <c>add</c>.
-            Recall that for unordered lists, the <c>add</c> method could simply place a
-            new node at the head of the list. It was the easiest point of access.
-            Unfortunately, this will no longer work with ordered lists. It is now
-            necessary that we discover the specific place where a new item belongs
-            in the existing ordered list.</p>
-  <p>Assume we have the ordered list consisting of 17, 26, 54, 77, and 93 and
-            we want to add the value 31. The <c>add</c> method must decide that the new
-            item belongs between 26 and 54. <xref ref="fig-orderinsert"/> shows the setup
-            that we need. As we explained earlier, we need to traverse the linked
-            list looking for the place where the new node will be added. We know we
-            have found that place when either we run out of nodes (<c>current</c>
-            becomes <c>None</c>) or the value of the current node becomes greater than
-            the item we wish to add. In our example, seeing the value 54 causes us
-            to stop.</p>
-  <figure align="center" xml:id="fig-orderinsert">
-    <caption>Adding an Item to an Ordered Linked List</caption>
-    <image source="BasicDS/Figures/linkedlistinsert.png" width="50%"/>
-  </figure>
-  <p>As we saw with unordered lists, it is necessary to have an additional
-            reference, again called <c>previous</c>, since <c>current</c> will not provide
-            access to the node that must be modified. <xref ref="basic-ds_lst-orderadd"/> shows
-            the complete <c>add</c> method. Lines 3&#x2013;4 set up the two external
-            references and lines 8&#x2013;9 again allow <c>previous</c> to follow one node
-            behind <c>current</c> every time through the iteration. The condition (line
-            7) allows the iteration to continue as long as there are more nodes and
-            the value in the current node is not larger than the item. In either
-            case, when the iteration fails, we have found the location for the new
-            node.</p>
-  <p>The remainder of the method completes the two-step process shown in
-            <xref ref="fig-orderinsert"/>. Once a new node has been created for the item,
-            the only remaining question is whether the new node will be added at the
-            beginning of the linked list or some place in the middle. Again,
-            <c>previous is None</c> (line 11) can be used to provide the answer.</p>
-  <listing xml:id="basic-ds_lst-orderadd"><pre>def add(self, item):
-    """Add a new node"""
-    current = self.head
-    previous = None
-    temp = Node(item)
-
-    while current is not None and current.data &lt; item:
-        previous = current
-        current = current.next
-
-    if previous is None:
-        temp.next = self.head
-        self.head = temp
-    else:
-        temp.next = current
-        previous.next = temp</pre></listing>
-  <p>The <c>OrderedList</c> class with methods discussed thus far can be found
-            in ActiveCode 1.
+    <p>The <c>OrderedList</c> class with methods discussed thus far is in <xref ref="basicds_complete-orderedList"/> along with documentation of its methods.
             We leave the remaining methods as exercises. You should carefully
             consider whether the unordered implementations will work given that the
-            list is now ordered.</p>
-  <program xml:id="orderedlistclass" interactive="activecode" language="python">
+            list is now ordered. If they will, you don't need to duplicate them; inheritance will do the job for you.</p>
+        <listing xml:id="basicds_complete-orderedList">
+            <program xml:id="orderedlistclass" language="java">
     <input>
-class Node:
-    """A node of a linked list"""
+public class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedList&lt;T&gt; {
 
-    def __init__(self, node_data):
-        self._data = node_data
-        self._next = None
+    // No extra properties in this class; they are inherited from
+    // UnorderedList.
 
-    def get_data(self):
-        """Get node data"""
-        return self._data
+    /*
+     * Call superclass constructor to set the head property
+     * to null.
+     */
+    public OrderedList() {
+        super();
+    }
 
-    def set_data(self, node_data):
-        """Set node data"""
-        self._data = node_data
+    /*
+     * Add given item at its correct position in the list.
+     * Presume that the item is not already in the list.
+     */
+    public void add(T item) {
+        Node&lt;T&gt; current = this.getHead();
+        Node&lt;T&gt; previous = null;
 
-    data = property(get_data, set_data)
+        while (current != null &amp;&amp; (current.getData()).compareTo(item) &lt; 0) {
+            previous = current;
+            current = current.getNext();
+        }
+        Node&lt;T&gt; itemNode = new Node&lt;T&gt;(item);
 
-    def get_next(self):
-        """Get next node"""
-        return self._next
+        if (previous == null)
+        {
+            itemNode.setNext(this.getHead());
+            this.setHead(itemNode);
+        } else {
+            itemNode.setNext(current);
+            previous.setNext(itemNode);
+        }
+    }
 
-    def set_next(self, node_next):
-        """Set next node"""
-        self._next = node_next
-
-    next = property(get_next, set_next)
-
-    def __str__(self):
-        """String"""
-        return str(self._data)
-
-
-class OrderedList:
-    """Ordered linked list implementation"""
-    def __init__(self):
-        self.head = None
-
-    def search(self, item):
-        """Search for a node with a specific value"""
-        current = self.head
-        while current is not None:
-            if current.data == item:
-                return True
-            if current.data &gt; item:
-                return False
-            current = current.next
-
-        return False
-
-    def add(self, item):
-        """Add a new node"""
-        current = self.head
-        previous = None
-        temp = Node(item)
-
-        while current is not None and current.data &lt; item:
-            previous = current
-            current = current.next
-
-        if previous is None:
-            temp.next = self.head
-            self.head = temp
-        else:
-            temp.next = current
-            previous.next = temp
-
-    def is_empty(self):
-        """Is the list empty"""
-        return self.head == None
-
-    def size(self):
-        """Size of the list"""
-        current = self.head
-        count = 0
-        while current is not None:
-            count = count + 1
-            current = current.next
-
-        return count
-
-
-my_list = OrderedList()
-my_list.add(31)
-my_list.add(77)
-my_list.add(17)
-my_list.add(93)
-my_list.add(26)
-my_list.add(54)
-
-print(my_list.size())
-print(my_list.search(93))
-print(my_list.search(100))
+    /*
+     * Check to see if the given item is in the list.
+     * Return true if it is, false if not.
+     */
+    public boolean search(T item) {
+        Node&lt;T&gt; current = this.getHead();
+        while (current != null) {
+            if (current.getData().equals(item)) {
+                return true;
+            }
+            if (current.getData().compareTo(item) &gt; 0) {
+                return false;
+            }
+            current = current.getNext();
+        }
+        return false;
+    }
+}
         </input>
   </program>
+</listing>
 </introduction>
   <subsection xml:id="basic-ds_analysis-of-linked-lists">
     <title>Analysis of Linked Lists</title>
     <p>To analyze the complexity of the linked list operations, we need to
                 consider whether they require traversal. Consider a linked list that has
-                <m>n</m> nodes. The <c>is_empty</c> method is <m>O(1)</m> since it requires
-                one step to check the head reference for <c>None</c>. <c>size</c>, on the
+                <m>n</m> nodes. The <c>isEmpty</c> method is <m>O(1)</m> since it requires
+                one step to check the head reference for <c>null</c>. <c>size</c>, on the
                 other hand, will always require <m>n</m> steps since there is no way to know
                 how many nodes are in the linked list without traversing from head to
                 end. Therefore, <c>size</c> is <m>O(n)</m>. Adding an item to an
@@ -231,9 +275,9 @@ print(my_list.search(100))
                 these methods are all <m>O(n)</m> since in the worst case each will
                 process every node in the list.</p>
     <p>You may also have noticed that the performance of this implementation
-                differs from the actual performance given earlier for Python lists. This
-                suggests that linked lists are not the way Python lists are implemented.
-                The actual implementation of a Python list is based on the notion of an array.
+                differs from the actual performance given earlier for ArrayLists. This
+                suggests that linked lists are not the way ArrayLists are implemented.
+                The actual implementation of a ArrayList is based on the notion of an array.
                 We discuss this in more detail in the last chapter.</p>
   </subsection>
 </section>
