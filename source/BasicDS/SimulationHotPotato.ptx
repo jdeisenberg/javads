@@ -32,10 +32,10 @@
             repetitive counting by <c>num</c>. What happens at that point is up to you.</p>
   <p>To simulate the circle, we will use a queue (see
             <xref ref="i122_id2fig-qupotatoqueue"/>). Assume that the child holding the potato will
-            be at the front of the queue. Upon passing the potato, the simulation
+            be at the head of the queue. Upon passing the potato, the simulation
             will dequeue and then immediately enqueue that child, putting them
             at the end of the line. They will then wait until all the others have
-            been at the front before it will be their turn again. After <c>num</c>
+            been at the head before it will be their turn again. After <c>num</c>
             dequeue/enqueue operations, the child at the front will be removed
             permanently and another cycle will begin. This process will continue
             until only one name remains (the size of the queue is 1).</p>
@@ -85,6 +85,6 @@ public class HotPotatoSimulation {
             until the value is reached. Also, notice that the list is loaded into
             the queue such that the first name on the list will be at the front of
             the queue. <c>"Bill"</c> in this case is the first item in the list and
-            therefore moves to the front of the queue. A variation of this
+            therefore moves to the head of the queue. A variation of this
             implementation, described in the exercises, allows for a random counter.</p>
 </section>

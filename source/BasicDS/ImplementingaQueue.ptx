@@ -13,7 +13,7 @@
             (the last element of the list). Recall that this also means that <c>enqueue</c>
             will be <m>O(n)</m> and <c>dequeue</c> will be <m>O(1)</m>.</p>
   <listing xml:id="basic-ds_lst-queuecode">
-    <program xml:id="basic-ds_prog-queuecode">
+    <program xml:id="basic-ds_prog-queuecode" language="java">
       <input>
 import java.util.ArrayList;
 import java.util.NoSuchElementException;

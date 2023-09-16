@@ -111,7 +111,7 @@
     </p>
   </subsection>
   <subsection xml:id="basic-ds_python-implementation">
-    <title>Python Implementation</title>
+    <title>Java Implementation</title>
     <p>To design this simulation we will create classes for the two
                 real-world objects described above: <c>Task</c> and <c>Printer</c>. The simulation class
                 that contains our <c>main</c> method (<c>PrintSimulation</c>) will create a <c>Queue&lt;Task&gt;</c> named <c>printQueue</c>.
@@ -164,12 +164,12 @@ class Task {
                 amount of time needed can be computed from the number of pages in the
                 task. The constructor will also allow the pages-per-minute setting to be
                 initialized. The <c>tick</c> method decrements the internal timer and sets
-                the printer to idle (line 11) if the task is completed.</p>
+                the printer to idle (line 16) if the task is completed.</p>
               <aside>
                 <p>Notice that the <c>Printer</c> class has a <c>Task</c> as one of its properties. This is
                   an example of a <term>has-a</term> relationship.</p>
               </aside>
-    <listing xml:id="basic-ds_lst-printer"><program language="java">
+    <listing xml:id="basic-ds_lst-printer"><program language="java" line-numbers="yes">
       <input>
 class Printer {
     int pageRate; // pages per minute
@@ -273,7 +273,7 @@ public class PrintSimulation {
 }
 </input>
     </program></listing>
-<p>Some notes about the Java code:</p>
+<note><title>Java Notes</title>
 <p>
   <ul>
     <li><p>Lines 5&#x2013;8 are not <c>static</c>; they are properties of our <c>PrintSimulation</c> class.</p></li>
@@ -281,6 +281,7 @@ public class PrintSimulation {
     <li><p>The <c>main</c> method in lines 51&#x2013;56 is very different from what we have seen before. Line 52 creates a new instance of a <c>PrintSimulation</c> object in variable <c>sim</c>, and line 54 calls that instance's <c>performSimulation</c> method. This is a typical pattern that you will see in Java programs: the <c>main</c> method creates an instance of the class it belongs to and then calls methods on that instance.</p></li>
   </ul>
 </p>
+</note>
     <p>When we run the simulation, we should not be concerned that the
                 results are different each time. This is due to the probabilistic nature
                 of the random numbers. We are interested in the trends that may be

@@ -7,7 +7,7 @@
         <p>Linear data structures maintain their data in an ordered fashion.</p>
       </li>
       <li>
-        <p>Stacks are simple data structures that maintain a LIFO (last in,
+        <p>Stacks are basic data structures that maintain a LIFO (last in,
                     first out) ordering.</p>
       </li>
       <li>
@@ -15,7 +15,7 @@
                     <c>isEmpty</c>.</p>
       </li>
       <li>
-        <p>Queues are simple data structures that maintain a FIFO (first in,
+        <p>Queues are basic data structures that maintain a FIFO (first in,
                     first out) ordering.</p>
       </li>
       <li>
@@ -53,7 +53,7 @@
       </li>
       <li>
         <p>A linked list implementation maintains logical order without
-                    requiring physical storage requirements.</p>
+          requiring physical storage requirements such as an underlying <c>ArrayList</c>.</p>
       </li>
       <li>
         <p>Modification to the head of the linked list is a special case.</p>

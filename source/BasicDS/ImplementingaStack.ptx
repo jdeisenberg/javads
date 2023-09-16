@@ -102,9 +102,9 @@ public class Stack&lt;T&gt; {
   </program>
 </listing>
 
-<p>Remember in our discussion of <c>ArrayList</c> in <xref ref="introduction_arraylist"/> that we put the data type in angle brackets>? This allowed us to have an <c>ArrayList&lt;String&gt;</c>, <c>ArrayList&lt;Integer&gt;</c>, etc. We would also like to be able to create a <c>Stack</c> whose elements are of any data type. To do this, we specify in line 4 that a stack has a <term>generic</term> data type.  The <c>T</c> is like a variable that, instead of holding an integer, double, or string value, holds a <em>data type</em>.  Thus, when we create a <c>Stack&lt;String&gt;</c>, the data type <c>String</c> provides the value that fills in the generic <c>T</c>. The body of the class uses <c>T</c> anywhere that it needs the type of stack we are dealing with.</p>
+<p>Remember in our discussion of <c>ArrayList</c> in <xref ref="introduction_arraylist"/> that we put the data type in angle brackets? This allowed us to have an <c>ArrayList&lt;String&gt;</c>, <c>ArrayList&lt;Integer&gt;</c>, etc. We would also like to be able to create a <c>Stack</c> whose elements are of any data type. To do this, we specify in line 4 that a stack has a <term>generic</term> data type.  The <c>T</c> is like a variable that, instead of holding an integer, double, or string value, holds a <em>data type</em>.  Thus, when we create a <c>Stack&lt;String&gt;</c>, the data type <c>String</c> provides the value that fills in the generic <c>T</c>. The body of the class uses <c>T</c> anywhere that it needs the type of stack we are dealing with.</p>
 
-  <p>Now we must write a program that creates a <c>Stack</c> object and then use it.
+  <p>Now we must write a program that creates a <c>Stack</c> object and then uses it.
             <xref ref="lst-stacktest"/> shows the <c>Stack</c> class in
             action as we perform the sequence of operations from
             <xref ref="basic-ds_the-stack-abstract-data-type"/>.  We don't need to <c>import</c> the <c>Stack</c> class as long as its source file is in the same directory as our test program.</p>
@@ -292,7 +292,7 @@ Stack&lt;String&gt; m = new Stack&lt;&gt;();
 m.push("x");
 m.push("y");
 m.push("z");
-while (!m.is_empty()):
+while (!m.isEmpty()) {
    m.pop();
    m.pop();
 }

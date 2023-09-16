@@ -78,7 +78,7 @@ public class Node&lt;T&gt; {
         System.out.println(temp.getData());
     </pre>
 
-    <note>
+    <note xml:id="java-note-private-access">
         <title>Java Note</title>
         <p>We have made the <c>data</c> and <c>next</c> properties <c>private</c>. This means the only way for other classes
             to access and modify these properties is via the <c>getData</c>, <c>setData</c>, <c>getNext</c> and
@@ -91,7 +91,7 @@ public class Node&lt;T&gt; {
                 to <c>null</c> will denote the fact that there is no next node. Note in the
                 constructor that a node is initially created with <c>next</c> set to
                 <c>null</c>. Since this is sometimes referred to as <q>grounding the node,</q>
-                we will use the standard ground symbol to denote a reference that is
+                we will use the standard <q>electrical ground</q> symbol to denote a reference that is
                 referring to <c>null</c>. It is always a good idea to explicitly assign
                 <c>null</c> to your initial next reference values.</p>
     <figure align="center" xml:id="file_106_id3">
@@ -147,7 +147,7 @@ public class UnorderedList&lt;T&gt; {
       <image source="BasicDS/Figures/linkedlist.png" width="50%"/>
     </figure>
     <p>The <c>isEmpty</c> method, shown in <xref ref="basic-ds_lst-isempty"/>, checks to
-                see if the head of the list is a reference to <c>None</c>. The result of
+                see if the head of the list is a reference to <c>null</c>. The result of
                 the boolean expression <c>this.head == null</c> will only be true if there
                 are no nodes in the linked list. Since a new list is empty, the
                 constructor and the check for empty must be consistent with one another.
@@ -224,7 +224,7 @@ myList.add(54);</pre>
                 the next node by <q>traversing</q> the next reference.</p>
     <p>To implement the <c>size</c> method, we need to traverse the linked list
                 and keep a count of the number of nodes that occurred.
-                <xref ref="basic-ds_lst-length"/> shows the Python code for counting the number of
+                <xref ref="basic-ds_lst-length"/> shows the Java code for counting the number of
                 nodes in the list. The external reference is called <c>current</c> and is
                 initialized to the head of the list in line 2. At the start of the
                 process we have not seen any nodes, so the count is set to zero.
@@ -280,15 +280,15 @@ myList.add(54);</pre>
     </program></listing>
     <p>As an example, consider invoking the <c>search</c> method looking for the
                 item 17.</p>
-    <program language="python">
+    <program language="java">
       <input>
-&gt;&gt;&gt; my_list.search(17)
-True
+boolean found = myList.search(17);
+System.out.println(found); // prints true
 </input>
     </program>
     <p>Since <c>17</c> is in the list, the traversal process needs to move only to the
-                node containing <c>17</c>. At that point, the condition in line 4 becomes <c>True</c> and
-                we return the result of the search.
+                node containing <c>17</c>. At that point, the condition in line 4 becomes <c>true</c> and
+                we return it as the result of the search.
                 This process can be seen in <xref ref="fig-searchpic"/>.</p>
     <figure align="center" xml:id="fig-searchpic">
       <caption>Successful Search for the Value 17</caption>
@@ -328,8 +328,7 @@ True
                 <c>current</c>. For this reason, <c>previous</c> starts out with a value of
                 <c>null</c> since there is no node before the head (see
                 <xref ref="fig-removeinit"/>).</p>
-    <p>In lines 6&#x2013;7 we ask whether the item stored in the current node is the
-                item we wish to remove. If so, we break out of the loop. If we
+    <p>In line 5 we decide whether to continue the loop or not. We continue if it we haven't reached the end of the list (the first condition) and the item at the current location isn't the one we're looking for (the second condition). If we
                 do not find the item, <c>previous</c> and <c>current</c> must both be moved
                 one node ahead. Again, the order of these two statements is crucial.
                 <c>previous</c> must first be moved one node ahead to the location of
@@ -567,9 +566,9 @@ public class TestUnorderedList {
                 starting with 0.</p>
     <exercises>
       <title>Self Check</title>
-      <p>Part I:  Implement the append method for UnorderedList.  What is the time complexity of the method you created?</p>
+      <p>Part I:  Implement the <c>append</c> method for <c>UnorderedList</c>.  What is the time complexity of the method you created?</p>
 
-      <p>Part II:  In the previous problem, you most likely created an append method that was <m>O(n)</m>  If you add an instance variable to the UnorderedList class you can create an append method that is <m>O(1)</m>.  Modify your append method to be <m>O(1)</m>  Be Careful!  To really do this correctly you will need to consider a couple of special cases that may require you to make a modification to the add method as well.</p>
+      <p>Part II:  In the previous problem, you most likely created an <c>append</c> method that was <m>O(n)</m>  If you add an instance variable to the UnorderedList class you can create an <c>append</c> method that is <m>O(1)</m>.  Modify your <c>append</c> method to be <m>O(1)</m>  Be Careful!  To really do this correctly, you will need to consider a couple of special cases that may require you to make a modification to the <c>add</c> method as well.</p>
 
     </exercises>
   </subsection>

@@ -25,7 +25,7 @@
                     it. It needs no parameters. The stack is not modified.</p>
       </li>
       <li>
-        <p><c>is_empty()</c> tests to see whether the stack is empty. It needs no
+        <p><c>isEmpty()</c> tests to see whether the stack is empty. It needs no
                     parameters and returns a boolean value.</p>
       </li>
       <li>
@@ -49,7 +49,7 @@
         <cell>Return Value</cell>
       </row>
       <row>
-        <cell><c>s.is_empty()</c></cell>
+        <cell><c>s.isEmpty()</c></cell>
         <cell><c>[]</c></cell>
         <cell><c>True</c></cell>
       </row>

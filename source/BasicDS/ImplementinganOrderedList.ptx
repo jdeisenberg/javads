@@ -18,7 +18,18 @@
 
             <p>The current <c>add</c> method needs to change. Instead of inserting new items at the head of the list, we must find the correct position for the insertion so that elements don't get out of order.  We can also improve the <c>search</c> method. Instead of scanning all the way to the end of the list to find if an element is in the list or not, we can take advantage of the fact that the list is in order and stop if we find an item in the list that is greater than the one we're looking for.</p>
 
-            <p>For both these changes, we will need to compare the items in the list to the item we're adding or searching for in order to get the correct position in the list. We will do this using the <c>compareTo</c> method. <c>compareTo</c> compares <c>this</c> and another object. It returns a negative number if <c>this</c> is less than the other object, zero if they are equal, and a positive number if <c>this</c> is greater than the other object. </p>
+            <p>For both these changes, we will need to compare the items in the list to the item we're adding or searching for in order to get the correct position in the list. We will do this by invoking the <c>compareTo</c> method on one of the objects, which we'll call <c>this</c>. <c>compareTo</c> compares <c>this</c> to another object. It returns a negative number if <c>this</c> is less than the other object, zero if they are equal, and a positive number if <c>this</c> is greater than the other object. The following output from jshell shows this method with <c>String</c> objects.</p>
+
+            <console><output>
+jshell> "cat".compareTo("dog");
+$1 ==> -1
+
+jshell> "zebra".compareTo("elephant");
+$2 ==> 21
+
+jshell> "giraffe".compareTo("giraffe");
+$3 ==> 0
+            </output></console>
 
             <p>Rather than copy and paste all of the code that is the same, we can use Java <term>inheritance</term> to allow
             one class to inherit all the properties and methods of another class by using
@@ -32,7 +43,7 @@ public class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedL
 }
 </input></program>
 
-<p>The first line looks very different from what you normally see in Java inheritance, as detailed in <xref ref="oop_inheritance_polymorphism"/>. Let's unpack it. Since we're using generics, we need to put a <c>&lt;T&gt;</c> on the child class (<c>OrderedList</c>) and the parent class (<c>UnorderedList</c>). We also need to tell Java that it can only allow types that have a <c>compareTo</c> method. That's what <c>extends Comparable&lt;T&gt;</c> means.</p>
+<p>The first line looks very different from what you normally see in Java inheritance, as detailed in <xref ref="oop_inheritance_polymorphism"/>. Let's unpack it. Since we're using generics, we need to put a <c>&lt;T&gt;</c> on the child class <c>OrderedList</c> and the parent class <c>UnorderedList</c>. We also need to tell Java that it can only allow types that have a <c>compareTo</c> method. That's what <c>extends Comparable&lt;T&gt;</c> does for us.</p>
 
 <p>In the constructor, we call <c>super()</c> on line 3.  This invokes the zero-argument constructor, which sets the <c>head</c> to <c>null</c>. If we had additional properties in the subclass, we would follow the call to <c>super()</c> with their initialization. The call to <c>super()</c> <em>must</em> be the first non-comment statement in the constructor!</p>
 
@@ -139,14 +150,16 @@ Is 505 in the list? true
 Is 300 in the list? false
 </output></console>
 
+<!--
 <note>
     <title>Java Note</title>
     <p>In line 2 of <xref ref="basic-ds_lst-orderadd"/> we wrote:</p>
         <pre>Node&lt;T&gt; current = this.getHead();</pre>
         <p>instead of:</p>
         <pre>Node&lt;T&gt; current = this.head;</pre>
-    <p>We needed to do this because <c>head</c> was declared <c>private</c> in <c>UnorderedList</c>; the only way to access its value is through the <c>getHead</c> method and the only way to modify the value (as in line 14) is via the <c>setHead</c> method.</p>
+        <p>As in <xref ref="java-note-private-access"/>, we needed to do this because <c>head</c> was declared <c>private</c> in <c>UnorderedList</c>; the only way to access its value is through the <c>getHead</c> method and the only way to modify the value (as in line 14) is via the <c>setHead</c> method.</p>
 </note>
+-->
 
   <p>The search of an unordered linked list required that we traverse the
             nodes one at a time until we either find the item we are looking for or
