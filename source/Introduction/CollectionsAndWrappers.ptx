@@ -7,41 +7,41 @@
   <subsection xml:id="introduction_arraylist" label="introduction_arraylist">
     <title>The ArrayList Class</title>
     <p>The primary collection we'll be using is the <c>ArrayList</c>. It's not one of the built-in data types, so you have to explicitly import it:</p>
-    <console>
-    <prompt>jshell> </prompt><input>import java.util.ArrayList;</input>
+    <console prompt="jshell&gt; ">
+    <input>import java.util.ArrayList;</input>
     </console>
     <p>Here, <c>ArrayList</c> is the name of the class. It belongs to the <c>java.util</c> <term>package</term>. Java uses packages to group together related data types.</p>
 
     <p>Let's create an <c>ArrayList</c> of <c>String</c> elements by using the <c>new</c> method. The element data type is enclosed in angle brackets. As with arrays, all the elements in an <c>ArrayList</c> must be of the same data type.</p>
 
-<console>
-<prompt>jshell> </prompt><input>ArrayList&lt;String&gt; animals = new ArrayList&lt;String&gt;();</input>
+<console prompt="jshell&gt; ">
+<input>ArrayList&lt;String&gt; animals = new ArrayList&lt;String&gt;();</input>
 <output>animals ==> []</output>
 </console>
 
     <p>The <c>add</c> method appends items to the end of the list and returns <c>true</c>. A two-argument version of <c>add</c> lets you give an index position at which to add an element, but it does not return any value. As with arrays, the first element in an <c>ArrayList</c> has index zero.</p>
 
-<console>
-<prompt>jshell&gt; </prompt><input>animals.add("ibex");</input>
+<console prompt="jshell&gt; ">
+<input>animals.add("ibex");</input>
 <output>$5 ==> true
 &#160;</output>
 
-<prompt>jshell&gt; </prompt><input>animals.add("capybara");</input>
+<input>animals.add("capybara");</input>
 <output>$6 ==> true
 &#160;</output>
 
-<prompt>jshell&gt; </prompt><input>animals.add("bison");</input>
+<input>animals.add("bison");</input>
 <output>$7 ==> true
 &#160;</output>
 
-<prompt>jshell&gt; </prompt><input>animals</input>
+<input>animals</input>
 <output>animals ==> [ibex, capybara, bison]
 &#160;</output>
 
-<prompt>jshell&gt; </prompt><input>animals.add(1, "giraffe");</input>
+<input>animals.add(1, "giraffe");</input>
 <output>
 &#160;</output>
-<prompt>jshell&gt; </prompt><input>animals</input>
+<input>animals</input>
 <output>animals ==> [ibex, giraffe, capybara, bison]
 &#160;</output>
 </console>
@@ -90,8 +90,8 @@
   <subsection xml:id="introduction_wrapper-classes" label="introduction_wrapper-classes">
     <title>Wrapper Classes</title>
     <p>Let's say we wanted an <c>ArrayList</c> with floating point values. If we try something like the following, we get an error:</p>
-<console>
-<prompt>jshell&gt; </prompt><input>ArrayList&lt;double&gt; prices = new ArrayList&lt;double&gt;();</input>
+<console prompt="jshell&gt; ">
+<input>ArrayList&lt;double&gt; prices = new ArrayList&lt;double&gt;();</input>
 <output>|  Error:
 |  unexpected type
 |    required: reference
@@ -130,23 +130,23 @@
 
 <p>It is possible to use explicit methods to wrap and unwrap primitives (also referred to as <term>box</term> and <term>unbox</term>):</p>
 
-<console>
-<prompt>jshell&gt; </prompt><input>Integer objectAge = Integer.valueOf(37);</input>
+<console prompt="jshell&gt; ">
+<input>Integer objectAge = Integer.valueOf(37);</input>
 <output>objectAge ==&gt; 37
 &#160;</output>
 
-<prompt>jshell&gt; </prompt><input>int primitiveAge = objectAge.intValue();</input>
+<input>int primitiveAge = objectAge.intValue();</input>
 <output>primitiveAge ==&gt; 37</output>
 </console>
 
 <p>However, modern versions of the Java compiler will automatically <q>auto-box</q> and <q>auto-unbox</q> values:</p>
 
-<console>
-<prompt>jshell&gt; </prompt><input>Integer objectAge = 37;</input>
+<console prompt="jshell&gt; ">
+<input>Integer objectAge = 37;</input>
 <output>objectAge ==> 37
 &#160;</output>
 
-<prompt>jshell&gt; </prompt><input>int primitiveAge = objectAge;</input>
+<input>int primitiveAge = objectAge;</input>
 <output>primitiveAge ==> 37</output>
 </console>
 </subsection>

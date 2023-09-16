@@ -347,23 +347,23 @@ String[] words = {"ant", "bee", "cat", "dog", "elk"};</pre>
 
 <p>You can also declare an array with the <c>new</c> operator, giving the data type and, in brackets, the number of items you want in the array. (This number can be in a variable or expression.) The items in the array will be given the appropriate default value for their data type. For objects such as <c>String</c>, the default value is <c>null</c>, which means the element does not refer to any value.</p>
 
-<console>
-<prompt>jshell> </prompt><input>int[] ages = new int[3];</input>
+<console prompt="jshell&gt; ">
+<input>int[] ages = new int[3];</input>
 <output>ages ==> int[3] { 0, 0, 0 }
 &#160;
 
 </output>
-<prompt>jshell> </prompt><input>double[] prices = new double[3];</input>
+<input>double[] prices = new double[3];</input>
 <output>prices ==> double[4] { 0.0, 0.0, 0.0 }
 &#160;
 
 </output>
-<prompt>jshell> </prompt><input>boolean[] valid = new boolean[3];</input>
+<input>boolean[] valid = new boolean[3];</input>
 <output>valid ==> boolean[3] { false, false, false }
 &#160;
 
 </output>
-<prompt>jshell> </prompt><input>String[] words = new String[3];</input>
+<input>String[] words = new String[3];</input>
 <output>words ==> String[3] { null, null, null }
 </output>
       </console>

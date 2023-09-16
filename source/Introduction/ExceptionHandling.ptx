@@ -61,8 +61,9 @@ class ArrayAccess {
 </input></program>
 
 <p>If the user enters a value that is less than the array length, the <c>System.out.println()</c> will display the value. However, if they enter a negative number or a number greater than or equal to the array length, the program will report an <c>ArrayIndexOutOfBounds</c>  exception.</p>
-<console><prompt>Enter an index: </prompt><input>7</input>
-<output>Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException:
+<console>
+<output>Enter an index: 7
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException:
   Index 7 out of bounds for length 6
         at ArrayAccess.main(ArrayAccess.java:13)
         </output></console>
