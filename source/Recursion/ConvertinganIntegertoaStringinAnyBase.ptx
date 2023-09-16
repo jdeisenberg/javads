@@ -5,15 +5,18 @@
             binary and hexadecimal. For example, convert the integer 10 to its
             string representation in decimal as <c>"10"</c>, or to its string
             representation in binary as <c>"1010"</c>. While there are many algorithms
-            to solve this problem, including the algorithm discussed in the stack
-            section, the recursive formulation of the problem is very
+            to solve this problem, including the algorithm we discussed in <xref ref="basic-ds_converting-decimal-numbers-to-binary-numbers"/> when discussing the stack data structure, the recursive formulation of the problem is very
             elegant.</p>
   <p>Let's look at a concrete example using base 10 and the number 769.
-            Suppose we have a sequence of characters corresponding to the first 10
-            digits, like <c>convert_string = "0123456789"</c>. It is easy to convert a
+            Suppose we have an array of strings corresponding to the first 10
+            digits, like:</p>
+
+          <pre>String [] digitStrings = {"0", "1", "2", "3", "4", "5",
+            "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};</pre>
+<p>We can convert a
             number less than 10 to its string equivalent by looking it up in the
-            sequence. For example, if the number is 9, then the string is
-            <c>convert_string[9]</c> or <c>"9"</c>. If we can arrange to break up the number
+            array. For example, if the number is 9, then the string is
+            <c>digitStrings[9]</c> or <c>"9"</c>. If we can arrange to break up the number
             769 into three single-digit numbers, 7, 6, and 9, then converting it to
             a string is simple. A number less than 10 sounds like a good base case.</p>
   <p>Knowing what our base is suggests that the overall algorithm will
@@ -47,7 +50,7 @@
             base. Now our job is to convert 76 to its string representation. Again
             we will use integer division plus remainder to get results of 7 and 6
             respectively. Finally, we have reduced the problem to converting 7,
-            which we can do easily since it satisfies the base case condition of
+            which we can do immediately since it satisfies the base case condition of
             <m>n &lt; base</m>, where <m>base = 10</m>. The series of operations
             we have just performed is illustrated in <xref ref="recursion_fig-tostr"/>. Notice that
             the numbers we want to remember are in the remainder boxes along the
@@ -57,27 +60,37 @@
   </figure>
   <p><xref ref="lst-rectostr"/> shows the Python code that implements the algorithm
             outlined above for any base between 2 and 16.</p>
-<listing xml:id="lst-rectostr"> <program label="lst-rectostr"  interactive="activecode" language="python">
+<listing xml:id="lst-rectostr">
+<program label="prg-rectostr"  language="java" line-numbers="yes">
     <input>
-def to_str(n, base):
-    convert_string = "0123456789ABCDEF"
-    if n &lt; base:
-        return convert_string[n]
-    else:
-        return to_str(n // base, base) + convert_string[n % base]
+public class RecursiveBaseConversion {
+    public static String toString(int n, int base) {
+        String [] digitStrings = {"0", "1", "2", "3", "4", "5",
+            "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
+        if (n &lt; base) {
+            return digitStrings[n];
+        } else {
+            int remainder = n % base;
+            return toString(n / base, base) + digitStrings[remainder];
+        }
+    }
 
-print(to_str(1453, 16))
+    public static void main(String[] args) {
+        System.out.println(toString(13, 2));     // 1101
+        System.out.println(toString(1066, 16));  // 42A
+    }
+}
         </input>
   </program>
 </listing>
-  <p>Notice that in line 3 we check for the base case where <c>n</c>
+  <p>Notice that in line 5 we check for the base case where <c>n</c>
             is less than the base we are converting to. When we detect the base
             case, we stop recursing and simply return the string from the
-            <c>convert_string</c> sequence. In line 6 we satisfy both the
+            <c>convert_string</c> sequence. In line 9 we satisfy both the
             second and third laws&#x2013;by making the recursive call and by reducing the
             problem size&#x2013;using division.</p>
-  <p>Let's trace the algorithm shown in <xref ref="lst-rectostr"/> again; this time we will convert the number 10
-            to its base 2 string representation (<c>"1010"</c>).</p>
+  <p>Let's trace the algorithm shown in <xref ref="lst-rectostr"/> again; this time we will convert the number 13
+            to its base 2 string representation (<c>"1101"</c>).</p>
 
   <figure xml:id="recursion_fig-tostr2" align="center">
     <image source="Recursion/Figures/toStrBase2.png" width="50%" alt="image"/>
@@ -86,29 +99,43 @@ print(to_str(1453, 16))
             but it looks like the digits are in the wrong order. The algorithm works
             correctly because we make the recursive call first on line
             6, then we add the string representation of the remainder.
-            If we reversed returning the <c>convert_string</c> lookup and returning the
-            <c>to_str</c> call, the resulting string would be backward! But by delaying
+            If we reversed returning the <c>digitStrings</c> lookup and returning the
+            <c>toString</c> call, the resulting string would be backward! But by delaying
             the concatenation operation until after the recursive call has returned,
             we get the result in the proper order. This should remind you of our
-            discussion of stacks back in the previous chapter.</p>
+            discussion of the reversal property of stacks back in <xref ref="basic-ds_stacks"/>.</p>
   <exercises>
     <title>Self Check</title>
-    <p>Write a function that takes a string as a parameter and returns a new string that is the reverse of the old string.</p>
-    <program xml:id="recursion_sc_1" interactive="activecode" language="python">
+    <exercise>
+    <p>Write a method that takes a string as a parameter and returns a new string that is the reverse of the old string. Use this as your starting point.</p>
+    <program xml:id="recursion_sc_1" language="java">
       <input>
-from test import testEqual
+public class ReverseString {
+    public static String reverse(String s) {
+        // your code here
+        return ""; // placeholder
+    }
 
+    public static void testEqual(String s1, String s2) {
+        if (s1.equals(s2)) {
+            System.out.printf("\"%s\" and \"%s\" are equal.%n", s1, s2);
+        } else {
+            System.out.printf("\"%s\" and \"%s\" are not equal.%n", s1, s2);
+        }
+    }
 
-def reverse(s):
-    return s
-
-testEqual(reverse("hello"), "olleh")
-testEqual(reverse("l"), "l")
-testEqual(reverse("follow"), "wollof")
-testEqual(reverse(""), "")
+    public static void main(String[] args) {
+        testEqual(reverse("hello"), "olleh");
+        testEqual(reverse("m"), "m");
+        testEqual(reverse("follow"), "wollof");
+        testEqual(reverse(""), "");
+    }
+}
         </input>
     </program>
-    <p>Write a function that takes a string as a parameter and returns <c>True</c> if the string is a palindrome, <c>False</c> otherwise.  Remember that a string is a palindrome if it is spelled the same both forward and backward.  For example:  <em>radar</em> is a palindrome.  For bonus points palindromes can also be phrases, but you need to remove the spaces and punctuation before checking.  For example:  <em>madam i'm adam</em>  is a palindrome.  Other fun palindromes include:</p>
+  </exercise>
+  <exercise>
+    <p>Write a function that takes a string as a parameter and returns <c>true</c> if the string is a palindrome, <c>false</c> otherwise.  Remember that a string is a palindrome if it is spelled the same both forward and backward.  For example:  <em>radar</em> is a palindrome.  For bonus points palindromes can also be phrases, but you need to remove the spaces and punctuation, and you need to change all the letters to lower case before checking.  For example, <em>Madam, I'm Adam</em> is a palindrome.  Other fun palindromes include:</p>
     <p>
       <ul>
         <li>
@@ -130,31 +157,52 @@ testEqual(reverse(""), "")
           <p>Able was I ere I saw Elba</p>
         </li>
         <li>
-          <p>Kanakanak &#x2013; a town in Alaska</p>
+          <p>Kanakanak <em>a town in Alaska</em></p>
         </li>
         <li>
-          <p>Wassamassaw &#x2013; a town in South Dakota</p>
+          <p>Wassamassaw <em>a town in South Dakota</em></p>
         </li>
       </ul>
     </p>
-    <program xml:id="recursion_sc_2" interactive="activecode" language="python">
+    <p>Here is a starting point for your program. Hint: the <c>Character.isLetter(ch)</c> method returns <c>true</c> if its argument is a letter, <c>false</c> otherwise.  <c>Character.toLowerCase(ch)</c> converts letters to their lower case versions, leaving non-letters unchanged.</p>
+
+    <program xml:id="recursion_sc_2" language="java">
       <input>
-from test import testEqual
+public class RecursivePalindromes {
 
+    /*
+     * Given a String, return the string with only letters,
+     * and all in lower case.
+     */
+    public static String lettersOnly(String s) {
+        return ""; // placeholder
+    }
 
-def remove_white(s):
-    return s
+    /*
+     * Return true if the given string is a palindrome,
+     * false otherwise.
+     */
+    public static boolean isPalindrome(String s) {
+        return false; // placeholder
+    }
 
-def is_pal(s):
-    return False
+    public static void testResult(String s, boolean given, boolean expected) {
+        System.out.printf("isPalindrome(\"%s\") returns %s; expected %s.%n",
+            s, given, expected);
+    }
 
-testEqual(is_pal(remove_white("x")), True)
-testEqual(is_pal(remove_white("radar")), True)
-testEqual(is_pal(remove_white("hello")), False)
-testEqual(is_pal(removeWremove_whitehite("")), True)
-testEqual(is_pal(remove_white("hannah")), True)
-testEqual(is_pal(remove_white("madam i'm adam")), True)
+    public static void main(String[] args) {
+        testResult("x", isPalindrome(lettersOnly("x")), true);
+        testResult("radar", isPalindrome(lettersOnly("radar")), true);
+        testResult("hello", isPalindrome(lettersOnly("hello")), false);
+        testResult("", isPalindrome(lettersOnly("")), true);
+        testResult("hannah", isPalindrome(lettersOnly("hannah")), true);
+        testResult("Madam, I'm Adam.",
+            isPalindrome(lettersOnly("Madam, I'm Adam.")), true);
+    }
+}
         </input>
     </program>
+  </exercise>
   </exercises>
 </section>

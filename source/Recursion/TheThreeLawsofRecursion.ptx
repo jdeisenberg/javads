@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <section xml:id="recursion_the-three-laws-of-recursion">
   <title>The Three Laws of Recursion</title>
-  <p>Like robots in Asimov's stories, all recursive algorithms must obey three
+  <p>Just as robots in Isaac Asimov's stories must obey <url href="https://en.wikipedia.org/wiki/Three_Laws_of_Robotics">three laws</url>, all recursive algorithms must obey three
             important laws:</p>
   <p>
     <ol marker="1">
@@ -18,18 +18,18 @@
     </ol>
   </p>
   <p>Let's look at each one of these laws in more detail and see how it was
-            used in the <c>list_sum</c> algorithm. First, a base case is the condition
+            used in the <c>arraySum</c> algorithm. First, a base case is the condition
             that allows the algorithm to stop recursing. A base case is typically a
-            problem that is small enough to solve directly. In the <c>list_sum</c>
+            problem that is small enough to solve directly. In the <c>arraySum</c>
             algorithm the base case is a list of length 1.</p>
   <p>To obey the second law, we must arrange for a change of state that moves
             the algorithm toward the base case. A change of state means that some
             data that the algorithm is using is modified. Usually the data that
-            represents our problem gets smaller in some way. In the <c>list_sum</c>
+            represents our problem gets smaller in some way. In the <c>arraySum</c>
             algorithm our primary data structure is a list, so we must focus our
             state-changing efforts on the list. Since the base case is a list of
             length 1, a natural progression toward the base case is to shorten the
-            list. This is exactly what happens on line 5 of <xref ref="lst-recsum"/> when we call <c>list_sum</c> with a shorter list.</p>
+            list. This is exactly what happens on line 9 of <xref ref="lst-recsum"/> when we call <c>arraySum</c> with a shorter list.</p>
   <p>The final law is that the algorithm must call itself. This is the very
             definition of recursion. Recursion is a confusing concept to many
             beginning programmers. As a novice programmer, you have learned that
@@ -48,7 +48,7 @@
     <title>Self Check</title>
     <exercise label="question_recsimp_1">
       <statement>
-        <p>Q-1: How many recursive calls are made when computing the sum of the list [2, 4, 6, 8, 10]?</p>
+        <p>How many recursive calls are made when computing the sum of the list [2, 4, 6, 8, 10]?</p>
       </statement>
       <choices>
         <choice>
@@ -64,7 +64,7 @@
             <p>5</p>
           </statement>
           <feedback>
-            <p>The initial call to list_sum is not a recursive call.</p>
+            <p>The initial call to arraySum is not a recursive call.</p>
           </feedback>
         </choice>
         <choice correct="yes">
@@ -87,7 +87,7 @@
     </exercise>
     <exercise label="question_recsimp_2">
       <statement>
-        <p>Q-2: Suppose you are going to write a recusive function to calculate the factorial of a number.  fact(n) returns n * n-1 * n-2 * &#x2026; Where the factorial of zero is defined to be 1.  What would be the most appropriate base case?</p>
+        <p>Suppose you are going to write a recursive function to calculate the factorial of a number.  fact(n) returns n * n-1 * n-2 * &#x2026; Where the factorial of zero is defined to be 1.  What would be the most appropriate base case?</p>
       </statement>
       <choices>
         <choice>

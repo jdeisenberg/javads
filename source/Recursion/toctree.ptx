@@ -2,7 +2,6 @@
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US" xml:id="chapter_recursion">
   <title>Recursion</title>
   <xi:include href="./Objectives.ptx"/>
-  <!--
   <xi:include href="./WhatIsRecursion.ptx"/>
   <xi:include href="./CalculatingtheSumofaListofNumbers.ptx"/>
   <xi:include href="./TheThreeLawsofRecursion.ptx"/>

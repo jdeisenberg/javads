@@ -9,48 +9,62 @@
             some interesting pictures. As you watch these pictures take shape you
             will get some new insight into the recursive process that may be helpful
             in cementing your understanding of recursion.</p>
-  <p>The tool we will use for our illustrations is Python's turtle graphics
-            module called <c>turtle</c>. The <c>turtle</c> module is standard with all
-            versions of Python and is very easy to use. The metaphor is quite
-            simple. You can create a turtle and the turtle can move forward,
+  <p>The tool we will use for our illustrations is called turtle graphics. You will need to put the
+    <c>World.java</c> and <c>Turtle.java</c> classes in the same directory as your Java programs
+    for these examples. Here is the metaphor that turtle graphics uses: You can create a turtle and the turtle can move forward,
             move backward, turn left, turn right, etc. The turtle can have its tail up or
             down. When the turtle's tail is down and the turtle moves, it draws a
             line as it moves. To increase the artistic value of the turtle, you can
             change the width of the tail as well as the color of the ink the tail is
             dipped in.</p>
-  <p>Here is a simple example to illustrate some <c>turtle</c> graphics basics. We
-            will use the <c>turtle</c> module to draw a spiral recursively.
-            <xref ref="lst-turt1"/> shows how it is done. After importing the <c>turtle</c>
-            module we create a turtle. When the turtle is created it also creates a
-            window for itself to draw in. Next we define the <c>draw_spiral</c> function.
+          <aside><p>Thanks to Luther Tychonievich, who wrote the World and Turtle classes and released them to the public domain.</p></aside>
+  <p>Here is an example to illustrate some <c>turtle</c> graphics basics. We
+            will use the World and Turtle module to draw a spiral recursively.
+            <xref ref="lst-turtle-spiral"/> shows how it is done. In line 4, we create a world (that is, a winow) for the turtle to draw in, and then we create a new turtle within that world on line 5.</p>
+          <aside><p>Programmers seem to like choosing cute names for turtles.</p></aside>
+          <p>When you run the program, you see the turtle's movement. Line 7 sets the time (in seconds) between turtle commands. Line 8 makes the window visible. Then, in line 9, we call the <c>drawSpiral</c> method. Finally, in line 10, we hide the image of the turtle so we can see the drawing in its entirety.</p>
+
+          <p>Now let us turn our attention to the <c>drawSpiral</c> method.
             The base case for this simple function is when the length of the line we
-            want to draw, as given by the <c>len</c> parameter, is reduced to zero or
+            want to draw, as given by the <c>lineLength</c> parameter, is reduced to zero or
             less. If the length of the line is longer than zero, we instruct the
-            turtle to go forward by <c>len</c> units and then turn right 90 degrees.
-            The recursive step is when we call <c>draw_spiral</c> again with a reduced
-            length. At the end of <xref ref="lst-turt1"/> you will notice that we call
-            the function <c>my_win.exitonclick()</c>. This is a handy little method of
-            the window that puts the turtle into a wait mode until you click inside
-            the window, after which the program cleans up and exits.</p>
-<listing xml:id="lst-turt1"> <program label="lst-turt1"  interactive="activecode" language="python">
+            turtle to go forward by <c>lineLength</c> units and then turn right 90 degrees.
+            The recursive step is when we call <c>drawSpiral</c> again with a reduced
+            length. </p>
+<listing xml:id="lst-turtle-spiral">
+<program label="prog-turtle-spiral" language="java" line-numbers="yes">
     <input>
-import turtle
+public class TurtleSpiral {
+    public static void main(String[] args)
+    {
+      World habitat = new World(300, 300);
+      Turtle yertle = new Turtle(habitat);
 
+      yertle.setDelay(0.1);
+      habitat.setVisible(true);
+      drawSpiral(yertle, 100);
+      yertle.hide();
+    }
 
-def draw_spiral(my_turtle, line_len):
-    if line_len &gt; 0:
-        my_turtle.forward(line_len)
-        my_turtle.right(90)
-        draw_spiral(my_turtle, line_len - 5)
+    public static void drawSpiral(Turtle myTurtle, int lineLength) {
+        if (lineLength &gt; 0) {
+            myTurtle.forward(lineLength);
+            myTurtle.turnRight(90);
+            drawSpiral(myTurtle, lineLength - 5);
+        }
+    }
 
-
-my_turtle = turtle.Turtle()
-my_win = turtle.Screen()
-draw_spiral(my_turtle, 100)
-my_win.exitonclick()
+}
         </input>
   </program>
 </listing>
+
+<p><xref ref="recursion_spiral_result"/> shows the resulting drawing:</p>
+
+    <figure xml:id="recursion_spiral_result" align="center">
+    <image source="Recursion/Figures/turtle_spiral_result.png" width="50%"/>
+  </figure>
+
   <p>That is really about all the turtle graphics you need to know in order
             to make some pretty impressive drawings. For our next program we
             will turn to fractals. Fractals come from a branch of
@@ -105,7 +119,8 @@ def tree(branch_len, t):
             the recursive calls and think about how this tree will unfold. Will it
             be drawn symmetrically with the right and left halves of the tree taking
             shape simultaneously? Will it be drawn right side first then left side?</p>
-<listing xml:id="lst-complete-tree"> <program label="lst-complete-tree"  interactive="activecode" language="python">
+<listing xml:id="lst-complete-tree">
+<program label="lst-complete-tree"  interactive="activecode" language="python">
     <input>
 import turtle
 
