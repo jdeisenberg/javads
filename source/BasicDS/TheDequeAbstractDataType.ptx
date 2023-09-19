@@ -52,10 +52,10 @@
             the rear as you move items in and out of the collection, as things can
             get a bit confusing.</p>
   <table xml:id="basic-ds_tbl-dequeoperations">
-    <tabular>
       <title>
         Examples of Deque Operations
       </title>
+    <tabular>
       <row header="yes">
         <cell>Deque Operation</cell>
         <cell>Deque Contents</cell>

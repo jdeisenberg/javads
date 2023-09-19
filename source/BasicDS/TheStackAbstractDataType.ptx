@@ -39,10 +39,10 @@
             stack operations. Under Stack Contents, the top item is listed at the
             far right.</p>
   <table xml:id="basic-ds_tbl-stackops">
-    <tabular>
       <title>
         Sample Stack Operations
       </title>
+    <tabular>
       <row header="yes">
         <cell>Stack Operation</cell>
         <cell>Stack Contents</cell>

@@ -20,6 +20,7 @@
             grows (as <c>push</c> operations occur), new items will be added on the end
             of the list. <c>pop</c> operations will manipulate that same end.</p>
 <listing xml:id="lst-stackcode1">
+  <caption>Implementing a Stack class using Java ArrayLists</caption>
 <program label="prog-stackcode1" language="java" line-numbers="yes">
     <input>
 import java.util.ArrayList;
@@ -111,6 +112,7 @@ public class Stack&lt;T&gt; {
           <p><em>Do we want to have a github repository where people can download the <c>Stack</c> class?</em></p>
 
 <listing xml:id="lst-stacktest">
+  <caption>Program to Test the Stack Class</caption>
   <program xml:id="prog-stacktest" language="java">
     <input>
 public class StackTest {
@@ -147,6 +149,7 @@ public class StackTest {
             explicitly using <c>remove</c> and <c>add</c>. The implementation is shown in
             <xref ref="lst-stackcode2"/>.</p>
 <listing xml:id="lst-stackcode2">
+  <caption>Alternative Implementation of the Stack class</caption>
 <program label="lst-stackcode2" language="java">
     <input>
 import java.util.ArrayList;

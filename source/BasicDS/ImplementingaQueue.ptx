@@ -13,6 +13,7 @@
             (the last element of the list). Recall that this also means that <c>enqueue</c>
             will be <m>O(n)</m> and <c>dequeue</c> will be <m>O(1)</m>.</p>
   <listing xml:id="basic-ds_lst-queuecode">
+    <caption>Implementation of a Queue</caption>
     <program xml:id="basic-ds_prog-queuecode" language="java">
       <input>
 import java.util.ArrayList;
@@ -97,6 +98,7 @@ public class Queue&lt;T&gt; {
             action as we perform the sequence of operations from
             <xref ref="basic-ds_the-queue-abstract-data-type"/>.</p>
           <listing xml:id="lst-queuetest">
+            <caption>Example Queue Operations</caption>
             <program xml:id="prog-queuetest" language="java">
     <input>
 public class QueueTest {

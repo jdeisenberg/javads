@@ -34,7 +34,9 @@
                 <term>data field</term> of the node. In addition, each node must hold a reference
                 to the next node. <xref ref="basic-ds_lst-nodeclass"/> shows the Java
                 implementation.</p>
-    <listing xml:id="basic-ds_lst-nodeclass"><program language="java">
+    <listing xml:id="basic-ds_lst-nodeclass">
+        <caption>The Node Class</caption>
+        <program language="java">
       <input>
 public class Node&lt;T&gt; {
 
@@ -113,7 +115,9 @@ public class Node&lt;T&gt; {
                 a reference to the first node. <xref ref="basic-ds_lst-listclass"/> shows the
                 constructor. Note that each list object will maintain a single reference
                 to the head of the list.</p>
-    <listing xml:id="basic-ds_lst-listclass"><program language="java">
+    <listing xml:id="basic-ds_lst-listclass">
+        <caption>The UnorderedList Class</caption>
+        <program language="java">
       <input>
 public class UnorderedList&lt;T&gt; {
 
@@ -193,7 +197,9 @@ myList.add(54);</pre>
                 rest of the list has been properly attached to the new node, we can
                 modify the head of the list to refer to the new node. The assignment
                 statement in line 4 sets the head of the list.</p>
-    <listing xml:id="basic-ds_lst-add"><program language="java" line-numbers="yes">
+    <listing xml:id="basic-ds_lst-add">
+        <caption>Adding a Node to a Linked List</caption>
+        <program language="java" line-numbers="yes">
       <input>
     public void add(T item) {
         Node&lt;T&gt; temp = new Node&lt;T&gt;(item);
@@ -235,7 +241,8 @@ myList.add(54);</pre>
                 time <c>current</c> moves to a new node, we add 1 to <c>count</c>.
                 Finally, <c>count</c> gets returned after the iteration stops.
                 <xref ref="fig-traversal"/> shows this process as it proceeds down the list.</p>
-    <listing xml:id="basic-ds_lst-length"><program language="java" line-numbers="yes">
+            <listing xml:id="basic-ds_lst-length"><caption>List Size</caption>
+                <program language="java" line-numbers="yes">
       <input>
     public int size() {
         Node&lt;T&gt; current = this.head;
@@ -264,7 +271,9 @@ myList.add(54);</pre>
                 the head of the list (line 2). We continue to iterate over the list as long as there are
                 more nodes to visit. The question in line 4 asks whether
                 the data item is present in the current node. If so, we return <c>true</c> immediately.</p>
-    <listing xml:id="basic-ds_lst-search"><program language="java" line-numbers="yes">
+    <listing xml:id="basic-ds_lst-search">
+        <caption>Searching a Linked List</caption>
+        <program language="java" line-numbers="yes">
       <input>
     public boolean search(T item) {
         Node&lt;T&gt; current = this.head;
@@ -337,7 +346,9 @@ System.out.println(found); // prints true
                 <c>current</c> before <c>current</c> moves ahead. <xref ref="fig-prevcurr"/> shows
                 the movement of <c>previous</c> and <c>current</c> as they progress down the
                 list looking for the node containing the value 17.</p>
-    <listing xml:id="basic-ds_lst-remove"><program language="java" line-numbers="yes">
+    <listing xml:id="basic-ds_lst-remove">
+        <caption>Removing an Item from a Linked List</caption>
+        <program language="java" line-numbers="yes">
       <input>
     public void remove(T item) {
         Node&lt;T&gt; current = this.head;
@@ -414,6 +425,7 @@ System.out.println(found); // prints true
     <p><xref ref="lst_unorderedlistcomplete"/> is the complete <c>UnorderedList</c> class, with comments to document
         the methods:</p>
     <listing xml:id="lst_unorderedlistcomplete">
+        <caption>The Node and UnorderedList Classes</caption>
     <program xml:id="unorderedlistcomplete" language="java">
       <input>
 public class UnorderedList&lt;T&gt; {
@@ -524,6 +536,7 @@ public class UnorderedList&lt;T&gt; {
     <p><xref ref="lst_unorderedlist_test"/> shows a program to test the <c>UnorderedList</c> class.</p>
 
     <listing xml:id="lst_unorderedlist_test">
+        <caption>Test of UnorderedList Methods</caption>
         <program xml:id="prog_unorderedlist_test" language="java"><input>
 public class TestUnorderedList {
     public static void main(String[] args) {

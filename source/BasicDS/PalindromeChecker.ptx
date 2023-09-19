@@ -14,7 +14,7 @@
             the first character of the string and the tail of the deque will hold
             the last character (see <xref ref="i114_id1fig-palindrome"/>).</p>
   <figure align="center" xml:id="i114_id1fig-palindrome">
-    <caption>A Deque</caption>
+    <caption>A Deque for Palindrome Checking</caption>
     <image source="BasicDS/Figures/palindromesetup.png" width="50%"/>
   </figure>
   <p>Since we can remove both of the head and tail characters directly, we can compare them and
@@ -25,6 +25,7 @@
             complete method for palindrome-checking appears in
             <xref ref="lst-palchecker"/>.</p>
 <listing xml:id="lst-palchecker">
+    <caption>Implementation of Palindrome Checker</caption>
 <program label="prog-palchecker" language="java">
     <input>
 public class Palindrome {

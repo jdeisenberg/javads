@@ -41,6 +41,7 @@
             digits are popped from the stack one at a time and appended to the
             right-hand end of the string. The binary string is then returned.</p>
 <listing xml:id="lst-binconverter">
+  <caption>Converting from Decimal to Binary</caption>
 <program label="lst-binconverter" language="java" line-numbers="yes">
     <input>
 public class DecimalToBinary {
@@ -90,6 +91,7 @@ public class DecimalToBinary {
           <p>The problem comes when we go beyond base 10. We can no longer simply use the remainders, as they are themselves represented as two-digit decimal numbers. Instead, we need to create a set of digits that can be used to represent those remainders beyond 9.</p>
 
 <listing xml:id="lst-baseconverter">
+  <caption>Converting from Decimal to any Base</caption>
 <program label="prog-baseconverter" language="java" line-numbers="yes">
     <input>
 public class DecimalToBaseN {

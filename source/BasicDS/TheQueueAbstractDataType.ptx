@@ -40,10 +40,10 @@
             such that the head is on the right. The first item enqueued was <c>4</c> so it
             is the first item returned by <c>dequeue</c>.</p>
   <table xml:id="basic-ds_tbl-queueoperations">
-    <tabular>
       <title>
         Example Queue Operations
       </title>
+    <tabular>
       <row header="yes">
         <cell>Queue Operation</cell>
         <cell>Queue Contents</cell>

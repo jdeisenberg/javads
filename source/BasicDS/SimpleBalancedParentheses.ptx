@@ -63,6 +63,7 @@
             been processed, the stack should be empty. The Java code to implement
             this algorithm is shown in <xref ref="lst-parcheck1"/>.</p>
 <listing xml:id="lst-parcheck1">
+  <caption>Solving the Balanced Parentheses Problem</caption>
 <program label="lst-parcheck1" line-numbers="yes" language="java">
     <input>
 public class Parentheses {

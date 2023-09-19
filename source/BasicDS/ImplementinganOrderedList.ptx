@@ -50,6 +50,7 @@ public class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedL
 <p>Because all the methods from <c>UnOrderedList</c> are inherited, we can immediately use the methods from <c>UnorderedList</c> without having to repeat them in <c>OrderedList</c>:</p>
 
 <listing xml:id="basicds_lst-test-ordered-list">
+    <caption>Testing <c>OrderedList</c> Methods</caption>
 <program xml:id="basicds_prog-test-ordered-list" language="java" line-numbers="yes"><input>
 public class TestOrderedList {
 
@@ -117,6 +118,7 @@ Is 300 in the list? false
             <c>previous == null</c> (line 11) can be used to provide the answer.</p>
 
           <listing xml:id="basic-ds_lst-orderadd">
+              <caption>The <c>add</c> Method for an <c>OrderedList</c></caption>
               <program language="java" xml:id="basic-ds_prog-orderadd" line-numbers="yes">
                   <input>
     public void add(T item) {
@@ -189,7 +191,9 @@ Is 300 in the list? false
             contains data greater than the item we are looking for, we will immediately return <c>false</c>.
             The remaining lines are identical to
             the unordered list search.</p>
-  <listing xml:id="basic-ds_lst-ordersearch"><program language="java" line-numbers="yes">
+  <listing xml:id="basic-ds_lst-ordersearch">
+      <caption>The <c>search</c> Method for an <c>OrderedList</c></caption>
+      <program language="java" line-numbers="yes">
           <input>
     public boolean search(T item) {
         Node&lt;T&gt; current = this.getHead();
@@ -211,6 +215,7 @@ Is 300 in the list? false
             consider whether the unordered implementations will work given that the
             list is now ordered. If they will, you don't need to duplicate them; inheritance will do the job for you.</p>
         <listing xml:id="basicds_complete-orderedList">
+            <caption>The Complete <c>OrderedList</c> Class</caption>
             <program xml:id="orderedlistclass" language="java">
     <input>
 public class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedList&lt;T&gt; {

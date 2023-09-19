@@ -46,6 +46,7 @@
   <p>The program is shown in <xref ref="lst-josephussim"/>. A call to the
             <c>hotPotato</c> method using 7 as the counting constant returns <c>"Susan"</c>.</p>
 <listing  xml:id="lst-josephussim">
+  <caption>Hot Potato Simulation</caption>
   <program language="java">
     <input>
 public class HotPotatoSimulation {

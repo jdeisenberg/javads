@@ -7,7 +7,8 @@
             of the deque. Our implementation (<xref ref="lst-dequecode"/>) will assume that
             the tail of the deque is at position 0 in the list.</p>
   <listing xml:id="lst-dequecode">
-<program label="lst-dequecode"  language="python">
+      <caption>Implementation of a Deque</caption>
+<program label="lst-dequecode"  language="java">
     <input>
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -122,6 +123,7 @@ public class Deque&lt;T&gt; {
             action as we perform the sequence of operations from
             <xref ref="basic-ds_the-deque-abstract-data-type"/>.</p>
         <listing xml:id="lst_deqtest">
+            <caption>Test of Deque Operation</caption>
   <program xml:id="deqtest" language="java">
     <input>
 public class DequeTest {

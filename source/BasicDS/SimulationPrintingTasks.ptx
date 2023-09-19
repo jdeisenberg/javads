@@ -132,7 +132,8 @@ import java.util.ArrayList;
                 created and placed in the printer queue. The <c>waitTime</c> method can
                 then be used to retrieve the amount of time spent in the queue before
                 printing begins.</p>
-    <listing xml:id="basic-ds_lst-task"><program language="java">
+              <listing xml:id="basic-ds_lst-task"><caption>The Task Class</caption>
+                <program language="java">
       <input>
 class Task {
     int timeStamp;
@@ -169,7 +170,9 @@ class Task {
                 <p>Notice that the <c>Printer</c> class has a <c>Task</c> as one of its properties. This is
                   an example of a <term>has-a</term> relationship.</p>
               </aside>
-    <listing xml:id="basic-ds_lst-printer"><program language="java" line-numbers="yes">
+    <listing xml:id="basic-ds_lst-printer">
+      <caption>The Printer Class</caption>
+      <program language="java" line-numbers="yes">
       <input>
 class Printer {
     int pageRate; // pages per minute
@@ -212,7 +215,9 @@ class Printer {
                 we can simulate this random event. The simulation function
                 allows us to set the total time and the pages per minute for the
                 printer.</p>
-    <listing xml:id="basic-ds_lst-qumainsim"><program language="java" line-numbers="yes">
+    <listing xml:id="basic-ds_lst-qumainsim">
+      <caption>The Simulation Driver</caption>
+      <program language="java" line-numbers="yes">
       <input>
 public class PrintSimulation {
 
@@ -328,6 +333,7 @@ Average wait  12.00 secs. 0 tasks remaining.
 </output>
     </console>
     <p>For your reference, here is the entire code for the simulation:</p>
+
     <program xml:id="qumainsim" language="java">
       <input>
 import java.util.Random;

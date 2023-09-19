@@ -24,6 +24,7 @@
             mismatch occurs, the balance checker returns <c>false</c> immediately.</p>
 
 <listing xml:id="lst-balcheck">
+    <caption>Solving the General Balanced Symbol Problem</caption>
 <program label="lst-balcheck" line-numbers="yes" language="java">
     <input>
 public class BalancedSymbols {
