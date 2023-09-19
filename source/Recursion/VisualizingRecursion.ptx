@@ -192,7 +192,7 @@ public class FractalTree {
             <title>Java Note</title>
             <p>In line 1 of <xref ref="lst-complete-tree"/>, we import <c>java.awt.Color</c> (<q>awt</q> stands for <q>Abstract Windowing Toolkit</q>, one of Java's basic graphics modules). This class lets us create customized colors.
               On line 9, we create a new color by giving its red, green, and blue components on a scale of 0.0 (none) to
-              1.0 (all). Our color will have no red, 50% green, and no blue. This results in a dark green.</p>
+              1.0 (all). Our color will have no red, 50% green, and no blue. This results in a dark green. You can also specify the red, green, and blue components as integers on a scale of 0 to 255.</p>
         </note>
 
   <exercises>

@@ -169,6 +169,10 @@ public class World extends JFrame {
         }
 	}
     
+    /**
+     * Draws a dot of the given diameter and color at the given location.
+     * Should only be called by Turtle class methods.
+     */
     void drawDot(Point2D.Double p1, double diameter, Color color) {
         this.gg.setColor(color);
         Ellipse2D.Double ellipse = new Ellipse2D.Double(p1.x, p1.y,
@@ -180,6 +184,10 @@ public class World extends JFrame {
         }
     }
 	
+    /**
+     * Fills the given path in the given color.
+     * Should only be called by Turtle class methods.
+     */
     void fill(Path2D path, Color c) {
         Color saveColor = this.gg.getColor();
         this.gg.setColor(c);
