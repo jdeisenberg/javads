@@ -58,13 +58,7 @@
    include the sizes of each jug and the final amount of water to be
    left in the larger jug.</p></exercise>
 
-            <exercise><p>Write a program that solves the following problem. Three missionaries
-   and three cannibals come to a river and find a boat that holds two
-   people. Everyone must get across the river to continue on the
-   journey. However, if the cannibals ever outnumber the missionaries on
-   either bank, the missionaries will be eaten. Find a series of
-   crossings that will get everyone safely to the other side of the
-   river.</p></exercise>
+            <exercise><p>Write a program that solves the following problem. You must transport three warrior robots and three worker robots across a canyon in a cable car. The cable car will hold you and two of the robots. You and all the robots must get across the canyon to continue the journey. However, if the warrior robots ever outnumber the worker robots on either side of the canyon, the warrior robots will destroy the worker robots. (This is a bad decision by whoever designed the warrior robots, but that's a totally different problem to solve.) Find a series of crossings that will get all the robots safely to the other side of the canyon.</p></exercise>
 
             <exercise><p>Modify the Tower of Hanoi program using <c>turtle</c> graphics to animate
    the movement of the disks. Hint: you can make multiple turtles and

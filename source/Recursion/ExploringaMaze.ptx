@@ -199,6 +199,7 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
             }
         }
         this.habitat.setUpdating(true);
+        t.setDelay(0.04);
     }
 
     public void drawCenteredBox(double x, double y, Color color) {
@@ -221,7 +222,7 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
 
   <p>Lines 7 and 8 will draw a brown box when the maze has an obstacle.</p>
 
-  <p>Line 13 resumes updating, which will display everything that we have drawn in the loops.</p>
+  <p>Line 13 resumes updating, which will display everything that we have drawn in the loops, and line 14 will set the delay to a small amount so the animation doesn't go too fast.</p>
 
   <p>The <c>updatePosition</c> method, as shown in <xref ref="recursion_lst-maze-update"/> moves the turtle to the given row and column. If the method is given a non-null String as its third parameter, it will update the internal representation with TRIED (".") or DEAD_END ("-") to
             indicate that the turtle has visited a particular square or if the
@@ -235,7 +236,7 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
 
             Color color = null;
             if (value.equals(PART_OF_PATH)) {
-                color = new Color(0, 128, 0);
+                color = new Color(0, 192, 0); //bright green
             } else if (value.equals(OBSTACLE)) {
                 color = Color.RED;
             } else if (value.equals(TRIED)) {
@@ -258,37 +259,14 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
     }
 
     public void dropBreadCrumb(Color color) {
-        double saveHeading = t.getHeading();
         Color saveColor = t.getColor();
-        boolean savePenDown = t.isPenDown();
-        this.habitat.setUpdating(false);
-        t.setDelay(0);
-        t.setHeading(0);
-        t.penUp();
         t.setColor(color);
-        t.setFillColor(color);
-        t.beginFill();
-        t.turnRight(45);
-        t.penDown();
-        for (int i = 0; i &lt; 4; i++) {
-            t.forward(0.141);
-            t.turnLeft(90);
-        }
-        t.endFill();
+        t.drawDot(0.25);
         t.setColor(saveColor);
-        t.setHeading(saveHeading);
-        if (savePenDown) {
-            t.penDown();
-        } else {
-            t.penUp();
-        }
-        this.habitat.setUpdating(true);
-        t.show();
-        t.setDelay(0.05);
     }
 </input>
   </program></listing>
-  <p>The <c>dropBreadCrumb</c> method has to do a lot of housekeeping. In lines 32&#x2013;34, it has to save the turtle state and restore it in lines 49&#x2013;55. It also sets the delay to zero and suspends screen updates so that it runs as fast as possible.</p>
+  <p>The <c>dropBreadCrumb</c> draws a dot in the given color.</p>
 
   <p>Finally, the <c>isExit</c> method uses the current position of the turtle
             to test for an exit condition. An exit condition occurs whenever the turtle
@@ -466,6 +444,7 @@ public class Maze {
             }
         }
         this.habitat.setUpdating(true);
+        t.setDelay(0.04);
     }
 
     public void drawCenteredBox(double x, double y, Color color) {
@@ -490,7 +469,7 @@ public class Maze {
 
             Color color = null;
             if (value.equals(PART_OF_PATH)) {
-                color = new Color(0, 128, 0);
+                color = new Color(0, 192, 0);  //bright green
             } else if (value.equals(OBSTACLE)) {
                 color = Color.RED;
             } else if (value.equals(TRIED)) {
@@ -513,33 +492,10 @@ public class Maze {
     }
 
     public void dropBreadCrumb(Color color) {
-        double saveHeading = t.getHeading();
         Color saveColor = t.getColor();
-        boolean savePenDown = t.isPenDown();
-        this.habitat.setUpdating(false);
-        t.setDelay(0);
-        t.setHeading(0);
-        t.penUp();
         t.setColor(color);
-        t.setFillColor(color);
-        t.beginFill();
-        t.turnRight(45);
-        t.penDown();
-        for (int i = 0; i &lt; 4; i++) {
-            t.forward(0.141);
-            t.turnLeft(90);
-        }
-        t.endFill();
+        t.drawDot(0.25);
         t.setColor(saveColor);
-        t.setHeading(saveHeading);
-        if (savePenDown) {
-            t.penDown();
-        } else {
-            t.penUp();
-        }
-        this.habitat.setUpdating(true);
-        t.show();
-        t.setDelay(0.05);
     }
 
     public boolean isExit(int row, int col) {

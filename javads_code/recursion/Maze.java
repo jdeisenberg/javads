@@ -71,6 +71,7 @@ public class Maze {
             }
         }
         this.habitat.setUpdating(true);
+        t.setDelay(0.04);
     }
 
     public void drawCenteredBox(double x, double y, Color color) {
@@ -95,7 +96,7 @@ public class Maze {
         
             Color color = null;
             if (value.equals(PART_OF_PATH)) {
-                color = new Color(0, 128, 0);
+                color = new Color(0, 192, 0);  //bright green
             } else if (value.equals(OBSTACLE)) {
                 color = Color.RED;
             } else if (value.equals(TRIED)) {
@@ -118,33 +119,10 @@ public class Maze {
     }
     
     public void dropBreadCrumb(Color color) {
-        double saveHeading = t.getHeading();
         Color saveColor = t.getColor();
-        boolean savePenDown = t.isPenDown();
-        this.habitat.setUpdating(false);
-        t.setDelay(0);
-        t.setHeading(0);
-        t.penUp();
         t.setColor(color);
-        t.setFillColor(color);
-        t.beginFill();
-        t.turnRight(45);
-        t.penDown();
-        for (int i = 0; i < 4; i++) {
-            t.forward(0.141);
-            t.turnLeft(90);
-        }
-        t.endFill();
+        t.drawDot(0.25);
         t.setColor(saveColor);
-        t.setHeading(saveHeading);
-        if (savePenDown) {
-            t.penDown();
-        } else {
-            t.penUp();
-        }
-        this.habitat.setUpdating(true);
-        t.show();
-        t.setDelay(0.05);
     }
         
     public boolean isExit(int row, int col) {

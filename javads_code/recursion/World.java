@@ -168,6 +168,17 @@ public class World extends JFrame {
             this.blit();
         }
 	}
+    
+    void drawDot(Point2D.Double p1, double diameter, Color color) {
+        this.gg.setColor(color);
+        Ellipse2D.Double ellipse = new Ellipse2D.Double(p1.x, p1.y,
+            diameter, diameter);
+        this.gg.fill(ellipse);
+        
+        if (this.updating) {
+            this.blit();
+        }
+    }
 	
     void fill(Path2D path, Color c) {
         Color saveColor = this.gg.getColor();

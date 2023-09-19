@@ -527,8 +527,9 @@ public class Turtle {
 		}
 	}
     
-    public void drawDot(int diameter, Color color) {
-        world.drawDot(this.location, diameter, color);
+    public void drawDot(double diameter) {
+        diameter = this.world.getScaleX() * diameter;
+        world.drawDot(this.location, diameter, this.getColor());
     }
     
     /**

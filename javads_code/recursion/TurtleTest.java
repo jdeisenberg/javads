@@ -5,23 +5,10 @@ public class TurtleTest
 {
     
       public static void dropBreadCrumb(Turtle t, Color color) {
-        double saveHeading = t.getHeading();
-        Color saveColor = t.getColor();
-        t.penUp();
-        t.setColor(color);
         t.setFillColor(color);
-        t.beginFill();
-        t.setHeading(0);
-        t.forward(0.1);
-        t.turnRight(45);
-        t.penDown();
-        for (int i = 0; i < 4; i++) {
-            t.forward(0.141);
-            t.turnLeft(90);
-        }
-        t.endFill();
-        t.setColor(saveColor);
-        t.setHeading(saveHeading);
+        t.setColor(color);
+        t.drawDot(10);
+    
     }
 
   public static void main(String[] args)
