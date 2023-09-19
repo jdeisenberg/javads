@@ -9,5 +9,6 @@
         <knowl exercise-inline="no" example="no" listing="no" />
         <index-page ref="javads" />
         <css style="oscarlevin" colors="blue_red" toc="crc" banner="crc" navbar="crc" shell="crc"/>
+		<tableofcontents focused="yes"/>
     </html>
 </publication>
