@@ -13,66 +13,90 @@
             You can continue to apply this procedure indefinitely if you have a
             sharp enough pencil. Before you continue reading, you may want to try
             drawing the Sierpinski triangle yourself, using the method described.</p>
-  <listing xml:id="recursion_fig-sierpinski"> <program label="recursion_fig-sierpinski"  interactive="activecode" language="python">
+  <listing xml:id="recursion_fig-sierpinski">
+<program label="prog_fig-sierpinski" language="java" line-numbers="yes">
     <input>
-import turtle
+import java.awt.Color;
+import java.awt.geom.Point2D;
 
+public class SierpinskiTriangles {
 
-def draw_triangle(points, color, my_turtle):
-    my_turtle.fillcolor(color)
-    my_turtle.up()
-    my_turtle.goto(points[0][0], points[0][1])
-    my_turtle.down()
-    my_turtle.begin_fill()
-    my_turtle.goto(points[1][0], points[1][1])
-    my_turtle.goto(points[2][0], points[2][1])
-    my_turtle.goto(points[0][0], points[0][1])
-    my_turtle.end_fill()
+    public static void drawTriangle(Point2D.Double[] points, Color color,
+      Turtle t) {
+        t.penUp();
+        t.goTo(points[0].x, points[0].y);
+        t.penDown();
+        t.beginFill(color);
+        t.goTo(points[1].x, points[1].y);
+        t.goTo(points[2].x, points[2].y);
+        t.goTo(points[0].x, points[0].y);
+        t.endFill();
+    }
 
+    public static Point2D.Double midpoint(Point2D.Double p1,
+      Point2D.Double p2) {
+        return new Point2D.Double((p1.x + p2.x) / 2.0, (p1.y + p2.y) / 2.0);
+    }
 
-def get_mid(p1, p2):
-    return ((p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2)
+    public static Color[] colorMap = {
+        Color.BLUE, Color.RED, Color.GREEN,
+        Color.WHITE, Color.YELLOW, Color.MAGENTA, Color.ORANGE};
 
+    public static void sierpinski(Point2D.Double[] points, int level,
+      Turtle t) {
+        drawTriangle(points, colorMap[level], t);
 
-def sierpinski(points, degree, my_turtle):
-    colormap = ["blue", "red", "green", "white", "yellow", "violet", "orange"]
-    draw_triangle(points, colormap[degree], my_turtle)
-    if degree &gt; 0:
-        sierpinski(
-            [points[0], get_mid(points[0], points[1]), get_mid(points[0], points[2])],
-            degree - 1,
-            my_turtle,
-        )
-        sierpinski(
-            [points[1], get_mid(points[0], points[1]), get_mid(points[1], points[2])],
-            degree - 1,
-            my_turtle,
-        )
-        sierpinski(
-            [points[2], get_mid(points[2], points[1]), get_mid(points[0], points[2])],
-            degree - 1,
-            my_turtle,
-        )
+        if (level > 0) {
+            Point2D.Double[] triangle1 = {
+                points[0], midpoint(points[0], points[1]),
+                midpoint(points[0], points[2]) };
 
+            sierpinski(triangle1, level -1, t);
 
-def main():
-    my_turtle = turtle.Turtle()
-    my_win = turtle.Screen()
-    my_points = [[-180, -150], [0, 150], [180, -150]]
-    sierpinski(my_points, 5, my_turtle)
-    my_win.exitonclick()
+            Point2D.Double[] triangle2 = {
+                points[1], midpoint(points[0], points[1]),
+                midpoint(points[1], points[2])
+            };
 
+            sierpinski(triangle2, level -1, t);
 
-main()
+            Point2D.Double[] triangle3 = {
+                points[2], midpoint(points[2], points[1]),
+                midpoint(points[0], points[2])
+            };
+
+            sierpinski(triangle3, level -1, t);
+        }
+    }
+
+    public static void main(String[] args) {
+        World habitat = new World(400, 400);
+        Turtle t = new Turtle(habitat);
+
+        t.setDelay(0.05);
+
+        Point2D.Double[] points = {
+            new Point2D.Double(-180, -150),
+            new Point2D.Double(0, 150),
+            new Point2D.Double(180, -150)
+        };
+
+        sierpinski(points, 5, t);
+        t.hide();
+    }
+}
         </input>
   </program></listing>
+
+  <note>
+      <title>Java Note</title>
+      <p>This program takes advantage of Java's AWT by using the <c>Point2D.Double</c> class to represent points with an <c>x</c> and <c>y</c> property. It is a subclass of the <c>Point2D</c> class; importing <c>java.awt.geom.Point2D</c> will give you access to it.</p>
+  </note>
+
   <p>The program in <xref ref="recursion_fig-sierpinski"/> follows the ideas outlined above. The
             first thing <c>sierpinski</c> does is draw the outer triangle. Next, there
             are three recursive calls, one for each of the new corner triangles we
-            get when we connect the midpoints. Once again we make use of the
-            standard <c>turtle</c> module that comes with Python. You can learn all the
-            details of the methods available in the turtle module by using
-            <c>help("turtle")</c> from the Python prompt.</p>
+            get when we connect the midpoints.</p>
   <p>Look at the code and think about the order in which the triangles will
             be drawn. While the exact order of the corners depends upon how the
             initial set is specified, let's assume that the corners are ordered
@@ -84,7 +108,7 @@ main()
             Finally, it fills in the lower-right corner, working its way toward the
             smallest triangle in the lower right.</p>
   <p>Sometimes it is helpful to think of a recursive algorithm in terms of a
-            diagram of function calls. <xref ref="recursion_fig-stcalltree"/> shows that the recursive
+            diagram of method calls. <xref ref="recursion_fig-stcalltree"/> shows that the recursive
             calls are always made going to the left. The active functions are
             outlined in black, and the inactive function calls are in gray. The
             farther you go toward the bottom of <xref ref="recursion_fig-stcalltree"/>, the smaller the
@@ -94,9 +118,9 @@ main()
   <figure xml:id="recursion_fig-stcalltree" align="center">
     <image source="Recursion/Figures/stCallTree.png" width="50%"/>
   </figure>
-  <p>The <c>sierpinski</c> function relies heavily on the <c>get_mid</c> function.
-            <c>get_mid</c> takes as arguments two endpoints and returns the point
+  <p>The <c>sierpinski</c> function relies heavily on the <c>midpoint</c> method.
+            <c>midpoint</c> takes as arguments two endpoints and returns the point
             halfway between them. In addition, <xref ref="recursion_fig-sierpinski"/> has a function that
-            draws a filled triangle using the <c>begin_fill</c> and <c>end_fill</c> turtle
-            methods.</p>
+            draws a filled triangle using the <c>beginFill</c> and <c>endFill</c> turtle
+            methods. (<c>beginFill</c> tells the turtle to store all subsequent movements as a <em>path</em> to be filled in the specified color. <c>endFill</c> marks the end of the path, at which point the path is filled with the color.)</p>
 </section>

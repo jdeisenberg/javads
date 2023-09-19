@@ -13,411 +13,610 @@
             our turtle is dropped down somewhere into the middle of the maze and
             must find its way out. Look at <xref ref="recursion_fig-mazescreen"/> to get an idea of
             where we are going in this section.</p>
-  <listing xml:id="recursion_fig-mazescreen">++++++++++++++++++++++
-+   +   ++ ++     +
-+ +   +       +++ + ++
-+ + +  ++  ++++   + ++
-+++ ++++++    +++ +  +
-+          ++  ++    +
-+++++ ++++++   +++++ +
-+     +   +++++++  + +
-+ +++++++      S +   +
-+                + +++
-++++++++++++++++++ +++</listing>
-  <p>To make this even more interesting we are going to use the <c>turtle</c>
+ <figure  xml:id="recursion_fig-mazescreen" align="center">
+    <image source="Recursion/Figures/maze.png" width="50%" alt="solved maze"/>
+  </figure>
+
+<p>To make it easier for us, we will assume that our maze is divided up into “squares.” Each square of the maze is either open or occupied by a section of wall. The turtle can only pass through the open squares of the maze. If the turtle bumps into a wall it must try a different direction. The turtle will require a systematic procedure to find its way out of the maze. Here is the procedure:</p>
+
+<p>
+    <ol>
+        <li>From our starting position we will first try going North one square and then recursively try our procedure from there.</li>
+        <li>If we are not successful by trying a Northern path as the first step, then we will take a step to the South and recursively repeat our procedure.</li>
+        <li>If South does not work, then we will try a step to the West as our first step and recursively apply our procedure.</li>
+        <li>If North, South, and West have not been successful then apply the procedure recursively from a position one step to our East.</li>
+        <li>If none of these directions works, then there is no way to get out of the maze and we fail.</li>
+    </ol>
+</p>
+
+<p>Now, that sounds pretty easy, but there are a couple of details to talk about first. Suppose we take our first recursive step by going North. By following our procedure, our next step would also be to the North. But if the North is blocked by a wall, we must look at the next step of the procedure and try going to the South. Unfortunately that step to the south brings us right back to our original starting place. If we apply the recursive procedure from there we will just go back one step to the North and be in an infinite loop.</p>
+
+<p>So, we must have a strategy to remember where we have been. In this case, we will assume that we have a bag of bread crumbs we can drop along our way. If we take a step in a certain direction and find that there is a bread crumb already on that square, we know that we should immediately back up and try the next direction in our procedure. As we will see when we look at the code for this algorithm, backing up consists of returning from a recursive function call.</p>
+
+<p>As we do for all recursive algorithms let us review the base cases. Some of them you may already have guessed based on the description in the previous paragraph. In this algorithm, there are four base cases to consider:</p>
+
+<p>
+    <ol>
+        <li>The turtle has run into a wall. Since the square is occupied by a wall, no further exploration can take place.</li>
+
+        <li>The turtle has found a square that has already been explored. We do not want to continue exploring from this position, or we will get into a loop.</li>
+
+        <li>We have found an outside edge, not occupied by a wall. In other words, we have found an exit from the maze.</li>
+
+        <li>We have explored a square unsuccessfully in all four directions.</li>
+
+        </ol>
+        </p>
+
+        <p>For our program to work we will need to have a way to represent the maze. We will store it in a file, where a plus sign represents an obstacle, spaces represent open squares, and the capital S represents our starting point:</p>
+
+        <listing xml:id="recursion_sample_maze">
+<pre>
+++++++++++++++++++++++
++   +   ++ ++        +
+      +     ++++++++++
++ +    ++  ++++ +++ ++
++ +   + + ++    +++  +
++          ++  ++  + +
++++++ + +      ++  + +
++++++ +++  + +  ++   +
++          + + S+ +  +
++++++ +  + + +     + +
+++++++++++++++++++++++
+</pre>
+</listing>
+
+  <p>To make this even more interesting, we are going to use the <c>turtle</c>
             module to draw and explore our maze so we can watch this algorithm in
             action. The <c>Maze</c> object will provide the following methods for us to use
             in writing our search algorithm:</p>
   <p>
     <ul>
       <li>
-        <p><c>__init__</c> Reads in a data file representing a maze, initializes
+        <p>The constructor reads in a data file representing a maze, initializes
                     the internal representation of the maze, and finds the starting
                     position for the turtle.</p>
       </li>
       <li>
-        <p><c>draw_maze</c> Draws the maze in a window on the screen.</p>
+        <p><c>drawMaze</c> Draws the maze in a window on the screen.</p>
       </li>
       <li>
-        <p><c>update_position</c> Updates the internal representation of the maze
+        <p><c>updatePosition</c> Updates the internal representation of the maze
                     and changes the position of the turtle in the window.</p>
       </li>
       <li>
-        <p><c>is_exit</c> Checks to see if the current position is an exit from the
+        <p><c>isExit</c> Checks to see if the current position is an exit from the
                     maze.</p>
       </li>
     </ul>
   </p>
-  <p>The <c>Maze</c> class also overloads the index operator <c>[]</c> so that our
-            algorithm can easily access the status of any particular square.</p>
-  <p><xref ref="recursion_lst-maze-globals"/> includes the global constants used by the <c>Maze</c> class methods
-            (Listings <xref ref="recursion_lst-maze-init"/>&#x2013;<xref ref="recursion_lst-maze-aux"/>) and the <c>search_from</c> function (<xref ref="recursion_lst-maze-search"/>).</p>
-  <listing xml:id="recursion_lst-maze-globals"><program language="python">
-    <input>
-START = "S"
-OBSTACLE = "+"
-TRIED = "."
-DEAD_END = "-"
-PART_OF_PATH = "O"
-</input>
-  </program></listing>
-  <p>The <c>__init__</c> method takes the name of a file as its
-            only parameter. This file is a text file that represents a maze by using
-            <q>+</q> characters for walls, spaces for open squares, and the letter <q>S</q> to
-            indicate the starting position.</p>
-  <listing xml:id="recursion_lst-maze-init"><program language="python">
-    <input>
-class Maze:
-    def __init__(self, maze_filename):
-        with open(maze_filename, "r") as maze_file:
-            self.maze_list = [
-                [ch for ch in line.rstrip("\n")]
-                for line in maze_file.readlines()
-            ]
-        self.rows_in_maze = len(self.maze_list)
-        self.columns_in_maze = len(self.maze_list[0])
-        for row_idx, row in enumerate(self.maze_list):
-            if START in row:
-                self.start_row = row_idx
-                self.start_col = row.index(START)
-                break
 
-        self.x_translate = -self.columns_in_maze / 2
-        self.y_translate = self.rows_in_maze / 2
-        self.t = turtle.Turtle()
-        self.t.shape("turtle")
-        self.wn = turtle.Screen()
-        self.wn.setworldcoordinates(
-            -(self.columns_in_maze - 1) / 2 - 0.5,
-            -(self.rows_in_maze - 1) / 2 - 0.5,
-            (self.columns_in_maze - 1) / 2 + 0.5,
-            (self.rows_in_maze - 1) / 2 + 0.5,
-        )
-</input>
-  </program></listing>
-  <p>The internal representation of the maze is a list of
-            lists. Each row of the <c>maze_list</c> instance variable is also a list.
-            This secondary list contains one character per square using the
-            characters described above. For the data file in <xref ref="recursion_fig-exmaze"/> the
-            internal representation looks like the following:</p>
-<listing xml:id="recursion_fig-exmaze">
-<program label="recursion_fig-exmaze"  language="python">
+  <p><xref ref="recursion_lst-maze-start"/> shows the beginning of the class with global constants and properties used by the <c>Maze</c> class methods
+            (Listings <xref ref="recursion_lst-maze-constructor"/>&#x2013;<xref ref="recursion_lst-maze-aux"/>) and the <c>searchFrom</c> method (<xref ref="recursion_lst-maze-search"/>).</p>
+  <listing xml:id="recursion_lst-maze-start"><program language="java" line-numbers="yes">
     <input>
-[  ['+', '+', '+', '+', '+', ..., '+', '+', '+', '+', '+']
-   ['+', ' ', ' ', ' ', '+', ..., ' ', '+', ' ', ' ', ' ']
-   ['+', ' ', '+', ' ', ' ', ..., ' ', '+', ' ', '+', '+']
-   ['+', ' ', '+', ' ', '+', ..., ' ', '+', ' ', '+', '+']
-   ['+', '+', '+', ' ', '+', ..., ' ', '+', ' ', ' ', '+']
-   ['+', ' ', ' ', ' ', ' ', ..., ' ', ' ', ' ', ' ', '+']
-   ['+', '+', '+', '+', '+', ..., '+', '+', '+', ' ', '+']
-   ['+', ' ', ' ', ' ', ' ', ..., ' ', ' ', '+', ' ', '+']
-   ['+', ' ', '+', '+', '+', ..., '+', ' ', ' ', ' ', '+']
-   ['+', ' ', ' ', ' ', ' ', ..., '+', ' ', '+', '+', '+']
-   ['+', '+', '+', '+', '+', ..., '+', ' ', '+', '+', '+'] ]
-</input>
-  </program>
-</listing>
-  <p>The <c>draw_maze</c> method uses this internal representation to draw the
-            initial view of the maze on the screen (<xref ref="recursion_fig-mazescreen"/>).</p>
-  <listing xml:id="recursion_lst-maze-draw"><program language="python">
-    <input>
-def draw_maze(self):
-    self.t.speed(10)
-    self.wn.tracer(0)
-    for y in range(self.rows_in_maze):
-        for x in range(self.columns_in_maze):
-            if self.maze_list[y][x] == OBSTACLE:
-                self.draw_centered_box(
-                    x + self.x_translate, -y + self.y_translate, "orange"
-                )
-    self.t.color("black")
-    self.t.fillcolor("blue")
-    self.wn.update()
-    self.wn.tracer(1)
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.awt.Color;
+import java.io.File;
 
-def draw_centered_box(self, x, y, color):
-    self.t.up()
-    self.t.goto(x - 0.5, y - 0.5)
-    self.t.color(color)
-    self.t.fillcolor(color)
-    self.t.setheading(90)
-    self.t.down()
-    self.t.begin_fill()
-    for i in range(4):
-        self.t.forward(1)
-        self.t.right(90)
-    self.t.end_fill()
+public class Maze {
+    static final String START = "S";
+    static final String OBSTACLE = "+";
+    static final String TRIED = ".";
+    static final String DEAD_END = "-";
+    static final String PART_OF_PATH = "O";
+
+    World habitat;
+    Turtle t;
+
+    int rowsInMaze;
+    int columnsInMaze;
+    int startRow;
+    int startColumn;
+
+    ArrayList&lt;String[]&gt; mazeList;
+
+    double xTranslate;
+    double yTranslate;
 </input>
   </program></listing>
-  <p>The <c>update_position</c> method, as shown in <xref ref="recursion_lst-maze-update"/> uses the
-            same internal representation to see if the turtle has run into a wall.
-            It also updates the internal representation with a <q>.</q> or <q>-</q> to
+
+  <p>Lines 16-19 specify the dimensions of the maze and the starting point.</p>
+  <p>Our representation of the maze in line 21 is unusual. Each item in the ArrayList will be a row of the maze, consisting of an array of String. We needed an ArrayList for the rows, as we don't know in advance how many rows will be in our text file. We don't know how many characters are in each line either, but we can use the <c>split</c> method to break the line into an array of <c>String</c>, as in this jshell fragment:</p>
+
+      <console>
+          <output>jshell&gt; String line = "+  ++++";
+line ==&gt; "+  ++++   +"
+
+jshell&gt; String[] items = line.split("");
+items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
+
+<p>This is an <em>ad hoc</em> design, taking shameless advantage of things that Java does for us, resulting in slightly less complicated code than we would need if we used an ArrayList where each row was represented by another ArrayList.</p>
+
+<p>Next, let's examine the constructor in <xref ref="recursion_lst-maze-constructor"/>. It takes the name of a file as its only parameter.</p>
+  <listing xml:id="recursion_lst-maze-constructor"><program language="java" line-numbers="yes">
+    <input>
+    public Maze(String mazeFileName) {
+        File inFile = new File(mazeFileName);
+        try (Scanner input = new Scanner(inFile)) {
+            String line;
+            int row = 0;
+            this.mazeList = new ArrayList&lt;String[]&gt;();
+            while (input.hasNextLine()) {
+                line = input.nextLine();
+                int sCol = line.indexOf(START);
+                if (sCol &gt;= 0) {
+                    startRow = row;
+                    startColumn = sCol;
+                }
+                this.mazeList.add(line.split(""));
+                row = row + 1;
+            }
+            this.rowsInMaze = this.mazeList.size();
+            this.columnsInMaze = (this.mazeList.get(0)).length;
+            this.xTranslate = -this.columnsInMaze / 2.0;
+            this.yTranslate = this.rowsInMaze / 2.0;
+            this.habitat = new World(600, 600, Color.WHITE,
+                -(this.columnsInMaze - 1) / 2.0 - 0.5,
+                -(this.rowsInMaze - 1) / 2.0 - 0.5,
+                (this.columnsInMaze - 1) / 2.0 + 0.5,
+                (this.rowsInMaze -1) / 2.0 + 0.5);
+            this.t = new Turtle(habitat);
+            t.hide();
+        }
+        catch (Exception ex) {
+            this.mazeList = null;
+        }
+    }
+</input>
+  </program></listing>
+  <note>
+      <title>Java Note</title>
+      <p>In line 3, we are using a <q><c>try</c> with resources</q><mdash/>when we place the creation of the Scanner before the opening brace of the block, Java will automatically close the Scanner when the block exits. We <em>must</em> use a <c>try</c> here, because this operation can throw a <term>checked Exception</term>; an Exception that the program must either <c>catch</c> or <c>throw</c>.</p>
+  </note>
+
+  <p>Line 5 starts our row counter; we need that to determine the starting row number. Lines 7&#x2013;16 read the file. Line 9 tests to see if we have the "S" in the line; if so, we can establish the starting row and column. Line 14 adds the array of individual Strings (produced by <c>split</c>) to the <c>mazeList</c>.</p>
+
+  <p>Lines 17&#x2013;18 establish the size of the maze. Lines 19&#x2013;20 set offsets that we will need to position the turtle properly.</p>
+
+  <p>Finally, lines 21&#x2013;25 create the turtle's world. Instead of having the mouse position in pixels, we set up the coordinate system so that the when we move the mouse by one unit, it moves one square in our drawing, not one pixel. The last four arguments to <c>World</c> give the x- and y- coordinates of the lower left and upper right points in this new coordinate system.</p>
+
+  <p>The <c>drawMaze</c> method uses this internal representation to draw the
+            initial view of the maze on the screen.</p>
+  <listing xml:id="recursion_lst-maze-draw"><program language="java" line-numbers="yes">
+    <input>
+    public void drawMaze() {
+        t.setDelay(0);
+        this.habitat.setUpdating(false);
+        for (int y = 0; y &lt; this.rowsInMaze; y++) {
+            for (int x = 0; x &lt; this.columnsInMaze; x++) {
+                if (this.mazeList.get(y)[x].equals(OBSTACLE)) {
+                    this.drawCenteredBox(x + this.xTranslate,
+                        -y + this.yTranslate, new Color(184,134,11));
+                }
+                t.setColor(Color.BLACK);
+            }
+        }
+        this.habitat.setUpdating(true);
+    }
+
+    public void drawCenteredBox(double x, double y, Color color) {
+        t.penUp();
+        t.setColor(Color.BLACK);
+        t.setFillColor(color);
+        t.beginFill();
+        t.goTo(x + 1, y - 1);
+        t.setHeading(90);
+        t.penDown();
+        for (int i = 0; i &lt; 4; i++) {
+            t.forward(1);
+            t.turnRight(90);
+        }
+        t.endFill();
+    }
+</input>
+  </program></listing>
+  <p>In line 2, we set the turtle movement delay to zero so that the turtle moves as quickly as possible. Line 3 will not update the drawing every time the turtle moves; this again saves time when running the program.</p>
+
+  <p>Lines 7 and 8 will draw a brown box when the maze has an obstacle.</p>
+
+  <p>Line 13 resumes updating, which will display everything that we have drawn in the loops.</p>
+
+  <p>The <c>updatePosition</c> method, as shown in <xref ref="recursion_lst-maze-update"/> moves the turtle to the given row and column. If the method is given a non-null String as its third parameter, it will update the internal representation with TRIED (".") or DEAD_END ("-") to
             indicate that the turtle has visited a particular square or if the
-            square is part of a dead end. In addition, the <c>update_position</c> method
-            uses two helper methods, <c>move_turtle</c> and <c>drop_bread_crumb</c>, to
-            update the view on the screen.</p>
-  <listing xml:id="recursion_lst-maze-update"><program language="python">
+            square is part of a dead end. If the status has change, <c>updatePosition</c> calls <c>dropBreadCrumb</c> to display the new status.</p>
+  <listing xml:id="recursion_lst-maze-update"><program language="java" line-numbers="yes">
     <input>
-def update_position(self, row, col, val=None):
-    if val:
-        self.maze_list[row][col] = val
-    self.move_turtle(col, row)
+    public void updatePosition(int row, int col, String value) {
+        moveTurtle(col, row);
+        if (value != null) {
+            mazeList.get(row)[col] = value;
 
-    if val == PART_OF_PATH:
-        color = "green"
-    elif val == OBSTACLE:
-        color = "red"
-    elif val == TRIED:
-        color = "black"
-    elif val == DEAD_END:
-        color = "red"
-    else:
-        color = None
+            Color color = null;
+            if (value.equals(PART_OF_PATH)) {
+                color = new Color(0, 128, 0);
+            } else if (value.equals(OBSTACLE)) {
+                color = Color.RED;
+            } else if (value.equals(TRIED)) {
+                color = Color.BLACK;
+            } else if (value.equals(DEAD_END)) {
+                color = Color.RED;
+            }
 
-    if color:
-        self.drop_bread_crumb(color)
+            if (color != null) {
+                dropBreadCrumb(color);
+            }
+        }
+    }
 
-def move_turtle(self, x, y):
-    self.t.up()
-    self.t.setheading(self.t.towards(x + self.x_translate, -y + self.y_translate))
-    self.t.goto(x + self.x_translate, -y + self.y_translate)
+    public void moveTurtle(double x, double y) {
+        t.penUp();
+        t.show();
+        t.setHeading(t.towards(x + this.xTranslate, -y + this.yTranslate));
+        t.goTo(x + xTranslate + 0.5, -y + this.yTranslate - 0.5);
+    }
 
-def drop_bread_crumb(self, color):
-    self.t.dot(10, color)
+    public void dropBreadCrumb(Color color) {
+        double saveHeading = t.getHeading();
+        Color saveColor = t.getColor();
+        boolean savePenDown = t.isPenDown();
+        this.habitat.setUpdating(false);
+        t.setDelay(0);
+        t.setHeading(0);
+        t.penUp();
+        t.setColor(color);
+        t.setFillColor(color);
+        t.beginFill();
+        t.turnRight(45);
+        t.penDown();
+        for (int i = 0; i &lt; 4; i++) {
+            t.forward(0.141);
+            t.turnLeft(90);
+        }
+        t.endFill();
+        t.setColor(saveColor);
+        t.setHeading(saveHeading);
+        if (savePenDown) {
+            t.penDown();
+        } else {
+            t.penUp();
+        }
+        this.habitat.setUpdating(true);
+        t.show();
+        t.setDelay(0.05);
+    }
 </input>
   </program></listing>
-  <p>Finally, the <c>is_exit</c> method uses the current position of the turtle
+  <p>The <c>dropBreadCrumb</c> method has to do a lot of housekeeping. In lines 32&#x2013;34, it has to save the turtle state and restore it in lines 49&#x2013;55. It also sets the delay to zero and suspends screen updates so that it runs as fast as possible.</p>
+
+  <p>Finally, the <c>isExit</c> method uses the current position of the turtle
             to test for an exit condition. An exit condition occurs whenever the turtle
             has navigated to the edge of the maze, either row zero or column zero,
             or the far-right column or the bottom row.</p>
   <listing xml:id="recursion_lst-maze-aux"><program language="python">
     <input>
-def is_exit(self, row, col):
-    return (
-        row == 0
-        or row == self.rows_in_maze - 1
-        or col == 0
-        or col == self.columns_in_maze - 1
-    )
-
-def __getitem__(self, idx):
-    return self.maze_list[idx]
+    public boolean isExit(int row, int col) {
+        return (
+            row == 0 ||
+            row == rowsInMaze - 1 ||
+            col == 0 ||
+            col == columnsInMaze -1
+        );
+    }
 </input>
   </program></listing>
   <p>Let's examine the code for the search function which we call
-            <c>search_from</c>. The code is shown in <xref ref="recursion_lst-maze-search"/>. Notice
-            that this function takes three parameters: a <c>Maze</c> object, the starting
-            row, and the starting column. This is important because as a recursive
+            <c>searchFrom</c>. The code is shown in <xref ref="recursion_lst-maze-search"/>. Notice
+            that this function takes two parameters: a the starting
+            row and the starting column. This is important because as a recursive
             function the search logically starts again with each recursive call.</p>
-  <listing xml:id="recursion_lst-maze-search"><program language="python">
+  <listing xml:id="recursion_lst-maze-search"><program language="java" line-numbers="yes">
     <input>
-def search_from(maze, row, column):
-    # Try each of four directions from this point until we find a way out.
-    maze.update_position(row, column)
-    # Base Case return values:
-    #  1. We have run into an obstacle, return false
-    if maze[row][column] == OBSTACLE:
-        return False
-    #  2. We have found an already explored square
-    if maze[row][column] in [TRIED, DEAD_END]:
-        return False
-    # 3. We have found an exit
-    if maze.is_exit(row, column):
-        maze.update_position(row, column, PART_OF_PATH)
-        return True
-    maze.update_position(row, column, TRIED)
-    # Otherwise, use logical short circuiting to try each direction
-    # in turn (if needed)
-    found = (
-        search_from(maze, row - 1, column)
-        or search_from(maze, row + 1, column)
-        or search_from(maze, row, column - 1)
-        or search_from(maze, row, column + 1)
-    )
-    if found:
-        maze.update_position(row, column, PART_OF_PATH)
-    else:
-        maze.update_position(row, column, DEAD_END)
-    return found
+    public boolean searchFrom(int startRow, int startColumn) {
+        /*
+         * try each of the four directions from this point until we find
+         * a way out.
+         */
+        updatePosition(startRow, startColumn, null);
+
+        /*
+         *  Base case return values:
+         *  1. We have run into an obstacle; return false
+         */
+        String value = getItem(startRow, startColumn);
+        if (value.equals(OBSTACLE)) {
+            return false;
+        }
+
+        /* 2. We have found a square that has already been explored */
+        if (value.equals(TRIED) || value.equals(DEAD_END)) {
+            return false;
+        }
+
+        /* 3. We have found an outside edge not occupied by an obstacle */
+        if (isExit(startRow, startColumn)) {
+            updatePosition(startRow, startColumn, PART_OF_PATH);
+            return true;
+        }
+
+        updatePosition(startRow, startColumn, TRIED);
+
+        /*
+         * Otherwise, use logical short circuiting to try each direction
+         * in turn (if needed)
+         */
+        boolean found = (
+            searchFrom(startRow - 1, startColumn)
+            || searchFrom(startRow + 1, startColumn)
+            || searchFrom(startRow, startColumn - 1)
+            || searchFrom(startRow, startColumn + 1)
+        );
+
+        if (found) {
+            updatePosition(startRow, startColumn, PART_OF_PATH);
+        } else {
+            updatePosition(startRow, startColumn, DEAD_END);
+        }
+        return found;
+    }
+
+    public String getItem(int row, int col) {
+        return mazeList.get(row)[col];
+    }
 </input>
   </program></listing>
   <p>As you look through the algorithm you will see that the first thing the
-            code does (line 3) is call <c>update_position</c>. This is simply to help
+            code does (line 6) is call <c>updatePosition</c>. This is to help
             you visualize the algorithm so that you can watch exactly how the turtle
-            explores its way through the maze. Next the algorithm checks for the
-            first three of the four base cases: Has the turtle run into a wall (lines
-            6)? Has the turtle circled back to a square already explored (line 9)?
-            Has the turtle found an exit (line 12)? If none of these conditions is
-            true then we continue the search recursively.</p>
+            explores its way through the maze. Next, the algorithm checks for the
+            first three of the four base cases: Has the turtle run into a wall (line
+            13)? Has the turtle circled back to a square already explored, or is it a dead end (line 18)?
+            Has the turtle found an exit (line 23)? If none of these conditions is
+            true, then we continue the search recursively.</p>
   <p>You will notice that in the recursive step there are four recursive
-            calls to <c>search_from</c>. It is hard to predict how many of these
-            recursive calls will be used since they are all connected by <c>or</c>
-            statements. If the first call to <c>search_from</c> returns <c>True</c> then
+            calls to <c>searchFrom</c>. It is hard to predict how many of these
+            recursive calls will be used since they are all connected by the <c>||</c> operator.
+            If the first call to <c>searchFrom</c> returns <c>true</c>, then
             none of the last three calls would be needed. You can interpret this as
             meaning that a step to <c>(row - 1, column)</c> (or north if you want to think
             geographically) is on the path leading out of the maze. If there is not
             a good path leading out of the maze to the north then the next recursive
-            call is tried, this one to the south. If south fails then try west, and
-            finally east. If all four recursive calls return <c>False</c> then we have
+            call is tried; this one to the south. If south fails then try west, and
+            finally east. If all four recursive calls return <c>false</c> then we have
             found a dead end. You should download or type in the whole program and
             experiment with it by changing the order of these calls.</p>
-  <p>The complete program is shown in <xref ref="recursion_completemaze"/>.  This program uses the data file <c>maze2.txt</c> shown below.
-            Note that it is a much more simple example file in that the exit is very close to the starting position of the turtle.</p>
+        <p>The <c>getItem</c> method (lines 49&#x2013;51) is a convenience method for extracting the status of the maze at the given row and column.</p>
 
-  <datafile label="maze_file2" filename="maze2.txt" rows="10" cols="60">
-    <pre source="Files/maze2.txt"/>
-  </datafile>
-
+        <p>The complete program is shown in <xref ref="recursion_completemaze"/>.  This program uses the data file <c>maze2.txt</c> shown in <xref ref="recursion_sample_maze"/>.</p>
 
 <listing xml:id="recursion_completemaze">
-<program label="recursion_completemaze"   interactive="activecode" language="python">
+<program label="recursion_completemaze" language="java">
     <input>
-import turtle
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.awt.Color;
+import java.io.File;
 
-START = "S"
-OBSTACLE = "+"
-TRIED = "."
-DEAD_END = "-"
-PART_OF_PATH = "O"
+public class Maze {
 
+    static final String START = "S";
+    static final String OBSTACLE = "+";
+    static final String TRIED = ".";
+    static final String DEAD_END = "-";
+    static final String PART_OF_PATH = "O";
 
-class Maze:
-    def __init__(self, maze_filename):
-        with open(maze_filename, "r") as maze_file:
-            self.maze_list = [
-                [ch for ch in line.rstrip("\n")]
-                for line in maze_file.readlines()
-            ]
-        self.rows_in_maze = len(self.maze_list)
-        self.columns_in_maze = len(self.maze_list[0])
-        for row_idx, row in enumerate(self.maze_list):
-            if START in row:
-                self.start_row = row_idx
-                self.start_col = row.index(START)
-                break
+    World habitat;
+    Turtle t;
 
-        self.x_translate = -self.columns_in_maze / 2
-        self.y_translate = self.rows_in_maze / 2
-        self.t = turtle.Turtle()
-        self.t.shape("turtle")
-        self.wn = turtle.Screen()
-        self.wn.setworldcoordinates(
-            -(self.columns_in_maze - 1) / 2 - 0.5,
-            -(self.rows_in_maze - 1) / 2 - 0.5,
-            (self.columns_in_maze - 1) / 2 + 0.5,
-            (self.rows_in_maze - 1) / 2 + 0.5,
-        )
+    int rowsInMaze;
+    int columnsInMaze;
+    int startRow;
+    int startColumn;
 
-    def draw_maze(self):
-        self.t.speed(0) # as fast as possible
-        self.wn.tracer(0)
-        for y in range(self.rows_in_maze):
-            for x in range(self.columns_in_maze):
-                if self.maze_list[y][x] == OBSTACLE:
-                    self.draw_centered_box(
-                        x + self.x_translate, -y + self.y_translate, "orange"
-                    )
-        self.t.color("black")
-        self.t.fillcolor("blue")
-        self.wn.update()
-        self.wn.tracer(1)
+    ArrayList&lt;String[]&gt; mazeList;
 
-    def draw_centered_box(self, x, y, color):
-        self.t.up()
-        self.t.goto(x - 0.5, y - 0.5)
-        self.t.color(color)
-        self.t.fillcolor(color)
-        self.t.setheading(90)
-        self.t.down()
-        self.t.begin_fill()
-        for i in range(4):
-            self.t.forward(1)
-            self.t.right(90)
-        self.t.end_fill()
+    double xTranslate;
+    double yTranslate;
 
-    def move_turtle(self, x, y):
-        self.t.up()
-        self.t.setheading(self.t.towards(x + self.x_translate, -y + self.y_translate))
-        self.t.goto(x + self.x_translate, -y + self.y_translate)
+    public Maze(String mazeFileName) {
+        File inFile = new File(mazeFileName);
+        try (Scanner input = new Scanner(inFile)) {
+            String line;
+            int row = 0;
+            this.mazeList = new ArrayList&lt;String[]&gt;();
+            while (input.hasNextLine()) {
+                line = input.nextLine();
+                int sCol = line.indexOf(START);
+                if (sCol &gt;= 0) {
+                    startRow = row;
+                    startColumn = sCol;
+                }
+                this.mazeList.add(line.split(""));
+                row = row + 1;
+            }
+            this.rowsInMaze = this.mazeList.size();
+            this.columnsInMaze = (this.mazeList.get(0)).length;
+            this.xTranslate = -this.columnsInMaze / 2.0;
+            this.yTranslate = this.rowsInMaze / 2.0;
+            this.habitat = new World(600, 600, Color.WHITE,
+                -(this.columnsInMaze - 1) / 2.0 - 0.5,
+                -(this.rowsInMaze - 1) / 2.0 - 0.5,
+                (this.columnsInMaze - 1) / 2.0 + 0.5,
+                (this.rowsInMaze -1) / 2.0 + 0.5);
+            this.t = new Turtle(habitat);
+            t.hide();
+        }
+        catch (Exception ex) {
+            this.mazeList = null;
+        }
 
-    def drop_bread_crumb(self, color):
-        self.t.dot(10, color)
+    }
 
-    def update_position(self, row, col, val=None):
-        if val:
-            self.maze_list[row][col] = val
-        self.move_turtle(col, row)
+    public void drawMaze() {
+        t.setDelay(0);
+        this.habitat.setUpdating(false);
+        for (int y = 0; y &lt; this.rowsInMaze; y++) {
+            for (int x = 0; x &lt; this.columnsInMaze; x++) {
+                if (this.mazeList.get(y)[x].equals(OBSTACLE)) {
+                    this.drawCenteredBox(x + this.xTranslate,
+                        -y + this.yTranslate, new Color(184,134,11));
+                }
+                t.setColor(Color.BLACK);
+            }
+        }
+        this.habitat.setUpdating(true);
+    }
 
-        if val == PART_OF_PATH:
-            color = "green"
-        elif val == OBSTACLE:
-            color = "red"
-        elif val == TRIED:
-            color = "black"
-        elif val == DEAD_END:
-            color = "red"
-        else:
-            color = None
+    public void drawCenteredBox(double x, double y, Color color) {
+        t.penUp();
+        t.setColor(Color.BLACK);
+        t.setFillColor(color);
+        t.beginFill();
+        t.goTo(x + 1, y - 1);
+        t.setHeading(90);
+        t.penDown();
+        for (int i = 0; i &lt; 4; i++) {
+            t.forward(1);
+            t.turnRight(90);
+        }
+        t.endFill();
+    }
 
-        if color:
-            self.drop_bread_crumb(color)
+    public void updatePosition(int row, int col, String value) {
+        moveTurtle(col, row);
+        if (value != null) {
+            mazeList.get(row)[col] = value;
 
-    def is_exit(self, row, col):
+            Color color = null;
+            if (value.equals(PART_OF_PATH)) {
+                color = new Color(0, 128, 0);
+            } else if (value.equals(OBSTACLE)) {
+                color = Color.RED;
+            } else if (value.equals(TRIED)) {
+                color = Color.BLACK;
+            } else if (value.equals(DEAD_END)) {
+                color = Color.RED;
+            }
+
+            if (color != null) {
+                dropBreadCrumb(color);
+            }
+        }
+    }
+
+    public void moveTurtle(double x, double y) {
+        t.penUp();
+        t.show();
+        t.setHeading(t.towards(x + this.xTranslate, -y + this.yTranslate));
+        t.goTo(x + xTranslate + 0.5, -y + this.yTranslate - 0.5);
+    }
+
+    public void dropBreadCrumb(Color color) {
+        double saveHeading = t.getHeading();
+        Color saveColor = t.getColor();
+        boolean savePenDown = t.isPenDown();
+        this.habitat.setUpdating(false);
+        t.setDelay(0);
+        t.setHeading(0);
+        t.penUp();
+        t.setColor(color);
+        t.setFillColor(color);
+        t.beginFill();
+        t.turnRight(45);
+        t.penDown();
+        for (int i = 0; i &lt; 4; i++) {
+            t.forward(0.141);
+            t.turnLeft(90);
+        }
+        t.endFill();
+        t.setColor(saveColor);
+        t.setHeading(saveHeading);
+        if (savePenDown) {
+            t.penDown();
+        } else {
+            t.penUp();
+        }
+        this.habitat.setUpdating(true);
+        t.show();
+        t.setDelay(0.05);
+    }
+
+    public boolean isExit(int row, int col) {
         return (
-            row == 0
-            or row == self.rows_in_maze - 1
-            or col == 0
-            or col == self.columns_in_maze - 1
-        )
+            row == 0 ||
+            row == rowsInMaze - 1 ||
+            col == 0 ||
+            col == columnsInMaze -1
+        );
+    }
 
-    def __getitem__(self, idx):
-        return self.maze_list[idx]
+    public boolean searchFrom(int startRow, int startColumn) {
+        /*
+         * try each of the four directions from this point until we find
+         * a way out.
+         */
+        updatePosition(startRow, startColumn, null);
 
+        /*
+         *  Base case return values:
+         *  1. We have run into an obstacle; return false
+         */
+        String value = getItem(startRow, startColumn);
+        if (value.equals(OBSTACLE)) {
+            return false;
+        }
 
-def search_from(maze, start_row, start_column):
-    # try each of four directions from this point until we find a way out.
-    # base Case return values:
-    #  1. We have run into an obstacle, return false
-    maze.update_position(start_row, start_column)
-    if maze[start_row][start_column] == OBSTACLE:
-        return False
-    #  2. We have found a square that has already been explored
-    if (
-        maze[start_row][start_column] == TRIED
-        or maze[start_row][start_column] == DEAD_END
-    ):
-        return False
-    # 3. We have found an outside edge not occupied by an obstacle
-    if maze.is_exit(start_row, start_column):
-        maze.update_position(start_row, start_column, PART_OF_PATH)
-        return True
-    maze.update_position(start_row, start_column, TRIED)
-    # Otherwise, use logical short circuiting to try each direction
-    # in turn (if needed)
-    found = (
-        search_from(maze, start_row - 1, start_column)
-        or search_from(maze, start_row + 1, start_column)
-        or search_from(maze, start_row, start_column - 1)
-        or search_from(maze, start_row, start_column + 1)
-    )
-    if found:
-        maze.update_position(start_row, start_column, PART_OF_PATH)
-    else:
-        maze.update_position(start_row, start_column, DEAD_END)
-    return found
+        /* 2. We have found a square that has already been explored */
+        if (value.equals(TRIED) || value.equals(DEAD_END)) {
+            return false;
+        }
 
+        /* 3. We have found an outside edge not occupied by an obstacle */
+        if (isExit(startRow, startColumn)) {
+            updatePosition(startRow, startColumn, PART_OF_PATH);
+            return true;
+        }
 
-my_maze = Maze("maze2.txt")
-my_maze.draw_maze()
-my_maze.update_position(my_maze.start_row, my_maze.start_col)
+        updatePosition(startRow, startColumn, TRIED);
 
-search_from(my_maze, my_maze.start_row, my_maze.start_col)
+        /*
+         * Otherwise, use logical short circuiting to try each direction
+         * in turn (if needed)
+         */
+        boolean found = (
+            searchFrom(startRow - 1, startColumn)
+            || searchFrom(startRow + 1, startColumn)
+            || searchFrom(startRow, startColumn - 1)
+            || searchFrom(startRow, startColumn + 1)
+        );
+
+        if (found) {
+            updatePosition(startRow, startColumn, PART_OF_PATH);
+        } else {
+            updatePosition(startRow, startColumn, DEAD_END);
+        }
+        return found;
+    }
+
+    public String getItem(int row, int col) {
+        return mazeList.get(row)[col];
+    }
+
+    public static void main(String[] args) {
+        Maze myMaze = new Maze("maze2.txt");
+        myMaze.drawMaze();
+        myMaze.updatePosition(myMaze.startRow, myMaze.startColumn, null);
+        myMaze.searchFrom(myMaze.startRow, myMaze.startColumn);
+        myMaze.t.setHeading(90);
+    }
+}
         </input>
   </program>
 </listing>
   <exercises>
     <title>Self Check</title>
-    <p>Modify the maze search program so that the calls to <c>search_from</c> are in a different order.
+    <p>Modify the maze search program so that the calls to <c>searchFrom</c> are in a different order.
                 Watch the program run. Can you explain why the behavior is different?
                 Can you predict what path the turtle will follow for a given change in order?</p>
   </exercises>

@@ -1,0 +1,10 @@
+base case
+caching
+checked exception
+dynamic programming
+fractal
+greedy method
+memoization
+recursion
+recursive calls
+stack frame

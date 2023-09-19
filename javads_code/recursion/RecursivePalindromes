@@ -1,0 +1,33 @@
+public class RecursivePalindromes {
+
+    /*
+     * Given a String, return the string with only letters,
+     * and all in lower case.
+     */
+    public static String lettersOnly(String s) {
+        return ""; // placeholder
+    }
+    
+    /*
+     * Return true if the given string is a palindrome,
+     * false otherwise.
+     */
+    public static boolean isPalindrome(String s) {
+        return false; // placeholder
+    }
+
+from test import testEqual
+
+
+def remove_white(s):
+    return s
+
+def is_pal(s):
+    return False
+
+testEqual(is_pal(remove_white("x")), True)
+testEqual(is_pal(remove_white("radar")), True)
+testEqual(is_pal(remove_white("hello")), False)
+testEqual(is_pal(removeWremove_whitehite("")), True)
+testEqual(is_pal(remove_white("hannah")), True)
+testEqual(is_pal(remove_white("madam i'm adam")), True)

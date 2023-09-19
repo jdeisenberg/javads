@@ -34,15 +34,15 @@ public class ConvertViaStack {
     }
 
     public static void main(String[] args) {
-        System.out.println(toString(5050, 16)); // 13BA
+        System.out.println(toString(13, 2)); // 1101
     }
 }
         </input>
   </program>
 </listing>
 <p>Each time we go through the first <c>while</c> loop in lines 9&#x2013;16, we push a character on the stack.
-            When converting 5050 to base 16, we see that when the loop exits, the stack would look like <xref ref="recursion_fig-recstack"/>. Now we can pop the characters off the stack and concatenate
-            them into the final result, <c>"13BA"</c>.</p>
+            When converting 13 to base 2, we see that when the loop exits, the stack would look like <xref ref="recursion_fig-recstack"/>. Now we can pop the characters off the stack and concatenate
+            them into the final result, <c>"1101"</c>.</p>
 
   <figure xml:id="recursion_fig-recstack" align="center">
     <image source="Recursion/Figures/recstack.png" width="50%"/>
