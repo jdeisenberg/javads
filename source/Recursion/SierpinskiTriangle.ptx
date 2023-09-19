@@ -15,12 +15,14 @@
             drawing the Sierpinski triangle yourself, using the method described.</p>
 
         <figure xml:id="recursion_fig-sierpinski" align="center">
+          <caption>The Sierpinski Triangle</caption>
     <image source="Recursion/Figures/sierpinski.png" width="50%"/>
   </figure>
 
   <p><xref ref="recursion_lst-sierpinski"/> shows the Java program to produce this drawing.</p>
 
   <listing xml:id="recursion_lst-sierpinski">
+    <caption>Program for Sierpinski Triangle</caption>
 <program label="prog-sierpinski" language="java" line-numbers="yes">
     <input>
 import java.awt.Color;
@@ -125,6 +127,7 @@ public class SierpinskiTriangles {
             finished with the bottom left it moves to the bottom middle, and so on.</p>
 
   <figure xml:id="recursion_fig-stcalltree" align="center">
+    <caption>Call Tree for Sierpinski Triangle</caption>
     <image source="Recursion/Figures/stCallTree.png" width="50%"/>
   </figure>
 

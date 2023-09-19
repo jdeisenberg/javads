@@ -7,6 +7,7 @@
             call. The code for this modified algorithm is shown in
             <xref ref="lst-recstack"/>.</p>
 <listing xml:id="lst-recstack">
+    <caption>Converting an Integer to a String Using a Stack</caption>
 <program label="lst-recstack" language="java" line-numbers="yes">
     <input>
 public class ConvertViaStack {
@@ -45,6 +46,7 @@ public class ConvertViaStack {
             them into the final result, <c>"1101"</c>.</p>
 
   <figure xml:id="recursion_fig-recstack" align="center">
+      <caption>Strings Placed on the Stack During Conversion</caption>
     <image source="Recursion/Figures/recstack.png" width="50%"/>
   </figure>
   <p>The previous example gives us some insight into how Java implements a
@@ -55,6 +57,7 @@ public class ConvertViaStack {
             call stack after the return statement on line 9.</p>
 
   <figure xml:id="recursion_fig-callstack" align="center">
+      <caption>Call Stack Generated from <c>convert(13, 2)</c></caption>
     <image source="Recursion/Figures/callstack.png" width="50%"/>
   </figure>
   <p>Notice that the call to <c>convert(2 / 2, 2)</c> defined in Listing 4.4 leaves a return value of

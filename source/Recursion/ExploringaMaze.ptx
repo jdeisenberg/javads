@@ -3,7 +3,7 @@
   <title>Exploring a Maze</title>
   <p>In this section we will look at a problem that has relevance to the
             expanding world of robotics: how do you find your way out of a maze? If you have
-            a Roomba vacuum cleaner for your dorm room (don't all college students?)
+            a Roomba&#x00AE; vacuum cleaner for your dorm room (don't all college students?)
             you will wish that you could reprogram it using what you have learned in
             this section. The problem we want to solve is to help our turtle find
             its way out of a virtual maze. The maze problem has roots as deep as the
@@ -14,6 +14,7 @@
             must find its way out. Look at <xref ref="recursion_fig-mazescreen"/> to get an idea of
             where we are going in this section.</p>
  <figure  xml:id="recursion_fig-mazescreen" align="center">
+     <caption>The Finished Maze Search Program</caption>
     <image source="Recursion/Figures/maze.png" width="50%" alt="solved maze"/>
   </figure>
 
@@ -51,6 +52,7 @@
         <p>For our program to work we will need to have a way to represent the maze. We will store it in a file, where a plus sign represents an obstacle, spaces represent open squares, and the capital S represents our starting point:</p>
 
         <listing xml:id="recursion_sample_maze">
+            <caption>An Example Maze Data File</caption>
 <pre>
 ++++++++++++++++++++++
 +   +   ++ ++        +
@@ -94,6 +96,7 @@
   <p><xref ref="recursion_lst-maze-start"/> shows the beginning of the class with global constants and properties used by the <c>Maze</c> class methods
             (Listings <xref ref="recursion_lst-maze-constructor"/>&#x2013;<xref ref="recursion_lst-maze-aux"/>) and the <c>searchFrom</c> method (<xref ref="recursion_lst-maze-search"/>).</p>
   <listing xml:id="recursion_lst-maze-start"><program language="java" line-numbers="yes">
+          <caption>The Maze Program Constants and Properties</caption>
     <input>
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -136,6 +139,7 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
 
 <p>Next, let's examine the constructor in <xref ref="recursion_lst-maze-constructor"/>. It takes the name of a file as its only parameter.</p>
   <listing xml:id="recursion_lst-maze-constructor"><program language="java" line-numbers="yes">
+          <caption>The Maze Class Constructor</caption>
     <input>
     public Maze(String mazeFileName) {
         File inFile = new File(mazeFileName);
@@ -184,7 +188,9 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
 
   <p>The <c>drawMaze</c> method uses this internal representation to draw the
             initial view of the maze on the screen.</p>
-  <listing xml:id="recursion_lst-maze-draw"><program language="java" line-numbers="yes">
+  <listing xml:id="recursion_lst-maze-draw">
+      <caption>The Maze Class Drawing Methods</caption>
+      <program language="java" line-numbers="yes">
     <input>
     public void drawMaze() {
         t.setDelay(0);
@@ -227,7 +233,9 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
   <p>The <c>updatePosition</c> method, as shown in <xref ref="recursion_lst-maze-update"/> moves the turtle to the given row and column. If the method is given a non-null String as its third parameter, it will update the internal representation with TRIED (".") or DEAD_END ("-") to
             indicate that the turtle has visited a particular square or if the
             square is part of a dead end. If the status has change, <c>updatePosition</c> calls <c>dropBreadCrumb</c> to display the new status.</p>
-  <listing xml:id="recursion_lst-maze-update"><program language="java" line-numbers="yes">
+  <listing xml:id="recursion_lst-maze-update">
+      <caption>The Maze Class Moving Methods</caption>
+      <program language="java" line-numbers="yes">
     <input>
     public void updatePosition(int row, int col, String value) {
         moveTurtle(col, row);
@@ -272,7 +280,8 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
             to test for an exit condition. An exit condition occurs whenever the turtle
             has navigated to the edge of the maze, either row zero or column zero,
             or the far-right column or the bottom row.</p>
-  <listing xml:id="recursion_lst-maze-aux"><program language="python">
+  <listing xml:id="recursion_lst-maze-aux">
+      <caption>The Maze Class Auxiliary Methods</caption><program language="java">
     <input>
     public boolean isExit(int row, int col) {
         return (
@@ -289,7 +298,9 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
             that this function takes two parameters: a the starting
             row and the starting column. This is important because as a recursive
             function the search logically starts again with each recursive call.</p>
-  <listing xml:id="recursion_lst-maze-search"><program language="java" line-numbers="yes">
+  <listing xml:id="recursion_lst-maze-search">
+      <caption>The Maze Search Method</caption>
+      <program language="java" line-numbers="yes">
     <input>
     public boolean searchFrom(int startRow, int startColumn) {
         /*
@@ -369,6 +380,7 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
         <p>The complete program is shown in <xref ref="recursion_completemaze"/>.  This program uses the data file <c>maze2.txt</c> shown in <xref ref="recursion_sample_maze"/>.</p>
 
 <listing xml:id="recursion_completemaze">
+    <caption>Complete Maze Solver</caption>
 <program label="recursion_completemaze" language="java">
     <input>
 import java.util.Scanner;

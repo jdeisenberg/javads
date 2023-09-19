@@ -56,11 +56,13 @@
             the numbers we want to remember are in the remainder boxes along the
             right side of the diagram.</p>
   <figure  xml:id="recursion_fig-tostr" align="center">
+    <caption>Converting an Integer to a String in Base 10</caption>
     <image source="Recursion/Figures/toStr.png" width="50%" alt="image"/>
   </figure>
   <p><xref ref="lst-rectostr"/> shows the Python code that implements the algorithm
             outlined above for any base between 2 and 16.</p>
 <listing xml:id="lst-rectostr">
+  <caption>Recursively Converting from Integer to String</caption>
 <program label="prg-rectostr"  language="java" line-numbers="yes">
     <input>
 public class RecursiveBaseConversion {
@@ -93,6 +95,7 @@ public class RecursiveBaseConversion {
             to its base 2 string representation (<c>"1101"</c>).</p>
 
   <figure xml:id="recursion_fig-tostr2" align="center">
+    <caption>Converting the Number 13 to its Base 2 String Representation</caption>
     <image source="Recursion/Figures/toStrBase2.png" width="50%" alt="image"/>
   </figure>
   <p><xref ref="recursion_fig-tostr2"/> shows that we get the results we are looking for,

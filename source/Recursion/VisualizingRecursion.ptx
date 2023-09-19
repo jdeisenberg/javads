@@ -32,6 +32,7 @@
             The recursive step is when we call <c>drawSpiral</c> again with a reduced
             length. </p>
 <listing xml:id="lst-turtle-spiral">
+  <caption>Drawing a Recursive Spiral using <c>Turtle</c></caption>
 <program label="prog-turtle-spiral" language="java" line-numbers="yes">
     <input>
 public class TurtleSpiral {
@@ -62,6 +63,7 @@ public class TurtleSpiral {
 <p><xref ref="recursion_spiral_result"/> shows the resulting drawing:</p>
 
     <figure xml:id="recursion_spiral_result" align="center">
+      <caption>Result of Spiral Program</caption>
     <image source="Recursion/Figures/turtle_spiral_result.png" width="50%"/>
   </figure>
 
@@ -102,6 +104,7 @@ public class TurtleSpiral {
             <c>if</c> statement on line 2 as a check for the base case of <c>branchLen</c>
             getting too small.</p>
   <listing xml:id="recursion_lst-fractree"><program language="java" line-numbers="yes">
+      <caption>Fractal Tree Code</caption>
     <input>
     public static void drawTree(int branchLen, Turtle t) {
         if (branchLen &gt; 5) {
@@ -122,6 +125,7 @@ public class TurtleSpiral {
             be drawn symmetrically with the right and left halves of the tree taking
             shape simultaneously? Will it be drawn right side first then left side?</p>
 <listing xml:id="lst-complete-tree">
+  <caption>Recursively Drawing a Tree</caption>
 <program label="prog-complete-tree" language="java" line-numbers="yes">
     <input>
 import java.awt.Color;
@@ -170,14 +174,17 @@ public class FractalTree {
             right side of the left tree is drawn until we finally make our way out
             to the smallest twig on the left, shown in <xref ref="recursion_fig-tree-complete"/>.</p>
   <figure xml:id="recursion_fig-tree1" align="center">
+    <caption>The Beginning of a Fractal Tree</caption>
     <image source="Recursion/Figures/tree1.png" width="50%"/>
   </figure>
 
   <figure xml:id="recursion_fig-tree2" align="center">
+    <caption>The First Half of the Tree</caption>
     <image source="Recursion/Figures/tree2.png" width="50%"/>
   </figure>
 
   <figure xml:id="recursion_fig-tree-complete" align="center">
+    <caption>The Completed Tree</caption>
     <image source="Recursion/Figures/tree_complete.png" width="50%"/>
   </figure>
 

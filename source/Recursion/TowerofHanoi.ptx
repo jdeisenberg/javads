@@ -25,6 +25,7 @@
             this puzzle before, you should try it now. You do not need fancy disks
             and poles&#x2014;a pile of books or pieces of paper will work.</p>
  <figure  xml:id="recursion_fig-hanoi" align="center">
+   <caption>An Example Arrangement of Disks for the Tower of Hanoi</caption>
     <image source="Recursion/Figures/hanoi.png" width="50%" alt="image"/>
   </figure>
 
@@ -43,7 +44,9 @@
 
   <p>As long as we always obey the rule that the larger disks remain on the bottom of the stack, we can use the three steps above recursively, treating any larger disks as though they were not even there. The only thing missing from the outline above is the identification of a base case. The simplest Tower of Hanoi problem is a tower of one disk. In this case, we need move only a single disk to its final destination. A tower of one disk will be our base case. In addition, the steps outlined above move us toward the base case by reducing the height of the tower in steps 1 and 3. <xref ref="recursion_lst-recursion_hanoi"/> shows the Java code to solve the Tower of Hanoi puzzle.</p>
 
-  <listing xml:id="recursion_lst-recursion_hanoi"><program language="java" line-numbers="yes">
+  <listing xml:id="recursion_lst-recursion_hanoi">
+    <caption>Java Code for the Tower of Hanoi</caption>
+<program language="java" line-numbers="yes">
     <input>
 public static void moveTower(int height, String fromPole, String toPole,
   String withPole) {
@@ -58,7 +61,7 @@ public static void moveTower(int height, String fromPole, String toPole,
   <p>Notice that the code in <xref ref="recursion_lst-recursion_hanoi"/> is almost identical to the
             English description. The key to the simplicity of the algorithm is that
             we make two different recursive calls, one on line 4 and a
-            second on line 6. On line 5 we move all but the bottom
+            second on line 6. On line 4 we move all but the bottom
             disk on the initial tower to an intermediate pole. The next line
             moves the bottom disk to its final resting place. Then on line
             6 we move the tower from the intermediate pole to the top of
@@ -70,7 +73,9 @@ public static void moveTower(int height, String fromPole, String toPole,
   <p>The function <c>moveDisk</c>, shown in <xref ref="recursion_lst-movedisk"/>, prints out that it is moving a disk from one pole
             to another. If you type in and run the <c>moveTower</c> program you can see
             that it gives you a very efficient solution to the puzzle.</p>
-  <listing xml:id="recursion_lst-movedisk"><program language="java">
+  <listing xml:id="recursion_lst-movedisk">
+    <caption>Java Code to Move One Disk</caption>
+    <program language="java">
     <input>
 public static void moveDisk(String fromPole, String toPole) {
     System.out.printf("Moving disk from %s to %s.%n", fromPole, toPole);
@@ -79,6 +84,7 @@ public static void moveDisk(String fromPole, String toPole) {
   </program></listing>
   <p>The program in <xref ref="recursion_hanoi"/> provides the entire solution for three disks.</p>
   <listing xml:id="recursion_hanoi">
+    <caption>Complete Java Program for Tower of Hanoi</caption>
 <program label="recursion_hanoi" language="java">
     <input>
 public class TowerOfHanoi {
