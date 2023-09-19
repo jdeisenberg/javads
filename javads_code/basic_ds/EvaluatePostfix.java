@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class Evaluator {
+public class EvaluatePostfix {
     
     public static Integer postfixEval(String postfixExpr) {
         
