@@ -4,7 +4,7 @@
   <p>Another fractal that exhibits the property of self-similarity is the
             Sierpinski triangle. An example is shown in <xref ref="recursion_fig-sierpinski"/>. The
             Sierpinski triangle illustrates a three-way recursive algorithm. The
-            procedure for drawing a Sierpinski triangle by hand is simple. Start
+            procedure for drawing a Sierpinski triangle by hand is as follows: Start
             with a single large triangle. Divide this large triangle into four new
             triangles by connecting the midpoint of each side. Ignoring the middle
             triangle that you just created, apply the same procedure to each of the
@@ -13,8 +13,15 @@
             You can continue to apply this procedure indefinitely if you have a
             sharp enough pencil. Before you continue reading, you may want to try
             drawing the Sierpinski triangle yourself, using the method described.</p>
-  <listing xml:id="recursion_fig-sierpinski">
-<program label="prog_fig-sierpinski" language="java" line-numbers="yes">
+
+        <figure xml:id="recursion_fig-sierpinski" align="center">
+    <image source="Recursion/Figures/sierpinski.png" width="50%"/>
+  </figure>
+
+  <p><xref ref="recursion_lst-sierpinski"/> shows the Java program to produce this drawing.</p>
+
+  <listing xml:id="recursion_lst-sierpinski">
+<program label="prog-sierpinski" language="java" line-numbers="yes">
     <input>
 import java.awt.Color;
 import java.awt.geom.Point2D;
@@ -93,10 +100,11 @@ public class SierpinskiTriangles {
       <p>This program takes advantage of Java's AWT by using the <c>Point2D.Double</c> class to represent points with an <c>x</c> and <c>y</c> property. It is a subclass of the <c>Point2D</c> class; importing <c>java.awt.geom.Point2D</c> will give you access to it.</p>
   </note>
 
-  <p>The program in <xref ref="recursion_fig-sierpinski"/> follows the ideas outlined above. The
+  <p><xref ref="recursion_lst-sierpinski"/> follows the ideas outlined above. The
             first thing <c>sierpinski</c> does is draw the outer triangle. Next, there
             are three recursive calls, one for each of the new corner triangles we
             get when we connect the midpoints.</p>
+
   <p>Look at the code and think about the order in which the triangles will
             be drawn. While the exact order of the corners depends upon how the
             initial set is specified, let's assume that the corners are ordered
@@ -107,6 +115,7 @@ public class SierpinskiTriangles {
             in the top corner by working toward the smallest, topmost triangle.
             Finally, it fills in the lower-right corner, working its way toward the
             smallest triangle in the lower right.</p>
+
   <p>Sometimes it is helpful to think of a recursive algorithm in terms of a
             diagram of method calls. <xref ref="recursion_fig-stcalltree"/> shows that the recursive
             calls are always made going to the left. The active functions are
@@ -118,9 +127,6 @@ public class SierpinskiTriangles {
   <figure xml:id="recursion_fig-stcalltree" align="center">
     <image source="Recursion/Figures/stCallTree.png" width="50%"/>
   </figure>
-  <p>The <c>sierpinski</c> function relies heavily on the <c>midpoint</c> method.
-            <c>midpoint</c> takes as arguments two endpoints and returns the point
-            halfway between them. In addition, <xref ref="recursion_fig-sierpinski"/> has a function that
-            draws a filled triangle using the <c>beginFill</c> and <c>endFill</c> turtle
-            methods. (<c>beginFill</c> tells the turtle to store all subsequent movements as a <em>path</em> to be filled in the specified color. <c>endFill</c> marks the end of the path, at which point the path is filled with the color.)</p>
+
+  <p>The <c>sierpinski</c> method relies heavily on the <c>midpoint</c> method. <c>midpoint</c> takes as arguments two endpoints and returns the point halfway between them. In addition, <xref ref="recursion_lst-sierpinski"/> has a <c>drawTriangle</c> method that draws a filled triangle using the <c>beginFill</c> and <c>endFill</c> turtle methods. (<c>beginFill</c> tells the turtle to store all subsequent movements as a <em>path</em> to be filled in the specified color. <c>endFill</c> marks the end of the path, at which point the path is filled with the color.)</p>
 </section>

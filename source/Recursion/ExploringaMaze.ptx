@@ -178,7 +178,7 @@ items ==&gt; String[11] { "+", " ", " ", "+", "+", "+", "+"}</output></console>
 
   <p>Line 5 starts our row counter; we need that to determine the starting row number. Lines 7&#x2013;16 read the file. Line 9 tests to see if we have the "S" in the line; if so, we can establish the starting row and column. Line 14 adds the array of individual Strings (produced by <c>split</c>) to the <c>mazeList</c>.</p>
 
-  <p>Lines 17&#x2013;18 establish the size of the maze. Lines 19&#x2013;20 set offsets that we will need to position the turtle properly.</p>
+  <p>Lines 17&#x2013;18 establish the size of the maze. Lines 19&#x2013;20 calculate offsets that we will need to position the turtle properly.</p>
 
   <p>Finally, lines 21&#x2013;25 create the turtle's world. Instead of having the mouse position in pixels, we set up the coordinate system so that the when we move the mouse by one unit, it moves one square in our drawing, not one pixel. The last four arguments to <c>World</c> give the x- and y- coordinates of the lower left and upper right points in this new coordinate system.</p>
 

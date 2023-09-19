@@ -33,11 +33,11 @@
   <p>The final law is that the algorithm must call itself. This is the very
             definition of recursion. Recursion is a confusing concept to many
             beginning programmers. As a novice programmer, you have learned that
-            functions are good because you can take a large problem and break it up
+            methods are good because you can take a large problem and break it up
             into smaller problems. The smaller problems can be solved by writing a
-            function to solve each problem. When we talk about recursion it may seem
+            method to solve each problem. When we talk about recursion it may seem
             that we are talking ourselves in circles. We have a problem to solve
-            with a function, but that function solves the problem by calling itself!
+            with a method, but that method solves the problem by calling itself!
             But the logic is not circular at all; the logic of recursion is an
             elegant expression of solving a problem by breaking it down into a
             smaller and easier problems.</p>

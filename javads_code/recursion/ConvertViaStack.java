@@ -1,6 +1,6 @@
 public class ConvertViaStack {
 
-    public static String toString(int n, int base) {
+    public static String convert(int n, int base) {
         Stack<String> rStack = new Stack<>();
         
         String [] digitStrings = {"0", "1", "2", "3", "4", "5",
@@ -8,10 +8,8 @@ public class ConvertViaStack {
         
         while (n > 0) {
             if (n < base) {
-                System.err.printf("pushing %d%n", n);
                 rStack.push(digitStrings[n]);
             } else {
-                System.err.printf("pushing remainder %d%n", n % base);
                 rStack.push(digitStrings[n % base]);
             }
             n = n / base;
@@ -19,14 +17,12 @@ public class ConvertViaStack {
         
         String result = "";
         while (! rStack.isEmpty()) {
-            System.out.printf("About to pop %s%n", rStack.peek());
             result = result + rStack.pop();
-            System.out.println("Result is now " + result);
         }
         return result;
     }
 
     public static void main(String[] args) {
-        System.out.println(toString(13, 2));
+        System.out.println(convert(13, 2));
     }
 }

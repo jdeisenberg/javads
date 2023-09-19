@@ -2,7 +2,7 @@
 <section xml:id="recursion_stack-frames-implementing-recursion">
   <title>Stack Frames: Implementing Recursion</title>
   <p>Suppose that instead of concatenating the result of the recursive call
-            to <c>toString</c> with the string from <c>convertString</c>, we modified our
+            to <c>convert</c> with the string from <c>digitStrings</c>, we modified our
             algorithm to push the strings onto a stack instead of making the recursive
             call. The code for this modified algorithm is shown in
             <xref ref="lst-recstack"/>.</p>
@@ -11,7 +11,7 @@
     <input>
 public class ConvertViaStack {
 
-    public static String toString(int n, int base) {
+    public static String convert(int n, int base) {
         Stack&lt;String&gt; rStack = new Stack&lt;&gt;();
 
         String [] digitStrings = {"0", "1", "2", "3", "4", "5",
@@ -34,7 +34,7 @@ public class ConvertViaStack {
     }
 
     public static void main(String[] args) {
-        System.out.println(toString(13, 2)); // 1101
+        System.out.println(convert(13, 2)); // 1101
     }
 }
         </input>
@@ -57,16 +57,16 @@ public class ConvertViaStack {
   <figure xml:id="recursion_fig-callstack" align="center">
     <image source="Recursion/Figures/callstack.png" width="50%"/>
   </figure>
-  <p>Notice that the call to <c>toString(2 / 2, 2)</c> defined in Listing 4.4 leaves a return value of
+  <p>Notice that the call to <c>convert(2 / 2, 2)</c> defined in Listing 4.4 leaves a return value of
             <c>"1"</c> on the stack because we have reached a base case. This return value is then used in place of the
-            function call (<c>toString(1, 2)</c>) in the expression <c>"1" + toString[3 % 2]</c>,
+            method call (<c>convert(1, 2)</c>) in the expression <c>"1" + convert[3 % 2]</c>,
             which will leave the string <c>"11"</c> on the top of the stack.
             In this way, the Java call stack takes the place of the
             stack we used explicitly in <xref ref="lst-recstack"/>. In our array-summing
             example, you can think of the return value on the stack taking the place
             of an accumulator variable.</p>
   <p>The stack frames also provide a scope for the variables used by the
-            function. Even though we are calling the same function over and over,
+            method. Even though we are calling the same methodd over and over,
             each call creates a new scope for the variables that are local to the
-            function.</p>
+            method.</p>
 </section>

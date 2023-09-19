@@ -64,20 +64,20 @@
 <program label="prg-rectostr"  language="java" line-numbers="yes">
     <input>
 public class RecursiveBaseConversion {
-    public static String toString(int n, int base) {
+    public static String convert(int n, int base) {
         String [] digitStrings = {"0", "1", "2", "3", "4", "5",
             "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
         if (n &lt; base) {
             return digitStrings[n];
         } else {
             int remainder = n % base;
-            return toString(n / base, base) + digitStrings[remainder];
+            return convert(n / base, base) + digitStrings[remainder];
         }
     }
 
     public static void main(String[] args) {
-        System.out.println(toString(13, 2));     // 1101
-        System.out.println(toString(1066, 16));  // 42A
+        System.out.println(convert(13, 2));     // 1101
+        System.out.println(convert(1066, 16));  // 42A
     }
 }
         </input>
@@ -85,8 +85,8 @@ public class RecursiveBaseConversion {
 </listing>
   <p>Notice that in line 5 we check for the base case where <c>n</c>
             is less than the base we are converting to. When we detect the base
-            case, we stop recursing and simply return the string from the
-            <c>convert_string</c> sequence. In line 9 we satisfy both the
+            case, we stop recursing and return the string from the
+            <c>convert</c> sequence. In line 9 we satisfy both the
             second and third laws&#x2013;by making the recursive call and by reducing the
             problem size&#x2013;using division.</p>
   <p>Let's trace the algorithm shown in <xref ref="lst-rectostr"/> again; this time we will convert the number 13
@@ -98,9 +98,9 @@ public class RecursiveBaseConversion {
   <p><xref ref="recursion_fig-tostr2"/> shows that we get the results we are looking for,
             but it looks like the digits are in the wrong order. The algorithm works
             correctly because we make the recursive call first on line
-            6, then we add the string representation of the remainder.
+            9, then we add the string representation of the remainder.
             If we reversed returning the <c>digitStrings</c> lookup and returning the
-            <c>toString</c> call, the resulting string would be backward! But by delaying
+            <c>convert</c> call, the resulting string would be backward! But by delaying
             the concatenation operation until after the recursive call has returned,
             we get the result in the proper order. This should remind you of our
             discussion of the reversal property of stacks back in <xref ref="basic-ds_stacks"/>.</p>
@@ -135,7 +135,7 @@ public class ReverseString {
     </program>
   </exercise>
   <exercise>
-    <p>Write a function that takes a string as a parameter and returns <c>true</c> if the string is a palindrome, <c>false</c> otherwise.  Remember that a string is a palindrome if it is spelled the same both forward and backward.  For example:  <em>radar</em> is a palindrome.  For bonus points palindromes can also be phrases, but you need to remove the spaces and punctuation, and you need to change all the letters to lower case before checking.  For example, <em>Madam, I'm Adam</em> is a palindrome.  Other fun palindromes include:</p>
+    <p>Write a method that takes a string as a parameter and returns <c>true</c> if the string is a palindrome, <c>false</c> otherwise.  Remember that a string is a palindrome if it is spelled the same both forward and backward.  For example:  <em>radar</em> is a palindrome.  For bonus points palindromes can also be phrases, but you need to remove the spaces and punctuation, and you need to change all the letters to lower case before checking.  For example, <em>Madam, I'm Adam</em> is a palindrome.  Other fun palindromes include:</p>
     <p>
       <ul>
         <li>
