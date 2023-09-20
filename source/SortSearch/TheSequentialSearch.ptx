@@ -4,7 +4,7 @@
   <introduction>
   <p>When data items are stored in a collection such as a list, we say that
             they have a linear or sequential relationship. Each data item is stored
-            in a position relative to the others. In Python lists, these relative
+            in a position relative to the others. In Java arrays and ArrayLists, these relative
             positions are the index values of the individual items. Since these
             index values are ordered, it is possible for us to visit them in
             sequence. This process gives rise to our first search technique, the
@@ -15,30 +15,39 @@
             we are looking for or run out of items, which would mean the item
             we were searching for was not present.</p>
   <figure align="center" xml:id="i11_id1fig-seqsearch">
-    <caption>Sequential Search of a List of Integers</caption>
+    <caption>Sequential Search of an ArrayList of Integers</caption>
     <image source="SortSearch/Figures/seqsearch.png" width="50%"/>
   </figure>
-  <p>The Python implementation for this algorithm is shown in the following program.  <xref ref="lst-seqsearchpython"/>
-            The function needs two items&#x2013;the list and the item we
-            are looking for&#x2013;and returns a Boolean value as to whether it is present.</p>
+  <p>The Java implementation for this algorithm is shown in the following program.  <xref ref="lst-seqsearch"/>
+            The function needs two items&#x2013;the array and the item we
+            are looking for&#x2013;and returns a boolean value as to whether it is present.</p>
 
-          <listing xml:id="lst-seqsearchpython">
-            <program xml:id="prog-seqsearchpython" label="prog-seqsearchpython" interactive="codelens" language="python"> <!--  -->
+          <listing xml:id="lst-seqsearch">
+            <caption>Sequential Search of an Unordered List</caption>
+            <program xml:id="prog-seqsearch" label="prog-seqsearch" language="java"> <!--  -->
     <input>
-def sequential_search(a_list, item):
-    pos = 0
+public class SequentialSearchExample {
 
-    while pos &lt; len(a_list):
-        if a_list[pos] == item:
-            return True
-        pos = pos + 1
+    public static boolean sequentialSearch(int[] list, int item) {
+        int index = 0;
+        while (index &lt; list.length) {
+            if (list[index] == item) {
+                return true;
+            }
+            index = index + 1;
+        }
+        return false;
+    }
 
-    return False
+    public static void main(String[] args) {
+        int[] testList = {1, 2, 32, 8, 17, 19, 42, 13, 0};
 
-
-test_list = [1, 2, 32, 8, 17, 19, 42, 13, 0]
-print(sequential_search(test_list, 3))
-print(sequential_search(test_list, 13))
+        System.out.println("Search for 3 returns " +
+            sequentialSearch(testList, 3));
+        System.out.println("Search for 13 returns " +
+            sequentialSearch(testList, 13));
+    }
+}
     </input>
   </program>
   </listing>
@@ -71,15 +80,15 @@ print(sequential_search(test_list, 13))
                 approximation, so the complexity of the sequential search is
                 <m>O(n)</m>. <xref ref="sort-search_tbl-seqsearchtable"/> summarizes these results.</p>
     <table xml:id="sort-search_tbl-seqsearchtable">
-      <tabular>
         <title>
-          <term>Table 1: Comparisons Used in a Sequential Search of an Unordered List</term>
+          Comparisons Used in a Sequential Search of an Unordered List
         </title>
+      <tabular>
         <row header="yes">
-          <cell><term>Case</term></cell>
-          <cell><term>Best Case</term></cell>
-          <cell><term>Worst Case</term></cell>
-          <cell><term>Average Case</term></cell>
+          <cell>Case</cell>
+          <cell>Best Case</cell>
+          <cell>Worst Case</cell>
+          <cell>Average Case</cell>
         </row>
         <row>
           <cell>item is present</cell>
@@ -111,31 +120,41 @@ print(sequential_search(test_list, 13))
                 other elements beyond 54 can work either since the list is sorted. In
                 this case, the algorithm does not have to continue looking through all
                 of the items to report that the item was not found. It can stop
-                immediately. <xref ref="lst-seqsearchpython2"/> The following program shows this variation of the
+                immediately. <xref ref="lst-seqsearch2"/> The following program shows this variation of the
                 sequential search function.</p>
     <figure align="center" xml:id="fig-seqsearch2">
       <caption>Sequential Search of an Ordered List of Integers</caption>
       <image source="SortSearch/Figures/seqsearch2.png" width="50%"/>
     </figure>
-    <listing xml:id="lst-seqsearchpython2">
-<program xml:id="prog-seqsearchpython2" label="prog-seqsearchpython2"  interactive="codelens" language="python">
-      <input>
-def ordered_sequential_search(a_list, item):
-    pos = 0
+    <listing xml:id="lst-seqsearch2">
+      <caption>Sequential Search of an Ordered List</caption>
+<program xml:id="prog-seqsearch2" label="prog-seqsearch2" language="java">
+  <input>
+public class OrderedSequentialSearchExample {
 
-    while pos &lt; len(a_list):
-        if a_list[pos] == item:
-            return True
-        if a_list[pos] &gt; item:
-            return False
-        pos = pos + 1
+    public static boolean orderedSequentialSearch(int[] list, int item) {
+        int index = 0;
+        while (index &lt; list.length) {
+            if (list[index] == item) {
+                return true;
+            }
+            if (list[index] > item) {
+                return false;
+            }
+            index = index + 1;
+        }
+        return false;
+    }
 
-    return False
+    public static void main(String[] args) {
+        int[] testList = {0, 1, 2, 8, 13, 17, 19, 32, 42};
 
-
-test_list = [0, 1, 2, 8, 13, 17, 19, 32, 42]
-print(ordered_sequential_search(test_list, 3))
-print(ordered_sequential_search(test_list, 13))
+        System.out.println("Search for 3 returns " +
+            orderedSequentialSearch(testList, 3));
+        System.out.println("Search for 13 returns " +
+            orderedSequentialSearch(testList, 13));
+    }
+}
     </input>
     </program>
   </listing>
@@ -146,10 +165,10 @@ print(ordered_sequential_search(test_list, 13))
                 <m>O(n)</m>. In summary, a sequential search is improved by ordering
                 the list only in the case where we do not find the item.</p>
     <table xml:id="sort-search_tbl-seqsearchtable2">
-      <tabular>
         <title>
-          <term>Table 2: Comparisons Used in Sequential Search of an Ordered List</term>
+          Comparisons Used in Sequential Search of an Ordered List
         </title>
+      <tabular>
         <row header="yes">
           <cell>Case</cell>
           <cell>Best Case</cell>
@@ -174,7 +193,7 @@ print(ordered_sequential_search(test_list, 13))
       <title>Self Check</title>
       <exercise label="question_SRCH_1">
         <statement>
-          <p>Q-3: Suppose you are doing a sequential search of the list [15, 18, 2, 19, 18, 0, 8, 14, 19, 14].  How many comparisons would you need to do in order to find the key 18?</p>
+          <p>Suppose you are doing a sequential search of the list [15, 18, 2, 19, 18, 0, 8, 14, 19, 14].  How many comparisons would you need to do in order to find the key 18?</p>
         </statement>
         <choices>
           <choice>
@@ -213,7 +232,7 @@ print(ordered_sequential_search(test_list, 13))
       </exercise>
       <exercise label="question_SRCH_2">
         <statement>
-          <p>Q-4: Suppose you are doing a sequential search of the ordered list [3, 5, 6, 8, 11, 12, 14, 15, 17, 18].  How many comparisons would you need to do in order to find the key 13?</p>
+          <p>Suppose you are doing a sequential search of the ordered list [3, 5, 6, 8, 11, 12, 14, 15, 17, 18].  How many comparisons would you need to do in order to find the key 13?</p>
         </statement>
         <choices>
           <choice>

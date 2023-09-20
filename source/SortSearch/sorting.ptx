@@ -25,7 +25,7 @@
             total number of comparisons will be the most common way to measure a
             sort procedure. Second, when values are not in the correct position with
             respect to one another, it may be necessary to exchange them. This
-            exchange is a costly operation and the total number of exchanges will
+            exchange is a costly operation, and the total number of exchanges will
             also be important for evaluating the overall efficiency of the
             algorithm.</p>
 </section>

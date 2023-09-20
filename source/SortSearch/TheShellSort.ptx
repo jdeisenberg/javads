@@ -9,6 +9,9 @@
             items, the Shell sort uses an increment <m>i</m>, sometimes called the
             <term>gap</term>, to create a sublist by choosing all items that are <m>i</m> items
             apart.</p>
+          <aside>
+            <p>The Shell sort is named after <url href="https://en.wikipedia.org/wiki/Donald_Shell">Donald Shell</url>, who first published the algorithm in 1959.</p>
+          </aside>
   <p>This can be seen in <xref ref="i19_id1fig-incrementsa"/>. This list has nine items. If
             we use an increment of three, there are three sublists, each of which
             can be sorted by an insertion sort. After completing these sorts, we get
@@ -21,23 +24,28 @@
     <caption>A Shell Sort with Increments of Three</caption>
     <image source="SortSearch/Figures/shellsortA.png" width="50%"/>
   </figure>
+
   <figure align="center" xml:id="i19_id2fig-incrementsb">
     <caption>A Shell Sort after Sorting Each Sublist</caption>
     <image source="SortSearch/Figures/shellsortB.png" width="50%"/>
   </figure>
+
   <p><xref ref="fig-incrementsc"/> shows a final insertion sort using an increment of
             one&#x2014;in other words, a standard insertion sort. Note that by performing
             the earlier sublist sorts, we have now reduced the total number of
             shifting operations necessary to put the list in its final order. For
             this case, we need only four more shifts to complete the process.</p>
+
   <figure align="center" xml:id="fig-incrementsc">
     <caption>ShellSort: A Final Insertion Sort with Increment of 1</caption>
     <image source="SortSearch/Figures/shellsortC.png" width="50%"/>
   </figure>
+
   <figure align="center" xml:id="fig-incrementsd">
     <caption>Initial Sublists for a Shell Sort</caption>
     <image source="SortSearch/Figures/shellsortD.png" width="50%"/>
   </figure>
+
   <p>We said earlier that the way in which the increments are chosen is the
             unique feature of the Shell sort. The function shown in <xref ref="lst-shell"/>
             uses a different set of increments. In this case, we begin with
@@ -49,62 +57,58 @@
             partially sorted lists after each increment, with the final sort being
             an insertion sort with an increment of one.</p>
 <listing xml:id="lst-shell">
-<program label="lst-shell"  interactive="activecode" language="python">
+  <caption>The Shell Sort</caption>
+<program label="lst-shell" language="java">
     <input>
-def shell_sort(a_list):
-    sublist_count = len(a_list) // 2
-    while sublist_count &gt; 0:
-        for pos_start in range(sublist_count):
-            gap_insertion_sort(a_list, pos_start, sublist_count)
-        print("After increments of size", sublist_count, "the list is", a_list)
-        sublist_count = sublist_count // 2
+import java.util.Arrays;
 
+public class ShellSortExample {
 
-def gap_insertion_sort(a_list, start, gap):
-    for i in range(start + gap, len(a_list), gap):
-        cur_val = a_list[i]
-        cur_pos = i
-        while cur_pos &gt;= gap and a_list[cur_pos - gap] &gt; cur_val:
-            a_list[cur_pos] = a_list[cur_pos - gap]
-            cur_pos = cur_pos - gap
-        a_list[cur_pos] = cur_val
+    public static void insertionSort(int[] list) {
+        int sublistCount = list.length / 2;
+        while (sublistCount &gt; 0) {
+            for (int startPos = 0; startPos &lt; sublistCount; startPos++) {
+                gapInsertionSort(list, startPos, sublistCount);
+            }
+            System.out.printf("After increments of size %d, the list is %s%n",
+                sublistCount, Arrays.toString(list));
+            sublistCount = sublistCount / 2;
+        }
+    }
 
+    private static void gapInsertionSort(int[] list, int start, int gap) {
+        for (int i = start + gap; i &lt; list.length; i = i + gap) {
+            int value = list[i];
+            int position = i;
+            while (position &gt;= gap &amp;&amp; list[position - gap] &gt; value) {
+                list[position] = list[position - gap];
+                position = position - gap;
+            }
+            list[position] = value;
+        }
+    }
 
-a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-shell_sort(a_list)
-print(a_list)
+    public static void main(String[] args) {
+        int[] testList = {54, 26, 93, 17, 77, 31, 44, 55, 20};
+        System.out.println("Start point:  " + Arrays.toString(testList));
+        insertionSort(testList);
+        System.out.println("Final result: " + Arrays.toString(testList));
+    }
+}
         </input>
   </program>
 </listing>
 
-  <!--For more detail, CodeLens 5 allows you to step through the algorithm.-->
-  <!---->
-  <!---->
-  <!--.. codelens:: shellSorttrace-->
-  <!--:caption: Tracing the Shell Sort-->
-  <!---->
-  <!--def shell_sort(a_list):-->
-  <!--sublist_count = len(a_list) // 2-->
-  <!--while sublist_count > 0:-->
-  <!--for pos_start in range(sublist_count):-->
-  <!--gap_insertion_sort(a_list, pos_start, sublist_count)-->
-  <!--print("After increments of size", sublist_count, "the list is", a_list)-->
-  <!--sublist_count = sublist_count // 2-->
-  <!---->
-  <!---->
-  <!--def gap_insertion_sort(a_list, start, gap):-->
-  <!--for i in range(start + gap, len(a_list), gap):-->
-  <!--cur_val = a_list[i]-->
-  <!--cur_pos = i-->
-  <!--while cur_pos >= gap and a_list[cur_pos - gap] > cur_val:-->
-  <!--a_list[cur_pos] = a_list[cur_pos - gap]-->
-  <!--cur_pos = cur_pos - gap-->
-  <!--a_list[cur_pos] = cur_val-->
-  <!---->
-  <!---->
-  <!--a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]-->
-  <!--shell_sort(a_list)-->
-  <!--print(alist)-->
+<p>Here is the output from the program:</p>
+<console><output>
+Start point:  [54, 26, 93, 17, 77, 31, 44, 55, 20]
+After increments of size 4, the list is [20, 26, 44, 17, 54, 31, 93, 55, 77]
+After increments of size 2, the list is [20, 17, 44, 26, 54, 31, 77, 55, 93]
+After increments of size 1, the list is [17, 20, 26, 31, 44, 54, 55, 77, 93]
+Final result: [17, 20, 26, 31, 44, 54, 55, 77, 93]
+</output></console>
+
+
   <p>At first glance you may think that a Shell sort cannot be better than an
             insertion sort since it does a complete insertion sort as the last
             step. It turns out, however, that this final insertion sort does not
@@ -123,8 +127,8 @@ print(a_list)
     <title>Self Check</title>
     <exercise label="question_sort_4">
       <statement>
-        <p>Q-3: Given the following list of numbers:  [5, 16, 20, 12, 3, 8, 9, 17, 19, 7]
-                Which answer illustrates the contents of the list after all swapping is complete for a gap size of 3?</p>
+        <p>Given the following list of numbers:</p><p>[5, 16, 20, 12, 3, 8, 9, 17, 19, 7]</p>
+        <p>Which answer illustrates the contents of the list after all swapping is complete for a gap size of 3?</p>
       </statement>
       <choices>
         <choice correct="yes">

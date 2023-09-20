@@ -68,7 +68,7 @@
 
             </exercise>
 
-            <exercise><p>Consider the list of characters: [<c>"P", "Y", "T", "H", "O", "N"</c>]. Show
+            <exercise><p>Consider the list of characters: [<c>"G", "A", "R", "L", "I", "C"</c>]. Show
                     how this list is sorted using the following algorithms:</p>
 
             <p><ul>
@@ -100,15 +100,15 @@
    starting and ending index values for the sublist. Generate a random,
    ordered list of integers and do a benchmark analysis.</p></exercise>
 
-            <exercise><p>Implement the <c>len</c> method (<c>__len__</c>) for the hash table Map ADT
+            <exercise><p>Implement the <c>size</c> method for the hash table Map ADT
    implementation.</p></exercise>
 
-            <exercise><p>Implement the <c>in</c> method (<c>__contains__</c>) for the hash table Map
+            <exercise><p>Implement the <c>containsKey</c> method for the hash table Map
    ADT implementation.</p></exercise>
 
             <exercise><p>How can you delete items from a hash table that uses chaining for
    collision resolution? How about if open addressing is used? What are
-   the special circumstances that must be handled? Implement the <c>del</c>
+   the special circumstances that must be handled? Implement the <c>removeKey</c>
    method for the <c>HashTable</c> class.</p></exercise>
 
             <exercise><p>In the hash table map implementation, the hash table size was chosen
@@ -124,8 +124,8 @@
    Perform a benchmark analysis using some of the sorting algorithms
    from this chapter. What is the difference in execution speed?</p></exercise>
 
-            <exercise><p>A bubble sort can be modified to “bubble” in both directions. The
-   first pass moves “up” the list, and the second pass moves “down.”
+   <exercise><p>A bubble sort can be modified to <q>bubble</q> in both directions. The
+                   first pass moves <q>up</q> the list, and the second pass moves <q>down.</q>
    This alternating pattern continues until no more passes are
    necessary. Implement this variation and describe under what
    circumstances it might be appropriate.</p></exercise>
@@ -133,17 +133,17 @@
             <exercise><p>Perform a benchmark analysis for a shell sort, using different
    increment sets on the same list.</p></exercise>
 
-            <exercise><p>Implement the <c>merge_sort</c> function without using the slice
+            <exercise><p>Implement the <c>mergeSort</c> function without using the slice
    operator.</p></exercise>
 
             <exercise><p>One way to improve the quicksort is to use an insertion sort on
-   lists that have a short length (call it the “partition limit”). Why
+                            lists that have a short length (call it the <q>partition limit</q>). Why
    does this make sense? Reimplement the quicksort and use it to sort
    a random list of integers. Perform an analysis using different list
    sizes for the partition limit.</p></exercise>
 
             <exercise><p>Implement the median of three method for selecting a pivot value as a
-   modification to <c>quick_sort</c>. Run an experiment to compare the two
+   modification to <c>quickSort</c>. Run an experiment to compare the two
    techniques.</p></exercise>
 </exercises>
 </section>

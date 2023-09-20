@@ -44,22 +44,33 @@
             of an exchange since only one assignment is performed. In benchmark
             studies, insertion sort will show very good performance.</p>
 <listing xml:id="lst-insertion">
-<program label="lst-insertion"  interactive="activecode" language="python">
+  <caption>The Insertion Sort</caption>
+<program label="lst-insertion" language="java">
     <input>
-def insertion_sort(a_list):
-    for i in range(1, len(a_list)):
-        cur_val = a_list[i]
-        cur_pos = i
+import java.util.Arrays;
 
-        while cur_pos &gt; 0 and a_list[cur_pos - 1] &gt; cur_val:
-            a_list[cur_pos] = a_list[cur_pos - 1]
-            cur_pos = cur_pos - 1
-        a_list[cur_pos] = cur_val
+public class InsertionSortExample {
 
+    public static void insertionSort(int[] list) {
+        for (int i = 1; i &lt; list.length; i++) {
+            int value = list[i];
+            int position = i;
 
-a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-insertion_sort(a_list)
-print(a_list)
+            while (position > 0 &amp;&amp; list[position - 1] > value) {
+                list[position] = list[position - 1];
+                position = position - 1;
+            }
+            list[position] = value;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] testList = {54, 26, 93, 17, 77, 31, 44, 55, 20};
+        System.out.println("Start point:  " + Arrays.toString(testList));
+        insertionSort(testList);
+        System.out.println("Final result: " + Arrays.toString(testList));
+    }
+}
         </input>
   </program>
 </listing>
@@ -87,12 +98,9 @@ print(a_list)
     <title>Self Check</title>
     <exercise label="question_sort_3">
       <statement>
-        <dl>
-          <li>
-            <title>Q-3:  Suppose you have the following list of numbers to sort: &lt;br&gt;</title>
-            <p>[15, 5, 4, 18, 12, 19, 14, 10, 8, 20] which list represents the partially sorted list after three complete passes of insertion sort?</p>
-          </li>
-        </dl>
+            <p>Suppose you have the following list of numbers to sort:</p>
+            <p>[15, 5, 4, 18, 12, 19, 14, 10, 8, 20]</p>
+            <p>Which list represents the partially sorted list after three complete passes of insertion sort?</p>
       </statement>
       <choices>
         <choice>

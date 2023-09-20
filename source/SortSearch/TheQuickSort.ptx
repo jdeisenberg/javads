@@ -5,6 +5,9 @@
             as the merge sort, while not using additional storage. As a trade-off,
             however, it is possible that the list may not be divided in half. When
             this happens, we will see that performance is diminished.</p>
+          <aside>
+            <p>The quicksort algorithm was first published by <url href="https://en.wikipedia.org/wiki/Tony_Hoare">Sir Charles Antony Richard Hoare</url> in 1961.</p>
+          </aside>
   <p>A quicksort first selects a value, which is called the <term>pivot value</term>.
             Although there are many different ways to choose the pivot value, we
             will simply use the first item in the list. The role of the pivot value
@@ -23,7 +26,7 @@
     <image source="SortSearch/Figures/firstsplit.png" width="50%"/>
   </figure>
   <p>Partitioning begins by locating two position markers&#x2014;let's call them
-            <c>left_mark</c> and <c>right_mark</c>&#x2014;at the beginning and end of the remaining
+            <c>leftMark</c> and <c>rightMark</c>&#x2014;at the beginning and end of the remaining
             items in the list (positions 1 and 8 in <xref ref="i15_id2fig-partitiona"/>). The goal
             of the partition process is to move items that are on the wrong side
             with respect to the pivot value while also converging on the split
@@ -33,14 +36,14 @@
     <caption>Finding the Split Point for 54</caption>
     <image source="SortSearch/Figures/partitionA.png" width="50%"/>
   </figure>
-  <p>We begin by incrementing <c>left_mark</c> until we locate a value that is
-            greater than the pivot value. We then decrement <c>right_mark</c> until we
+  <p>We begin by incrementing <c>leftMark</c> until we locate a value that is
+            greater than the pivot value. We then decrement <c>rightMark</c> until we
             find a value that is less than the pivot value. At this point we have
             discovered two items that are out of place with respect to the eventual
             split point. For our example, this occurs at 93 and 20. Now we can
             exchange these two items and then repeat the process again.</p>
-  <p>At the point where <c>right_mark</c> becomes less than <c>left_mark</c>, we
-            stop. The position of <c>right_mark</c> is now the split point. The pivot
+  <p>At the point where <c>rightMark</c> becomes less than <c>leftMark</c>, we
+            stop. The position of <c>rightMark</c> is now the split point. The pivot
             value can be exchanged with the contents of the split point and the
             pivot value is now in place (<xref ref="fig-partitionb"/>). In addition, all the
             items to the left of the split point are less than the pivot value, and
@@ -51,99 +54,76 @@
     <caption>Completing the Partition Process to Find the Split Point for 54</caption>
     <image source="SortSearch/Figures/partitionB.png" width="50%"/>
   </figure>
-  <p>The <c>quick_sort</c> function shown in <xref ref="lst-quick"/> invokes a recursive
-            function, <c>quick_sort_helper</c>. <c>quick_sort_helper</c> begins with the same
+  <p>The <c>quickSort</c> function shown in <xref ref="lst-quick"/> invokes a recursive
+            function, <c>quickSortHelper</c>. <c>quickSortHelper</c> begins with the same
             base case as the merge sort. If the length of the list is less than or
             equal to one, it is already sorted. If it is greater, then it can be
             partitioned and recursively sorted. The <c>partition</c> function
             implements the process described earlier.</p>
 <listing xml:id="lst-quick">
-<program label="lst-quick"  interactive="activecode" language="python">
+  <caption>The Quicksort Program</caption>
+<program label="lst-quick" language="java">
     <input>
-def quick_sort(a_list):
-    quick_sort_helper(a_list, 0, len(a_list) - 1)
+import java.util.Arrays;
 
+public class QuickSortExample {
 
-def quick_sort_helper(a_list, first, last):
-    if first &lt; last:
-        split = partition(a_list, first, last)
-        quick_sort_helper(a_list, first, split - 1)
-        quick_sort_helper(a_list, split + 1, last)
+    public static void quickSort(int[] list) {
+        quickSortHelper(list, 0, list.length - 1);
+    }
 
+    public static void quickSortHelper(int[] list, int first, int last) {
+        if (first &lt; last) {
+            int split = partition(list, first, last);
+            quickSortHelper(list, first, split - 1);
+            quickSortHelper(list, split + 1, last);
+        }
+    }
 
-def partition(a_list, first, last):
-    pivot_val = a_list[first]
-    left_mark = first + 1
-    right_mark = last
-    done = False
+    public static int partition(int [] list, int first, int last) {
+        int pivotValue = list[first];
+        int leftMark = first + 1;
+        int rightMark = last;
+        boolean done = false;
 
-    while not done:
-        while left_mark &lt;= right_mark and a_list[left_mark] &lt;= pivot_val:
-            left_mark = left_mark + 1
-        while left_mark &lt;= right_mark and a_list[right_mark] &gt;= pivot_val:
-            right_mark = right_mark - 1
-        if right_mark &lt; left_mark:
-            done = True
-        else:
-            a_list[left_mark], a_list[right_mark] = (
-                a_list[right_mark],
-                a_list[left_mark],
-            )
-    a_list[first], a_list[right_mark] = a_list[right_mark], a_list[first]
+        while (!done) {
+            while (leftMark &lt;= rightMark &amp;&amp; list[leftMark] &lt;= pivotValue) {
+                leftMark = leftMark + 1;
+            }
+            while (leftMark &lt;= rightMark &amp;&amp; list[rightMark] &gt;= pivotValue) {
+                rightMark = rightMark - 1;
+            }
 
-    return right_mark
+            if (rightMark &lt; leftMark) {
+                done = true;
+            } else {
+                int temporary = list[leftMark];
+                list[leftMark] = list[rightMark];
+                list[rightMark] = temporary;
+            }
+        }
 
+        int temporary = list[first];
+        list[first] = list[rightMark];
+        list[rightMark] = temporary;
 
-a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-quick_sort(a_list)
-print(a_list)
+        return rightMark;
+    }
+
+    public static void main(String[] args) {
+        int[] testList = {54, 26, 93, 17, 77, 31, 44, 55, 20};
+        System.out.println("Start point:  " + Arrays.toString(testList));
+
+        quickSort(testList);
+
+        System.out.println("Final result: " + Arrays.toString(testList));
+    }
+}
         </input>
   </program>
 </listing>
 
-  <!--For more detail, CodeLens 7 lets you step through the algorithm.-->
-  <!---->
-  <!--.. codelens:: quicktrace-->
-  <!--:caption: Tracing the Quicksort-->
-  <!---->
-  <!--def quick_sort(a_list):-->
-  <!--quick_sort_helper(a_list, 0, len(a_list) - 1)-->
-  <!---->
-  <!---->
-  <!--def quick_sort_helper(a_list, first, last):-->
-  <!--if first < last:-->
-  <!--split = partition(a_list, first, last)-->
-  <!--quick_sort_helper(a_list, first, split - 1)-->
-  <!--quick_sort_helper(a_list, split + 1, last)-->
-  <!---->
-  <!---->
-  <!--def partition(a_list, first, last):-->
-  <!--pivot_val = a_list[first]-->
-  <!--left_mark = first + 1-->
-  <!--right_mark = last-->
-  <!--done = False-->
-  <!---->
-  <!--while not done:-->
-  <!--while left_mark <= right_mark and a_list[left_mark] <= pivot_val:-->
-  <!--left_mark = left_mark + 1-->
-  <!--while left_mark <= right_mark and a_list[right_mark] >= pivot_val:-->
-  <!--right_mark = right_mark - 1-->
-  <!--if right_mark < left_mark:-->
-  <!--done = True-->
-  <!--else:-->
-  <!--a_list[left_mark], a_list[right_mark] = (-->
-  <!--a_list[right_mark],-->
-  <!--a_list[left_mark],-->
-  <!--)-->
-  <!--a_list[first], a_list[right_mark] = a_list[right_mark], a_list[first]-->
-  <!---->
-  <!--return right_mark-->
-  <!---->
-  <!---->
-  <!--a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]-->
-  <!--quick_sort(a_list)-->
-  <!--print(a_list)-->
-  <p>To analyze the <c>quick_sort</c> function, note that for a list of length
+  <p>To analyze the <c>quickSort</c> function, note that for a list of length
             <m>n</m>, if the partition always occurs in the middle of the list, there
             will again be <m>\log{n}</m> divisions. In order to find the split
             point, each of the <m>n</m> items needs to be checked against the pivot
@@ -172,7 +152,7 @@ print(a_list)
     <title>Self Check</title>
     <exercise label="question_sort_7">
       <statement>
-        <p>Q-3: Given the following list of numbers [14, 17, 13, 15, 19, 10, 3, 16, 9, 12] which answer shows the contents of the list after the second partitioning according to the quicksort algorithm?</p>
+        <p>Given the following list of numbers [14, 17, 13, 15, 19, 10, 3, 16, 9, 12] which answer shows the contents of the list after the second partitioning according to the quicksort algorithm?</p>
       </statement>
       <choices>
         <choice>
@@ -211,7 +191,7 @@ print(a_list)
     </exercise>
     <exercise label="question_sort_8">
       <statement>
-        <p>Q-4: Given the following list of numbers [1, 20, 11, 5, 2, 9, 16, 14, 13, 19] what would be the first pivot value using the median of 3 method?</p>
+        <p>Given the following list of numbers [1, 20, 11, 5, 2, 9, 16, 14, 13, 19] what would be the first pivot value using the median of 3 method?</p>
       </statement>
       <choices>
         <choice>
@@ -235,7 +215,7 @@ print(a_list)
             <p>16</p>
           </statement>
           <feedback>
-            <p>although 16 would be the median of 1, 16, 19 the middle is at len(list) // 2.</p>
+            <p>although 16 would be the median of 1, 16, 19 the middle is at list.length / 2.</p>
           </feedback>
         </choice>
         <choice>
@@ -250,7 +230,7 @@ print(a_list)
     </exercise>
     <exercise label="question_sort_9">
       <statement>
-        <p>Q-5: Which of the following sort algorithms are guaranteed to be O(n log n) even in the worst case?</p>
+        <p>Which of the following sort algorithms are guaranteed to be <m>O(n\log n)</m> even in the worst case?</p>
       </statement>
       <choices>
         <choice>
@@ -258,7 +238,7 @@ print(a_list)
             <p>Shell Sort</p>
           </statement>
           <feedback>
-            <p>Shell sort is about ``n^1.5``</p>
+            <p>Shell sort is about <m>O(n^{1.5})</m>.</p>
           </feedback>
         </choice>
         <choice>
@@ -266,7 +246,7 @@ print(a_list)
             <p>Quick Sort</p>
           </statement>
           <feedback>
-            <p>Quicksort can be O(n log n), but if the pivot points are not well chosen and the list is just so, it can be O(n^2).</p>
+            <p>Quicksort can be <m>O(n\log n)</m>, but if the pivot points are not well chosen and the list is just so, it can be <m>O(n^2)</m>.</p>
           </feedback>
         </choice>
         <choice correct="yes">
@@ -274,7 +254,7 @@ print(a_list)
             <p>Merge Sort</p>
           </statement>
           <feedback>
-            <p>Merge Sort is the only guaranteed O(n log n) even in the worst case.  The cost is that merge sort uses more memory.</p>
+            <p>Merge Sort is the only guaranteed <m>O(n\log n)</m> even in the worst case.  The cost is that merge sort uses more memory.</p>
           </feedback>
         </choice>
         <choice>
@@ -282,7 +262,7 @@ print(a_list)
             <p>Insertion Sort</p>
           </statement>
           <feedback>
-            <p>Insertion sort is ``O(n^2)``</p>
+            <p>Insertion sort is <m>O(n^2)</m></p>
           </feedback>
         </choice>
       </choices>

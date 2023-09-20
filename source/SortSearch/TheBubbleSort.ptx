@@ -23,65 +23,67 @@
             correct position with no further processing required. <xref ref="lst-bubble"/>
             shows the complete <c>bubble_sort</c> function. It takes the list as a
             parameter and modifies it by exchanging items as necessary.</p>
-  <p>The exchange operation, sometimes called a <em>swap</em>, is slightly different
-            in Python than in most other programming languages. Typically, swapping
+  <p>Typically, swapping
             two elements in a list requires a temporary variable (an
             additional memory location). A code fragment such as</p>
-  <pre>temp = a_list[i]
-a_list[i] = a_list[j]
-a_list[j] = temp</pre>
+  <pre>temp = list[i];
+list[i] = list[j];
+list[j] = temp;</pre>
   <p>will exchange the <m>i</m>-th and <m>j</m>-th items in the list. Without the
             temporary storage, one of the values would be overwritten.</p>
-  <p>In Python, it is possible to perform simultaneous assignment. The
+          <aside>
+          <p>In some other languages such as Python, it is possible to use <em>simultaneous assignment</em> to do two assignments at the same time</p>
+        </aside>
+  <!--<p>In Python, it is possible to perform simultaneous assignment. The
             statement <c>a, b = b, a</c> will result in two assignment statements being
             done at the same time (see <xref ref="i15_id2fig-pythonswap"/>). Using simultaneous
-            assignment, the exchange operation can be done in one statement.</p>
-  <p>Lines 5&#x2013;7 in <xref ref="lst-bubble"/> perform the exchange of the <m>i</m> and
+          assignment, the exchange operation can be done in one statement.</p>-->
+  <p>Lines 13&#x2013;15 in <xref ref="lst-bubble"/> perform the exchange of the <m>i</m> and
             <m>(i+1)</m>-th items using the three-step procedure described
-            earlier. Note that we could also have used the simultaneous assignment
-            to swap the items.</p>
-  <figure align="center" xml:id="i15_id2fig-pythonswap">
+            earlier.</p>
+  <!--<figure align="center" xml:id="i15_id2fig-pythonswap">
     <caption>Exchanging Two Values in Python</caption>
     <image source="SortSearch/Figures/swap.png" width="50%"/>
-  </figure>
-  <p>The following activecode example shows the complete <c>bubble_sort</c> function working on the list
-            shown above.</p>
+          </figure>-->
+          <p>The following example shows the complete <c>bubbleSort</c> function working on the preceding list. We have put <c>System.out.printf</c> calls in the code so you can see how it works.</p>
 <listing xml:id="lst-bubble">
-<program label="lst-bubble"  interactive="activecode" language="python">
+  <caption>The Bubble Sort Implementation</caption>
+<program label="prog-bubble" language="java" line-numbers="yes">
     <input>
-def bubble_sort(a_list):
-    for i in range(len(a_list) - 1, 0, -1):
-        for j in range(i):
-            if a_list[j] &gt; a_list[j + 1]:
-                temp = a_list[j]
-                a_list[j] = a_list[j + 1]
-                a_list[j + 1] = temp
+import java.util.Arrays;
 
+public class BubbleSortExample {
 
-a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-bubble_sort(a_list)
-print(a_list)
+    public static void bubbleSort(int[] list) {
+        for (int i = list.length - 1; i > 0; i--) {
+            System.out.printf("Scanning from 0 to %d%n", i);
+            for (int j = 0; j &lt; i; j++) {
+                System.out.printf("   Compare %d and %d", list[j],
+                    list[j + 1]);
+                if (list[j] &gt; list[j + 1]) {
+                    System.out.printf(" -- must swap");
+                    int temporary = list[j];
+                    list[j] = list[j + 1];
+                    list[j + 1] = temporary;
+                }
+                System.out.println();
+            }
+            System.out.println(Arrays.toString(list));
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] testList = {54, 26, 93, 17, 77, 31, 44, 55, 20};
+        System.out.println("Start point: " + Arrays.toString(testList));
+        bubbleSort(testList);
+        System.out.println("Final result: " + Arrays.toString(testList));
+    }
+}
         </input>
   </program>
 </listing>
 
-  <!--For more detail, CodeLens 1 allows you to step through the algorithm.-->
-  <!---->
-  <!--.. codelens:: bubbletrace-->
-  <!--:caption: Tracing the Bubble Sort-->
-  <!---->
-  <!--def bubble_sort(a_list):-->
-  <!--for i in range(len(a_list) - 1, 0, -1):-->
-  <!--for j in range(i):-->
-  <!--if a_list[j] > a_list[j + 1]:-->
-  <!--temp = a_list[j]-->
-  <!--a_list[j] = a_list[j + 1]-->
-  <!--a_list[j + 1] = temp-->
-  <!---->
-  <!---->
-  <!--a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]-->
-  <!--bubble_sort(a_list)-->
-  <!--print(a_list)-->
   <p>To analyze the bubble sort, we should note that regardless of how the
             items are arranged in the initial list, <m>n - 1</m> passes will be
             made to sort a list of size <m>n</m>. <xref ref="sort-search_tbl-bubbleanalysis"/> shows the number
@@ -98,11 +100,11 @@ print(a_list)
   <table xml:id="sort-search_tbl-bubbleanalysis">
     <tabular>
       <title>
-        <term>Table 1: Comparisons for Each Pass of Bubble Sort</term>
+        Comparisons for Each Pass of Bubble Sort
       </title>
       <row header="yes">
-        <cell><term>Pass</term></cell>
-        <cell><term>Comparisons</term></cell>
+        <cell>Pass</cell>
+        <cell>Comparisons</cell>
       </row>
       <row>
         <cell>1</cell>
@@ -139,49 +141,55 @@ print(a_list)
             <xref ref="lst-shortbubble"/> shows this modification, which is often referred
             to as the <term>short bubble</term>.</p>
 <listing xml:id="lst-shortbubble">
-<program label="lst-shortbubble"  interactive="activecode" language="python">
+<program label="lst-shortbubble" language="java" line-numbers="yes">
     <input>
-def bubble_sort_short(a_list):
-    for i in range(len(a_list) - 1, 0, -1):
-        exchanges = False
-        for j in range(i):
-            if a_list[j] &gt; a_list[j + 1]:
-                exchanges = True
-                a_list[j], a_list[j + 1] = a_list[j + 1], a_list[j]
-        if not exchanges:
-            break
+import java.util.Arrays;
 
+public class ShortBubbleExample {
+    public static void bubbleSortShort(int[] list) {
+        for (int i = list.length - 1; i &gt; 0; i--) {
+            boolean exchanges = false;
+            System.out.printf("Scanning from 0 to %d%n", i);
+            for (int j = 0; j &lt; i; j++) {
+                System.out.printf("   Compare %d and %d", list[j],
+                    list[j + 1]);
+                if (list[j] &gt; list[j + 1]) {
+                    System.out.printf(" -- must swap");
+                    int temporary = list[j];
+                    list[j] = list[j + 1];
+                    list[j + 1] = temporary;
+                    exchanges = true;
+                }
+                System.out.println();
+            }
+            System.out.println(Arrays.toString(list));
+            System.out.println();
+            if (!exchanges) {
+                break;
+            }
+        }
+    }
 
-a_list = [20, 30, 40, 90, 50, 60, 70, 80, 100, 110]
-bubble_sort_short(a_list)
-print(a_list)
-        </input>
-  </program>
-</listing>
-  <!--Finally, here is ``bubble_sort_short`` in CodeLens (CodeLens 2)..-->
-  <!---->
-  <!--.. codelens:: shortbubbletrace-->
-  <!--:caption: Tracing the Short Bubble Sort-->
-  <!---->
-  <!--def bubble_sort_short(a_list):-->
-  <!--for i in range(len(a_list) - 1, 0, -1):-->
-  <!--exchanges = False-->
-  <!--for j in range(i):-->
-  <!--if a_list[j] > a_list[j + 1]:-->
-  <!--exchanges = True-->
-  <!--a_list[j], a_list[j + 1] = a_list[j + 1], a_list[j]-->
-  <!--if not exchanges:-->
-  <!--break-->
-  <!---->
-  <!---->
-  <!--a_list = [20, 30, 40, 90, 50, 60, 70, 80, 100, 110]-->
-  <!--bubble_sort_short(a_list)-->
-  <!--print(a_list)-->
+    public static void main(String[] args) {
+        int[] testList = {20, 30, 40, 90, 50, 60, 70, 80, 100, 110};
+        System.out.println("Start point: " + Arrays.toString(testList));
+        bubbleSortShort(testList);
+        System.out.println("Final result: " + Arrays.toString(testList));
+    }
+}
+</input></program></listing>
+
+<note>
+  <title>Java Note</title>
+  <p>The <c>break</c> statement in line 23 does what its name says; it breaks out of the loop. In general, one of the authors recommends avoiding the use of <c>break</c> and using compound conditions instead to determine when the loop ends.</p>
+  <p>While it is possible to write this code without using <c>break</c>, it turns out that, in this case, the code is more readable when you use <c>break</c>.</p>
+</note>
+
   <exercises>
     <title>Self Check</title>
     <exercise label="question_sort_1">
       <statement>
-        <p>Q-4: Suppose you have the following list of numbers to sort: &lt;br&gt;
+        <p>Suppose you have the following list of numbers to sort: &lt;br&gt;
                 [19, 1, 9, 7, 3, 10, 13, 15, 8, 12] which list represents the partially sorted list after three complete passes of bubble sort?</p>
       </statement>
       <choices>
