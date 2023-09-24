@@ -52,8 +52,7 @@
 import java.util.Iterator;
 
 public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Comparable&lt;V&gt;&gt;
-    implements Iterable&lt;BinarySearchTree&lt;K, V&gt;.TreeNode&gt;,
-        Iterator&lt;BinarySearchTree&lt;K, V&gt;.TreeNode&gt; {
+    implements Iterable&lt;BinarySearchTree&lt;K, V&gt;.TreeNode&gt; {
 
     private TreeNode root;
     private int size;
@@ -73,14 +72,6 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
 
     public Iterator&lt;TreeNode&gt; iterator() {
         return this;
-    }
-
-    public boolean hasNext() {
-        return iteraterNode != null;
-    }
-
-    public TreeNode next() {
-        return null;
     }
 
   </input></program></listing>

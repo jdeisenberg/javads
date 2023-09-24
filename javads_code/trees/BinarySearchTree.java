@@ -1,12 +1,10 @@
 import java.util.Iterator;
 
 public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
-    implements Iterable<BinarySearchTree<K, V>.TreeNode>,
-        Iterator<BinarySearchTree<K, V>.TreeNode> {
+    implements Iterable<BinarySearchTree<K, V>.TreeNode> {
 
     private TreeNode root;
     private int size;
-    private TreeNode iteratorNode;
     
     public BinarySearchTree() {
         this.root = null;
@@ -22,27 +20,9 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
     }
         
     public Iterator<TreeNode> iterator() {
-        if (root.leftChild == null) {
-            iteratorNode = root;
-        } else {
-            iteratorNode = root.findMinimumChild();
-        }
-        return this;
+        return new TreeIterator();
     }
- 
-    public boolean hasNext() {
-        return iteratorNode != null;
-    }
-    
-    public TreeNode next() {
-        TreeNode result = null;
-        if (iteratorNode != null) {
-            result = iteratorNode; // .key;
-            iteratorNode = iteratorNode.findSuccessor();
-        }
-        return result;
-    }
-    
+     
     public void put(K key, V value) {
         if (this.root != null) {
             put(key, value, this.root);
@@ -202,4 +182,30 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
             */
         }
     }
+    
+    class TreeIterator implements Iterator<BinarySearchTree<K, V>.TreeNode> {
+        TreeNode iteratorNode;
+        
+        public TreeIterator() {
+            if (root.leftChild == null) {
+                iteratorNode = root;
+            } else {
+                iteratorNode = root.findMinimumChild();
+            }
+        }
+        
+        public boolean hasNext() {
+            return iteratorNode != null;
+        }
+        
+        public TreeNode next() {
+            TreeNode result = null;
+            if (iteratorNode != null) {
+                result = iteratorNode; // .key;
+                iteratorNode = iteratorNode.findSuccessor();
+            }
+            return result;
+        }
+    }
+    
 }

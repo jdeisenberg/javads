@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class BinarySearchTreeExample {
 
     public static void main(String[] args) {
@@ -16,6 +18,16 @@ public class BinarySearchTreeExample {
         for (BinarySearchTree.TreeNode node: tree) {
             System.out.println(node.getKey() + " -> "
                 + node.getValue());
+        }
+        
+        System.out.println("-----------------------------");
+        
+        Iterator<BinarySearchTree<String, String>.TreeNode> iter =
+            tree.iterator();
+        
+        while (iter.hasNext()) {
+            BinarySearchTree.TreeNode node = iter.next();
+            System.out.println(node.getKey() + " -> " + node.getValue());
         }
     }
 }
