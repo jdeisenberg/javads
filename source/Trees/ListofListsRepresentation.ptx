@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
 <section xml:id="trees_list-of-lists-representation">
   <title>List of Lists Representation</title>
-  <p>In a tree represented by a list of lists, we will begin
-            with Python's list data structure and write the functions defined above.
-            Although writing the interface as a set of operations on a list is a bit
-            different from the other abstract data types we have implemented, it is
+  <p>One way to represent a tree is as a list of lists. It is
             interesting to do so because it provides us with a simple recursive data
-            structure that we can look at and examine directly. In a list of lists
+            structure that we can look at and examine directly. In an list of list
             tree, we will store the value of the root node as the first element of
-            the list. The second element of the list will itself be a list that
-            represents the left subtree. The third element of the list will be
+            the array. The second element of the array will itself be a list that
+            represents the left subtree. The third element of the array will be
             another list that represents the right subtree. To illustrate this
             storage technique, let's look at an example. <xref ref="i10_id1fig-smalltree"/>
             shows a simple tree and the corresponding list implementation.</p>
@@ -30,8 +27,8 @@
     ]</pre>
   <p>Notice that we can access subtrees of the list using standard list
             indexing. The root of the tree is <c>my_tree[0]</c>, the left subtree of the
-            root is <c>my_tree[1]</c>, and the right subtree is <c>my_tree[2]</c>. <xref ref="lst-treelist1"/> illustrates creating a simple tree using a
-            list. Once the tree is constructed, we can access the root and the left
+            root is <c>my_tree[1]</c>, and the right subtree is <c>my_tree[2]</c>. <!--<xref ref="lst-treelist1"/> illustrates creating a simple tree using a
+            list. --> Once the tree is constructed, we can access the root and the left
             and right subtrees. One very nice property of this list of lists
             approach is that the structure of a list representing a subtree adheres
             to the structure defined for a tree; the structure itself is recursive!
@@ -39,6 +36,17 @@
             Another nice feature of the list of lists approach is that it
             generalizes to a tree that has many subtrees. In the case where the tree
             is more than a binary tree, another subtree is just another list.</p>
+
+          <p>This representation works great in languages like Python that use <term>dynamic typing</term>. In these languages, data types are determined at runtime. This lets you define arrays with different data types for each item, as in this Python list (which is what they call arrays):</p>
+
+          <pre>my_list = [15, "Python", 37.6, false, ["abc", -27]]</pre>
+
+          <p>Note that the last item of the list is itself another list, again with heterogeneous data. The preceding representation of an array takes advantage of this. The first item in the list is a string; the other items are lists<mdash/>different data types.</p>
+
+          <p>Unfortunately, Java uses <term>static typing</term>. You have to declare a variable's data type, and it doesn't change. Moreover, arrays and ArrayLists cannot have heterogeneous data in them; every element must be of the same data type. There are statically typed languages such as OCaml and Haskell that can specify that a variable can have one of several different types<mdash/>a <q>union type</q><mdash/>, but, again, Java is not such a language.</p>
+
+          <p>Since we don't want to have to give an introduction to Python, we will have to bid a fond farewell to this representation and proceed to a second representation that is more amenable to implementation in Java: nodes and references.</p>
+<!--
 <listing xml:id="lst-treelist1">
 <program label="lst-treelist1"  interactive="activecode" language="python">
     <input>
@@ -233,4 +241,5 @@ testEqual(get_root_val(get_right_child(get_right_child(ttree))), "f")
       </program>
     </exercise>
   </exercises>
+          -->
 </section>

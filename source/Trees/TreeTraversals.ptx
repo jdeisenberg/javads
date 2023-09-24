@@ -30,6 +30,11 @@
                         root node.</p>
     </li>
   </dl>
+
+  <observation>
+    <p>The name of the order is based on where the root is visited; in <em>pre</em>order, we visit it first. For <em>in</em>order, we visit it in the middle, and for <em>post</em>order, we visit it last.</p>
+  </observation>
+
   <p>Let's look at some examples that illustrate each of these three kinds of
             traversals. First let's look at the preorder traversal using a book
             as an example tree. The book is
@@ -59,112 +64,147 @@
   <p>The code for writing tree traversals is surprisingly elegant, largely
             because the traversals are written recursively. You may wonder,
             what is the best way to write an algorithm like preorder
-            traversal? Should it be a function that simply uses a tree as a data
-            structure, or should it be a method of the tree data structure itself?
+            traversal? Should it be a method that uses a tree as a data
+            structure, external to the <c>BinaryTree</c> class, or should it be a method of the tree data structure itself?
             <xref ref="trees_lst-preorder1"/> shows a version of the preorder traversal
-            written as an external function that takes a binary tree as a parameter.
-            The external function is particularly elegant because our base case is
-            simply to check if the tree exists. If the tree parameter is <c>None</c>,
+            written as a static method that takes a binary tree as a parameter.
+            The static method is particularly elegant because our base case is
+            simply to check if the tree exists. If the tree parameter is <c>null</c>,
             then the function returns without taking any action.</p>
-  <listing xml:id="trees_lst-preorder1"><pre>def preorder(tree):
-    if tree:
-        print(tree.key)
-        preorder(tree.left_child)
-        preorder(tree.right_child)</pre></listing>
+          <listing xml:id="trees_lst-preorder1"><pre>
+public static void preorder(BinaryTree&lt;String&gt; tree) {
+    if (tree != null) {
+        System.out.println(tree.getRootValue());
+        preorder(tree.getLeftChild());
+        preorder(tree.getRightChild());
+    }
+}
+</pre></listing>
+
   <p>We can also implement <c>preorder</c> as a method of the <c>BinaryTree</c>
             class. The code for implementing <c>preorder</c> as an internal method is
             shown in <xref ref="trees_lst-preorder2"/>. Notice what happens when we move the
             code from external to internal. In general, we just replace <c>tree</c>
-            with <c>self</c>. However, we also need to modify the base case. The
+            with <c>this</c>. Also, because this method is part of <c>BinaryTree</c>, it can directly
+            access the fields. However, we also need to modify the base case. The
             internal method must check for the existence of the left and the right
             children <em>before</em> making the recursive call to <c>preorder</c>.</p>
-  <listing xml:id="trees_lst-preorder2"><pre>def preorder(self):
-    print(self.key)
-    if self.left_child:
-        self.left_child.preorder()
-    if self.right_child:
-        self.right_child.preorder()</pre></listing>
+  <listing xml:id="trees_lst-preorder2"><pre>
+public void preorder() {
+    System.out.println(this.key);
+    if (this.leftChild != null) {
+        this.leftChild.preorder();
+    }
+    if (this.rightChild != null) {
+        this.rightChild.preorder();
+    }
+}
+  </pre></listing>
   <p>Which of these two ways to implement <c>preorder</c> is best? The answer is
-            that implementing <c>preorder</c> as an external function is probably
+            that implementing <c>preorder</c> as an external method is probably
             better in this case. The reason is that you very rarely want to just
-            traverse the tree. In most cases you are going to want to accomplish
+            traverse the tree and print its values. In most cases, you will want to accomplish
             something else while using one of the basic traversal patterns. In fact,
             we will see in the next example that the <c>postorder</c> traversal pattern
             follows very closely with the code we wrote earlier to evaluate a parse
-            tree. Therefore we will write the rest of the traversals as external
-            functions.</p>
+            tree. Therefore, we will write the rest of the traversals as external
+            methods.</p>
+
   <p>The algorithm for the <c>postorder</c> traversal, shown in
             <xref ref="trees_lst-postorder1"/>, is nearly identical to <c>preorder</c> except that
             we move the call to print to the end of the function.</p>
-  <listing xml:id="trees_lst-postorder1"><pre>def postorder(tree):
-    if tree:
-        postorder(tree.left_child)
-        postorder(tree.right_child)
-        print(tree.key)</pre></listing>
+          <listing xml:id="trees_lst-postorder1" language="java"><pre>
+public static void postorder(BinaryTree&lt;String&gt; tree) {
+    if (tree != null) {
+        postorder(tree.getLeftChild());
+        postorder(tree.getRightChild());
+        System.out.println(tree.getKeyValue());
+    }
+}
+          </pre></listing>
+
   <p>We have already seen a common use for the postorder traversal, namely
             evaluating a parse tree. Look back at <xref ref="trees_parse-tree"/> again.
             The algorithm evaluates the left subtree, evaluates the right subtree,
             and combines them in the root through the function call to an
             operator.
             Assuming our binary tree is going to store only expression tree data,
-            rewrite the evaluation function, but model it even more closely on
+            we rewrite the evaluation function, but model it even more closely on
             the postorder code in <xref ref="trees_lst-postorder1"/>.</p>
-  <listing xml:id="trees_lst-postordereval"><pre>def postordereval(tree):
-    operators = {
-        "+": operator.add,
-        "-": operator.sub,
-        "*": operator.mul,
-        "/": operator.truediv,
+  <listing xml:id="trees_lst-postordereval"><pre>
+    public static Double postorderEvaluate(BinaryTree&gt;String&gt; tree) {
+        Double leftValue = null;
+        Double rightValue = null;
+        Double result;
+        if (tree != null) {
+            leftValue = postorderEvaluate(tree.getLeftChild());
+            rightValue = postorderEvaluate(tree.getRightChild());
+            if (leftValue != null &amp;&amp; rightValue != null) {
+                String operator = tree.getRootValue();
+                if (operator.equals("+")) {
+                    result = leftValue + rightValue;
+                } else if (operator.equals("-")) {
+                    result = leftValue - rightValue;
+                } else if (operator.equals("*")) {
+                    result = leftValue * rightValue;
+                } else {
+                    result = leftValue / rightValue;
+                }
+                return Double.doubleValu(result);
+            }
+            return Double.parseDouble(tree.getRootValue());
+        } else {
+            return null;
+        }
     }
-    result_1 = None
-    result_2 = None
-    if tree:
-        result_1 = postordereval(tree.left_child)
-        result_2 = postordereval(tree.right_child)
-        if result_1 and result_2:
-            return operators[tree.key](result_1, result_2)
-        return tree.key</pre></listing>
+</pre></listing>
+
   <p>Notice that the form in <xref ref="trees_lst-postorder1"/> is the same as the form
             in <xref ref="trees_lst-postordereval"/>, except that instead of printing the key at
             the end of the function, we return it. This allows us to save the values
             returned from the recursive calls in lines 11 and 12. We
             then use these saved values along with the operator on line 14.</p>
+
   <p>The final traversal we will look at in this section is the inorder
             traversal. In the inorder traversal we visit the left subtree, followed
             by the root, and finally the right subtree. <xref ref="trees_lst-inorder1"/> shows
             our code for the inorder traversal. Notice that in all three of the
-            traversal functions we are simply changing the position of the <c>print</c>
-            function with respect to the two recursive function calls.</p>
-  <listing xml:id="trees_lst-inorder1"><program language="python">
+            traversal functions we are simply changing the position of the <c>System.out.println</c>
+            call with respect to the two recursive function calls.</p>
+  <listing xml:id="trees_lst-inorder1"><program language="java">
     <input>
-def inorder(tree):
-    if tree:
-        inorder(tree.left_child)
-        print(tree.key)
-        inorder(tree.right_child)
+    public static void inorder(BinaryTree&lt;String&gt; tree) {
+        if (tree != null) {
+            inorder(tree.leftChild);
+            System.out.println(tree.key);
+            inorder(tree.rightChild);
+        }
+    }
 </input>
   </program></listing>
-  <p>If we perform a simple inorder traversal of a parse tree, we get our
+  <p>If we perform an inorder traversal of a parse tree, we get our
             original expression back without any parentheses. Let's modify the
             basic inorder algorithm to allow us to recover the fully parenthesized
-            version of the expression. The only modifications we will make to the
-            basic template are as follows: print a left parenthesis <em>before</em> the
-            recursive call to the left subtree, and print a right parenthesis
+            version of the expression as a string. The only modifications we will make to the
+            basic template are as follows: put a left parenthesis <em>before</em> the
+            recursive call to the left subtree, and put a right parenthesis
             <em>after</em> the recursive call to the right subtree. The modified code is
             shown in <xref ref="trees_lst-printexp"/>.</p>
-  <listing xml:id="trees_lst-printexp"><program language="python">
+  <listing xml:id="trees_lst-printexp"><program language="java">
     <input>
-def print_exp(tree):
-    result = ""
-    if tree:
-        result = "(" + print_exp(tree.left_child)
-        result = result + str(tree.key)
-        result = result + print_exp(tree.right_child) + ")"
-    return result
+    public static String expressionToString(BinaryTree&lt;String&gt; tree) {
+        String result = "";
+        if (tree != null) {
+            result = result + "(" + expressionToString(tree.leftChild);
+            result = result + tree.key;
+            result = result + expressionToString(tree.rightChild) + ")";
+        }
+        return result;
+    }
 </input>
   </program></listing>
-  <p>Notice that the <c>print_exp</c> function as we have implemented it puts
+  <p>Notice that the <c>expressionToString</c> method as we have implemented it puts
             parentheses around each number. While not incorrect, the parentheses are
             clearly not needed. In the exercises at the end of this chapter you are
-            asked to modify the <c>print_exp</c> function to remove this set of parentheses.</p>
+            asked to modify the <c>expressionToString</c> function to remove this set of parentheses.</p>
 </section>

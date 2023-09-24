@@ -12,7 +12,7 @@
         <p><c>insert(k)</c> adds a new item to the heap.</p>
       </li>
       <li>
-        <p><c>get_min()</c> returns the item with the minimum key value, leaving
+        <p><c>getMin()</c> returns the item with the minimum key value, leaving
                     the item in the heap.</p>
       </li>
       <li>
@@ -20,7 +20,7 @@
                     the item from the heap.</p>
       </li>
       <li>
-        <p><c>is_empty()</c> returns <c>True</c> if the heap is empty, <c>False</c> otherwise.</p>
+        <p><c>isEmpty()</c> returns <c>True</c> if the heap is empty, <c>False</c> otherwise.</p>
       </li>
       <li>
         <p><c>size()</c> returns the number of items in the heap.</p>
@@ -31,23 +31,39 @@
     </ul>
   </p>
   <p><xref ref="lst-heap1"/> demonstrates the use of some of the binary
-            heap methods.  Notice that no matter what order we add items to the heap, the smallest
-            is removed each time.</p>
-<listing xml:id="lst-heap1"> <program label="lst-heap1"  interactive="activecode" language="python">
+            heap methods. </p>
+<listing xml:id="lst-heap1">
+<program label="lst-heap1" language="java">
     <input>
-from pythonds3.trees import BinaryHeap
+public class BinaryHeapTest {
+    public static void main(String[] args) {
+        BinaryHeap&lt;Integer&gt; myHeap = new BinaryHeap&lt;&gt;();
+        myHeap.insert(5);
+        myHeap.insert(7);
+        myHeap.insert(3);
+        myHeap.insert(11);
+        System.out.println("Min value: " + myHeap.getMin());
 
-my_heap = BinaryHeap()
-my_heap.insert(5)
-my_heap.insert(7)
-my_heap.insert(3)
-my_heap.insert(11)
-
-print(my_heap.delete())
-print(my_heap.delete())
-print(my_heap.delete())
-print(my_heap.delete())
+        System.out.println("Deleting items: ");
+        System.out.println(myHeap.delete());
+        System.out.println(myHeap.delete());
+        System.out.println(myHeap.delete());
+        System.out.println(myHeap.delete());
+    }
+}
         </input>
   </program>
 </listing>
+
+<p>Here is its output:</p>
+<console><output>Min value: 3
+Size: 4
+Deleting items:
+3
+5
+7
+11
+</output></console>
+<p> Notice that no matter what order we add items to the heap, the smallest
+  is removed each time.</p>
 </section>
