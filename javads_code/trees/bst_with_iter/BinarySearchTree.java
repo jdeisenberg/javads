@@ -79,8 +79,8 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
     }
     
     class TreeNode {
-        K key;
-        V value;
+        private K key;
+        private V value;
         TreeNode leftChild;
         TreeNode rightChild;
         TreeNode parent;
@@ -100,27 +100,33 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
             this.rightChild = right;
             this.parent = parent;
         }
-                
+        
+        /* Is this node a left child of a parent? */
         boolean isLeftChild() {
             return parent != null && parent.leftChild == this;
         }
         
+        /* Is this node a right child of a parent? */
         boolean isRightChild() {
             return parent != null && parent.rightChild == this;
         }
         
+        /* Is this the root node? (The root node has no parent) */
         boolean isRoot() {
             return parent == null;
         }
         
+        /* Is this a leaf node? (Leaf nodes have no children) */
         boolean isLeaf() {
             return (leftChild == null && rightChild == null);
         }
         
+        /* Does this node have any children? */
         boolean hasAnyChild() {
             return leftChild != null || rightChild != null;
         }
         
+        /* Does this node have both left and right children? */
         boolean hasChildren() {
             return leftChild != null && rightChild != null;
         }
@@ -145,7 +151,15 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
         public V getValue() {
             return this.value;
         }
-                
+        
+        public String toString() {
+            String keyStr = (key == null) ? "null" : key.toString();
+            String valStr = (value == null) ? "null" : value.toString();
+            return "key: " + key + " value: " + value + "\n  " +
+                " left: " + leftChild + " right: " + rightChild + 
+                "parent: " + parent;
+        }
+
         TreeNode findSuccessor() {
             TreeNode successor = null;
             if (rightChild != null) {
@@ -171,16 +185,6 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
             }
             return current;
         }
-        
-        public void debug() {
-            /*
-            if (this != null) {
-                System.err.println("Key: " + key + " value: " + value + " left: " + leftChild + " right: " + rightChild + " parent: " + parent);
-            } else {
-                System.err.println("null");
-            }
-            */
-        }
     }
     
     class TreeIterator implements Iterator<BinarySearchTree<K, V>.TreeNode> {
@@ -201,11 +205,10 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
         public TreeNode next() {
             TreeNode result = null;
             if (iteratorNode != null) {
-                result = iteratorNode; // .key;
+                result = iteratorNode;
                 iteratorNode = iteratorNode.findSuccessor();
             }
             return result;
         }
     }
-    
 }

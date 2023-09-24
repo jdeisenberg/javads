@@ -51,8 +51,8 @@
   <input>
 import java.util.Iterator;
 
-public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Comparable&lt;V&gt;&gt;
-    implements Iterable&lt;BinarySearchTree&lt;K, V&gt;.TreeNode&gt; {
+public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;,
+  V extends Comparable&lt;V&gt;&gt; {
 
     private TreeNode root;
     private int size;
@@ -70,21 +70,17 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
         return root;
     }
 
-    public Iterator&lt;TreeNode&gt; iterator() {
-        return this;
-    }
-
   </input></program></listing>
 
   <note>
   <title>Java Note</title>
-  <p>There are a lot of new Java constructs to unpack here.
-  First, in line 3, we define this class as requiring two generic data types, <c>K</c> for the key and <c>V</c> for
+  <p>There are some new Java constructs to unpack here.
+  First, in lines 3 and 4, we define this class as requiring two generic data types, <c>K</c> for the key and <c>V</c> for
   the value. We may need to do comparisons on both keys and values, so we want to make sure each data type
   <c>extends Comparable</c>.</p>
 
-  <p>We would also like to be able to use an extended <c>for</c> loop to iterate through a <c>BinarySearchTree</c>.
-  Lines 4 and 5 say that our class is <c>Iterable</c> and we will provide an <c>Iterator</c> that <c>for</c> (and other code) can use.  Line 9 declares a variable that we will use when iterating. Lines 23 and 24 return the iterator; lines 27&#x2013;33 are methods that an <c>Iterator</c> uses to determine whether iteration has ended, and how to return the next values. (At the moment, these are placeholder methods.)</p>
+  <p>We would also like to be able to use an extended <c>for</c> loop to iterate through a <c>BinarySearchTree</c>, so we need to import the <c>Iterator</c> class in line 1. We will add the code for iteration in <xref ref="iterate-binary-search-tree"/>.
+  </p>
   </note>
 
   <p>The <c>TreeNode</c> class provides many helper methods that make the work
@@ -99,14 +95,14 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
 
             The <c>TreeNode</c> class will also explicitly keep track
             of the parent as an attribute of each node. You will see why this is
-            important when we discuss the implementation for the <c>remove</c> method.</p>
+            important when we discuss the implementation for the <c>remove</c> method in <xref ref="remove-key-binary-search-tree"/>.</p>
 
   <p>We have <term>overloaded</term> the constructor. In lines 16&#x2013;22, the constructor
     is given all the information a <c>TreeNode</c> needs. Sometimes, though, we want to construct a <c>TreeNode</c> without only some of the information. The constructors in lines 8&#x2013;14 call the 5-argument constructor to provide the <q>missing</q> arguments. (Using <c>this</c> as a method name calls the constructor.)</p>
   <listing xml:id="trees_lst-bst2"><program language="java" line-numbers="yes"><input>
-  class TreeNode {
-        K key;
-        V value;
+    class TreeNode {
+        private K key;
+        private V value;
         TreeNode leftChild;
         TreeNode rightChild;
         TreeNode parent;
@@ -127,26 +123,32 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
             this.parent = parent;
         }
 
+        /* Is this node a left child of a parent? */
         boolean isLeftChild() {
             return parent != null &amp;&amp; parent.leftChild == this;
         }
 
+        /* Is this node a right child of a parent? */
         boolean isRightChild() {
             return parent != null &amp;&amp; parent.rightChild == this;
         }
 
+        /* Is this the root node? (The root node has no parent) */
         boolean isRoot() {
             return parent == null;
         }
 
+        /* Is this a leaf node? (Leaf nodes have no children) */
         boolean isLeaf() {
             return (leftChild == null &amp;&amp; rightChild == null);
         }
 
+        /* Does this node have any children? */
         boolean hasAnyChild() {
             return leftChild != null || rightChild != null;
         }
 
+        /* Does this node have both left and right children? */
         boolean hasChildren() {
             return leftChild != null &amp;&amp; rightChild != null;
         }
@@ -171,8 +173,29 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
         public V getValue() {
             return this.value;
         }
+
+        public String toString() {
+            String keyStr = (key == null) ? "null" : key.toString();
+            String valStr = (value == null) ? "null" : value.toString();
+            return "key: " + key + " value: " + value + "\n  " +
+                " left: " + leftChild + " right: " + rightChild +
+                "parent: " + parent;
+        }
     }
     </input></program></listing>
+
+    <note>
+    <title>Java Note</title>
+    <p>Lines 76 and 77 introduce Java's <term>ternary operator</term>.  Writing an expression of the form:</p>
+    <pre>variable = (condition) ? trueExpression : falseExpression;</pre>
+    <p>is a shortcut for the following <c>if</c> statement:</p>
+    <pre>
+if (condition) {
+    variable = trueExpression;
+} else {
+    variable = falseExpression;
+}</pre>
+    </note>
   </subsection>
 
   <subsection xml:id="put-binary-search-tree">
@@ -200,13 +223,22 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
     </ul>
   </p>
 
-  <p><xref ref="trees_lst-put"/> shows the Java code for inserting a new node in the tree. The private <c>put</c> method is written recursively following the steps outlined above. Notice that when a new child is inserted into the tree, the <c>currentNode</c> is passed to the new tree as the parent.</p>
+  <p><xref ref="trees_lst-put"/> shows the Java code for inserting a new node in the tree. The public <c>put</c> method with two arguments calls the he private <c>put</c> method, which is written recursively following the steps outlined above. Notice that when a new child is inserted into the tree, the <c>currentNode</c> is passed to the new tree as the parent.</p>
 
   <p>One important problem with our implementation of insertion is that duplicate keys are not handled properly. As our tree is implemented, a duplicate key will create a new node with the same key value in the right subtree of the node having the original key. The result of this is that the node with the new key will never be found during a search. A better way to handle the insertion of a duplicate key is for the value associated with the new key to replace the old value. We leave fixing this bug as an exercise for you.</p>
 
   <listing xml:id="trees_lst-put"><caption>The <c>put</c> Method</caption>
   <program language="java"><input>
-      private void put(K key, V value, TreeNode currentNode) {
+   public void put(K key, V value) {
+        if (this.root != null) {
+            put(key, value, this.root);
+        } else {
+            this.root = new TreeNode(key, value);
+        }
+        this.size = this.size + 1;
+    }
+
+    private void put(K key, V value, TreeNode currentNode) {
         if (key.compareTo(currentNode.key) &lt; 1) {
             if (currentNode.leftChild != null) {
                 put(key, value, currentNode.leftChild);
@@ -225,7 +257,10 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
     }
   </input></program></listing>
 
-
+<note>
+<title>Java Note</title>
+<p>There are two methods named <c>put</c>, but Java does not have a problem with this because they have different <term>method signatures</term>: the method name, the number, and types of arguments. As long as these are different, there is no ambiguity when Java needs to figure out whch method to call. The return type and the access (<c>public</c> or <c>private</c>) are <em>not</em> part of the method signature.</p>
+</note>
   <p><xref ref="i146_id2fig-bstput"/> illustrates the process for inserting a new node
             into a binary search tree. The lightly shaded nodes indicate the nodes
             that were visited during the insertion process.</p>
@@ -305,7 +340,7 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
             <c>BinarySearchTree</c> methods that may need to make use of other data
             from the <c>TreeNode</c> besides the payload.</p>
   <listing xml:id="trees_lst-get">
-  <caption>The <c>put</c> Method</caption>
+  <caption>The <c>get</c> Method</caption>
   <program language="java"><input>
     public V get(K key) {
         if (this.root != null) {
@@ -331,11 +366,6 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
     }
 </input></program></listing>
 
-<note>
-<title>Java Note</title>
-<p>There are two methods named <c>get</c>, but Java does not have a problem with this because they have different <term>method signatures</term>: the method name, the number, and types of arguments. As long as these are different, there is no ambiguity when Java needs to figure out whch method to call. The return type and the access (<c>public</c> or <c>private</c>) are <em>not</em> part of the method signature.</p>
-</note>
-
     <p>We can use the <c>get</c> helper method when implementing the <c>containsKey</c> method in
     <xref ref="trees_lst-contains"/>;
     if it returns a node, we return <c>true</c>; if it returns <c>null</c>, we return <c>false</c>:</p>
@@ -350,6 +380,30 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
     }
   </input></program></listing>
 
+    <p>At this point we have enough to implement a program to test our tree, shown in <xref ref="lst_bst-example1"/>:</p>
+<listing xml:id="lst_bst-example1">
+<caption>Sample Binary Search Tree Program</caption>
+<program language="java"><input>
+public class BinarySearchTreeExample {
+
+    public static void main(String[] args) {
+        BinarySearchTree&lt;String, String&gt; tree = new BinarySearchTree&lt;&gt;();
+
+        tree.put("France", "Paris");
+        tree.put("Japan", "Tokyo");
+        tree.put("Albania", "Tirana");
+        tree.put("Madagascar", "Antananarivo");
+        tree.put("Zimbabwe", "Harare");
+        tree.put("South Korea", "Seoul");
+
+        System.out.println(tree.get("Japan"));  // "Tokyo"
+        System.out.println(tree.get("Brazil")); // null
+    }
+}
+</input></program></listing>
+
+<p>This is a good time to take a break before proceeding to the remainder of this section.</p>
+
 </subsection>
 
 <subsection xml:id="iterate-binary-search-tree">
@@ -358,7 +412,7 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
   <p>Suppose that we would like to iterate over all the keys in the
             tree in order. You already know how to traverse a
             binary tree in order, using the <c>inorder</c> traversal algorithm.
-            However, writing an iterator requires a bit more work since an iterator
+            However, writing an iterator is a bit different since an iterator
             should return only one node each time it is called.</p>
 
   <p>To make our iterator work, we will need two methods in the <c>TreeNode</c> class:</p>
@@ -408,12 +462,11 @@ TreeNode findSuccessor() {
     return successor;
   </input></program>
   </listing>
-  <p>Lines 3 and 4 handle the first case (there is a right child) by calling
-    <c>findMinimumChild</c>. Line 7 tests to see if this node is a left child of its parent (the second case). Otherwise, we have the third case and <c>this</c> is the right child of its parent. Line 10 temporary excludes this node from the tree so we don't end up in an infinite loop, and line 12 retores the <c>parent</c>'s right child.</p>
 
-    <p><xref ref="lst_find-minimum-child"/> shows the code for finding the minimum child. You should convince yourself that the minimum value key in any binary search tree is the leftmost child of the tree. Therefore the <c>findMinimumChild</c>
-            method follows the <c>leftChild</c> references in each node of the
-            subtree until it reaches a node that does not have a left child. The code uses a <c>while</c> loop rather than using recursion to follow the left children, </p>
+  <p>Lines 3 and 4 handle the first case (there is a right child) by calling
+    <c>findMinimumChild</c>. Line 7 tests to see if this node is a left child of its parent (the second case). Otherwise, we have the third case and <c>this</c> is the right child of its parent. Line 10 temporary excludes this node from the tree, and line 12 retores the <c>parent</c>'s right child.</p>
+
+    <p><xref ref="lst_find-minimum-child"/> shows the code for finding the minimum child. You should convince yourself that the minimum value key in any binary search tree is the leftmost child of the tree. Therefore the <c>findMinimumChild</c> method follows the <c>leftChild</c> references in each node of the subtree until it reaches a node that does not have a left child. The code uses a <c>while</c> loop rather than using recursion to follow the left children:</p>
 
     <listing xml:id="lst_find-minimum-child">
     <program language="java" line-numbers="yes">
@@ -427,48 +480,60 @@ TreeNode findMinimumChild() {
 }
     </input></program></listing>
 
-    <p>Now that we have these methods, we can create an <c>Iterator</c> for Java to call when it starts a <c>for</c> loop.  If the tree has no left child, then we initialize the <c>iteratorNode</c> as the the root. It is the smallest item in the tree because everything to the right of the root is larger than the root. If the root has a left child, we need to find the smallest element in the tree as our starting point (line&#xA0;5).</p>
+    <p>Now that we have these methods, we have to modify the <c>BinarySearchTree</c> class. We change the first lines of the class to declare that this class is <c>Iterable</c>:</p>
 
-    <listing xml:id="lst_create_iterator">
+    <program language="java"><input>
+import java.util.Iterator;
+
+public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Comparable&lt;V&gt;&gt;
+    implements Iterable&lt;BinarySearchTree&lt;K, V&gt;.TreeNode&gt; {
+</input></program>
+
+<p>Our next step is to create an <c>Iterator</c> class that Java uses when it starts a <c>for</c> loop. (We can use it ourselves,too.) </p>
+
+    <listing xml:id="lst_iterator_class">
     <caption>Initializing an <c>Iterator</c></caption>
     <program language="java" line-numbers="yes">
     <input>
-public Iterator&lt;TreeNode&gt; iterator() {
-    if (root.leftChild == null) {
-        iteratorNode = root;
-    } else {
-        iteratorNode = root.findMinimumChild();
-    }
-    return this;
-}
-    </input></program></listing>
+    class TreeIterator implements Iterator&lt;BinarySearchTree&lt;K, V&gt;.TreeNode&gt; {
+        TreeNode iteratorNode;
 
-    <p>We now implement two methods used by the iterator. (We can also use them in a <c>while</c> loop ourselves.) <c>hasNext</c> returns <c>true</c> if there is a next node; <c>false</c> otherwise<mdash/>this is used to decide when to end a loop using the iterator.  The <c>next</c> method moves the iterator to the successor node (or null if we have finished traversing the tree) and returns it. <xref ref="lst_next-methods"/> shows the code for these two methods:</p>
-
-    <listing xml:id="lst_next-methods">
-    <caption>Iteration Methods</caption>
-    <program language="java" line-numbers="yes">
-    <input>
-    public boolean hasNext() {
-        return iteratorNode != null;
-    }
-
-    public TreeNode next() {
-        TreeNode result = null;
-        if (iteratorNode != null) {
-            result = iteratorNode;
-            iteratorNode = iteratorNode.findSuccessor();
+        public TreeIterator() {
+            if (root.leftChild == null) {
+                iteratorNode = root;
+            } else {
+                iteratorNode = root.findMinimumChild();
+            }
         }
-        return result;
+
+        public boolean hasNext() {
+            return iteratorNode != null;
+        }
+
+        public TreeNode next() {
+            TreeNode result = null;
+            if (iteratorNode != null) {
+                result = iteratorNode;
+                iteratorNode = iteratorNode.findSuccessor();
+            }
+            return result;
+        }
     }
     </input></program></listing>
 
-    <p>At last! We can now write the program in <xref ref="lst_binary-search-tree-example"/> that tests insertion, accessing nodes,  and traversal of a binary search tree.</p>
+    <p>Line 2 creates a <c>TreeNode</c> that keeps track of where we are in the tree.</p>
+    <p>The constructor is in lines 4&#x2013;10. It sets the <c>iteratorNode</c> to the first (smallest) element in the tree. If the root doesn't have a left child, then the root must be the smallest element, as everything to the right of the root is larger than the root.  Otherwise, if there is a left child, we must find its minimum child in line 8.</p>
 
-    <listing xml:id="lst_binary-search-tree-example">
+    <p>We now implement two methods used by the iterator.  <c>hasNext</c> in lines&#xA0;12&#x2013;14 returns <c>true</c> if there is a next node; <c>false</c> otherwise<mdash/>this is used to decide when to end a loop using the iterator.  The <c>next</c> method in lines&#xA0;16&#x2013;23 moves the iterator to the successor node (or null if we have finished traversing the tree) and returns it.</p>
+
+    <p>At last! We can now write the program in <xref ref="lst_bst-example2"/> that tests insertion, accessing nodes,  and traversal of a binary search tree. In lines&#xA0;18&#x2013;21 we iterate through the tree with a <c>for</c> loop; in lines&#xA0;25&#x2013;31 we set up an iterator of our own for use with a <c>while</c> loop.</p>
+
+    <listing xml:id="lst_bst-example2">
     <caption>Using the Binary Searh Tree</caption>
     <program language="java" line-numbers="yes">
     <input>
+import java.util.Iterator;
+
 public class BinarySearchTreeExample {
 
     public static void main(String[] args) {
@@ -488,16 +553,28 @@ public class BinarySearchTreeExample {
             System.out.println(node.getKey() + " -&gt; "
                 + node.getValue());
         }
+
+        System.out.println("-----------------------------");
+
+        Iterator&lt;BinarySearchTree&lt;String, String&gt;.TreeNode&gt; iter =
+            tree.iterator();
+
+        while (iter.hasNext()) {
+            BinarySearchTree.TreeNode node = iter.next();
+            System.out.println(node.getKey() + " -&gt; " + node.getValue());
+        }
+
     }
 }
     </input></program></listing>
 
-    <p>In line 16, we must use the fully qualified class name <c>BinarySearchTree.TreeNode</c> because the
-    <c>TreeNode</c> class is nested inside the <c>BinarySearchTree</c> class.</p>
+    <p>In line 18, we must use the fully qualified class name <c>BinarySearchTree.TreeNode</c> because the
+    <c>TreeNode</c> class is nested inside the <c>BinarySearchTree</c> class. In line 25, we must also add
+    the data types for the key and value.</p>
     </subsection>
 
-<subsection xml:id="delete-binary-search-tree">
-    <title>Deleting a Key from a Binary Search Tree</title>
+<subsection xml:id="remove-key-binary-search-tree">
+    <title>Removing a Key from a Binary Search Tree</title>
 
   <p>Finally, we turn our attention to the most challenging operation on the
             binary search tree, the deletion of a key (see <xref ref="trees_lst-bst8"/>).
