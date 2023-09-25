@@ -576,28 +576,34 @@ public class BinarySearchTreeExample {
 <subsection xml:id="remove-key-binary-search-tree">
     <title>Removing a Key from a Binary Search Tree</title>
 
-  <p>Finally, we turn our attention to the most challenging operation on the
-            binary search tree, the deletion of a key (see <xref ref="trees_lst-bst8"/>).
-            The first task is to find the
-            node to delete by searching the tree. If the tree has more than one node
-            we search using the <c>get</c> method to find the <c>TreeNode</c> that needs
-            to be removed. If the tree only has a single node, that means we are
-            removing the root of the tree, but we still must check to make sure the
-            key of the root matches the key that is to be deleted. In either case, if
-            the key is not found the <c>remove</c> method raises an error.</p>
-  <listing xml:id="trees_lst-bst8"><pre>def delete(self, key):
-    if self.size &gt; 1:
-        node_to_remove = self._get(key, self.root)
-        if node_to_remove:
-            self._delete(node_to_remove)
-            self.size = self.size - 1
-        else:
-            raise KeyError("Error, key not in tree")
-    elif self.size == 1 and self.root.key == key:
-        self.root = None
-        self.size = self.size - 1
-    else:
-        raise KeyError("Error, key not in tree")</pre></listing>
+  <p>Finally, we turn our attention to the most challenging operation on the binary search tree, the deletion of a key (see <xref ref="trees_lst-remove-key-1"/>). The first task is to find the node to delete by searching the tree. If the tree has more than one node we search using the <c>get</c> method to find the <c>TreeNode</c> that needs to be removed. If the tree only has a single node, that means we are removing the root of the tree, but we still must check to make sure the key of the root matches the key that is to be deleted. In either case, if the key is not found the <c>remove</c> method raises an error.</p>
+
+  <listing xml:id="trees_lst-remove-key-1"><program language="java"><input>
+    public TreeNode removeKey(K key) {
+        if (size > 1) {
+            TreeNode nodeToRemove = get(key, root);
+            if (nodeToRemove != null) {
+                removeNode(nodeToRemove);
+                size = size - 1;
+                return nodeToRemove;
+            } else {
+                throw new NoSuchElementException(
+                    key.toString() + " not in tree.");
+            }
+        } else if (size == 1 &amp;&amp; root.key.equals(key)) {
+            root = null;
+            size = size - 1;
+            return null;
+        } else {
+            throw new NoSuchElementException(
+                    key.toString() + " not in tree.");
+        }
+    }
+
+    public void removeNode(TreeNode currentNode) {
+        // to be determined...
+    }
+</input></program></listing>
   <p>Once we&#x2019;ve found the node containing the key we want to delete, there
             are three cases that we must consider:</p>
   <p>
@@ -625,17 +631,24 @@ public class BinarySearchTreeExample {
     <caption>Deleting Node 5, a Node with Two Children</caption>
     <image source="Trees/Figures/bstdel3.png" width="50%"/>
   </figure>
+
   <p>The first case is straightforward. If the current node has no children,
-            all we need to do is delete the node and remove the reference to this
-            node in the parent. The code for this case is shown in <xref ref="trees_lst-bst9"/>.</p>
-  <listing xml:id="trees_lst-bst9"><pre>if current_node.is_leaf():
-    if current_node == current_node.parent.left_child:
-        current_node.parent.left_child = None
-    else:
-        current_node.parent.right_child = None</pre></listing>
+            all that has to happen is to delete the node and remove the reference to this
+            node in the parent. The code for this case is shown in <xref ref="trees_lst-remove-case-1"/>.</p>
+  <listing xml:id="trees_lst-remove-case-1"><caption>Removing a Leaf Node</caption>
+  <program language="java"><input>
+       if (currentNode.isLeaf() {
+            if (currentNode == currentNode.parent.leftChild) {
+                currentNode.parent.leftChild = null;
+            } else {
+                currentNode.parent.rightChild = null;
+            }
+        }
+  </input></program></listing>
+
   <p>The second case is only slightly more complicated. If a node has only a
-            single child, then we can simply promote the child to take the place of
-            its parent. The code for this case is shown in <xref ref="trees_lst-bst10"/>. As
+            single child, then we promote the child to take the place of
+            its parent. The code for this case is shown in <xref ref="trees_lst-remove-case-2"/>. As
             you look at this code, you will see that there are six cases to consider.
             Since the cases are symmetric with respect to either having a left or
             right child, we will just discuss the case where the current node has a
@@ -662,7 +675,7 @@ public class BinarySearchTreeExample {
       </li>
     </ol>
   </p>
-  <listing xml:id="trees_lst-bst10"><pre>else:  # removing a node with one child
+  <listing xml:id="trees_lst-remove-case-2"><pre>else:  # removing a node with one child
     if current_node.get_left_child():
         if current_node.is_left_child():
             current_node.left_child.parent = current_node.parent
@@ -705,19 +718,19 @@ public class BinarySearchTreeExample {
             how to remove it using the two cases for deletion that we have already
             implemented. Once the successor has been removed, we put it in
             the tree in place of the node to be deleted. The code
-            to handle the third case is shown in <xref ref="trees_lst-bst11"/>.</p>
-  <p>In <xref ref="trees_lst-bst11"/> we make use of the helper methods
+            to handle the third case is shown in <xref ref="trees_lst-remove-key-3"/>.</p>
+  <p>In <xref ref="trees_lst-remove-key-3"/> we make use of the helper methods
             <c>findSuccessor</c> and <c>spliceOut</c> to find and remove the successor.
             The reason we use <c>spliceOut</c> is that it
             goes directly to the node we want to splice out and makes the right
             changes. We could call <c>remove</c> recursively, but then we would waste
             time searching again for the key node.</p>
-  <listing xml:id="trees_lst-bst11"><pre>elif current_node.has_children():  # removing a node with two children
+  <listing xml:id="trees_lst-remove-key-3"><pre>elif current_node.has_children():  # removing a node with two children
     successor = current_node.find_successor()
     successor.splice_out()
     current_node.key = successor.key
     current_node.value = successor.value</pre></listing>
-  <p>The code to find the successor is shown below (see <xref ref="trees_lst-bst12"/>) and, as
+  <p>The code to find the successor is shown below (see <xref ref="trees_lst-splice-out"/>) and, as
             you can see, is a method of the <c>TreeNode</c> class. This code makes use
             of the same properties of binary search trees that cause an inorder
             traversal to print out the nodes in the tree from smallest to largest.</p>
@@ -731,26 +744,7 @@ public class BinarySearchTreeExample {
             search tree is the leftmost child of the tree. Therefore the <c>findMin</c>
             method follows the <c>leftChild</c> references in each node of the
             subtree until it reaches a node that does not have a left child.</p>
-  <listing xml:id="trees_lst-bst12"><pre>def find_successor(self):
-    successor = None
-    if self.right_child:
-        successor = self.right_child.find_min()
-    else:
-        if self.parent:
-            if self.is_left_child():
-                successor = self.parent
-            else:
-                self.parent.right_child = None
-                successor = self.parent.find_successor()
-                self.parent.right_child = self
-    return successor
-
-def find_min(self):
-    current = self
-    while current.left_child:
-        current = current.left_child
-    return current
-
+  <listing xml:id="trees_lst-splice-out"><pre>
 def splice_out(self):
     if self.is_leaf():
         if self.is_left_child():

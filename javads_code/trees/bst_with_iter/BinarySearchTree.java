@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
     implements Iterable<BinarySearchTree<K, V>.TreeNode> {
@@ -78,6 +79,70 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
         return (result != null);
     }
     
+    public TreeNode removeKey(K key) {
+        if (size > 1) {
+            TreeNode nodeToRemove = get(key, root);
+            if (nodeToRemove != null) {
+                removeNode(nodeToRemove);
+                size = size - 1;
+                return nodeToRemove;
+            } else {
+                throw new NoSuchElementException(
+                    key.toString() + " not in tree."); 
+            }
+        } else if (size == 1 && root.key.equals(key)) {
+            root = null;
+            size = size - 1;
+            return null;
+        } else {
+            throw new NoSuchElementException(
+                    key.toString() + " not in tree.");
+        }
+    }
+    
+    public void removeNode(TreeNode currentNode) {
+        // case 1: the current node is a leaf node
+        if (currentNode.isLeaf()) {
+            if (currentNode == currentNode.parent.leftChild) {
+                currentNode.parent.leftChild = null;
+            } else {
+                currentNode.parent.rightChild = null;
+            }
+        }
+        else if (currentNode.leftChild != null) {
+            if (currentNode.isLeftChild()) {
+                currentNode.leftChild.parent = currentNode.parent;
+                currentNode.parent.leftChild = currentNode.leftChild;
+            } else if (currentNode.isRightChild()) {
+                currentNode.leftChild.parent = currentNode.parent;
+                currentNode.parent.rightChild = currentNode.leftChild;
+            } else {
+                currentNode.replaceValue(
+                    currentNode.leftChild.key,
+                    currentNode.leftChild.value,
+                    currentNode.leftChild.leftChild,
+                    currentNode.leftChild.rightChild
+                );
+            }
+            /*
+    else:
+        if current_node.is_left_child():
+            current_node.right_child.parent = current_node.parent
+            current_node.parent.left_child = current_node.right_child
+        elif current_node.is_right_child():
+            current_node.right_child.parent = current_node.parent
+            current_node.parent.right_child = current_node.right_child
+        else:
+            current_node.replace_value(
+                current_node.right_child.key,
+                current_node.right_child.value,
+                current_node.right_child.left_child,
+                current_node.right_child.right_child,
+            )  
+            */  
+        }
+        
+    }
     class TreeNode {
         private K key;
         private V value;
