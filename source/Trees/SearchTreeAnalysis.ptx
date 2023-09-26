@@ -39,10 +39,10 @@
   </figure>
   <p>Now that you understand that the performance of
             the <c>put</c> method is limited by the height of the tree, you can
-            probably guess that other methods, <c>get</c>, <c>in</c>, and <c>del</c>, are limited
+            probably guess that other methods, <c>get</c>, <c>containsKey</c>, and <c>removeKey</c> are limited
             as well. Since <c>get</c> searches the tree to find the key, in the worst
             case the tree is searched all the way to the bottom and no key is found.
-            At first glance <c>del</c> might seem more complicated since it may need
+            At first glance <c>removeKey</c> might seem more complicated since it may need
             to search for the successor before the deletion operation can complete.
             But remember that the worst-case scenario to find the successor is also
             just the height of the tree which means that you would simply double the

@@ -1,6 +1,6 @@
 <section xml:id="trees_balanced-binary-search-trees">
         <title>Balanced Binary Search Trees</title>
-        <p>In the previous section we looked at building a binary search tree. As
+        <p>In <xref ref="trees_search-tree-analysis"/> we looked at building a binary search tree. As
             we learned, the performance of the binary search tree can degrade to
             <m>O(n)</m> for operations like <c>get</c> and <c>put</c> when the tree
             becomes unbalanced. In this section we will look at a special kind of
@@ -14,7 +14,7 @@
             and right subtrees for each node. More formally, we define the balance
             factor for a node as the difference between the height of the left
             subtree and the height of the right subtree.</p>
-        <me>balance\_factor = height(left\_subtree) - height(right\_subtree)</me>
+        <me>balanceFactor = height(leftSubtree) - height(rightSubtree)</me>
         <p>Using the definition for balance factor given above, we say that a
             subtree is left-heavy if the balance factor is greater than zero. If the
             balance factor is less than zero, then the subtree is right-heavy. If the

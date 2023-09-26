@@ -54,8 +54,8 @@ import java.util.Iterator;
 public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;,
   V extends Comparable&lt;V&gt;&gt; {
 
-    private TreeNode root;
-    private int size;
+    TreeNode root;
+    int size;
 
     public BinarySearchTree() {
         this.root = null;
@@ -74,13 +74,15 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;,
 
   <note>
   <title>Java Note</title>
-  <p>There are some new Java constructs to unpack here.
+  <p>There are several new Java constructs to unpack here.
   First, in lines 3 and 4, we define this class as requiring two generic data types, <c>K</c> for the key and <c>V</c> for
   the value. We may need to do comparisons on both keys and values, so we want to make sure each data type
   <c>extends Comparable</c>.</p>
 
   <p>We would also like to be able to use an extended <c>for</c> loop to iterate through a <c>BinarySearchTree</c>, so we need to import the <c>Iterator</c> class in line 1. We will add the code for iteration in <xref ref="iterate-binary-search-tree"/>.
   </p>
+
+  <p>The <c>root</c> and <c>size</c> properties are not declared to be either <c>public</c> or <c>private</c>. Instead, they have <em>default access</em>; other classes and subclasses in the same package (in this case, in the same directory as this file) can access the properties. For convenience, we will be using this default access for everything that does not need to be <c>public</c>.</p>
   </note>
 
   <p>The <c>TreeNode</c> class provides many helper methods that make the work
@@ -101,8 +103,8 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;,
     is given all the information a <c>TreeNode</c> needs. Sometimes, though, we want to construct a <c>TreeNode</c> without only some of the information. The constructors in lines 8&#x2013;14 call the 5-argument constructor to provide the <q>missing</q> arguments. (Using <c>this</c> as a method name calls the constructor.)</p>
   <listing xml:id="trees_lst-bst2"><program language="java" line-numbers="yes"><input>
     class TreeNode {
-        private K key;
-        private V value;
+        K key;
+        V value;
         TreeNode leftChild;
         TreeNode rightChild;
         TreeNode parent;
@@ -170,8 +172,16 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;,
             return this.key;
         }
 
+        public void setKey(K key) {
+            this.key = key;
+        }
+
         public V getValue() {
             return this.value;
+        }
+
+        public void setValue(V value) {
+            this.value = value;
         }
 
         public String toString() {
@@ -186,7 +196,7 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;,
 
     <note>
     <title>Java Note</title>
-    <p>Lines 76 and 77 introduce Java's <term>ternary operator</term>.  Writing an expression of the form:</p>
+    <p>Lines 84 and 85 introduce Java's <term>ternary operator</term>.  Writing an expression of the form:</p>
     <pre>variable = (condition) ? trueExpression : falseExpression;</pre>
     <p>is a shortcut for the following <c>if</c> statement:</p>
     <pre>
@@ -238,7 +248,7 @@ if (condition) {
         this.size = this.size + 1;
     }
 
-    private void put(K key, V value, TreeNode currentNode) {
+    void put(K key, V value, TreeNode currentNode) {
         if (key.compareTo(currentNode.key) &lt; 1) {
             if (currentNode.leftChild != null) {
                 put(key, value, currentNode.leftChild);
@@ -352,7 +362,7 @@ if (condition) {
         return null;
     }
 
-    private TreeNode get(K key, TreeNode currentNode) {
+    TreeNode get(K key, TreeNode currentNode) {
         if (currentNode == null) {
             return null;
         }
@@ -600,7 +610,7 @@ public class BinarySearchTreeExample {
         }
     }
 
-    public void removeNode(TreeNode currentNode) {
+    void removeNode(TreeNode currentNode) {
         // to be determined...
     }
 </input></program></listing>
@@ -669,7 +679,7 @@ public class BinarySearchTreeExample {
       </li>
       <li>
         <p>If the current node has no parent, it must be the root. In this case
-                    we will just replace the <c>key</c>, <c>value</c>, <c>left_child</c>, and
+                    we will replace the <c>key</c>, <c>value</c>, <c>leftChild</c>, and
                     <c>rightChild</c> data by calling the <c>replaceValue</c> method on the
                     root.</p>
       </li>
@@ -689,7 +699,7 @@ public class BinarySearchTreeExample {
     <caption>Adjusting Parent/Child References</caption>
     <program language="java">
     <input>
-    private void adjustParent(TreeNode nodeToRemove, TreeNode childOfRemoved) {
+    void adjustParent(TreeNode nodeToRemove, TreeNode childOfRemoved) {
         if (nodeToRemove.isLeftChild()) {
             childOfRemoved.parent = nodeToRemove.parent;
             nodeToRemove.parent.leftChild = childOfRemoved;
@@ -798,8 +808,8 @@ import java.util.NoSuchElementException;
 public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Comparable&lt;V&gt;&gt;
     implements Iterable&lt;BinarySearchTree&lt;K, V&gt;.TreeNode&gt; {
 
-    private TreeNode root;
-    private int size;
+    TreeNode root;
+    int size;
 
     public BinarySearchTree() {
         this.root = null;
@@ -808,10 +818,6 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
 
     public int size() {
         return size;
-    }
-
-    public TreeNode getRoot() {
-        return root;
     }
 
     public Iterator&lt;TreeNode&gt; iterator() {
@@ -827,7 +833,7 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
         this.size = this.size + 1;
     }
 
-    private void put(K key, V value, TreeNode currentNode) {
+    void put(K key, V value, TreeNode currentNode) {
         if (key.compareTo(currentNode.key) &lt; 1) {
             if (currentNode.leftChild != null) {
                 put(key, value, currentNode.leftChild);
@@ -855,7 +861,7 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
         return null;
     }
 
-    private TreeNode get(K key, TreeNode currentNode) {
+    TreeNode get(K key, TreeNode currentNode) {
         if (currentNode == null) {
             return null;
         }
@@ -894,7 +900,7 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
         }
     }
 
-    private void adjustParent(TreeNode nodeToRemove, TreeNode childOfRemoved) {
+    void adjustParent(TreeNode nodeToRemove, TreeNode childOfRemoved) {
         if (nodeToRemove.isLeftChild()) {
             childOfRemoved.parent = nodeToRemove.parent;
             nodeToRemove.parent.leftChild = childOfRemoved;
@@ -910,7 +916,7 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
         }
     }
 
-    public void removeNode(TreeNode currentNode) {
+    void removeNode(TreeNode currentNode) {
         // case 1: the current node is a leaf node
         if (currentNode.isLeaf()) {
             if (currentNode == currentNode.parent.leftChild) {
@@ -935,8 +941,8 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
     }
 
     class TreeNode {
-        private K key;
-        private V value;
+        K key;
+        V value;
         TreeNode leftChild;
         TreeNode rightChild;
         TreeNode parent;
@@ -1004,8 +1010,16 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
             return this.key;
         }
 
+        public void setKey(K key) {
+            this.key = key;
+        }
+
         public V getValue() {
             return this.value;
+        }
+
+        public void setValue(V value) {
+            this.value = value;
         }
 
         public String toString() {
