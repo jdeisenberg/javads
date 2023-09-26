@@ -100,6 +100,22 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
         }
     }
     
+    private void adjustParent(TreeNode nodeToRemove, TreeNode childOfRemoved) {
+        if (nodeToRemove.isLeftChild()) {
+            childOfRemoved.parent = nodeToRemove.parent;
+            nodeToRemove.parent.leftChild = childOfRemoved;
+        } else if (nodeToRemove.isRightChild()) {
+            childOfRemoved.parent = nodeToRemove.parent;
+            nodeToRemove.parent.rightChild = childOfRemoved;
+        } else {
+            nodeToRemove.replaceValue(
+                childOfRemoved.key,
+                childOfRemoved.value,
+                childOfRemoved.leftChild,
+                childOfRemoved.rightChild);
+        }
+    }    
+
     public void removeNode(TreeNode currentNode) {
         // case 1: the current node is a leaf node
         if (currentNode.isLeaf()) {
@@ -108,41 +124,22 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
             } else {
                 currentNode.parent.rightChild = null;
             }
+        } else if (currentNode.hasChildren()) { // case 3: two chilren
+            TreeNode successor = currentNode.findSuccessor();
+            successor.spliceOut();
+            currentNode.key = successor.key;
+            currentNode.value = successor.value;
         }
-        else if (currentNode.leftChild != null) {
-            if (currentNode.isLeftChild()) {
-                currentNode.leftChild.parent = currentNode.parent;
-                currentNode.parent.leftChild = currentNode.leftChild;
-            } else if (currentNode.isRightChild()) {
-                currentNode.leftChild.parent = currentNode.parent;
-                currentNode.parent.rightChild = currentNode.leftChild;
-            } else {
-                currentNode.replaceValue(
-                    currentNode.leftChild.key,
-                    currentNode.leftChild.value,
-                    currentNode.leftChild.leftChild,
-                    currentNode.leftChild.rightChild
-                );
+        else { // case 2: one child only
+            if (currentNode.leftChild != null) {
+                adjustParent(currentNode, currentNode.leftChild);
             }
-            /*
-    else:
-        if current_node.is_left_child():
-            current_node.right_child.parent = current_node.parent
-            current_node.parent.left_child = current_node.right_child
-        elif current_node.is_right_child():
-            current_node.right_child.parent = current_node.parent
-            current_node.parent.right_child = current_node.right_child
-        else:
-            current_node.replace_value(
-                current_node.right_child.key,
-                current_node.right_child.value,
-                current_node.right_child.left_child,
-                current_node.right_child.right_child,
-            )  
-            */  
+            else {
+                adjustParent(currentNode, currentNode.rightChild);
+            }
         }
-        
     }
+    
     class TreeNode {
         private K key;
         private V value;
@@ -234,7 +231,7 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
                     if (isLeftChild()) {
                         successor = parent;
                     } else {
-                        parent.rightChild = null; // temporarily wipe this out
+                        parent.rightChild = null;
                         successor = parent.findSuccessor();
                         parent.rightChild = this;
                     }
@@ -249,6 +246,32 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
                 current = current.leftChild;
             }
             return current;
+        }
+        
+        void spliceOut() {
+            if (this.isLeaf()) {
+                if (this.isLeftChild()) {
+                    this.parent.leftChild = null;
+                } else {
+                    this.parent.rightChild = null;
+                }
+            } else if (this.hasAnyChild()) {
+                if (this.leftChild != null) {
+                    if (this.isLeftChild()) {
+                        this.parent.leftChild = this.leftChild;
+                    } else {
+                        this.parent.rightChild = this.leftChild;
+                    }
+                    this.leftChild.parent = this.parent;
+                } else {
+                    if (this.isLeftChild()) {
+                        this.parent.leftChild = this.rightChild;
+                    } else {
+                        this.parent.rightChild = this.rightChild;
+                    }
+                    this.rightChild.parent = this.parent;
+                }
+            }
         }
     }
     
