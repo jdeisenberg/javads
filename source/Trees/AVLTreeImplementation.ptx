@@ -29,11 +29,11 @@
     </ul>
   </p>
   <p>We will implement the AVL tree as a subclass of <c>BinarySearchTree</c>. To
-            begin, we will override the <c>_put</c> method and write a new
-            <c>update_balance</c> helper method. These methods are shown in
+            begin, we will override the <c>put</c> helper method and write a new
+            <c>updateBalance</c> helper method. These methods are shown in
             <xref ref="lst-updbal"/>. You will notice that the definition for <c>_put</c> is
             exactly the same as in simple binary search trees except for the addition of
-            the calls to <c>update_balance</c> on lines&#xA0;9 and&#xA0;17.</p>
+            the calls to <c>updateBalance</c> on lines&#xA0;9 and&#xA0;17.</p>
 <listing xml:id="lst-updbal">
 <program label="lst-updbal"  language="python">
     <input>
@@ -45,7 +45,7 @@ def _put(self, key, value, current_node):
             current_node.left_child = AVLTreeNode(
                 key, value, 0, parent=current_node
             )
-            self.update_balance(current_node.left_child)
+            self.updateBalance(current_node.left_child)
     else:
         if current_node.right_child:
             self._put(key, value, current_node.right_child)
@@ -53,9 +53,9 @@ def _put(self, key, value, current_node):
             current_node.right_child = AVLTreeNode(
                 key, value, 0, parent=current_node
             )
-            self.update_balance(current_node.right_child)
+            self.updateBalance(current_node.right_child)
 
-def update_balance(self, node):
+def updateBalance(self, node):
     if node.balance_factor &gt; 1 or node.balance_factor &lt; -1:
         self.rebalance(node)
         return
@@ -66,18 +66,18 @@ def update_balance(self, node):
             node.parent.balance_factor -= 1
 
         if node.parent.balance_factor != 0:
-            self.update_balance(node.parent)
+            self.updateBalance(node.parent)
 </input>
   </program>
 </listing>
-  <p>The new <c>update_balance</c> method is where most of the work is done. This
+  <p>The new <c>updateBalance</c> method is where most of the work is done. This
             implements the recursive procedure we just described. It first checks to see if the current node is out
             of balance enough to require rebalancing (line&#xA0;20). If that
             is the case then the rebalancing is done and no further updating to
             parents is required. If the current node does not require rebalancing
             then the balance factor of the parent is adjusted. If the balance factor
             of the parent is nonzero then the algorithm continues to work its way
-            up the tree toward the root by recursively calling <c>update_balance</c> on
+            up the tree toward the root by recursively calling <c>updateBalance</c> on
             the parent.</p>
   <p>When a rebalancing of the tree is necessary, how do we do it? Efficient
             rebalancing is the key to making the AVL Tree work well without
@@ -142,15 +142,15 @@ def update_balance(self, node):
   <p>Now that you have seen the rotations and have the basic idea of how a
             rotation works let us look at the code. <xref ref="trees_lst-bothrotations"/> shows the
             code for the left rotation (the
-            <c>rotate_right</c> method is symmetrical to <c>rotate_left</c> so we will leave
-            it to you to study the code for <c>rotate_right</c>). In line&#xA0;2
+            <c>rotateRight</c> method is symmetrical to <c>rotateLeft</c> so we will leave
+            it to you to study the code for <c>rotateRight</c>). In line&#xA0;2
             we create a temporary variable to keep track of the new root of the
             subtree. As we said before, the new root is the right child of the
             previous root. Now that a reference to the right child has been stored
             in this temporary variable, we replace the right child of the old root
             with the left child of the new.</p>
   <p>The next step is to adjust the parent pointers of the two nodes. If
-            <c>new_root</c> has a left child then the new parent of the left child
+            <c>newRoot</c> has a left child then the new parent of the left child
             becomes the old root. The parent of the new root is set to the parent of
             the old root. If the old root was the root of the entire tree then we
             must set the root of the tree to point to this new root. Otherwise, if
