@@ -316,4 +316,33 @@ Key Luanda has value 2,165,867.
 </table>
 </subsection>
 
+<subsection>
+    <title>The Set Collection</title>
+    <p>The <c>Set</c> collection implements the mathematical version of a set. You can think of a <c>Set</c> as an <c>ArrayList</c> with the extra requirement that no item can appear twice in the <c>Set</c>. In Java, <c>Set</c> is an <em>interface</em>; when we need an actual set, we will construct a <c>HashSet</c>.</p>
+
+    <p>Here are the commonly-used <c>Set</c> methods:</p>
+
+<table xml:id="table-set-methods" label="table-set-methods">
+    <title>Set Methods</title>
+    <tabular>
+        <col width="50%"/>
+        <col width="50%"/>
+
+        <row header="yes">
+            <cell><p>Method</p></cell>
+            <cell><p>Purpose</p></cell>
+        </row>
+        <row>
+            <cell><p><c>remove(element)</c></p></cell>
+            <cell><p>If the element is in the set, removes the object from the set and returns <c>true</c>;
+                    otherwise returns <c>false</c> and leaves the set unchanged</p></cell>
+        </row>
+        <row>
+            <cell><p><c>contains(element)</c></p></cell>
+            <cell><p>Returns <c>true</c> if the element is in the set, <c>false</c> otherwise.</p></cell>
+        </row>
+    </tabular>
+</table>
+</subsection>
+
 </section>
