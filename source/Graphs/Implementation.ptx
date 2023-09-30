@@ -1,116 +1,198 @@
 <?xml version="1.0"?>
 <section xml:id="graphs_implementation">
   <title>Implementation</title>
-  <p>Using dictionaries, it is easy to implement the adjacency list in
-            Python. In our implementation of the graph abstract data type, we will
+  <p>Using HashMaps, it is easy to implement the adjacency list in
+            Java. In our implementation of the graph abstract data type, we will
             create two classes:
             <c>Vertex</c>, which will represent each vertex in the graph
             (see <xref ref="graphs_lst-vertex"/>), and
             <c>Graph</c>, which holds the master list of vertices (see <xref ref="graphs_lst-graph"/>).</p>
-  <p>Each <c>Vertex</c> uses a dictionary to keep track of the vertices to which
-            it is connected and the weight of each edge. This dictionary is called
+  <p>Each <c>Vertex</c> uses a HashMap to keep track of the vertices to which
+            it is connected and the weight of each edge. This map is called
             <c>neighbors</c>. The listing below shows the code for the <c>Vertex</c>
             class. The constructor simply initializes the <c>key</c>, which will
             typically be a string, and the <c>neighbors</c> dictionary. The
-            <c>set_neighbor</c> method is used to add a connection from this vertex to
-            another. The <c>get_neighbors</c> method returns all of the vertices in
+            <c>setNeighbor</c> method is used to add a connection from this vertex to
+            another. The <c>getNeighbors</c> method returns all of the vertices in
             the adjacency list, as represented by the <c>neighbors</c> instance
-            variable. The <c>get_neighbor</c> method returns the weight of the edge from
+            variable. The <c>getNeighborWeight</c> method returns the weight of the edge from
             this vertex to the vertex passed as a parameter.</p>
-  <listing xml:id="graphs_lst-vertex"><pre>class Vertex:
-    def __init__(self, key):
-        self.key = key
-        self.neighbors = {}
+        <listing xml:id="graphs_lst-vertex"><caption>The <c>Vertex</c> Class</caption>
+            <program language="java" line-numbers="yes"><input>
+import java.util.HashMap;
+import java.util.Set;
 
-    def get_neighbor(self, other):
-        return self.neighbors.get(other, None)
+public class Vertex&lt;T&gt; {
+    T key;
+    HashMap&lt;Vertex&lt;T&gt;, Integer&gt; neighbors;
 
-    def set_neighbor(self, other, weight=0):
-        self.neighbors[other] = weight
+    Vertex(T key) {
+        this.key = key;
+        this.neighbors = new HashMap&lt;Vertex&lt;T&gt;, Integer&gt;();
+    }
 
-    def __repr__(self):
-        return f"Vertex({self.key})"
+    /*
+     * Get the weight of the edge from this vertex
+     * to the other vertex. Returns null if there is no
+     * connection to the other vertex.
+     */
+    Integer getNeighborWeight(Vertex&lt;T&gt; other) {
+        return neighbors.get(other);
+    }
 
-    def __str__(self):
-        return (
-            str(self.key)
-            + " connected to: "
-            + str([x.key for x in self.neighbors])
-        )
+    /*
+     * Set a connection from this vertex to the other
+     * vertex with a weight of zero
+     */
+    void setNeighbor(Vertex&lt;T&gt; other) {
+        setNeighbor(other, 0);
+    }
 
-    def get_neighbors(self):
-        return self.neighbors.keys()
+    /*
+     * Set a connection from this vertex to the other
+     * vertex with the given weight
+     */
+    void setNeighbor(Vertex&lt;T&gt; other, Integer weight) {
+        neighbors.put(other, weight);
+    }
 
-    def get_key(self):
-        return self.key</pre></listing>
-  <p>The <c>Graph</c> class, shown in the next listing, contains a dictionary
+    /*
+     * Return a Set of the neighbor vertices.
+     */
+    Set&lt;Vertex&lt;T&gt;&gt; getNeighbors() {
+        return neighbors.keySet();
+    }
+
+    /*
+     * Return the key for this vertex.
+     */
+    T getKey() {
+        return key;
+    }
+
+    public String toString() {
+        String result = this.key.toString();
+        if (neighbors.size() &gt; 0) {
+            result = result + " connected to: ";
+            for (Vertex&lt;T&gt; vertex: this.getNeighbors()) {
+                result = result + vertex.key + ", ";
+            }
+            result = result.substring(0, result.length() - 2);
+        } else {
+            result = result + " has no connections";
+        }
+        return result;
+        return result;
+    }
+}
+        </input></program></listing>
+
+        <note>
+            <title>Java Note</title>
+            <p>
+                In line 41, we return the neighbors as a Java <c>Set</c>. A set has the property that there are no duplicate elements. Sets are iterable, which means that we can use an extended <c>for</c> loop to examine all of a vertex's neighbors.  Using a <c>Set</c> also frees us from having to construct an <c>Iterator</c> class and implement the <c>next</c> and <c>hasNext</c> methods, as we had to do for the <c>BinarySearchTree</c> in <xref ref="trees_search-tree-implementation"/>.
+            </p>
+        </note>
+
+  <p>The <c>Graph</c> class, shown in the following listing, contains a HashMap
             that maps vertex names to vertex objects. In <xref ref="graphs_an-adjacency-list"/> this
-            dictionary object is represented by the shaded gray box. <c>Graph</c> also
+            HashMap is represented by the shaded gray box. <c>Graph</c> also
             provides methods for adding vertices to a graph and connecting one
-            vertex to another. The <c>get_vertices</c> method returns the names of all
+            vertex to another. The <c>getVertices</c> method returns the names of all
             of the vertices in the graph. In addition, we have implemented the
             <c>__iter__</c> method to make it easy to iterate over all the vertex
             objects in a particular graph. Together, the two methods allow you to
             iterate over the vertices in a graph by name, or by the objects
             themselves.</p>
-  <listing xml:id="graphs_lst-graph"><pre>class Graph:
-    def __init__(self):
-        self.vertices = {}
+  <listing xml:id="graphs_lst-graph"><program language="java"><input>
+import java.util.HashMap;
+import java.util.Set;
 
-    def set_vertex(self, key):
-        self.vertices[key] = Vertex(key)
+public class Graph&lt;T&gt; {
+    HashMap&lt;T, Vertex&lt;T&gt;&gt; vertices;
 
-    def get_vertex(self, key):
-        return self.vertices.get(key, None)
+    public Graph() {
+        this.vertices = new HashMap&lt;T, Vertex&lt;T&gt;&gt;();
+    }
 
-    def __contains__(self, key):
-        return key in self.vertices
+    public void setVertex(T key) {
+        vertices.put(key, new Vertex&lt;T&gt;(key));
+    }
 
-    def add_edge(self, from_vert, to_vert, weight=0):
-        if from_vert not in self.vertices:
-            self.set_vertex(from_vert)
-        if to_vert not in self.vertices:
-            self.set_vertex(to_vert)
-        self.vertices[from_vert].set_neighbor(self.vertices[to_vert], weight)
+    public Vertex&lt;T&gt; getVertex(T key) {
+        return vertices.get(key);
+    }
 
-    def get_vertices(self):
-        return self.vertices.keys()
+    public boolean containsVertex(T key) {
+        return vertices.containsKey(key);
+    }
 
-    def __iter__(self):
-        return iter(self.vertices.values())</pre></listing>
+    public void addEdge(T fromVertex, T toVertex) {
+        addEdge(fromVertex, toVertex, 0);
+    }
+
+    public void addEdge(T fromVertex, T toVertex,
+        Integer weight) {
+        if (!vertices.containsKey(fromVertex)) {
+            setVertex(fromVertex);
+        }
+        if (!vertices.containsKey(toVertex)) {
+            setVertex(toVertex);
+        }
+        Vertex&lt;T&gt; from = vertices.get(fromVertex);
+        Vertex&lt;T&gt; to = vertices.get(toVertex);
+        from.setNeighbor(to, weight);
+    }
+
+    public HashMap&lt;T, Vertex&lt;T&gt;&gt; getVertices() {
+        return this.vertices;
+    }
+
+    public Set&lt;T&gt; getVertexKeys() {
+        return this.vertices.keySet();
+    }
+}
+          </input></program></listing>
   <p>Using the <c>Graph</c> and <c>Vertex</c> classes just defined, the following
-            Python session creates the graph in <xref ref="graphs_vocabularyand-definitions"/>. First we
+            program creates the graph in <xref ref="graphs_vocabularyand-definitions"/>. First we
             create six vertices numbered 0 through 5. Then we display the vertex
-            dictionary. Notice that for each key 0 through 5 we have created an
+            HashMap. Notice that for each key 0 through 5 we have created an
             instance of a <c>Vertex</c>. Next, we add the edges that connect the
-            vertices together. Finally, a nested loop verifies that each edge in the
+            vertices together. Finally, loop verifies that each edge in the
             graph is properly stored. You should check the output of the edge list
-            at the end of this session against <xref ref="graphs_vocabularyand-definitions"/>.</p>
-  <pre>&gt;&gt;&gt; g = Graph()
-&gt;&gt;&gt; for i in range(6):
-...     g.set_vertex(i)
-&gt;&gt;&gt; g.vertices
-{0: Vertex(0), 1: Vertex(1), 2: Vertex(2), 3: Vertex(3), 4: Vertex(4), 5: Vertex(5)}
-&gt;&gt;&gt; g.add_edge(0, 1, 5)
-&gt;&gt;&gt; g.add_edge(0, 5, 2)
-&gt;&gt;&gt; g.add_edge(1, 2, 4)
-&gt;&gt;&gt; g.add_edge(2, 3, 9)
-&gt;&gt;&gt; g.add_edge(3, 4, 7)
-&gt;&gt;&gt; g.add_edge(3, 5, 3)
-&gt;&gt;&gt; g.add_edge(4, 0, 1)
-&gt;&gt;&gt; g.add_edge(5, 4, 8)
-&gt;&gt;&gt; g.add_edge(5, 2, 1)
-&gt;&gt;&gt; for v in g:
-...     for w in v.get_neighbors():
-...         print("f({v.get_key()}, {w.get_key()})")
-...
-(0, 1)
-(0, 5)
-(1, 2)
-(2, 3)
-(3, 4)
-(3, 5)
-(4, 0)
-(5, 4)
-(5, 2)</pre>
+            at the end of this session against the graph shown in <xref ref="graphs_vocabularyand-definitions"/>.</p>
+  <listing xml:id="lst_test-graph-class">
+      <caption>Testing the <c>Graph</c> Class</caption>
+      <program language="java"><input>
+public class TestGraph {
+    public static void main(String[] args) {
+        Graph&lt;Integer&gt; g = new Graph&lt;&gt;();
+        for (int i = 0; i &lt; 6; i++) {
+            g.setVertex(i);
+        }
+        g.addEdge(0, 1, 5);
+        g.addEdge(0, 5, 2);
+        g.addEdge(1, 2, 4);
+        g.addEdge(2, 3, 9);
+        g.addEdge(3, 4, 7);
+        g.addEdge(3, 5, 3);
+        g.addEdge(4, 0, 1);
+        g.addEdge(5, 4, 8);
+        g.addEdge(5, 2, 1);
+
+        for (Integer key: g.getVertexKeys()) {
+            System.out.println(g.getVertex(key));
+        }
+    }
+}
+              </input></program></listing>
+  <p>Here is its output:</p>
+  <console><output>
+0 connected to: 5, 1
+1 connected to: 2
+2 connected to: 3
+3 connected to: 4, 5
+4 connected to: 0
+5 connected to: 4, 2
+</output></console>
 </section>

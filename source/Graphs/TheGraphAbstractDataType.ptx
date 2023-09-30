@@ -10,34 +10,36 @@
         <p><c>Graph()</c> creates a new empty graph.</p>
       </li>
       <li>
-        <p><c>add_vertex(vert)</c> adds an instance of <c>Vertex</c> to the graph.</p>
+        <p><c>addVertex(vert)</c> adds an instance of <c>Vertex</c> to the graph.</p>
       </li>
       <li>
-        <p><c>add_edge(from_vert, to_vert)</c> adds a new directed edge to the graph
+        <p><c>addEdge(fromVert, toVert)</c> adds a new directed edge to the graph
                     that connects two vertices.</p>
       </li>
       <li>
-        <p><c>add_edge(from_vert, to_vert, weight)</c> adds a new weighted directed
+        <p><c>addEdge(fromVert, toVert, weight)</c> adds a new weighted directed
                     edge to the graph that connects two vertices.</p>
       </li>
       <li>
-        <p><c>get_vertex(vert_key)</c> finds the vertex in the graph named
-                    <c>vert_key</c>.</p>
+        <p><c>getVertex(vertKey)</c> finds the vertex in the graph named
+                    <c>vertKey</c>.</p>
       </li>
       <li>
-        <p><c>get_vertices()</c> returns the list of all vertices in the graph.</p>
+        <p><c>getVertices()</c> returns the list of all vertices in the graph.</p>
       </li>
       <li>
-        <p><c>in</c> returns <c>True</c> for a statement of the form
-                    <c>vertex in graph</c> if the given vertex is in the graph, <c>False</c>
+        <p><c>getVertexKeys()</c> returns a <c>Set</c> of all the vertex keys in the graph.</p>
+      </li>
+      <li>
+        <p><c>containsVertex(vertex)</c> returns <c>true</c>  if the given vertex is in the graph, <c>false</c>
                     otherwise.</p>
       </li>
     </ul>
   </p>
   <p>Now that we have looked at the definition for the graph ADT,
-            there are several ways we can implement it in Python. We will see that there are
+            there are several ways we can implement it in Java. We will see that there are
             trade-offs in using different representations to implement the ADT
             described above. There are two well-known implementations of a graph,
             the <term>adjacency matrix</term> and the <term>adjacency list</term>. We will explain
-            both of these options, and then implement one as a Python class.</p>
+            both of these options, and then implement one as a Java class.</p>
 </section>

@@ -19,7 +19,7 @@
                         relationship between them. Edges may be one-way or two-way. If the
                         edges in a graph are all one-way, we say that the graph is a
                         <term>directed graph</term>, or a <term>digraph</term>. The class prerequisites graph
-                        shown above is clearly a digraph since you must take some classes
+                        shown in <xref ref="graphs_fig1"/>  is a digraph since you must take some classes
                         before others.</p>
     </li>
     <li>
