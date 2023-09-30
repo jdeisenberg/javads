@@ -389,7 +389,36 @@ if (condition) {
         return (result != null);
     }
   </input></program></listing>
+</subsection>
 
+<subsection xml:id="display-binary-search-tree">
+    <title>Displaying a Binary Search Tree</title>
+    <p>We would like to be able to see the resulting tree. Rather than display the tree graphically, we will instead display it as a nested list of the format:</p>
+    <pre>[root [left tree] [right tree]]</pre>
+    <p><xref ref="lst_tree-to-string"/> shows the <c>toString</c> method with its <c>stringify</c> helper method, which does an inorder traversal of the tree.</p>
+
+    <listing xml:id="lst_tree-to-string">
+    <caption>Tree to String</caption>
+    <program language="java"><input>
+    public String toString() {
+        return stringify(this.root);
+    }
+
+    String stringify(TreeNode node) {
+        String result = "";
+        if (node != null) {
+            if (node.isLeaf()) {
+                result = " [" +  node.key + "]";
+            } else {
+                result = " [" + node.key + stringify(node.leftChild) +
+                    stringify(node.rightChild) + "]";
+            }
+        } else {
+            result = " []";
+        }
+        return result;
+    }
+    </input></program></listing>
     <p>At this point we have enough to implement a program to test our tree, shown in <xref ref="lst_bst-example1"/>:</p>
 <listing xml:id="lst_bst-example1">
 <caption>Sample Binary Search Tree Program</caption>
@@ -405,12 +434,20 @@ public class BinarySearchTreeExample {
         tree.put("Madagascar", "Antananarivo");
         tree.put("Zimbabwe", "Harare");
         tree.put("South Korea", "Seoul");
+        System.out.println(tree); // show tree at its current state
 
         System.out.println(tree.get("Japan"));  // "Tokyo"
         System.out.println(tree.get("Brazil")); // null
     }
 }
 </input></program></listing>
+
+<p>Here is its output:</p>
+<console><output>
+ [France [Albania] [Japan [] [Madagascar [] [Zimbabwe [South Korea] []]]]]
+Tokyo
+null
+</output></console>
 
 <p>This is a good time to take a break before proceeding to the remainder of this section.</p>
 
@@ -938,6 +975,28 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
                 adjustParent(currentNode, currentNode.rightChild);
             }
         }
+    }
+
+    /*
+     * Return nested list representation of tree
+     */
+    public String toString() {
+        return stringify(this.root);
+    }
+
+    String stringify(TreeNode node) {
+        String result = "";
+        if (node != null) {
+            if (node.isLeaf()) {
+                result = " [" +  node.key + "]";
+            } else {
+                result = " [" + node.key + stringify(node.leftChild) +
+                    stringify(node.rightChild) + "]";
+            }
+        } else {
+            result = " []";
+        }
+        return result;
     }
 
     class TreeNode {

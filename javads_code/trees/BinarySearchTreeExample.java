@@ -14,7 +14,8 @@ public class BinarySearchTreeExample {
         
         System.out.println(tree.get("Japan"));  // "Tokyo"
         System.out.println(tree.get("Brazil")); // null
-        
+        System.out.println(tree);
+
         for (BinarySearchTree.TreeNode node: tree) {
             System.out.println(node.getKey() + " -> "
                 + node.getValue());

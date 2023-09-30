@@ -28,45 +28,47 @@
       </li>
     </ul>
   </p>
-  <p>We will implement the AVL tree as a subclass of <c>BinarySearchTree</c>. To
-            begin, we will override the <c>put</c> helper method and write a new
-            <c>updateBalance</c> helper method. These methods are shown in
-            <xref ref="lst-updbal"/>. You will notice that the definition for <c>_put</c> is
-            exactly the same as in simple binary search trees except for the addition of
-            the calls to <c>updateBalance</c> on lines&#xA0;9 and&#xA0;17.</p>
+  <p>We will implement the AVL tree in a class named <c>AVLTree</c> It uses a copy of <c>BinarySearchTree</c> as our starting point, changing <c>TreeNode</c> to <c>AVLTreeNode</c>, which adds an integer <c>balanceFactor</c> property. To begin, we will override the <c>put</c> helper method and write a new <c>updateBalance</c> helper method. These methods are shown in <xref ref="lst-updbal"/>. You will notice that the definition for <c>_put</c> is exactly the same as in simple binary search trees except for the addition of the calls to <c>updateBalance</c> on lines&#xA0;8 and&#xA0;16.</p>
 <listing xml:id="lst-updbal">
-<program label="lst-updbal"  language="python">
+<program label="prog-updbal" language="java" line-numbers="yes">
     <input>
-def _put(self, key, value, current_node):
-    if key &lt; current_node.key:
-        if current_node.left_child:
-            self._put(key, value, current_node.left_child)
-        else:
-            current_node.left_child = AVLTreeNode(
-                key, value, 0, parent=current_node
-            )
-            self.updateBalance(current_node.left_child)
-    else:
-        if current_node.right_child:
-            self._put(key, value, current_node.right_child)
-        else:
-            current_node.right_child = AVLTreeNode(
-                key, value, 0, parent=current_node
-            )
-            self.updateBalance(current_node.right_child)
+    void put(K key, V value, AVLTreeNode currentNode) {
+        if (key.compareTo(currentNode.key) &lt; 0) {
+            if (currentNode.leftChild != null) {
+                put(key, value, currentNode.leftChild);
+            } else {
+                currentNode.leftChild = new AVLTreeNode(
+                    key, value, currentNode);
+                updateBalance(currentNode.leftChild);
+            }
+        } else {
+            if (currentNode.rightChild != null) {
+                put(key, value, currentNode.rightChild);
+            } else {
+                currentNode.rightChild = new AVLTreeNode(
+                    key, value, currentNode);
+                updateBalance(currentNode.rightChild);
+            }
+        }
+    }
 
-def updateBalance(self, node):
-    if node.balance_factor &gt; 1 or node.balance_factor &lt; -1:
-        self.rebalance(node)
-        return
-    if node.parent:
-        if node.is_left_child():
-            node.parent.balance_factor += 1
-        elif node.is_right_child():
-            node.parent.balance_factor -= 1
+    void updateBalance(AVLTreeNode node) {
+        if (node.balanceFactor &gt; 1 || node.balanceFactor &lt; -1) {
+            rebalance(node);
+        } else {
+            if (node.parent != null) {
+                if (node.isLeftChild()) {
+                    node.parent.balanceFactor += 1;
+                } else if (node.isRightChild()) {
+                    node.parent.balanceFactor -= 1;
+                }
 
-        if node.parent.balance_factor != 0:
-            self.updateBalance(node.parent)
+                if (node.parent.balanceFactor != 0) {
+                    updateBalance(node.parent);
+                }
+            }
+        }
+    }
 </input>
   </program>
 </listing>
@@ -87,10 +89,12 @@ def updateBalance(self, node):
             Consider the tree in the left half of <xref ref="i18_id1fig-unbalsimple"/>. This tree
             is out of balance with a balance factor of -2. To bring this tree into
             balance we will use a left rotation around the subtree rooted at node A.</p>
+
   <figure align="center" xml:id="i18_id1fig-unbalsimple">
     <caption>Transforming an Unbalanced Tree Using a Left Rotation</caption>
     <image source="Trees/Figures/simpleunbalanced.png" width="50%"/>
   </figure>
+
   <p>To perform a left rotation we essentially do the following:</p>
   <p>
     <ol marker="1">
@@ -139,8 +143,9 @@ def updateBalance(self, node):
       </li>
     </ol>
   </p>
+
   <p>Now that you have seen the rotations and have the basic idea of how a
-            rotation works let us look at the code. <xref ref="trees_lst-bothrotations"/> shows the
+            rotation works let us look at the code. <xref ref="trees_lst-leftrotation"/> shows the
             code for the left rotation (the
             <c>rotateRight</c> method is symmetrical to <c>rotateLeft</c> so we will leave
             it to you to study the code for <c>rotateRight</c>). In line&#xA0;2
@@ -156,38 +161,40 @@ def updateBalance(self, node):
             must set the root of the tree to point to this new root. Otherwise, if
             the old root is a left child then we change the parent of the left child
             to point to the new root; otherwise we change the parent of the right
-            child to point to the new root. (lines&#xA0;10-13).
+            child to point to the new root. (lines&#xA0;11&#x2013;15).
             Finally we set the parent of the old root to be the new root. This is a
             lot of complicated bookkeeping, so we encourage you to trace through
             this function while looking at <xref ref="i18_id1fig-unbalsimple"/>.</p>
-  <listing xml:id="trees_lst-bothrotations" names="lst_bothrotations">
-<program label="trees_lst-bothrotations" names="lst_bothrotations"  language="python">
+  <listing xml:id="trees_lst-leftrotation">
+<program label="trees_prog-leftrotation" language="java">
     <input>
-def rotate_left(self, rotation_root):
-    new_root = rotation_root.right_child
-    rotation_root.right_child = new_root.left_child
-    if new_root.left_child:
-        new_root.left_child.parent = rotation_root
-    new_root.parent = rotation_root.parent
-    if rotation_root.is_root():
-        self._root = new_root
-    else:
-        if rotation_root.is_left_child():
-            rotation_root.parent.left_child = new_root
-        else:
-            rotation_root.parent.right_child = new_root
-    new_root.left_child = rotation_root
-    rotation_root.parent = new_root
-    rotation_root.balance_factor = (
-        rotation_root.balance_factor + 1 - min(new_root.balance_factor, 0)
-    )
-    new_root.balance_factor = (
-        new_root.balance_factor + 1 + max(rotation_root.balance_factor, 0)
-    )
+    void rotateLeft(AVLTreeNode rotationRoot) {
+        AVLTreeNode newRoot = rotationRoot.rightChild;
+        rotationRoot.rightChild = newRoot.leftChild;
+        if (newRoot.leftChild != null) {
+            newRoot.leftChild.parent = rotationRoot;
+        }
+        newRoot.parent = rotationRoot.parent;
+        if (rotationRoot.isRoot()) {
+            root = newRoot;
+        } else {
+            if (rotationRoot.isLeftChild()) {
+                rotationRoot.parent.leftChild = newRoot;
+            } else {
+                rotationRoot.parent.rightChild = newRoot;
+            }
+        }
+        newRoot.leftChild = rotationRoot;
+        rotationRoot.parent = newRoot;
+        rotationRoot.balanceFactor = rotationRoot.balanceFactor + 1 -
+            Math.min(newRoot.balanceFactor, 0);
+        newRoot.balanceFactor = newRoot.balanceFactor + 1 +
+            Math.max(rotationRoot.balanceFactor, 0);
+    }
 </input>
   </program>
   </listing>
-  <p>Finally, lines&#xA0;16-21 require some explanation. In
+  <p>Finally, lines&#xA0;18-22 require some explanation. In
             these lines we update the balance factors of the old and the new
             root. Since all the other moves involve moving entire subtrees, the
             balance factors of all other nodes are unaffected by the rotation. But
@@ -232,14 +239,13 @@ def rotate_left(self, rotation_root):
           <md><mrow>new\_bal(B) = old\_bal(B) + 1 + max(0 , -old\_bal(D))</mrow>
             <mrow>new\_bal(B) = old\_bal(B) + 1 - min(0 , old\_bal(D)</mrow></md>
   <p>Now we have all of the parts in terms that we readily know. If we
-            remember that B is <c>rotation_root</c> and D is <c>new_root</c> then we can see this
-            corresponds exactly to the statement on lines&#xA0;16-18 in
-            <xref ref="trees_lst-bothrotations"/>, or:</p>
-  <program language="python">
+            remember that B is <c>rotationRoot</c> and D is <c>newRoot</c>, then we can see this
+            corresponds exactly to the statement on lines&#xA0;19&#x2013;20 in
+            <xref ref="trees_lst-leftrotation"/>, or:</p>
+  <program language="java">
     <input>
-rotation_root.balance_factor = (
-    rotation_root.balance_factor + 1 - min(new_root.balance_factor, 0)
-)
+rotationRoot.balanceFactor = rotationRoot.balanceFactor + 1 -
+            Math.min(newRoot.balanceFactor, 0);
 </input>
   </program>
   <p>A similar derivation gives us the equation for the updated node D as
@@ -250,17 +256,21 @@ rotation_root.balance_factor = (
             But take a look at <xref ref="fig-hardrotate"/>. Since node A has a balance
             factor of -2 we should do a left rotation. But what happens when we do
             the left rotation around A?</p>
+
   <figure align="center" xml:id="fig-hardrotate">
     <caption>An Unbalanced Tree that is More Difficult to Balance</caption>
-    <image source="Trees/Figures/hardunbalanced.png" width="50%"/>
+    <image source="Trees/Figures/hardunbalanced.png" width="20%"/>
   </figure>
+
   <p><xref ref="fig-badrotate"/> shows us that after the left rotation we are now
             out of balance the other way. If we do a right rotation to correct the
             situation we are right back where we started.</p>
+
   <figure align="center" xml:id="fig-badrotate">
     <caption>After a Left Rotation the Tree is Out of Balance in the Other Direction</caption>
-    <image source="Trees/Figures/badrotate.png" width="50%"/>
+    <image source="Trees/Figures/badrotate.png" width="20%"/>
   </figure>
+
   <p>To correct this problem we must use the following set of rules:</p>
   <p>
     <ol marker="1">
@@ -282,37 +292,45 @@ rotation_root.balance_factor = (
             encountered in <xref ref="fig-hardrotate"/> and <xref ref="fig-badrotate"/>. Starting
             with a right rotation around node C puts the tree in a position where
             the left rotation around A brings the entire subtree back into balance.</p>
+
   <figure align="center" xml:id="fig-rotatelr">
     <caption>A Right Rotation Followed by a Left Rotation</caption>
     <image source="Trees/Figures/rotatelr.png" width="50%"/>
   </figure>
+
   <p>The code that implements these rules can be found in our <c>rebalance</c>
             method, which is shown in <xref ref="trees_lst-rebalance"/>. Rule number 1 from
             above is implemented by the <c>if</c> statement starting on line&#xA0;2.
-            Rule number 2 is implemented by the <c>elif</c> statement starting on
-            line 8.</p>
-  <listing xml:id="trees_lst-rebalance"><program language="python">
+            Rule number 2 is implemented by the <c>else if</c> statement starting on
+            line 9.</p>
+  <listing xml:id="trees_lst-rebalance"><program language="java" line-numbers="yes">
     <input>
-def rebalance(self, node):
-    if node.balance_factor &lt; 0:
-        if node.right_child.balance_factor &gt; 0:
-            self.rotate_right(node.right_child)
-            self.rotate_left(node)
-        else:
-            self.rotate_left(node)
-    elif node.balance_factor &gt; 0:
-        if node.left_child.balance_factor &lt; 0:
-            self.rotate_left(node.left_child)
-            self.rotate_right(node)
-        else:
-            self.rotate_right(node)
+    void rebalance(AVLTreeNode node) {
+        if (node.balanceFactor &lt; 0) {
+            if (node.rightChild.balanceFactor &gt; 0) {
+                rotateRight(node.rightChild);
+                rotateLeft(node);
+            } else {
+                rotateLeft(node);
+            }
+        } else if (node.balanceFactor > 0) {
+            if (node.leftChild.balanceFactor &lt; 0) {
+                rotateLeft(node.leftChild);
+                rotateRight(node);
+            } else {
+                rotateRight(node);
+            }
+        }
+    }
 </input>
   </program></listing>
+
   <p>The <xref ref="trees_key-terms"/> provide you the opportunity to rebalance a tree
             that requires a left rotation followed by a right. In addition the
             discussion questions provide you with the opportunity to rebalance some
             trees that are a little more complex than the tree in
             <xref ref="fig-rotatelr"/>.</p>
+
   <p>By keeping the tree in balance at all times, we can ensure that the
             <c>get</c> method will run in order <m>O(log_2(n))</m> time. But the
             question is at what cost to our <c>put</c> method? Let us break this down
@@ -323,6 +341,47 @@ def rebalance(self, node):
             rotations are required to bring the tree back into balance. But each of
             the rotations works in <m>O(1)</m> time, so even our <c>put</c>
             operation remains <m>O(log_2(n))</m>.</p>
+          <p><xref ref="lst_balanced-example"/> shows a program that inserts items into a tree in increasing order.</p>
+
+          <listing xml:id="lst_balanced-example">
+            <caption>Example of Inserting into an AVL Tree</caption>
+            <program language="java"><input>
+public class AVLTreeExample {
+
+    public static void main(String[] args) {
+        AVLTree&lt;String, String&gt; tree = new AVLTree&lt;&gt;();
+
+        tree.put("Albania", "Tirana");
+        System.out.println(tree);
+
+        tree.put("Bolivia", "La Paz");
+        System.out.println(tree);
+
+        tree.put("Germany", "Berlin");
+        System.out.println(tree);
+
+        tree.put("Lesotho", "Maseru");
+        System.out.println(tree);
+
+        tree.put("Madagascar", "Antananarivo");
+        System.out.println(tree);
+
+        tree.put("South Korea", "Seoul");
+        System.out.println(tree);
+    }
+}
+</input></program></listing>
+
+<p> You can see in the output that the tree is rebalancing to ensure that we do not end up with a right-heavy tree.</p>
+<console><output>
+ [Albania]
+ [Albania [] [Bolivia]]
+ [Bolivia [Albania] [Germany]]
+ [Bolivia [Albania] [Germany [] [Lesotho]]]
+ [Bolivia [Albania] [Lesotho [Germany] [Madagascar]]]
+ [Lesotho [Bolivia [Albania] [Germany]] [Madagascar [] [South Korea]]]
+ </output></console>
+
   <p>At this point we have implemented a functional AVL tree, unless you need
             the ability to delete a node. We leave the deletion of the node and
             subsequent updating and rebalancing as an exercise for you.</p>

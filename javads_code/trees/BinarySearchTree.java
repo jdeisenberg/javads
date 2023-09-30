@@ -135,7 +135,29 @@ public class BinarySearchTree<K extends Comparable<K>, V extends Comparable<V>>
             }
         }
     }
-    
+
+    /*
+     * Return nested list representation of tree
+     */
+    public String toString() {
+        return stringify(this.root);
+    }
+
+    String stringify(TreeNode node) {
+        String result = "";
+        if (node != null) {
+            if (node.isLeaf()) {
+                result = " [" +  node.key + "]";
+            } else {
+                result = " [" + node.key + stringify(node.leftChild) +
+                    stringify(node.rightChild) + "]";
+            }
+        } else {
+            result = " []";
+        }
+        return result;
+    }
+
     class TreeNode {
         K key;
         V value;

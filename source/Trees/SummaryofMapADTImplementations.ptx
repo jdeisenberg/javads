@@ -8,10 +8,10 @@
             performance of each data structure for the key operations defined by the
             map ADT (see <xref ref="trees_tbl-compare"/>).</p>
   <table xml:id="trees_tbl-compare">
-    <tabular>
       <title>
-        <term>Table 1: Comparing the Performance of Different Map Implementations</term>
+        Comparing the Performance of Different Map Implementations
       </title>
+    <tabular>
       <row header="yes">
         <cell>operation</cell>
         <cell>Sorted List</cell>

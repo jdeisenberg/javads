@@ -2,22 +2,6 @@
 <section xml:id="trees_exercises">
   <title>Trees: Exercises</title>
   <exercises>
-			<exercise><p>Draw the tree structure resulting from the following set of tree
-                    function calls:</p>
-                <pre>
-       >>> r = BinaryTree(3)
-       >>> insert_left(r, 4)
-       [3, [4, [], []], []]
-       >>> insert_left(r, 5)
-       [3, [5, [4, [], []], []], []]
-       >>> insert_right(r, 6)
-       [3, [5, [4, [], []], []], [6, [], []]]
-       >>> insert_right(r, 7)
-       [3, [5, [4, [], []], []], [7, [], [6, [], []]]]
-       >>> set_root_val(r, 9)
-       >>> insert_left(r, 11)
-       [9, [11, [5, [4, [], []], []], []], [7, [], [6, [], []]]]
-	      </pre></exercise>
 
 			<exercise><p>Trace the algorithm for creating an expression tree for the
                     expression <m>(4 * 8) / 6 - 3</m>.</p></exercise>
@@ -40,7 +24,7 @@
 			<exercise><p>Draw the binary search tree that results from inserting the following
    keys in the order given: 68, 88, 61, 89, 94, 50, 4, 76, 66, and 82.</p></exercise>
 
-			<exercise><p>Generate a random list of integers. Draw the binary search tree
+			<exercise><p>Generate a random list of ten integers. Draw the binary search tree
    resulting from inserting the integers on the list.</p></exercise>
 
 			<exercise><p>Consider the following list of integers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]. Show
@@ -74,14 +58,14 @@
                         </figure>
                     </p></exercise>
 
-			<exercise><p>Extend the <c>build_parse_tree</c> function to handle mathematical
+			<exercise><p>Extend the <c>buildParseTree</c> method to handle mathematical
    expressions that do not have spaces between every character.</p></exercise>
 
-			<exercise><p>Modify the <c>build_parse_tree</c> and <c>evaluate</c> functions to handle
-   Boolean statements (<c>and</c>, <c>or</c>, and <c>not</c>). Remember that <c>not</c> is a unary
+			<exercise><p>Modify the <c>buildParseTree</c> and <c>evaluate</c> methods to handle
+   Boolean statements (<c>&amp;&amp;</c>, <c>||</c>, and <c>!</c>). Remember that <c>!</c> is a unary
    operator, so this will complicate your code somewhat.</p></exercise>
 
-			<exercise><p>Using the <c>find_successor</c> method, write a non-recursive inorder
+			<exercise><p>Using the <c>findSuccessor</c> method, write a non-recursive inorder
    traversal for a binary search tree.</p></exercise>
 
    <exercise><p>A <em>threaded</em> binary tree maintains a reference from each node to
@@ -99,13 +83,13 @@
    grows in size to more than <m>n</m> items the least important item is
    dropped.</p></exercise>
 
-			<exercise><p>Clean up the <c>print_exp</c> function so that it does not include an
+			<exercise><p>Clean up the <c>expressionToString</c> method so that it does not include an
    extra set of parentheses around each number.</p></exercise>
 
-			<exercise><p>Using the <c>heapify</c> method, write a sorting function that can
+			<exercise><p>Using the <c>heapify</c> method, write a sorting method that can
    sort a list in <m>O(n\log{n})</m> time.</p></exercise>
 
-			<exercise><p>Write a function that takes a parse tree for a mathematical
+			<exercise><p>Write a method that takes a parse tree for a mathematical
    expression and calculates the derivative of the expression with
    respect to some variable.</p></exercise>
 

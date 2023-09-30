@@ -1,58 +1,73 @@
 <?xml version="1.0"?>
 <section xml:id="trees_key-terms">
   <title>Key Terms</title>
-  <table>
-    <tabular>
-      <row>
-        <cell>AVL tree</cell>
-        <cell>height</cell>
-        <cell>postorder traversal</cell>
-      </row>
-      <row>
-        <cell>balance factor</cell>
-        <cell>inorder traversal</cell>
-        <cell>preorder traversal</cell>
-      </row>
-      <row>
-        <cell>binary heap</cell>
-        <cell>leaf node</cell>
-        <cell>priority queue</cell>
-      </row>
-      <row>
-        <cell>binary search tree</cell>
-        <cell>level</cell>
-        <cell>root</cell>
-      </row>
-      <row>
-        <cell>binary tree</cell>
-        <cell>map</cell>
-        <cell>rotation</cell>
-      </row>
-      <row>
-        <cell>BST property</cell>
-        <cell>min/max heap</cell>
-        <cell>sibling</cell>
-      </row>
-      <row>
-        <cell>child / children</cell>
-        <cell>node</cell>
-        <cell>subtree</cell>
-      </row>
-      <row>
-        <cell>complete binary tree</cell>
-        <cell>parent</cell>
-        <cell>successor</cell>
-      </row>
-      <row>
-        <cell>edge</cell>
-        <cell>parse tree</cell>
-        <cell>tree</cell>
-      </row>
-      <row>
-        <cell>heap order property</cell>
-        <cell>path</cell>
-        <cell>tree traversal</cell>
+<table>
+  <tabular>
+    <row>
+      <cell>AVL tree</cell>
+      <cell>balance factor</cell>
+      <cell>binary heap</cell>
+    </row>
+    <row>
+      <cell>binary search trees</cell>
+      <cell>binary tree</cell>
+      <cell>BST property</cell>
+    </row>
+    <row>
+      <cell>children</cell>
+      <cell>complete binary tree</cell>
+      <cell>dynamic typing</cell>
+    </row>
+    <row>
+      <cell>edge</cell>
+      <cell>heap order property</cell>
+      <cell>height</cell>
+    </row>
+    <row>
+      <cell>inorder traversal</cell>
+      <cell>leaf node</cell>
+      <cell>level</cell>
+    </row>
+    <row>
+      <cell>map</cell>
+      <cell>max heap</cell>
+      <cell>method signatures</cell>
+    </row>
+    <row>
+      <cell>min heap</cell>
+      <cell>node</cell>
+      <cell>overloaded</cell>
+    </row>
+    <row>
+      <cell>parent</cell>
+      <cell>parse trees</cell>
+      <cell>path</cell>
+    </row>
+    <row>
+      <cell>postorder traversal</cell>
+      <cell>preorder traversal</cell>
+      <cell>priority queue</cell>
+    </row>
+    <row>
+      <cell>root</cell>
+      <cell>rotations</cell>
+      <cell>rotations</cell>
+    </row>
+    <row>
+      <cell>siblings</cell>
+      <cell>static typing</cell>
+      <cell>subtree</cell>
+    </row>
+    <row>
+      <cell>successor</cell>
+      <cell>ternary operator</cell>
+      <cell>tree</cell>
+    </row>
+    <row>
+      <cell>tree traversal</cell>
+      <cell></cell>
+      <cell></cell>
       </row>
     </tabular>
-  </table>
+</table>
 </section>
