@@ -9,7 +9,7 @@
     <image source="Graphs/Figures/wordgraph.png" width="50%"/>
   </figure>
 
-  <p>We could use several different approaches to create the graph we need to solve this problem. Let's start with the assumption that we have a list of words that are all the same length. As a starting point, we can create a vertex in the graph for every word in the list. To figure out how to connect the words, we could compare each word in the list with every other. When we compare we are looking to see how many letters are different. If the two words in question are different by only one letter, we can create an edge between them in the graph. For a small set of words that approach would work fine; however, let's suppose we have a list of 5,110 words. Roughly speaking, comparing one word to every other word on the list is an <m>O(n^2)</m> algorithm. For 5,110 words, <m>n^2</m> is more than 26&#xA0;million comparisons.</p>
+  <p>We could use several different approaches to create the graph we need to solve this problem. Let's start with the assumption that we have a list of words that are all the same length. As a starting point, we can create a vertex in the graph for every word in the list. To figure out how to connect the words, we could compare each word in the list with every other. When we compare we are looking to see how many letters are different. If the two words in question are different by only one letter, we can create an edge between them in the graph. For a small set of words that approach would work fine; however, let's suppose we have a list of 2,430 words. Roughly speaking, comparing one word to every other word on the list is an <m>O(n^2)</m> algorithm. For 2,430 words, <m>n^2</m> is almost 6&#xA0;million comparisons.</p>
 
   <p>We can do much better by using the approach shown in <xref ref="i190_id2fig-wordbucket"/>.
             Suppose that we have a number of buckets, each labeled with a four-letter word,
@@ -25,33 +25,68 @@
     <image source="Graphs/Figures/wordbuckets.png" width="50%"/>
   </figure>
 
-  <p>In Java, we can implement the scheme we have just described by using a HashMap. The labels on the buckets we have just described are the keys in our HashMap. The value stored for each key is a list of words. Once we have the HashMap built, we can create the graph. We start our graph by creating a vertex for each word in the graph. Then we create edges between all the vertices we find for words found under the same key in the HashMap. <xref ref="graphs_lst-wordbucket1"/> shows the Java code required to build the graph.</p>
-  <listing xml:id="graphs_lst-wordbucket1"><pre>from pythonds3.graphs import Graph
+  <p>In Java, we can implement the scheme we have just described by using a HashMap. The labels on the buckets we have just described are the keys in our HashMap. The value stored for each key is a list of words that fit that label (thus, the bucket key POP_ would have POPE and POPS as its value). Once we have the HashMap built, we can create the graph. We start our graph by creating a vertex for each word in the graph. Then we create edges between all the vertices we find for words found under the same key in the HashMap. <xref ref="graphs_lst-wordbucket1"/> shows the Java code required to build the graph from a file containing one word per line.</p>
 
+  <listing xml:id="graphs_lst-wordbucket1"><caption>Building the Graph</caption>
+    <program language="java" line-numbers="yes"><input>
+      public Graph&lt;String&gt; buildGraph(String fileName) {
+        Graph&lt;String&gt; wordGraph = new Graph&lt;String&gt;();
+        HashMap&lt;String, Set&lt;String&gt;&gt; buckets = new HashMap&lt;&gt;();
 
-def build_graph(filename):
-    buckets = {}
-    the_graph = Graph()
-    with open(filename, "r", encoding="utf8") as file_in:
-        all_words = file_in.readlines()
-    # create buckets of words that differ by 1 letter
-    for line in all_words:
-        word = line.strip()
-        for i, _ in enumerate(word):
-            bucket = f"{word[:i]}_{word[i + 1 :]}"
-            buckets.setdefault(bucket, set()).add(word)
+        File inFile = new File(fileName);
 
-    # add edges between different words in the same bucket
-    for similar_words in buckets.values():
-        for word1 in similar_words:
-            for word2 in similar_words - {word1}:
-                the_graph.add_edge(word1, word2)
-    return the_graph</pre></listing>
+        try (Scanner input = new Scanner(inFile);) {
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                String word = line.trim();
+                for (int i = 0; i &lt; word.length(); i++) {
+                    String bucket = word.substring(0, i) + "_" +
+                        word.substring(i + 1);
+                    if (!buckets.containsKey(bucket)) {
+                        buckets.put(bucket, new HashSet&lt;String&gt;());
+                    }
+                    buckets.get(bucket).add(word);
+                }
+            }
+
+            int nEdges = 0;
+            for (Set&lt;String&gt; similarWords: buckets.values()) {
+                if (similarWords.size() &gt; 1) {
+                    for (String word1: similarWords) {
+                        for (String word2: similarWords) {
+                            if (!word1.equals(word2)) {
+                                wordGraph.addEdge(word1, word2);
+                            }
+                            nEdges++;
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return wordGraph;
+    }
+    </input></program></listing>
+
+    <p>Let's look at the preceding code in a bit more detail. First, building the buckets:</p>
+    <p>
+        <ul>
+            <li>In lines 9 and 10, we read in a word from the file.</li>
+            <li>For each letter in the word (line 11), we create a bucket label (lines 12&#x2013;13). For example, for the input word SAGE, the loop would create the labels
+                _AGE, S_GE, SA_E, and SAG_ as it went through its iterations.</li>
+            <li>If the bucket label doesn't already exist, we add it to our HashMap (lines 14&#x2013;16). Its value will be an empty <c>HashSet</c>.</li>
+            <li>The word we are currently processing belongs to that bucket (line 17).</li>
+        </ul>
+    </p>
+
+    <p>Once the buckets are available, we proceed to build the graph. The loop in line 21 gives us one bucket at a time. If the bucket has more than one word in it (line 22) we run a nested loop through all the pairs of words in the bucket (lines 23 and 24) adding edges between them (line 26) except for an edge from a word to itself (line 25). The <c>addEdge</c> method will add vertices to the graph if they don't already exist.</p>
   <p>Since this is our first real-world graph problem, you might be wondering
             how sparse the graph is. The list of four-letter words we have for this
-            problem is 5,110 words long. If we were to use an adjacency matrix, the
-            matrix would have <m>5,110 \cdot 5,110</m> = 26,112,100 cells. The graph
-            constructed by the <c>buildGraph</c> function has exactly 53,286 edges, so
-            the matrix would have only 0.20% of the cells filled! That is a very
+            problem is 2,436 words long. If we were to use an adjacency matrix, the
+            matrix would have <m>2,436 \cdot 2,36</m> = 5,934,096 cells. The graph
+            constructed by the <c>buildGraph</c> function has exactly 27,592 edges, so
+            the matrix would have only 0.46% of the cells filled! That is a very
             sparse matrix indeed.</p>
 </section>

@@ -10,8 +10,8 @@
   <p>Each <c>Vertex</c> uses a HashMap to keep track of the vertices to which
             it is connected and the weight of each edge. This map is called
             <c>neighbors</c>. The listing below shows the code for the <c>Vertex</c>
-            class. The constructor simply initializes the <c>key</c>, which will
-            typically be a string, and the <c>neighbors</c> dictionary. The
+            class. The constructor initializes the <c>key</c>, which will
+            typically be a string, and the <c>neighbors</c> HashMap. The
             <c>setNeighbor</c> method is used to add a connection from this vertex to
             another. The <c>getNeighbors</c> method returns all of the vertices in
             the adjacency list, as represented by the <c>neighbors</c> instance
@@ -22,7 +22,9 @@
 import java.util.HashMap;
 import java.util.Set;
 
-public class Vertex&lt;T&gt; {
+public class Vertex&lt;T extends Comparable&lt;T&gt;&gt;
+    implements Comparable&lt;Vertex&lt;T&gt;&gt; {
+
     T key;
     HashMap&lt;Vertex&lt;T&gt;, Integer&gt; neighbors;
 
@@ -82,13 +84,21 @@ public class Vertex&lt;T&gt; {
             result = result + " has no connections";
         }
         return result;
-        return result;
     }
+
+    public int compareTo(Vertex&lt;T&gt; other) {
+        return this.key.compareTo(other.key);
+    }
+
 }
         </input></program></listing>
 
         <note>
-            <title>Java Note</title>
+            <title>Java Notes</title>
+            <p>
+                We not only want to make sure that the data type of a key can be compared (line 4); we also want to make sure
+                that we can compare vertices to each other (line 5) in some of the algorithms for this chapter. This requires us to implement a <c>compareTo</c> method (lines&#xA0;68&#x2013;70). It returns the result of comparing the keys; a negative number if <c>this.key</c> is less than <c>other.key</c>, zero if they are equal, and positive if <c>this.key</c> is greater than <c>other.key</c>.
+            </p>
             <p>
                 In line 41, we return the neighbors as a Java <c>Set</c>. A set has the property that there are no duplicate elements. Sets are iterable, which means that we can use an extended <c>for</c> loop to examine all of a vertex's neighbors.  Using a <c>Set</c> also frees us from having to construct an <c>Iterator</c> class and implement the <c>next</c> and <c>hasNext</c> methods, as we had to do for the <c>BinarySearchTree</c> in <xref ref="trees_search-tree-implementation"/>.
             </p>
@@ -104,7 +114,7 @@ public class Vertex&lt;T&gt; {
             objects in a particular graph. Together, the two methods allow you to
             iterate over the vertices in a graph by name, or by the objects
             themselves.</p>
-  <listing xml:id="graphs_lst-graph"><program language="java"><input>
+  <listing xml:id="graphs_lst-graph"><program language="java" line-numbers="yes"><input>
 import java.util.HashMap;
 import java.util.Set;
 

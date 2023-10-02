@@ -7,16 +7,9 @@ public class Vertex<T extends Comparable<T>>
     T key;
     HashMap<Vertex<T>, Integer> neighbors;
     
-    int distance;
-    Vertex<T> previous;
-    VertexColor color;
-    
-    public Vertex(T key) {
+    Vertex(T key) {
         this.key = key;
         this.neighbors = new HashMap<Vertex<T>, Integer>();
-        this.distance = 0;
-        this.previous = null;
-        this.color = VertexColor.WHITE;
     }
     
     /*
@@ -58,14 +51,6 @@ public class Vertex<T extends Comparable<T>>
         return key;
     }
     
-    public VertexColor getColor() {
-        return this.color;
-    }
-    
-    public void setColor(VertexColor color) {
-        this.color = color;
-    }
-    
     public String toString() {
         String result = this.key.toString();
         if (neighbors.size() > 0) {
@@ -83,5 +68,5 @@ public class Vertex<T extends Comparable<T>>
     public int compareTo(Vertex<T> other) {
         return this.key.compareTo(other.key);
     }
-    
+
 }

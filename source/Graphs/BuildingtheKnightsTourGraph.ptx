@@ -10,10 +10,10 @@
     <caption>Legal Moves for a Knight on Square 12 and the Corresponding Graph</caption>
     <image source="Graphs/Figures/knightmoves.png" width="50%"/>
   </figure>
-  <p>To build the full graph for an <em>n</em>-by-<em>n</em> board, we can use the Python
-            function shown in <xref ref="graphs_lst-knighttour1"/>. The <c>knight_graph</c> function
+  <p>To build the full graph for an <em>n</em>-by-<em>n</em> board, we can use the Java
+            method shown in <xref ref="graphs_lst-knighttour1"/>. The <c>knightGraph</c> function
             makes one pass over the entire board. At each square on the board the
-            <c>knight_graph</c> function calls a helper, <c>gen_legal_moves</c>, to create a
+            <c>knightGraph</c> function calls a helper, <c>generateLegalMoves</c>, to create a
             list of legal moves for that position on the board. All legal moves are
             then converted into edges in the graph. Each location on the board is converted into a
             linear vertex number similar to the vertex numbers shown

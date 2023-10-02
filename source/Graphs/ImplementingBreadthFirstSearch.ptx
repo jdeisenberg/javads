@@ -8,6 +8,7 @@
             the easiest algorithms for searching a graph. It also serves as a
             prototype for several other important graph algorithms that we will
             study later.</p>
+
   <p>Given a starting vertex <m>s</m> of a graph <m>G</m>, a breadth
             first search proceeds by exploring edges in the graph to find all the
             vertices in <m>G</m> for which there is a path from <m>s</m>. The
@@ -18,6 +19,7 @@
             that it is building a tree, one level of the tree at a time. A breadth
             first search adds all children of the starting vertex before it begins
             to discover any of the grandchildren.</p>
+
   <p>To keep track of its progress, BFS colors each of the vertices white,
             gray, or black. All the vertices are initialized to white when they are
             constructed. A white vertex is an undiscovered vertex. When a vertex is
@@ -26,43 +28,57 @@
             colored black, it has no white vertices adjacent to it. A gray node, on
             the other hand, may have some white vertices adjacent to it, indicating
             that there are still additional vertices to explore.</p>
-  <p>The breadth-first search algorithm shown in <xref ref="graphs_lst-wordbucket2"/> below uses the
+
+          <p>The BFS algorithm uses an extended version of the <c>Vertex</c>
+            class that adds three new instance variables:
+            <c>distance</c> (how far this vertex is from a starting point), <c>previous</c> (the previous <c>Vertex</c> in the search), and <c>color</c>.  Each of these instance variables also
+            has the appropriate getter and setter methods.</p>
+          <p>
+            While we could use a <c>String</c> to represent the vertex color, we will instead use a Java <c>enum</c> class. An <c>enum</c> is <q>is a special data type that enables for a variable to be a set of predefined constants</q> (as defined in the <url href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html">Java Tutorials</url>.  The code for this class, which goes into a file named <c>VertexColor.java</c>, follows:</p>
+          <listing xml:id="lst_vertex-color">
+            <caption>The <c>VertexColor</c> Enumeration</caption>
+            <program language="java"><input>
+public enum VertexColor {
+    WHITE, GRAY, BLACK
+}
+</input></program></listing>
+
+
+  <p>The breadth-first search algorithm shown in <xref ref="graphs_lst-wordbucket-bfs"/> below uses the
             adjacency list graph representation we developed earlier. In addition it uses a <c>Queue</c>,
             a crucial point as we will see, to decide which vertex to explore next.</p>
-  <listing xml:id="graphs_lst-wordbucket2"><pre>from pythonds3.basic import Queue
-from pythonds3.graphs import Graph
+
+          <listing xml:id="graphs_lst-wordbucket-bfs"><caption>Breadth-First Search</caption>
+            <program language="java" line-numbers="yes"><input>
+      public void bfs(Vertex&lt;T&gt; start) {
+        start.color = VertexColor.GRAY;
+        start.distance = 0;
+        start.previous = null;
+
+        Queue&lt;Vertex&lt;T&gt;&gt; vertexQueue = new Queue&lt;&gt;();
+        vertexQueue.enqueue(start);
+        while (vertexQueue.size() &gt; 0) {
+            Vertex&lt;T&gt; current = vertexQueue.dequeue();
+            for (Vertex&lt;T&gt; neighbor: current.getNeighbors()) {
+                if (neighbor.color == VertexColor.WHITE) {
+                    neighbor.color = VertexColor.GRAY;
+                    neighbor.previous = current;
+                    neighbor.distance = current.distance + 1;
+                    vertexQueue.enqueue(neighbor);
+                }
+            }
+
+            current.color = VertexColor.BLACK;
+        }
+    }
+    </input></program></listing>
 
 
-def bfs(start):
-    start.distance = 0
-    start.previous = None
-    vert_queue = Queue()
-    vert_queue.enqueue(start)
-    while vert_queue.size() &gt; 0:
-        current = vert_queue.dequeue()
-        for neighbor in current.get_neighbors():
-            if neighbor.color == "white":
-                neighbor.color = "gray"
-                neighbor.distance = current.distance + 1
-                neighbor.previous = current
-                vert_queue.enqueue(neighbor)
-        current.color = "black"</pre></listing>
-  <p>The BFS algorithm uses an extended version of the <c>Vertex</c>
-            class that adds three new instance variables:
-            <c>distance</c>, <c>previous</c>, and <c>color</c>. Each of these instance variables also
-            has the appropriate getter and setter methods. The code for this
-            expanded <c>Vertex</c> class is included in the <c>pythonds3</c> package, but we
-            will not show it to you here as there is nothing new to learn by seeing
-            the additional instance variables.</p>
   <p>BFS begins at the starting vertex <c>start</c> and paints it gray to
             show that it is currently being explored. Two other values, the <c>distance</c>
             and the <c>previous</c>, are initialized to 0 and <c>None</c> respectively for
-            the starting vertex. Finally, <c>start</c> is placed on a <c>Queue</c>. The
-            next step is to begin to systematically explore vertices at the front of
-            the queue. We explore each new node at the front of the queue by
-            iterating over its adjacency list. As each node on the adjacency list is
-            examined, its color is checked. If it is white, the vertex is unexplored,
-            and four things happen:</p>
+            the starting vertex. Finally, <c>start</c> is placed on a <c>Queue</c> (lines&#xA0;6&#x2013;7).</p>
+          <p>The next step is to begin to systematically explore vertices at the front of the queue. We explore each new node at the front of the queue by iterating over its adjacency list. As each node on the adjacency list is examined, its color is checked. If it is white, the vertex is unexplored, and four things happen:</p>
   <p>
     <ol marker="1">
       <li>
@@ -81,8 +97,10 @@ def bfs(start):
                     <c>current</c> have been explored.</p>
       </li>
     </ol>
+
+    <p>After the current node's neighbors have been explored, we color the node black (line&#xA0;19) to mark that it has been fully explored.</p>
   </p>
-  <p>Let's look at how the <c>bfs</c> function would construct the breadth-first
+  <p>Let's look at how the <c>bfs</c> method would construct the breadth-first
             tree corresponding to the graph in <xref ref="graphs_buildingthe-word-ladder-graph"/>. Starting
             from FOOL we take all nodes that are adjacent to FOOL and add them to
             the tree. The adjacent nodes include POOL, FOIL, FOUL, and COOL. Each of
@@ -126,13 +144,47 @@ def bfs(start):
             problems along the way. We can start at any vertex in the breadth-first
             search tree and follow the predecessor arrows back to the root to find
             the shortest word ladder from any word back to FOOL.
-            The function below (<xref ref="graphs_lst-wordbucket3"/>) shows
+            The method below (<xref ref="graphs_lst-wordbucket3"/>) shows
             how to follow the predecessor links to print out the word ladder.</p>
-  <listing xml:id="graphs_lst-wordbucket3"><pre>def traverse(starting_vertex):
-    current = starting_vertex
-    while current:
-        print(current.key)
-        current = current.previous
+          <listing xml:id="graphs_lst-wordbucket3"><program language="java"><input>
+    public static void traverse(Vertex&lt;String&gt; start) {
+        Vertex&lt;String&gt; current = start;
+        while (current != null) {
+            System.out.println(current.key);
+            current = current.previous;
+        }
+    }
+    </input></program></listing>
 
-traverse(g.get_vertex("sage"))</pre></listing>
+    <p><xref ref="graphs_lst-word-ladder-driver"/> shows a <c>main</c> method for testing the preceding code:</p>
+    <listing xml:id="graphs_lst-word-ladder-driver">
+      <program language="java">
+        <input>
+    public static void main(String[] args) {
+        WordLadder ladder = new WordLadder();
+        Graph&lt;String&gt; wordGraph = ladder.buildGraph("wordlist.txt");
+
+        String startWord = "fool";
+        String endWord = "sage";
+
+        /*
+         * Because traverse uses the previous reference,
+         * we reverse end and start words here.
+         */
+        wordGraph.bfs(wordGraph.getVertex(endWord));
+        traverse(wordGraph.getVertex(startWord));
+    }
+  </input>
+</program>
+</listing>
+<p>With this output (using the full word list):</p>
+<console><output>
+fool
+pool
+poll
+pole
+sole
+sale
+sage
+</output></console>
 </section>
