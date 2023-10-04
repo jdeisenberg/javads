@@ -4,7 +4,7 @@ import java.util.Collections;
 public class DepthFirstSearchTest<T> {
 
     public static void main(String[] args) {
-        Graph<String> testGraph = new Graph<String>();
+        DFSGraph<String> testGraph = new DFSGraph<String>();
         testGraph.addEdge("A", "B");
         testGraph.addEdge("A", "D");
         testGraph.addEdge("B", "C");
@@ -14,10 +14,12 @@ public class DepthFirstSearchTest<T> {
         testGraph.addEdge("E", "F");
         testGraph.addEdge("F", "C");
         testGraph.dfs();
+        
         ArrayList<Vertex<String>> sortList = testGraph.getVertexList();
         for (Vertex<String> v: sortList) {
             System.out.println(v);
         }
+        
         Collections.sort(sortList, new ByClosingTime());
         System.out.println("=====");
         for (Vertex<String> v: sortList) {

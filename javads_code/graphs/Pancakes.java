@@ -4,7 +4,7 @@ import java.util.Collections;
 public class Pancakes {
 
     public static void main(String[] args) {
-        Graph<String> pancake = new Graph<String>();
+        DFSGraph<String> pancake = new DFSGraph<String>();
         pancake.addEdge("3/4 cup milk", "1 cup mix");
         pancake.addEdge("1 egg", "1 cup mix");
         pancake.addEdge("1 Tbsp oil", "1 cup mix");
@@ -16,11 +16,8 @@ public class Pancakes {
         pancake.addEdge("heat syrup", "eat");
         pancake.dfs();
         ArrayList<Vertex<String>> sortList = pancake.getVertexList();
-        for (Vertex<String> v: sortList) {
-            System.out.println(v);
-        }
         Collections.sort(sortList, new ByClosingTime());
-        System.out.println("=====");
+        Collections.reverse(sortList);
         for (Vertex<String> v: sortList) {
             System.out.println(v.key + " " + v.discoveryTime + "/" + v.closingTime);
         }

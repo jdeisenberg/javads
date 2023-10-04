@@ -19,49 +19,62 @@
             discovery and closing times of the nodes provide some interesting
             properties we can use in later algorithms.</p>
   <p>The code for our depth-first search is shown in <xref ref="graphs_lst-dfsgeneral"/>. Since
-            the two functions <c>dfs</c> and its helper <c>dfs_visit</c> use a variable to
-            keep track of the time across calls to <c>dfs_visit</c>, we chose to
+            the two functions <c>dfs</c> and its helper <c>dfsVisit</c> use a variable to
+            keep track of the time across calls to <c>dfsVisit</c>, we chose to
             implement the code as methods of a class that inherits from the
             <c>Graph</c> class. This implementation extends the graph class by adding a
-            <c>time</c> instance variable and the two methods <c>dfs</c> and <c>dfs_visit</c>.
-            Looking at line&#xA0;11 you will notice that the <c>dfs</c> method
-            iterates over all of the vertices in the graph calling <c>dfs_visit</c> on
+            <c>time</c> instance variable and the two methods <c>dfs</c> and <c>dfsVisit</c>.
+            Looking at line&#xA0;13 you will notice that the <c>dfs</c> method
+            iterates over all of the vertices in the graph calling <c>dfsVisit</c> on
             the nodes that are white. The reason we iterate over all the nodes,
             rather than simply searching from a chosen starting node, is to make
             sure that all nodes in the graph are considered and that no vertices are
-            left out of the depth-first forest. It may look unusual to see the
-            statement <c>for vertex in self</c>, but remember that in this case <c>self</c>
-            is an instance of the <c>DFSGraph</c> class, and iterating over all the
+            left out of the depth-first forest. Iterating over all the
             vertices in an instance of a graph is a natural thing to do.</p>
-  <listing xml:id="graphs_lst-dfsgeneral"><program language="python">
+  <listing xml:id="graphs_lst-dfsgeneral">
+    <caption>The <c>DFSGraph</c> Class</caption>
+    <program language="java" line-numbers="yes">
     <input>
-from pythonds3.graphs import Graph
+public class DFSGraph&lt;T extends Comparable&lt;T&gt;&gt; extends Graph&lt;T&gt; {
+    int time;
 
+    public DFSGraph() {
+        super();
+    }
 
-class DFSGraph(Graph):
-    def __init__(self):
-        super().__init__()
-        self.time = 0
+    public void dfs() {
+        time = 0;
+        Vertex&lt;T&gt; vertex;
 
-    def dfs(self):
-        for vertex in self:
-            vertex.color = "white"
-            vertex.previous = -1
-        for vertex in self:
-            if vertex.color == "white":
-                self.dfs_visit(vertex)
+        for (T key: getVertexKeys()) {
+            vertex = vertices.get(key);
+            vertex.setColor(VertexColor.WHITE);
+            vertex.setPrevious(null);
+        }
 
-    def dfs_visit(self, start_vertex):
-        start_vertex.color = "gray"
-        self.time = self.time + 1
-        start_vertex.discovery_time = self.time
-        for next_vertex in start_vertex.get_neighbors():
-            if next_vertex.color == "white":
-                next_vertex.previous = start_vertex
-                self.dfs_visit(next_vertex)
-        start_vertex.color = "black"
-        self.time = self.time + 1
-        start_vertex.closing_time = self.time
+        for (T key: getVertexKeys()) {
+            vertex = vertices.get(key);
+            if (vertex.color == VertexColor.WHITE) {
+                dfsVisit(vertex);
+            }
+        }
+    }
+
+    void dfsVisit(Vertex&lt;T&gt; startVertex) {
+        startVertex.setColor(VertexColor.GRAY);
+        time = time + 1;
+        startVertex.discoveryTime = time;
+        for (Vertex&lt;T&gt; nextVertex: startVertex.getNeighbors()) {
+            if (nextVertex.color == VertexColor.WHITE) {
+                nextVertex.previous = startVertex;
+                dfsVisit(nextVertex);
+            }
+        }
+        startVertex.setColor(VertexColor.BLACK);
+        time = time + 1;
+        startVertex.closingTime = time;
+    }
+}
 </input>
   </program></listing>
   <p>Although our implementation of <c>bfs</c> is only interested in

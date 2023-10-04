@@ -5,8 +5,10 @@ import java.util.Set;
 public class Graph<T extends Comparable<T>> {
     
     HashMap<T, Vertex<T>> vertices;
+    int time; // for depth-first search
     
     public Graph() {
+        System.out.println("Initializing vertices...");
         this.vertices = new HashMap<T, Vertex<T>>();
     }
 
@@ -38,6 +40,7 @@ public class Graph<T extends Comparable<T>> {
         Vertex<T> from = vertices.get(fromVertex);
         Vertex<T> to = vertices.get(toVertex);
         from.setNeighbor(to, weight);
+        System.out.println("edge " + fromVertex + " -> " + toVertex + " " + vertices);
     }
     
     public HashMap<T, Vertex<T>> getVertices() {
