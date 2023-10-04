@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -11,12 +12,17 @@ public class Vertex<T extends Comparable<T>>
     Vertex<T> previous;
     VertexColor color;
     
+    int discoveryTime;
+    int closingTime;
+    
     public Vertex(T key) {
         this.key = key;
         this.neighbors = new HashMap<Vertex<T>, Integer>();
         this.distance = 0;
         this.previous = null;
         this.color = VertexColor.WHITE;
+        this.discoveryTime = 0;
+        this.closingTime = 0;
     }
     
     /*
@@ -58,6 +64,15 @@ public class Vertex<T extends Comparable<T>>
         return key;
     }
     
+    public Vertex<T> getPrevious() {
+        return this.previous;
+    }
+    
+    public void setPrevious(Vertex<T> v) {
+        this.previous = v;
+    }
+    
+    
     public VertexColor getColor() {
         return this.color;
     }
@@ -83,5 +98,18 @@ public class Vertex<T extends Comparable<T>>
     public int compareTo(Vertex<T> other) {
         return this.key.compareTo(other.key);
     }
-    
+
 }
+
+class ByDiscoveryTime implements Comparator<Vertex> {
+    public int compare(Vertex a, Vertex b) {
+        return a.discoveryTime - b.discoveryTime;
+    }
+}
+
+class ByClosingTime implements Comparator<Vertex> {
+    public int compare(Vertex a, Vertex b) {
+        return a.closingTime - b.closingTime;
+    }
+}
+

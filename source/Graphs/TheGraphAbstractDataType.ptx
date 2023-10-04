@@ -25,7 +25,7 @@
                     <c>vertKey</c>.</p>
       </li>
       <li>
-        <p><c>getVertices()</c> returns the list of all vertices in the graph.</p>
+        <p><c>getVertexList()</c> returns the list of all vertices in the graph.</p>
       </li>
       <li>
         <p><c>getVertexKeys()</c> returns a <c>Set</c> of all the vertex keys in the graph.</p>

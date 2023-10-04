@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
 
-public class KnightsTour {
+public class KnightsTourImproved {
     
     public static Graph<Integer> makeKnightGraph(int boardSize) {
         Graph<Integer> knightGraph = new Graph<Integer>();
@@ -59,14 +60,15 @@ public class KnightsTour {
     public static boolean knightTour(int currentDepth, ArrayList<Vertex<Integer>> path,
         Vertex<Integer> vertex, int nodesInPath) {
         boolean done;
-
+        
+        /*System.out.println("Entering at depth " + currentDepth +
+            " vertex: " + vertex + " path size: " + path.size());*/
         vertex.color = VertexColor.GRAY;
         path.add(vertex);
         
         if (currentDepth < nodesInPath) {
             ArrayList<Vertex<Integer>> neighbors =
-              new ArrayList<>(vertex.getNeighbors());
-            Collections.sort(neighbors);
+              orderByAvail(vertex);
             int i = 0;
             done = false;
             while (i < neighbors.size() && !done) {
@@ -88,10 +90,34 @@ public class KnightsTour {
         
     }
     
+    public static ArrayList<Vertex<Integer>> orderByAvail(
+      Vertex<Integer> start) {
+        ArrayList<CountAndVertex<Integer>> sortList = new ArrayList<>();
+        for (Vertex<Integer> v: start.getNeighbors()) {
+            if (v.color == VertexColor.WHITE) {
+                int count = 0;
+                for (Vertex<Integer> w: v.getNeighbors()) {
+                    if (w.color == VertexColor.WHITE) {
+                        count = count + 1;
+                    }
+                }
+                sortList.add(new CountAndVertex<Integer>(count, v));
+            }
+        }
+        Collections.sort(sortList);
+        ArrayList<Vertex<Integer>> resultList = new ArrayList<>();
+        for (CountAndVertex<Integer> pair: sortList) {
+            resultList.add(pair.vertex);
+        }
+        return resultList;
+    }
+
     public static void main(String[] args) {
         Graph<Integer> knightGraph = makeKnightGraph(8);
         ArrayList<Vertex<Integer>> path = new ArrayList<>();
+        
         knightTour(0, path, knightGraph.getVertex(0), 63);
+        
         System.out.println("Path size: " + path.size());
         boolean[] encountered = new boolean[path.size()];
         String result = "";
@@ -109,6 +135,21 @@ public class KnightsTour {
             }
         }
         System.out.println(result.substring(0, result.length() - 2));
+    }
+}
+
+class CountAndVertex<T extends Comparable<T>>
+    implements Comparable<CountAndVertex<T>> {
+    int count;
+    Vertex<T> vertex;
+    
+    public CountAndVertex(int count, Vertex<T> vertex) {
+        this.count = count;
+        this.vertex = vertex;
+    }
+    
+    public int compareTo(CountAndVertex other) {
+        return (this.count - other.count);
     }
 }
 

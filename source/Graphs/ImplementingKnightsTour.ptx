@@ -29,7 +29,8 @@
             enough, we continue to explore one level deeper by choosing a new vertex
             to explore and calling <c>knightTour</c> recursively for that vertex.</p>
           <listing xml:id="graphs_lst-knight"><program language="java" line-numbers="yes"><input>
-    public static boolean knightTour(int currentDepth, ArrayList&lt;Vertex&lt;Integer&gt;&gt; path,
+    public static boolean knightTour(int currentDepth,
+        ArrayList&lt;Vertex&lt;Integer&gt;&gt; path,
         Vertex&lt;Integer&gt; vertex, int nodesInPath) {
         boolean done;
 

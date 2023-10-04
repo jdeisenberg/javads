@@ -70,17 +70,17 @@ class DFSGraph(Graph):
             shortest path between all pairs of nodes in the graph. We leave this as
             an exercise. In our next two algorithms we will see why keeping track of
             the depth-first forest is important.</p>
-  <p>The <c>dfs_visit</c> method starts with a single vertex called
-            <c>start_vertex</c> and explores all of the neighboring white vertices as
-            deeply as possible. If you look carefully at the code for <c>dfs_visit</c>
+  <p>The <c>dfsVisit</c> method starts with a single vertex called
+            <c>startVertex</c> and explores all of the neighboring white vertices as
+            deeply as possible. If you look carefully at the code for <c>dfsVisit</c>
             and compare it to breadth-first search, what you should notice is that
-            the <c>dfs_visit</c> algorithm is almost identical to <c>bfs</c> except that on
-            the last line of the inner <c>for</c> loop, <c>dfs_visit</c> calls itself
+            the <c>dfsVisit</c> algorithm is almost identical to <c>bfs</c> except that on
+            the last line of the inner <c>for</c> loop, <c>dfsVisit</c> calls itself
             recursively to continue the search at a deeper level, whereas <c>bfs</c>
             adds the node to a queue for later exploration. It is interesting to
-            note that where <c>bfs</c> uses a queue, <c>dfs_visit</c> uses a stack. You
+            note that where <c>bfs</c> uses a queue, <c>dfsVisit</c> uses a stack. You
             don't see a stack in the code, but it is implicit in the recursive call
-            to <c>dfs_visit</c>.</p>
+            to <c>dfsVisit</c>.</p>
   <p>The following sequence of figures illustrates the depth-first search algorithm in
             action for a small graph. In these figures, the dotted lines
             indicate edges that are checked, but the node at the other end of the

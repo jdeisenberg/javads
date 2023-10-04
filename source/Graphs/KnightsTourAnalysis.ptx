@@ -3,7 +3,7 @@
   <title>Knight's Tour Analysis</title>
   <p>There is one last interesting topic regarding the knight's tour problem,
             then we will move on to the general version of the depth-first search.
-            The topic is performance. In particular, <c>knight_tour</c> is very
+            The topic is performance. In particular, <c>knightTour</c> is very
             sensitive to the method you use to select the next vertex to visit. For
             example, on a <m>5 \times 5</m> board you can produce a path in about 1.5
             seconds on a reasonably fast computer. But what happens if you try an
@@ -54,15 +54,16 @@
             size.</p>
   <p>Luckily there is a way to speed up the <m>8 \times 8</m> case so that it
             runs in under one second. In the <xref ref="graphs_lst-avail"/> we show the code that
-            speeds up the <c>knight_tour</c>. This function, called <c>order_by_avail</c>,
-            will be used in place of the call to <c>u.get_neighbors</c> at line 8 in <xref ref="graphs_implementing-knights-tour"/>.
+            speeds up the <c>knightTour</c>. This method, called <c>orderByAvail</c>,
+            will be used in place of the call to <c>vertex.getNeighbors</c> at lines&#xA0;9&#x2013;11 in <xref ref="graphs_implementing-knights-tour"/>.
             The critical line in the
-            <c>order_by_avail</c> function is line 10. This line ensures that we select the vertex
+            <c>orderByAvail</c> method is line 15. This line ensures that we select the vertex
             that has the fewest available moves to go next. You
             might think this is really counterproductive; why not select the node
             that has the most available moves? You can try that approach easily by
             running the program yourself and inserting the line
-            <c>res_list.reverse()</c> right after the sort.</p>
+            <c>Collections.reverse(sortList)</c> right after the sort.</p>
+
   <p>The problem with using the vertex with the most available moves as your
             next vertex on the path is that it tends to have the knight visit the
             middle squares early on in the tour. When this happens it is easy for
@@ -73,24 +74,62 @@
             This ensures that the knight will visit the hard-to-reach corners early
             and can use the middle squares to hop across the board only when
             necessary.</p>
+
   <p>Utilizing this kind of knowledge to speed up an algorithm is
             called a <em>heuristic</em>. Humans use heuristics every day to help make
             decisions, and heuristic searches are often used in the field of artificial
             intelligence. This particular heuristic is called Warnsdorff's
             algorithm, named after H. C. von Warnsdorff who published his idea in 1823.</p>
-  <listing xml:id="graphs_lst-avail"><program language="python">
+
+  <listing xml:id="graphs_lst-avail">
+    <caption>The <c>orderByAvail</c> Method</caption>
+    <program language="java" line-numbers="yes">
     <input>
-def order_by_avail(n):
-    res_list = []
-    for v in n.get_neighbors():
-        if v.color == "white":
-            c = 0
-            for w in v.get_neighbors():
-                if w.color == "white":
-                    c = c + 1
-            res_list.append((c, v))
-    res_list.sort(key=lambda x: x[0])
-    return [y[1] for y in res_list]
+    public static ArrayList&lt;Vertex&lt;Integer&gt;&gt; orderByAvail(
+      Vertex&lt;Integer&gt; start) {
+        ArrayList&lt;CountAndVertex&lt;Integer&gt;&gt; sortList = new ArrayList&lt;&gt;();
+        for (Vertex&lt;Integer&gt; v: start.getNeighbors()) {
+            if (v.color == VertexColor.WHITE) {
+                int count = 0;
+                for (Vertex&lt;Integer&gt; w: v.getNeighbors()) {
+                    if (w.color == VertexColor.WHITE) {
+                        count = count + 1;
+                    }
+                }
+                sortList.add(new CountAndVertex&lt;Integer&gt;(count, v));
+            }
+        }
+        Collections.sort(sortList);
+        ArrayList&lt;Vertex&lt;Integer&gt;&gt; resultList = new ArrayList&lt;&gt;();
+        for (CountAndVertex&lt;Integer&gt; pair: sortList) {
+            resultList.add(pair.vertex);
+        }
+        return resultList;
+    }
 </input>
   </program></listing>
+
+  <p>The preceding method has to keep track of a vertex and its count of unvisited neighbors as a pair of values. Since Java doesn't allow us to make an array with heterogeneous types, we need to create a class for this pair; <xref ref="lst_knight-count-and-vertex"/> shows the code for this <c>CountAndVertex</c> class. Its <c>compareTo</c> method uses subtraction to return a negative value when <c>this.count</c> is less than <c>other.count</c>, zero when they are equal, and a positive number when <c>this.count</c> is greater than <c>other.count</c>.</p>
+
+  <listing xml:id="lst_knight-count-and-vertex">
+    <caption>The <c>CountAndVertex</c> Class</caption>
+    <program language="java" line-numbers="yes">
+      <input>
+class CountAndVertex&lt;T extends Comparable&lt;T&gt;&gt;
+    implements Comparable&lt;CountAndVertex&lt;T&gt;&gt; {
+    int count;
+    Vertex&lt;T&gt; vertex;
+
+    public CountAndVertex(int count, Vertex&lt;T&gt; vertex) {
+        this.count = count;
+        this.vertex = vertex;
+    }
+
+    public int compareTo(CountAndVertex other) {
+        return (this.count - other.count);
+    }
+}
+      </input>
+    </program>
+  </listing>
 </section>
