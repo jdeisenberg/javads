@@ -15,11 +15,13 @@ public class Pancakes {
         pancake.addEdge("turn when bubbly", "eat");
         pancake.addEdge("heat syrup", "eat");
         pancake.dfs();
+        
         ArrayList<Vertex<String>> sortList = pancake.getVertexList();
         Collections.sort(sortList, new ByClosingTime());
         Collections.reverse(sortList);
         for (Vertex<String> v: sortList) {
-            System.out.println(v.key + " " + v.discoveryTime + "/" + v.closingTime);
+            System.out.println(v.key + " (" + v.discoveryTime +
+                "/" + v.closingTime + ")");
         }
    }
 }

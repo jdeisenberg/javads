@@ -136,14 +136,14 @@
 
             <exercise><p>Modify the depth-first search function to produce a topological sort.</p></exercise>
 
-            <exercise><p>Modify the depth-first search to produce strongly connected
-   components.</p></exercise>
-
             <exercise><p>Write the <c>transpose</c> method for the <c>Graph</c> class.</p></exercise>
+
+            <exercise><p>Modify the depth-first search to produce strongly connected
+                    components. Hint: produce an <c>ArrayList&lt;ArrayList&lt;T&gt;&gt;</c> (where <em>T</em> is your data type). The main ArrayList contains one ArrayList per forest, with each forest containing the keys for that forest.</p></exercise>
 
             <exercise><p>Using breadth-first search, write an algorithm that can determine the
    shortest path from each vertex to every other vertex. This is called
-   the “all pairs shortest path problem.”</p></exercise>
+   the <q>all pairs shortest path problem.</q>></p></exercise>
 
             <exercise><p>Using breadth-first search revise the maze program from
    <xref ref="chapter_recursion"/> to find the shortest path out of a maze.</p></exercise>

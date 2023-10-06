@@ -104,7 +104,7 @@
   </figure>
   <p>Finally, <xref ref="fig-sccforest"/> shows the forest of three trees produced
             in step 3 of the strongly connected components algorithm. You will notice
-            that we do not provide you with the Python code for the SCC algorithm;
+            that we do not provide you with the Java code for the SCC algorithm;
             we leave writing this program as an exercise.</p>
   <figure align="center" xml:id="fig-sccforest">
     <caption>Strongly Connected Components</caption>
