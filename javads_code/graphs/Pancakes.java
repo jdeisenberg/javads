@@ -17,7 +17,7 @@ public class Pancakes {
         pancake.dfs();
         
         ArrayList<Vertex<String>> sortList = pancake.getVertexList();
-        Collections.sort(sortList, new ByClosingTime());
+        Collections.sort(sortList, new Vertex.ByClosingTime());
         Collections.reverse(sortList);
         for (Vertex<String> v: sortList) {
             System.out.println(v.key + " (" + v.discoveryTime +
