@@ -99,17 +99,18 @@ public class Vertex<T extends Comparable<T>>
         return this.key.compareTo(other.key);
     }
 
+    static class ByDiscoveryTime implements Comparator<Vertex> {
+        public int compare(Vertex a, Vertex b) {
+            return a.discoveryTime - b.discoveryTime;
+        }
+    }
+
+    static class ByClosingTime implements Comparator<Vertex> {
+        public int compare(Vertex a, Vertex b) {
+            return a.closingTime - b.closingTime;
+        }
+    }
+
 }
 
-class ByDiscoveryTime implements Comparator<Vertex> {
-    public int compare(Vertex a, Vertex b) {
-        return a.discoveryTime - b.discoveryTime;
-    }
-}
-
-class ByClosingTime implements Comparator<Vertex> {
-    public int compare(Vertex a, Vertex b) {
-        return a.closingTime - b.closingTime;
-    }
-}
 

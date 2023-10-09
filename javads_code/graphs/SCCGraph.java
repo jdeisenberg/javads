@@ -21,7 +21,7 @@ public class SCCGraph<T extends Comparable<T>> extends DFSGraph<T> {
         }
         
         ArrayList<Vertex<T>> vertexList = this.getVertexList();
-        Collections.sort(vertexList, new ByClosingTime());
+        Collections.sort(vertexList, new Vertex.ByClosingTime());
         Collections.reverse(vertexList);
         
         for (Vertex<T> visit: vertexList) {

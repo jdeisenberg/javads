@@ -20,13 +20,13 @@ public class DepthFirstSearchTest<T> {
             System.out.println(v);
         }
         
-        Collections.sort(sortList, new ByClosingTime());
+        Collections.sort(sortList, new Vertex.ByClosingTime());
         System.out.println("=====");
         for (Vertex<String> v: sortList) {
             System.out.println(v.key + " " + v.discoveryTime + "/" + v.closingTime);
         }
         
-        Collections.sort(sortList, new ByDiscoveryTime());
+        Collections.sort(sortList, new Vertex.ByDiscoveryTime());
         System.out.println("=====");
         for (Vertex<String> v: sortList) {
             System.out.println(v.key + " " + v.discoveryTime + "/" + v.closingTime);
