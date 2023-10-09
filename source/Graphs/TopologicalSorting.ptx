@@ -83,7 +83,7 @@ public class Pancakes {
         pancake.dfs();
 
         ArrayList&lt;Vertex&lt;String&gt;&gt; sortList = pancake.getVertexList();
-        Collections.sort(sortList, new ByClosingTime());
+        Collections.sort(sortList, new Vertex.ByClosingTime());
         Collections.reverse(sortList);
         for (Vertex&lt;String&gt; v: sortList) {
             System.out.println(v.key + " (" + v.discoveryTime +
@@ -95,19 +95,19 @@ public class Pancakes {
 
 <note>
   <title>Java Note</title>
-  <p>In line 20 of <xref ref="lst_graph-pancakes"/>, we call the <code>sort</code> method with two parameters. The first is the collection to sort; the second is a <em>comparator</em>, a class that gives the criteria for determining sorting order. A comparator implements a <c>compare</c> method that compares its two parameters. It returns a negative value if the first object is <q>less than</q> the second, zero if they are equal, and positive if the first object is <q>greater than</q> the second. <xref ref="lst_comparators"/> shows the two comparators which we have added to the <c>Vertex.java</c> file.</p>
+  <p>In line 20 of <xref ref="lst_graph-pancakes"/>, we call the <code>sort</code> method with two parameters. The first is the collection to sort; the second is a <em>comparator</em>, a class that gives the criteria for determining sorting order. A comparator implements a <c>compare</c> method that compares its two parameters. It returns a negative value if the first object is <q>less than</q> the second, zero if they are equal, and positive if the first object is <q>greater than</q> the second. <xref ref="lst_comparators"/> shows the two comparators which we have added to the <c>Vertex.java</c> file. These are <em>nested classes</em>.</p>
 </note>
 
 <listing xml:id="lst_comparators">
   <program language="java">
     <input>
-class ByDiscoveryTime implements Comparator&lt;Vertex&gt; {
+static class ByDiscoveryTime implements Comparator&lt;Vertex&gt; {
     public int compare(Vertex a, Vertex b) {
         return a.discoveryTime - b.discoveryTime;
     }
 }
 
-class ByClosingTime implements Comparator&lt;Vertex&gt; {
+static class ByClosingTime implements Comparator&lt;Vertex&gt; {
     public int compare(Vertex a, Vertex b) {
         return a.closingTime - b.closingTime;
     }
