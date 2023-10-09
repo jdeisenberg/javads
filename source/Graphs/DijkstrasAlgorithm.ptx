@@ -17,8 +17,7 @@
             is set to a very large number. Theoretically you would set <c>distance</c> to
             infinity, but in practice we just set it to a number that is larger than
             any real distance we would have in the problem we are trying to solve.</p>
-  <p>The code for Dijkstra's algorithm is shown in <xref ref="graphs_lst-shortpath"/>. When the algorithm finishes, the distances are set
-            correctly as are the predecessor links for each vertex in the graph.</p>
+  <p>The code for Dijkstra's algorithm is shown in <xref ref="graphs_lst-shortpath"/>. When the algorithm finishes, the distances are set correctly as are the predecessor links for each vertex in the graph.</p>
   <listing xml:id="graphs_lst-shortpath"><pre>from pythonds3.graphs import PriorityQueue
 
 def dijkstra(graph, start):

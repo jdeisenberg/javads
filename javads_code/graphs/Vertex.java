@@ -24,13 +24,13 @@ public class Vertex<T extends Comparable<T>>
         this.discoveryTime = 0;
         this.closingTime = 0;
     }
-    
+
     /*
      * Get the weight of the edge from this vertex
      * to the other vertex. Returns null if there is no
      * connection to the other vertex.
      */
-    Integer getNeighborWeight(Vertex<T> other) {
+    Integer getNeighbor(Vertex<T> other) {
         return neighbors.get(other);
     }
     
@@ -113,3 +113,8 @@ class ByClosingTime implements Comparator<Vertex> {
     }
 }
 
+class ByDistance implements Comparator<Vertex> {
+    public int compare(Vertex a, Vertex b) {
+        return a.distance - b.distance;
+    }
+}

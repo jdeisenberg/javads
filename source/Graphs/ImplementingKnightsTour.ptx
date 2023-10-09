@@ -18,11 +18,11 @@
             the depth-first search algorithm finds a dead end (a place in the graph
             where there are no more moves possible) it backs up the tree to the next
             deepest vertex that allows it to make a legal move.</p>
-  <p>The <c>knight_tour</c> function shown in <xref ref="graphs_lst-knight"/>
+  <p>The <c>knightTour</c> function shown in <xref ref="graphs_lst-knight"/>
             takes four parameters: the <c>currentDepth</c> in the search tree; <c>path</c>, a list of vertices visited up to
             this point; <c>vertex</c>, the vertex in the graph we wish to explore; and
-            <c>limit</c>, the number of nodes in the path. The <c>knight_tour</c> function
-            is recursive. When the <c>knight_tour</c> function is called, it first
+            <c>limit</c>, the number of nodes in the path. The <c>knightTour</c> function
+            is recursive. When the <c>knightTour</c> function is called, it first
             checks the base case condition. If we have a path that contains 64
             vertices, we return from <c>knightTour</c> with a status of <c>true</c>,
             indicating that we have found a successful tour. If the path is not long
@@ -111,18 +111,18 @@
     <caption>Finish</caption>
     <image source="Graphs/Figures/ktdfsh.png" width="50%"/>
   </figure>
-  <p><c>knight_tour</c> starts with node A in <xref ref="fig-kta"/>. The nodes adjacent to A are B and D.
+  <p><c>knightTour</c> starts with node A in <xref ref="fig-kta"/>. The nodes adjacent to A are B and D.
             Since B is before D alphabetically, DFS selects B to expand next as
-            shown in <xref ref="fig-ktb"/>. Exploring B happens when <c>knight_tour</c> is
-            called recursively. B is adjacent to C and D, so <c>knight_tour</c> elects
+            shown in <xref ref="fig-ktb"/>. Exploring B happens when <c>knightTour</c> is
+            called recursively. B is adjacent to C and D, so <c>knightTour</c> elects
             to explore C next. However, as you can see in <xref ref="fig-ktc"/> node C is
             a dead end with no adjacent white nodes. At this point we change the
-            color of node C back to white. The call to <c>knight_tour</c> returns a
+            color of node C back to white. The call to <c>knightTour</c> returns a
             value of <c>False</c>. The return from the recursive call effectively
             backtracks the search to vertex B (see <xref ref="fig-ktd"/>). The next
-            vertex on the list to explore is vertex D, so <c>knight_tour</c> makes a
+            vertex on the list to explore is vertex D, so <c>knightTour</c> makes a
             recursive call moving to node D (see <xref ref="fig-kte"/>). From vertex D on,
-            <c>knight_tour</c> can continue to make recursive calls until we
+            <c>knightTour</c> can continue to make recursive calls until we
             get to node C again (see <xref ref="fig-ktf"/>, <xref ref="fig-ktg"/>, and  <xref ref="fig-kth"/>).  However, this time when we get to node C the
             test <c>n &lt; limit</c> fails so we know that we have exhausted all the
             nodes in the graph. At this point we can return <c>True</c> to indicate
@@ -134,7 +134,7 @@
             symmetric. With some modification you can make circular tours that start
             and end at the same square.</p>
   <figure align="center" xml:id="fig-tour">
-    <caption>A Complete Tour of the Board Found by <literal>knight_tour</literal></caption>
+    <caption>A Complete Tour of the Board Found by <literal>knightTour</literal></caption>
     <image source="Graphs/Figures/completeTour.png" width="50%"/>
   </figure>
 </section>

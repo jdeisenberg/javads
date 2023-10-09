@@ -15,7 +15,7 @@
             <c>setNeighbor</c> method is used to add a connection from this vertex to
             another. The <c>getNeighbors</c> method returns all of the vertices in
             the adjacency list, as represented by the <c>neighbors</c> instance
-            variable. The <c>getNeighborWeight</c> method returns the weight of the edge from
+            variable. The <c>getNeighbor</c> method returns the weight of the edge from
             this vertex to the vertex passed as a parameter.</p>
         <listing xml:id="graphs_lst-vertex"><caption>The <c>Vertex</c> Class</caption>
             <program language="java" line-numbers="yes"><input>
@@ -38,7 +38,7 @@ public class Vertex&lt;T extends Comparable&lt;T&gt;&gt;
      * to the other vertex. Returns null if there is no
      * connection to the other vertex.
      */
-    Integer getNeighborWeight(Vertex&lt;T&gt; other) {
+    Integer getNeighbor(Vertex&lt;T&gt; other) {
         return neighbors.get(other);
     }
 
