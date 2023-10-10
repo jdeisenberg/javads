@@ -2,51 +2,55 @@
 <section xml:id="basic-ds_key-terms">
   <title>Key Terms</title>
 
-  <table>
+<table>
   <tabular>
     <row>
       <cell>balanced parentheses</cell>
-      <cell>data field</cell>
-      <cell>deque</cell>
-    </row>
-    <row>
-      <cell>doubly linked list</cell>
-      <cell>escape</cell>
-      <cell>first in, first out (FIFO)</cell>
-    </row>
-    <row>
-      <cell>fully qualified name</cell>
-      <cell>generic</cell>
       <cell>has-a</cell>
-    </row>
-    <row>
-      <cell>head</cell>
-      <cell>inheritance</cell>
-      <cell>last in, first out (LIFO)</cell>
-    </row>
-    <row>
-      <cell>linear data structures</cell>
-      <cell>linked list</cell>
-      <cell>linked list traversal</cell>
-    </row>
-    <row>
-      <cell>list</cell>
       <cell>node</cell>
+    </row>
+    <row>
+      <cell>data field</cell>
+      <cell>head</cell>
       <cell>override</cell>
     </row>
     <row>
+      <cell>deque</cell>
+      <cell>inheritance</cell>
       <cell>palindrome</cell>
+    </row>
+    <row>
+      <cell>doubly linked list</cell>
+      <cell>last in, first out</cell>
       <cell>queue</cell>
+    </row>
+    <row>
+      <cell>escape</cell>
+      <cell>LIFO</cell>
       <cell>short-circuit evaluation</cell>
     </row>
     <row>
+      <cell>FIFO</cell>
+      <cell>linear data structures</cell>
       <cell>simulation</cell>
+    </row>
+    <row>
+      <cell>first in, first out</cell>
+      <cell>linked list</cell>
       <cell>singly linked list</cell>
+    </row>
+    <row>
+      <cell>fully qualified name</cell>
+      <cell>linked list traversal</cell>
       <cell>stack</cell>
     </row>
     <row>
-      </row>
+      <cell>generic</cell>
+      <cell>list</cell>
+      <cell></cell>
+    </row>
     </tabular>
 </table>
+
 
 </section>

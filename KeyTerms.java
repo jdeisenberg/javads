@@ -4,46 +4,52 @@
  */
 import java.util.Scanner;
 import java.io.File;
+import java.util.ArrayList;
 
 public class KeyTerms {
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Usage: java KeyTerms inputfile");
+		int nColumns = 3;
+        if (args.length < 1 || args.length > 2) {
+            System.out.println("Usage: java KeyTerms inputfile nColumns");
         } else {
             String fileName = args[0];
+			if (args.length == 2) {
+				nColumns = Integer.parseInt(args[1]);
+			}
+            ArrayList<String> terms = new ArrayList<>();
             try {
                 Scanner inFile = new Scanner(new File(fileName));
-                System.out.println("""
-  <table>
-    <tabular>
-      <row>""");
-                int nItems = 0;
                 while (inFile.hasNextLine()) {
-                    String str = inFile.nextLine();
-                    System.out.println("      <cell>" + str + "</cell>");
-                    nItems++;
-                    if (nItems == 3) {
-                        System.out.println("    </row>");
-                        System.out.println("    <row>");
-                        nItems = 0;
-                    }
+                    terms.add(inFile.nextLine());
                 }
-                
-                if (nItems != 0) {
-                    for (int n = nItems; n < 3; n++) {
-                        System.out.println("      <cell></cell>");
-                    }
-                }
-                System.out.println("""
-      </row>
-    </tabular>
-</table>""");
-
                 inFile.close();
             }
             catch (Exception ex) {
-                System.out.println(ex);
+               System.out.println(ex);
             }
+
+                
+            System.out.println("""
+  <table>
+    <tabular>""");
+            int nRows = (terms.size() + nColumns -1) / nColumns;
+            System.err.println("n rows: " + nRows);
+            for (int row = 0; row  < nRows; row++) {
+                System.out.println("    <row>");
+                for (int col = 0; col < nColumns; col++) {
+                    int itemNumber = col * nRows + row;
+                    String str = "";
+                    if (itemNumber < terms.size()) {
+                        str = terms.get(itemNumber);
+                    }
+                    System.out.println("      <cell>" + str + "</cell>");
+                }
+                System.out.println("    </row>");
+            }
+            System.out.println("""
+    </tabular>
+</table>""");
+
         }
     }
 }

@@ -4,36 +4,37 @@
 <table>
   <tabular>
     <row>
-      <cell>algorithm analysis</cell>
-      <cell>average-case</cell>
-      <cell>benchmark analysis</cell>
-    </row>
-    <row>
-      <cell>best-case</cell>
-      <cell>Big O notation</cell>
-      <cell>brute force</cell>
-    </row>
-    <row>
+      <cell>anagram</cell>
       <cell>cache</cell>
-      <cell>constant</cell>
-      <cell>cubic</cell>
-    </row>
-    <row>
-      <cell>exponential</cell>
-      <cell>garbage collection</cell>
       <cell>linear</cell>
     </row>
     <row>
+      <cell>average-case</cell>
+      <cell>checking off</cell>
       <cell>logarithmic</cell>
+    </row>
+    <row>
+      <cell>benchmark analysis</cell>
+      <cell>constant</cell>
       <cell>log linear</cell>
+    </row>
+    <row>
+      <cell>best-case</cell>
+      <cell>cubic</cell>
       <cell>order of magnitude</cell>
     </row>
     <row>
+      <cell>Big O notation</cell>
+      <cell>exponential</cell>
       <cell>quadratic</cell>
+    </row>
+    <row>
+      <cell>brute force</cell>
+      <cell>garbage collection</cell>
       <cell>worst-case</cell>
-      <cell></cell>
-      </row>
+    </row>
     </tabular>
 </table>
+
 
 </section>

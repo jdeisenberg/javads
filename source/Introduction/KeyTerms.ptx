@@ -1,79 +1,109 @@
 <?xml version="1.0"?>
 <section xml:id="introduction_key-terms">
   <title>Key Terms</title>
-  <table>
-    <tabular>
-      <row>
-        <cell>abstract data type</cell>
-        <cell>abstraction</cell>
-        <cell>ADT</cell>
-      </row>
-      <row>
-        <cell>algorithm</cell>
-        <cell>array</cell>
-        <cell>block</cell>
-      </row>
-      <row>
-        <cell>box/unbox</cell>
-        <cell>bytecode</cell>
-        <cell>camel case</cell>
-      </row>
-      <row>
-        <cell>case sensitive</cell>
-        <cell>class</cell>
-        <cell>collections</cell>
-      </row>
-      <row>
-        <cell>comment</cell>
-        <cell>computable</cell>
-        <cell>constructor</cell>
-      </row>
-      <row>
-        <cell>data abstraction</cell>
-        <cell>data structure</cell>
-        <cell>data types</cell>
-      </row>
-      <row>
-        <cell>deep equality</cell>
-        <cell>encapsulation</cell>
-        <cell>exceptions</cell>
-      </row>
-      <row>
-        <cell>extended for loop</cell>
-        <cell>field</cell>
-        <cell>format specifiers</cell>
-      </row>
-      <row>
-        <cell>format string</cell>
-        <cell>formatted printing</cell>
-        <cell>HashMap</cell>
-      </row>
-      <row>
-        <cell>implementation-independent</cell>
-        <cell>indeterminate loops</cell>
-        <cell>information hiding</cell>
-      </row>
-      <row>
-        <cell>instance</cell>
-        <cell>instance method</cell>
-        <cell>method</cell>
-      </row>
-      <row>
-        <cell>object</cell>
-        <cell>overloading</cell>
-        <cell>package</cell>
-      </row>
-      <row>
-        <cell>primitive</cell>
-        <cell>procedural abstraction</cell>
-        <cell>reference types</cell>
-      </row>
-      <row>
-        <cell>shallow equality</cell>
-        <cell>String</cell>
-        <cell>token</cell>
-        </row>
-      </tabular>
-  </table>
+<table>
+  <tabular>
+    <row>
+      <cell>abstract data type</cell>
+      <cell>data abstraction</cell>
+      <cell>method</cell>
+    </row>
+    <row>
+      <cell>abstraction</cell>
+      <cell>data structure</cell>
+      <cell>method body</cell>
+    </row>
+    <row>
+      <cell>ADT</cell>
+      <cell>data types</cell>
+      <cell>methods</cell>
+    </row>
+    <row>
+      <cell>algorithm</cell>
+      <cell>declare</cell>
+      <cell>objects</cell>
+    </row>
+    <row>
+      <cell>array</cell>
+      <cell>deep equality</cell>
+      <cell>objects</cell>
+    </row>
+    <row>
+      <cell>block</cell>
+      <cell>dot notation</cell>
+      <cell>overloading</cell>
+    </row>
+    <row>
+      <cell>box</cell>
+      <cell>encapsulation</cell>
+      <cell>package</cell>
+    </row>
+    <row>
+      <cell>bytecode</cell>
+      <cell>exceptions</cell>
+      <cell>primitive</cell>
+    </row>
+    <row>
+      <cell>call</cell>
+      <cell>extended </cell>
+      <cell>procedural abstraction</cell>
+    </row>
+    <row>
+      <cell>camel case</cell>
+      <cell>field</cell>
+      <cell>Programming</cell>
+    </row>
+    <row>
+      <cell>case sensitive</cell>
+      <cell>format specifiers</cell>
+      <cell>qualify</cell>
+    </row>
+    <row>
+      <cell>class</cell>
+      <cell>format string</cell>
+      <cell>recursion</cell>
+    </row>
+    <row>
+      <cell>class</cell>
+      <cell>formatted printing</cell>
+      <cell>reference</cell>
+    </row>
+    <row>
+      <cell>class</cell>
+      <cell>HashMap</cell>
+      <cell>reference types</cell>
+    </row>
+    <row>
+      <cell>collections</cell>
+      <cell>implementation-independent</cell>
+      <cell>shallow equality</cell>
+    </row>
+    <row>
+      <cell>comment</cell>
+      <cell>indeterminate loops</cell>
+      <cell>tokens</cell>
+    </row>
+    <row>
+      <cell>comment</cell>
+      <cell>information hiding</cell>
+      <cell>unbox</cell>
+    </row>
+    <row>
+      <cell>computable</cell>
+      <cell>instance</cell>
+      <cell>unordered</cell>
+    </row>
+    <row>
+      <cell>concatenate</cell>
+      <cell>instance method</cell>
+      <cell></cell>
+    </row>
+    <row>
+      <cell>constructor</cell>
+      <cell>interface</cell>
+      <cell> </cell>
+    </row>
+    </tabular>
+</table>
 
 </section>
