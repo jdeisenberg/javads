@@ -52,12 +52,6 @@
             <exercise><p>Ignoring the weights, perform a breadth-first search on the graph
                     drawn for question 1 or 2.</p>
 
-<program xml:id="breadth_first" interactive="activecode" language="python">
-      <input>
-# Your code here.
-        </input>
-    </program>
-
             </exercise>
 
             <exercise xml:id="big_o_build_graph_exercise" label="big_o_build_graph">
@@ -91,12 +85,6 @@
 
             <exercise><p>Using Prim’s algorithm, find the minimum weight spanning tree for the graph
    drawn for question 1 or 2.</p>
-
-<program xml:id="prims_algorithm_code" interactive="activecode" language="python">
-      <input>
-# Your code here.
-        </input>
-    </program>
             </exercise>
 
             <exercise><p>Draw a dependency graph illustrating the steps needed to send an
@@ -143,7 +131,7 @@
 
             <exercise><p>Using breadth-first search, write an algorithm that can determine the
    shortest path from each vertex to every other vertex. This is called
-   the <q>all pairs shortest path problem.</q>></p></exercise>
+   the <q>all pairs shortest path problem.</q></p></exercise>
 
             <exercise><p>Using breadth-first search revise the maze program from
    <xref ref="chapter_recursion"/> to find the shortest path out of a maze.</p></exercise>
