@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="exceptions">
+<title>Exceptions</title>
+
+<introduction>
+<p>
+Consider this program:
+</p>
+<listing xml:id="exceptions_error_program">
+<program language="java" >
+<input>
+import java.util.Scanner;
+
+public class ErrorProne {
+
+    public static void main(String[] args) {
+        int[] data = {10, 66, 47, 11};
+        
+        Scanner input = new Scanner(System.in);
+        
+        System.out.print("Enter index 0-3: ");
+        int index = input.nextInt();
+        
+        System.out.print("Enter number to divide by: ");
+        int divisor = input.nextInt();
+        
+        int result = data[index] / divisor;
+        System.out.printf("quotient of %d and %d is %d\n",
+            data[index], divisor, result);
+    }
+}
+</input>
+</program>
+</listing>
+
+<p>
+If you enter a non-number the program crashes:
+</p>
+
+<console><output>
+Enter index 0-3: two
+Exception in thread "main" java.util.InputMismatchException
+	at java.base/java.util.Scanner.throwFor(Scanner.java:939)
+	at java.base/java.util.Scanner.next(Scanner.java:1594)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2258)
+	at java.base/java.util.Scanner.nextInt(Scanner.java:2212)
+	at ErrorProne.main(ErrorProne.java:11)
+</output></console>
+
+<p>
+The lines beginning with <c>at</c> are a <term>stack trace</term>. They show the chain of method calls in reverse chronological order with the file name and line number. You'll want to look for the one that is in your program. In this case, the error was in <c>ErrorProne.java:11</c>, where the <c>11</c> is the line number in the source file with the <c>nextInt</c> call.
+</p>
+
+<p>
+If you enter an index outside the array bounds, the program crashes (the output has been reformatted to fit on the line length of this page):
+</p>
+
+<console><output>
+Enter index 0-3: 5
+Enter number to divide by: 0
+Exception in thread "main"
+  java.lang.ArrayIndexOutOfBoundsException:
+  Index 5 out of bounds for length 4
+	at ErrorProne.main(ErrorProne.java:21)
+
+</output></console>
+
+<p>
+And if you enter a zero as the divisor, you get yet another error:
+</p>
+
+<console><output>
+Enter index 0-3: 2
+Enter number to divide by: 0
+Exception in thread "main"
+  java.lang.ArithmeticException: / by zero
+    at ErrorProne.main(ErrorProne.java:21)
+</output></console>
+
+<p>
+All of these errors are called <em>exceptions</em><mdash/>exceptional conditions after which the program cannot continue to run. In Java, we say that the program <em>throws</em> an exception when it fails.
+</p>
+
+<p>
+You already know how to handle these problems before they crash your program: you can use an <c>if</c> statement with <c>Scanner</c>'s <c>hasNextInt</c> method to make sure that the user enters an integer. You can use <c>if</c> statements to check that the index number is between 0 and the array's length, and that the divisor is non-zero.
+</p>
+</introduction>
+
+<subsection xml:id="exceptions_try_catch">
+    <title><c>try</c> and <c>catch</c></title>
+<p>
+In addition to using an <c>if</c> statement to avoid errors, Java has another general mechanism for catching exceptions before they stop your program:  <c>try</c> and <c>catch</c>.
+Let's enclose the code that could have an error in a <c>try</c> block:
+</p>
+
+<listing xml:id="exceptions_try_block">
+<program language="java">
+<input>
+try {
+    System.out.print("Enter index 0-3: ");
+    int index = input.nextInt();
+    
+    System.out.print("Enter number to divide by: ");
+    int divisor = input.nextInt();
+    
+    int result = data[index] / divisor;
+    System.out.printf("quotient of %d and %d is %d\n",
+        data[index], divisor, result);
+}
+</input>
+</program>
+</listing>
+
+<p>
+The <c>try</c> block is followed by a <c>catch</c> block that specifies the exception we want to handle
+and how to handle it.  Let's start with the division by zero, which generated a <c>java.lang.ArithmeticException</c>:
+</p>
+
+<listing xml:id="exceptions_catch_block">
+<program language="java">
+<input>
+catch (ArithmeticException ex) {
+    System.out.println("Number to divide by cannot be zero.");
+}
+</input>
+</program>
+</listing>
+
+<p>
+If you recompile and run the program and enter 2 and 0 as your numbers, you'll get the error message in the <c>catch</c> block. Notice that the <c>printf</c> statement after the division doesn't occur<mdash/>when an exception is thrown, execution imediately jumps to the <c>catch</c>.
+</p>
+
+<p>
+If you enter <c>five</c> or <c>5</c> for the first input, you'll still get the <c>NumberFormatException</c> or <c>ArrayIndexOutOfBoundsException</c>.
+</p>
+
+<p>
+You may follow a <c>try</c> block with as many <c>catch</c> blocks as you want. Let's add two more <c>catch</c> blocks to handle these other two errors:
+</p>
+
+<listing xml:id="exceptions_multiple_catch">
+<program language="java">
+<input>
+catch (NumberFormatException ex) {
+    System.out.println("You must enter digits for numbers.");
+}
+catch (ArrayIndexOutOfBoundsException ex) {
+    System.out.printf("Index must be in range 0-%d\n", data.length);
+}
+</input>
+</program>
+</listing>
+
+<p>
+The variable in parentheses after <c>catch</c> is local to the <c>catch</c> block. This means you can use the same variable name in all the <c>catch</c> blocks, and, by convention, most programmers name it <c>ex</c>. (We will put it to use later in the chapter.)
+</p>
+
+<p>
+When an exception occurs, Java goes through the <c>catch</c> blocks in the order that they appear in your program and finds the first one that applies. In the preceding example, we could have put the <c>catch</c> blocks in any order. However, the order does become important once we examine the hierarchy of exceptions.
+</p>
+</subsection>
+
+<subsection>
+<title>The Hierarchy of Exceptions</title>
+<p>
+All exceptions descend from the <c>Exception</c> class. This list shows many of the most common exceptions you will encounter when learning Java; each category contains many other classes:</p>
+
+<aside><p><c>Exception</c> is a child of the <c>Throwable</c> class. Another child of <c>Throwable</c> is <c>Error</c>, which is used for serious, system-level problems. You will very rarely encounter one of these.</p></aside>
+
+<p><ul>
+    <li><c>Exception</c></li>
+        <p><ul>
+            <li><c>IOException</c></li>
+                <p><ul>
+                    <li><c>FileNotFoundException</c></li>
+                </ul></p>
+            <li><c>RunTimeException</c></li>
+            <p><ul>
+                <li><c>ArithmeticException</c></li>
+                <li><c>IllegalArgumentException</c></li>
+                    <p><ul>
+                        <li><c>IllegalFormatException</c></li>
+                        <li><c>InvalidParameterException</c></li>
+                        <li><c>NumberFormatException</c></li>
+                    </ul></p>
+                <li><c>IndexOutOfBoundsException</c></li>
+                    <p><ul>
+                        <li><c>ArrayIndexOutOfBoundsException</c></li>
+                        <li><c>StringIndexOutOfBoundsException</c></li>
+                    </ul></p>
+                <li><c>NullPointerException</c></li>
+              </ul></p>
+    </ul></p>
+</ul></p>
+
+If you put a <c>catch</c> for a parent class <em>before</em> a <c>catch</c> for a child class, the parent class will catch the error.
+Thus, in this code fragment:
+
+<listing xml:id="lst_multiple_catch">
+<program language="java" line-numbers="yes">
+<input>
+try {
+    int n = 12 / 0;
+}
+catch (Exception ex) {
+    System.out.println("Something unexpected occurred.");
+}
+catch (ArithmeticException ex) {
+    System.out.println("You can't divide by zero.");
+}
+</input>
+</program>
+</listing>
+
+You will see the <q>Something unexpected occurred.</q> message.  For this reason, always <c>catch</c> the more specific (child) exception classes before you <c>catch</c> the more general (parent) exception classes.
+
+Let's say you <c>catch</c> the most generic <c>Exception</c> possible, or one that could have many possible causes, such as <c>FileNotFoundException</c>. How can you give the user more information than just <q>something unexpected occurred</q>? You can use the variable that you declared in the <c>catch</c> clause. Here are some methods that you can use<fn><p>These methods are from the <c>Throwable</c> class, which is the parent of all Java exceptions.</p></fn>
+
+<p>
+<dl>
+    <li>
+        <title><c>getMessage()</c></title>
+        <p>Returns a detailed message string</p>
+    </li>
+
+    <li>
+        <title><c>toString()</c></title>
+        <p>Returns a short description</p>
+    </li>
+
+    <li>
+        <title><c>printStackTrace()</c></title>
+        <p>This <c>void</c> method prints the exception and its stack trace to the standard error stream, which is your terminal window</p>
+    </li>
+</dl>
+</p>
+
+<p>
+For example, you could <c>catch</c> <em>only</em> <c>Exception</c> and use one of these methods to tell users what went wrong:
+</p>
+
+<listing xml:id="lst_using_exception_methods">
+<program language="java" line-numbers="yes">
+<input>
+catch (Exception ex) {
+    System.out.println("An error occurred:");
+    System.out.println(ex.toString());
+}
+</input>
+</program>
+</listing>
+
+You can see this in action in file <em>ErrorProneGeneralException.java</em> in the code repository. As you can see, the error messages are not as satisfactory as those you would write yourself when handling the specific exceptions.
+</subsection>
+
+<subsection xml:id="exceptions_finally_clause">
+<title>The <c>finally</c> Clause</title>
+
+<p>
+Sometimes programs need to take an action whether the code in the <c>try</c> block succeeded or not. (For example, if you have allocated resources and want to <q>clean up</q> before exiting the program.) This is the role of the <c>finally</c> clause. It is executed whether the <c>try</c> block succeeded or an exception was caught by a <c>catch</c> block. In fact, it is executed even when there is a <c>return</c> or <c>break</c> in a block:
+</p>
+
+<listing>
+<program language="java">
+<input>
+public class FinallyTest {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        try {
+            int result = 17 / 5;
+            System.out.printf("quotient of 17 and 5 is %d\n",
+               result);
+            return; // exits the main() method
+        }
+        catch (ArithmeticException ex) {
+            System.out.println("You can't divide by zero.");
+        }
+        finally {
+            System.out.println("In the finally clause.");
+        }
+        System.out.println("Does not print if return succeeds");
+    }
+}
+</input>
+</program>
+</listing>
+
+<p>
+This program will print <c>In the finally clause.</c> even though the <c>return</c> prevents the last <c>println</c> from happening.
+</p>
+
+</subsection>
+
+<subsection xml:id="exceptions_throw_exceptions">
+    <title>Throwing Exceptions</title>
+
+    <p>
+        Before proceeding, let's ask a philosophical question: why do these exceptions even exist? Why doesn't the JVM simply do something reasonable when it encounters one of these situations?  That's the whole problem<mdash/>what does <q>reasonable</q> mean? For dividing by zero, some programs might want to return a zero as a default answer. Other programs might want to print an error message and end the program. Still others might want to detect the attempt to divide by zero and ask for new input.
+    </p>
+
+    <p>
+        Because the definition of <q>reasonable</q> is different for every program and every programmer, it makes sense for these exceptions that happen in many different circumstances to throw the problem back to the programmer and say, <q>you handle this.</q>
+    </p>
+
+    <p>
+        If you are writing a library of Java methods for other people to use, you won't be able to anticipate all of your users' needs either. Your methods will also need to <c>throw</c> an <c>Exception</c> so that the people who use your methods can handle errors as they see fit.
+    </p>
+
+    <p>
+        For example, let's say you have a Java library with a method that calculates the average of an array of <c>double</c> values. If somebody hands you an empty array, that's an illegal argument, and you can write your code to <c>throw</c> an <c>IllegalArgumentException</c>:
+    </p>
+
+<listing xml:id="lst_throw_exception">
+<program language="java" line-numbers="yes">
+<input>
+public class ArrayStats {
+    public static double average(double[] data)
+        throws IllegalArgumentException {
+        int n = data.length;
+        if (n &gt; 0) {
+            double sum = 0.0;
+            for (double value: data) {
+                sum += value;
+            }
+            return sum / n;
+        } else {
+            throw new IllegalArgumentException("Empty array");
+        }
+    }
+}
+</input>
+</program>
+</listing>
+
+<p>
+In line 3, specify that this method <c>throws</c> an <c>IllegalArgumentException</c>.
+</p>
+
+<p>
+    In line 12, when the length of the array is zero, use the keyword <c>throw</c> and create a <c>new</c> <c>IllegalArgumentException</c>. The argument to the constructor is the value that will be returned when someone calls the exception's <c>getMessage</c> method.
+</p>
+
+<p>
+Here's an example that calls the code (without <c>try</c> and <c>catch</c>) and the resulting error, formatted to fit the page:
+</p>
+
+<listing xml:id="lst_try_throw_exception">
+<program language="java" line-numbers="yes">
+<input>
+public class TestArrayStats {
+    public static void main(String[] args) {
+        double[] items = new double[0];
+        double result = ArrayStats.average(items);
+        System.out.println("Average is " + result);
+    }
+}
+</input></program></listing>
+
+<console><output>
+Exception in thread "main"
+  java.lang.IllegalArgumentException: Empty array
+        at ArrayStats.average(ArrayStats.java:12)
+        at TestArrayStats.main(TestArrayStats.java:5)
+        </output></console>
+
+<p>
+    If your method can throw more than one exception, you list them separated by commas in the <c>throws</c> clause:
+</p>
+
+<listing xml:id="lst_throw_multiple_exceptions">
+<program language="java" line-numbers="yes">
+<input>
+public static void example(int n) throws IllegalArgumentException,
+  ArithmeticException, NumberFormatException {
+    // ...code
+}
+</input>
+</program>
+</listing>
+</subsection>
+
+<subsection>
+    <title>Checked and Unchecked Exceptions</title>
+<p>
+    All of the exceptions used in the preceding examples (and all exceptions that are descendants of <c>RuntimeException</c>) are called <em>unchecked exceptions</em>. Java doesn't require you to enclose operations that cause such exceptions in a <c>try</c>-<c>catch</c> block. This is a good thing, or you'd need <c>try</c>-<c>catch</c> blocks around every division, array access, and string-to-numeric conversion.
+</p>
+
+<p>
+    For many operations that could throw an unchecked exception, you are better off using an <c>if</c> statement to avoid the error in the first place. You can, for example, use an <c>if</c> to check if an index is within array bounds, a divisor is non-zero, or if the user has actually entered data that can be converted to integer. This also gives you greater control over the program flow and structure. See, for example, the {\it NormalErrorChecking.java} file in the code repository.
+</p>
+
+<p>
+    So, why are we talking about <c>try</c> and <c>catch</c> at all? Because there are some exceptions that can't easily be handled by an <c>if</c>-<c>else</c>. These exceptions are called <em>checked exceptions</em>. The Java compiler requires you to enclose operations that might throw these exceptions in a <c>try</c> block and provide a <c>catch</c> block to handle them. You are also required to list them in a <c>throws</c> clause if you are throwing those exceptions yourself. Foremost of these checked exceptions is the <c>IOException</c>, generated by I/O (Input/Output) operations. When you are working with files in Java, you will need to check this exception. Handling files is the topic of the next section of this chapter.
+</p>
+</subsection>
+</section>
+

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appendix xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US" xml:id="appendix_exceptions_files">
+  <title>Exceptions and Files</title>
+  <xi:include href="./Objectives.ptx"/>
+  <xi:include href="./Exceptions.ptx"/>
+  <xi:include href="./Files.ptx"/>
+  <xi:include href="./Exercises.ptx"/>
+</appendix>

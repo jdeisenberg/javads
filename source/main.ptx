@@ -77,6 +77,7 @@
     <xi:include href="./Advanced/toctree.ptx"/>
     <backmatter>
       <xi:include href="./AppendixOOP/toctree.ptx"/>
+      <xi:include href="./AppendixFiles/toctree.ptx"/>
       <index>
         <index-list/>
       </index>

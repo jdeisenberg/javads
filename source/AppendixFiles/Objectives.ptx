@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="files_exceptions_objectives">
+  <title>Objectives</title>
+  <p>
+    <ul>
+      <li>
+        <p>To understand the concept of an <c>Exception</c> in Java.</p>
+      </li>
+      <li>
+        <p>To be able to catch and throw exceptions.</p>
+      </li>
+      <li>
+        <p>To be able to open files and get their meta-information.</p>
+      </li>
+      <li>
+        <p>To be able to read and write text files.</p>
+      </li>
+    </ul>
+  </p>
+</section>
