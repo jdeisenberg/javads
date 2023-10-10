@@ -4,8 +4,8 @@
 
 <introduction>
     <p>
-        Up to this point, we've entered all the data for a program as data structures in our example programs or have prompted the user to enter data from the keyboard, using a <c>Scanner</c> with <c>System.in</c>.  What if someone sends you a file of several months' worth of weather data from Munich, Germany, in a file named <em>klima.txt</em>. (You can find this file in the code repository.)<fn><p>The file is an edited version of the data at <url ref="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/recent/tageswerte_KL_03379_akt.zip">opendata.dwd.de</url></p></fn>
-    </p>
+        Up to this point, we've entered all the data for a program as data structures in our example programs or have prompted the user to enter data from the keyboard, using a <c>Scanner</c> with <c>System.in</c>.  What if someone sends you a file of several months' worth of weather data from Munich, Germany, in a file named <em>klima.txt</em>. (You can find this file in the code repository.)</p>
+    <aside><p>The file is an edited version of the data at <url href="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/daily/kl/recent/tageswerte_KL_03379_akt.zip">opendata.dwd.de</url></p></aside>
 
 <console><output>
 MESS_DATUM;TMK;TXK;TNK
@@ -86,7 +86,7 @@ The variable <c>f</c> is what, in other programming languages, is called a <em>f
 </p>
 
 <p>
-    The <c>File</c> class also has methods that let you delete files, rename them, and create directories. For details, see <url ref="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html">the Java API documentation</url>.
+    The <c>File</c> class also has methods that let you delete files, rename them, and create directories. For details, see <url href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/io/File.html">the Java API documentation</url>.
 </p>
 </subsection>
 

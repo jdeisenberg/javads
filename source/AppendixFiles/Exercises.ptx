@@ -77,7 +77,7 @@ Erika Mustermann: 86.25 (4 tests)
 
 <exercise>
 <p>
-In this exercise, you will consolidate data from one file to create another file in a program named <em>Consolidate.java</em>. The original data is in file <em>wildfires_jan_2015.txt</em> and was extracted from a database of 1.8 million wildfires from 1992 to 2015.<fn><p>Short, Karen C. 2017. Spatial wildfire occurrence data for the United States, 1992-2015 [FPA_FOD_20170508]. 4th Edition. Fort Collins, CO: Forest Service Research Data Archive. <url ref="https://doi.org/10.2737/RDS-2013-0009.4">doi.org</url></p></fn>
+In this exercise, you will consolidate data from one file to create another file in a program named <em>Consolidate.java</em>. The original data is in file <em>wildfires_jan_2015.txt</em> and was extracted from a database of 1.8 million wildfires from 1992 to 2015.<fn><p>Short, Karen C. 2017. Spatial wildfire occurrence data for the United States, 1992-2015 [FPA_FOD_20170508]. 4th Edition. Fort Collins, CO: Forest Service Research Data Archive. <url href="https://doi.org/10.2737/RDS-2013-0009.4">doi.org</url></p></fn>
 </p>
 
 <p>Each line in the file contains:</p>
@@ -163,7 +163,7 @@ First, write the <c>City</c> class that defines an object with these properties:
 Then, write a class named <c>CityInfo</c> that contains the <c>main()</c> method.Use the <em>citylist.dat</em> file to set up the initial list of cities. The file is available from the repository. Each line of the text file has a country code, city name, and population, separated by semicolons. Your program must first read the city data file with this method:
 </p>
 
-<aside><p>The data for this exercise came from <url ref="http://geonames.org/">geonames.org</url>, licensed under a Creative Commons Attribution 4.0 License (see <url ref="https://creativecommons.org/licenses/by/4.0/">creativecommons.org</url></p></aside>
+<aside><p>The data for this exercise came from <url href="http://geonames.org/">geonames.org</url>, licensed under a Creative Commons Attribution 4.0 License (see <url href="https://creativecommons.org/licenses/by/4.0/">creativecommons.org</url></p></aside>
 
 <console><output>
 public static ArrayList&lt;City&gt; readCityFile(String fileName)
