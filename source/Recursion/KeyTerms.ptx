@@ -1,29 +1,29 @@
 <?xml version="1.0"?>
 <section xml:id="recursion_key-terms">
   <title>Key Terms</title>
-<table>
-  <tabular>
-    <row>
-      <cell>base case</cell>
-      <cell>caching</cell>
-      <cell>checked exception</cell>
-    </row>
-    <row>
-      <cell>dynamic programming</cell>
-      <cell>fractal</cell>
-      <cell>greedy method</cell>
-    </row>
-    <row>
-      <cell>memoization</cell>
-      <cell>recursion</cell>
-      <cell>recursive calls</cell>
-    </row>
-    <row>
-      <cell>stack frame</cell>
-      <cell></cell>
-      <cell></cell>
+  <table>
+    <tabular>
+      <row>
+        <cell>base case</cell>
+        <cell>fractal</cell>
+        <cell>recursive calls</cell>
       </row>
-    </tabular>
-</table>
+      <row>
+        <cell>caching</cell>
+        <cell>greedy method</cell>
+        <cell>stack frame</cell>
+      </row>
+      <row>
+        <cell>checked Exception</cell>
+        <cell>memoization</cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell>dynamic programming</cell>
+        <cell>recursion</cell>
+        <cell></cell>
+      </row>
+      </tabular>
+  </table>
 
 </section>

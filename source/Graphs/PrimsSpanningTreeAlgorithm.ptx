@@ -76,30 +76,45 @@
             We define a safe edge as any edge that connects a vertex that is in the
             spanning tree to a vertex that is not in the spanning tree. This ensures
             that the tree will always remain a tree and therefore have no cycles.</p>
-  <p>The Python code to implement Prim's algorithm is shown in <xref ref="lst-prims"/>.
+  <p>The Java code to implement Prim's algorithm is shown in <xref ref="lst-prims"/>.
             Prim's algorithm is similar to Dijkstra's algorithm
             in that they both use a priority queue to select the next vertex to add
             to the growing graph.</p>
 <listing xml:id="lst-prims">
-  <pre>import sys
-from pythonds3.graphs import PriorityQueue
+  <caption>Prim's Spanning Tree Algorithm</caption>
+  <program language="java">
+    <input>
+import java.util.ArrayList;
 
+public class PrimsAlgorithm&lt;T extends Comparable&lt;T&gt;&gt; {
 
-def prim(graph, start):
-    pq = PriorityQueue()
-    for vertex in graph:
-        vertex.distance = sys.maxsize
-        vertex.previous = None
-    start.distance = 0
-    pq.heapify([(vertex.distance, vertex) for vertex in graph])
-    while not pq.is_empty():
-        distance, current_v = pq.delete()
-        for next_v in current_v.get_neighbors():
-            new_distance = current_v.get_neighbor(next_v)
-            if next_v in pq and new_distance &lt; next_v.distance:
-                next_v.previous = current_v
-                next_v.distance = new_distance
-                pq.change_priority(next_v, new_distance)</pre>
+    public PrimsAlgorithm() {
+    }
+
+    public void prim(Graph&lt;T&gt; graph, Vertex&lt;T&gt; start) {
+        PriorityQueue&lt;Vertex&lt;T&gt;&gt; pq = new PriorityQueue&lt;&gt;();
+        ArrayList&lt;Vertex&lt;T&gt;&gt; vertices = graph.getVertexList();
+        for (Vertex&lt;T&gt; vertex: vertices) {
+            vertex.distance = Integer.MAX_VALUE;
+            vertex.previous = null;
+        }
+        start.distance = 0;
+        pq.heapify(vertices);
+
+        while (!pq.isEmpty()) {
+            Vertex&lt;T&gt; currentVertex = pq.dequeue();
+            for (Vertex&lt;T&gt; nextVertex: currentVertex.getNeighbors()) {
+                int newDistance = currentVertex.getNeighbor(nextVertex);
+                if (pq.contains(nextVertex) &amp;&amp; newDistance &lt; nextVertex.distance) {
+                    nextVertex.distance = newDistance;
+                    nextVertex.previous = currentVertex;
+                    pq.changePriority(nextVertex, newDistance);
+                }
+            }
+        }
+    }
+}
+</input></program>
 </listing>
   <p>The following sequence of figures (<xref ref="file_145_id3"/>
             through <xref ref="file_145_id9"/>) shows the algorithm in operation on our sample
