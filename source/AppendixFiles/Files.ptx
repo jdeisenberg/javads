@@ -186,7 +186,7 @@ public class Klima {
 </p>
 
 <p>
-    The program will read lines one at a time and then extract the data from each line. Because <c>Scanner</c>'s <c>next</c> and <c>nextDouble</c> methods use whitespace to separate items, we can't use them <q>>as-is</q> here, where data items are separated by semicolons. We could solve this problem by using the <c>useDelimiter</c> method to change the separator to a semicolon, but that would deprive us of the opportunity to learn about a new <c>String</c> method and practice more with exceptions.
+    The program will read lines one at a time and then extract the data from each line. Because <c>Scanner</c>'s <c>next</c> and <c>nextDouble</c> methods use whitespace to separate items, we can't use them <q>as-is</q> here, where data items are separated by semicolons. We could solve this problem by using the <c>useDelimiter</c> method to change the separator to a semicolon, but that would deprive us of the opportunity to learn about a new <c>String</c> method and practice more with exceptions.
 </p>
 
 <p>

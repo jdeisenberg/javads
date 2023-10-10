@@ -1,0 +1,27 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+class City {
+  - country: String 
+  - name: String
+  - population: int
+
+  + City(country: String, name: String, population: int)
+  
+  + getCountry(): String
+  + getName(): String
+  + getPopulation(): int
+  + setPopulation(population: int): void
+
+  + toString(): String
+  
+}
+@enduml

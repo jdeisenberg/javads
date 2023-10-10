@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="files_exercises">
 <title>Exercises</title>
-    <p>Watch this space.</p>
-<!--
-<exercises>
-<exercise>
+
+    <exercises>
+    <exercise>
+
 <p>
 Write a program named <em>TestAverages.java</em> that asks the user for the name of an input file that has people's names and test scores. Each line has the person's name, a colon, and a list of scores separated by commas.
-
+</p>
+<p>
 Next, the program asks the user for the name of an output file. The program will then read the input file and write a new output file with the names and their average scores, including the number of tests on which it is based.
-
+</p>
+<p>
 Your program has to do the following error handling:
-
+</p>
 <p><ul>
 <li>If the input file does not exist or cannot be opened, print an appropriate error message.</li>
 <li>If the output file cannot be opened, print an appropriate error message.</li>
@@ -19,7 +21,7 @@ Your program has to do the following error handling:
 <li>If an input line has no scores, print an appropriate message to the screen.</li>
 </ul></p>
 
-% For this input file <em>sampleScores.txt</em>:
+<p>For this input file <em>sampleScores.txt</em>:</p>
 
 <console><output>
 Juan Fulano: 88, 82, 89
@@ -29,14 +31,14 @@ Joseph Schmegeggie:
 Erika Mustermann: 79.5, 83.5, 90, 92
 </output></console>
 
-Here is the result of running the program several times. First, with a bad input file name:
+<p>Here is the result of running the program several times. First, with a bad input file name:</p>
 
 <console><output>
 Enter input file name with test scores: nosuchfile.txt
 Cannot find input file nosuchfile.txt
 </output></console>
 
-With a good input file name but a bad output file name. Notice that the message tells why the output file failed:
+<p>With a good input file name but a bad output file name. Notice that the message tells why the output file failed:</p>
 
 <console><output>
 Enter input file name with test scores: sampleScores.txt
@@ -44,7 +46,7 @@ Enter output file name for averages: /usr/output.txt
 IO Error: /usr/output.txt (Permission denied)
 </output></console>
 
-With a good input and output file name:
+<p>With a good input and output file name:</p>
 
 <console><output>
 Enter input file name with test scores: sampleScores.txt
@@ -54,7 +56,7 @@ No numbers found on line Joseph Schmegeggie:
 File output.txt written successfully.
 </output></console>
 
-After the program finishes successfully, the <em>output.txt</em> file looks like this:
+<p>After the program finishes successfully, the <em>output.txt</em> file looks like this:</p>
 
 <console><output>
 Juan Fulano: 86.33 (3 tests)
@@ -63,90 +65,30 @@ Jan Kovacs: 86.17 (3 tests)
 Erika Mustermann: 86.25 (4 tests)
 </output></console>
 
-Some hints:
+<p>Here are some hints:</p>
 
 <p><ul>
 <li>Do not presume that the input file will always be named <em>sampleScores.txt</em> or the output file will always be named <em>output.txt</em><mdash/>the user gets to decide those names, not you!</li>
 <li> If a person has scores, but none of them are numeric, then they will have no tests to average. Your program needs to handle that situation correctly.</li>
 <li>Use the <c>split</c> method in the <c>String</c> class to separate the name from the scores, and use it again to separate the individual scores. You will need to convert the resulting strings to <c>double</c>. Do this by using the <c>Double.parseDouble</c> method, which throws a <c>NumberFormatException</c> if given a non-numeric string as its parameter.</li>
 </ul></p>
+</exercise>
 
-\end{exercise}
 
-\begin{exercise}
-Are you tired of having to write all the getter and setter methods when you create a new <c>class</c>? In this exercise, your program will ask for the name of a file that contains Java declarations, like this:
+<exercise>
+<p>
+In this exercise, you will consolidate data from one file to create another file in a program named <em>Consolidate.java</em>. The original data is in file <em>wildfires_jan_2015.txt</em> and was extracted from a database of 1.8 million wildfires from 1992 to 2015.<fn><p>Short, Karen C. 2017. Spatial wildfire occurrence data for the United States, 1992-2015 [FPA_FOD_20170508]. 4th Edition. Fort Collins, CO: Forest Service Research Data Archive. <url ref="https://doi.org/10.2737/RDS-2013-0009.4">doi.org</url></p></fn>
+</p>
 
-<console><output>
-public int age;
-private double[] weights;
-</output></console>
-
-It will then ask for an output file name and create that file with the getters and setters:
-
-<console><output>
-public int getAge() {
-    return age;
-}
-
-public void setAge(int age) {
-    this.age = age;
-}
-
-public double[] getWeights() {
-    return weights;
-}
-
-public void setWeights(double[] weights) {
-    this.weights = weights;
-}
-</output></console>
-
-You may presume that the input file is formatted as follows:
-
-\begin{enumerate}
-<li>Each line will begin with either <c>public</c> or <c>private</c>, without leading blanks.</li>
-<li>The data type does not contain any blanks.</li>
-<li>There is only one blank between the items on a line, and the data type does not contain any blanks. (These three items allow you to do <c>string.split(" ")</c> to get the individual parts of the declaration.)</li>
-<li>Each line always ends with a semicolon.</li>
-\end{enumerate}
-
-If the input file has blank lines, ignore them.
-
-As in the preceding exercise, use exception handling to make sure that:
-
-<p><ul>
-<li>If the input file does not exist or cannot be opened, print an appropriate error message.</li>
-<li>If the output file cannot be opened, print an appropriate error message.</li>
-</ul></p>
-
-Hint: You can use the <c>replaceAll</c> method in the <c>String</c> class to get rid of the semicolon. The <c>replaceAll</c> method takes two parameters: a pattern to look for and a replacement string. For example, to replace all occurrences of <c>"ab"</c> with the empty string <c>""</c>:
-
-<listing>
-<program language="java" line-numbers="yes">
-<input>
-String original = "abracadabra";
-String result = original.replaceAll("ab", "");
-// result will be "racadra"
-</input>
-</program>
-</listing>
-
-\end{exercise}
-
-\begin{exercise}
-In this exercise, you will consolidate data from one file to create another file in a program named <em>Consolidate.java</em>. The original data is in file <em>ch18/wildfires\_jan\_2015.txt</em> and was extracted from a database of 1.8 million wildfires from 1992 to 2015.\footnotemark
-
-\footnotetext{Short, Karen C. 2017. Spatial wildfire occurrence data for the United States, 1992-2015 [FPA\_FOD\_20170508]. 4th Edition. Fort Collins, CO: Forest Service Research Data Archive. \url{https://doi.org/10.2737/RDS-2013-0009.4}}
-
-Each line in the file contains:
+<p>Each line in the file contains:</p>
 <p><ul>
 <li>the year</li>
 <li>the day of the year (1-365) the fire was discovered</li>
 <li>fire perimeter (acres)</li>
-<li>cause of fire (1 = lightning, 7 = arson, anything else is ``other'')</li>
+<li>cause of fire (1 = lightning, 7 = arson, anything else is <q>other</q>)</li>
 </ul></p>
 
-The first few lines of the file look like this:
+<p>The first few lines of the file look like this:</p>
 
 <console><output>
 2015,1,2,2
@@ -158,7 +100,7 @@ The first few lines of the file look like this:
 2015,1,0,4
 </output></console>
 
-Your program will read this file and create a new file where each line contains, separated by commas:
+<p>Your program will read this file and create a new file where each line contains, separated by commas:</p>
 
 <p><ul>
 <li>The year</li>
@@ -168,7 +110,7 @@ Your program will read this file and create a new file where each line contains,
 <li>The number of fires with other causes and their total acreage</li>
 </ul></p>
 
-The first few lines of the output file look like this:
+<p>The first few lines of the output file look like this:</p>
 
 <console><output>
 2015,1,0,0,2,3,57,260
@@ -177,24 +119,17 @@ The first few lines of the output file look like this:
 2015,4,0,0,2,33,21,255
 </output></console>
 
-Your program will read the input and output file names from the command line, so it could be invoked as follows:
+<p>As in the preceding exercise, use <c>split</c> to separate the items, and check that data can be converted to <c>double</c> by <c>catch</c>ing <c>NumberFormatException</c>.</p>
+</exercise>
 
-<console><output>
-java Consolidate wildfires_jan_2015.txt wildfire_summary.txt
-</output></console>
+<exercise>
+<p>
+In this exercise, you will write two classes: a class that represents information about a city and a main program that processes that information. You can find some pseudocode for this exercise that may help you get the program organized and started in the repository, file <em>CityInfo_Pseudocode.java</em>.
+</p>
 
-If the user gives too many or too few command line arguments, give an appropriate ``usage'' message.
-Your program should give an appropriate message if the input file cannot be opened or the output file cannot be created.
-As in the preceding exercise, use <c>split</c> to separate the items, and check that data can be converted to <c>double</c> by <c>catch</c>ing <c>NumberFormatException</c>.
-\end{exercise}
-
-\begin{exercise}
-
-In this exercise, you will write two classes: a class that represents information about a city and a main program that processes that information. You can find some pseudocode for this exercise that may help you get the program organized and started in the repository, file <em>ch18/CityInfo\_Pseudocode.java</em>.
-
-{\large\bf{The <c>City</c> class}}
-
+<p>
 First, write the <c>City</c> class that defines an object with these properties:
+</p>
 
 <p><ul>
     <li><c>private String country</c>: the two-letter country code</li>
@@ -202,76 +137,95 @@ First, write the <c>City</c> class that defines an object with these properties:
     <li><c>private int population</c>: the city's population</li>
 </ul></p>
 
-Implement these methods:
+<p>Implement these methods:</p>
 
-\begin{description}
-    <li>[<c>public City(String country, String name, int population)</c>] \hfill \\ The constructor</li>
-    <li>Accessors and mutators \hfill \\ Write an accessor (getter) and mutator (setter) for the population, and only a getter for the country code and city name; once the object is constructed, the country and city name never change. These must be <c>public</c>.</li>
-    <li>[<c>public String toString()</c>] \hfill \\ Returns a string giving the country name, city name, and population, separated by semicolons.</li>
-\end{description}
+<p>
+    <ul>
+        <li>
+        <c>public City(String country, String name, int population)</c>: The constructor
+        </li>
+        <li>Accessors and mutators:
+            Write an accessor (getter) and mutator (setter) for the population, and only a getter for the country code and city name; once the object is constructed, the country and city name never change. These must be <c>public</c>.
+        </li>
+        <li>
+            <c>public String toString()</c>: Returns a string giving the country name, city name, and population, separated by semicolons.
+        </li>
+    </ul>
+</p>
 
-Figure~\ref{fig.ch18.cityUML} shows a UML diagram for the <c>City</c> class.
+    <p><xref ref="fig-files-cityuml"/> shows the UML diagram for the <c>City</c> class.</p>
 
-\begin{figure}[!h]
-\begin{center}
-\includegraphics[scale=0.75]{figs/ch18/city.pdf}
-\caption{UML diagram showing attributes and methods of the City class}
-\label{fig.ch18.cityUML}
-\end{center}
-\end{figure}
+   <figure align="center" xml:id="fig-files-cityuml">
+      <image source="AppendixFiles/Figures/city.png" width="50%" alt="UML diagram"/>
+    </figure>
 
+    <p>
+Then, write a class named <c>CityInfo</c> that contains the <c>main()</c> method.Use the <em>citylist.dat</em> file to set up the initial list of cities. The file is available from the repository. Each line of the text file has a country code, city name, and population, separated by semicolons. Your program must first read the city data file with this method:
+</p>
 
-{\large\bf{The <c>CityInfo</c> class}}
-
-Then, write a class named <c>CityInfo</c> that contains the <c>main()</c> method.Use the <em>citylist.dat</em> file\footnotemark to set up the initial list of cities. The file is available from the repository at <em>ch18/citylist.dat</em> Each line of the text file has a country code, city name, and population, separated by semicolons. Your program must first read the city data file with this method:
-
-\footnotetext{The data for this exercise came from \url{http://geonames.org/}, licensed under a Creative Commons Attribution 4.0 License (see \url{https://creativecommons.org/licenses/by/4.0/})}
+<aside><p>The data for this exercise came from <url ref="http://geonames.org/">geonames.org</url>, licensed under a Creative Commons Attribution 4.0 License (see <url ref="https://creativecommons.org/licenses/by/4.0/">creativecommons.org</url></p></aside>
 
 <console><output>
-public static ArrayList<City> readCityFile(String fileName)
+public static ArrayList&lt;City&gt; readCityFile(String fileName)
 </output></console>
 
+<p>
 This method will open the given <c>fileName</c>, read it, and return an <c>ArrayList</c> of <c>City</c> objects corresponding to each line of the file.
+</p>
 
+<p>
 If a line in the file has bad data (non-numeric population or too many or too few entries), your program will print an error that displays the bad line without entering any new data into the <c>ArrayList</c>. The <c>citylist.dat</c> file in the repository purposely contains some lines with bad data so you can test to see if your error-handling code works. Do not write your code for this specific file; another person's file might have bad data on different lines with different data on them.
+</p>
 
-If the file does not exist, the method prints an appropriate error message and returns an empty <c>ArrayList<City></c>.
+<p>
+If the file does not exist, the method prints an appropriate error message and returns an empty <c>ArrayList&lt;City&gt;</c>.
+</p>
 
+<p>
 If the returned <c>ArrayList</c> is not empty, the program will repeatedly ask for a country code (or ENTER to quit).
 Once the user enters a country code, the <c>main()</c> method will call this method:
+</p>
 
 <console><output>
 public static int statistics(String countryCode,
-   ArrayList<City> cityList)
+   ArrayList&lt;City&gt; cityList)
 </output></console>
 
+<p>
 The <c>statistics()</c> method will go through the city list and
+</p>
 
 <p><ul>
-    <li>Calculate the total number of cities in the given country.</li>
-    <li>If there are more than zero cities:</li>
-        <p><ul>
+    <li><p>Calculate the total number of cities in the given country.</p></li>
+    <li><p>If there are more than zero cities:
+        <p>
+        <ul>
             <li>Print the total number of cities</li>
             <li>Print the average population for those cities</li>
-        </ul></p>
-
-    <li>Otherwise, prints an appropriate error message.</li>
-    <li>Returns the total number of cities found.</li>
+        </ul>
+        </p>
+        </p>
+    </li>
+    <li><p>Otherwise, prints an appropriate error message.</p></li>
+    <li><p>Returns the total number of cities found.</p></li>
 </ul></p>
 
+<p>
 The <c>main()</c> method will then use this returned value. If it is greater than zero, you will write a new file name <em>CC.dat</em>, where <em>CC</em> stands for a country code. This file will have the information for the cities in that country in the same format as <c>citylist.dat</c>. For example, if the country code is <c>JP</c>, your program will create a file named <em>JP.dat</em>. You will use a method named
+</p>
 
 <console><output>
 public static void writeCountryFile(String countryCode,
-    ArrayList<City> cityList)
+    ArrayList&lt;City&gt; cityList)
 </output></console>
 
+<p>
 to do this. If there is an <c>IOException</c> while opening the output file or writing the data, print an appropriate error message. You must use the exception's <c>getMessage()</c> method when constructing your error message. If the file is written successfully, print a message letting the user know that the file has been created. This message <em>must</em> contain the file name.
+</p>
 
-{\large\bf{Handling Exceptions}}
-
+<p>
 Your program must handle these exceptions:
-
+</p>
 <p><ul>
     <li>Catch <c>FileNotFoundException</c>when opening a <c>Scanner</c> for the input file. You could use the <c>File.exists()</c> method, but let's use exceptions to get more practice.)</li>
     <li>Catch <c>NumberFormatException</c> when reading the input file and converting strings to numbers.</li>
@@ -279,14 +233,16 @@ Your program must handle these exceptions:
     <li>Catch <c>IOException</c> when writing an output file.</li>
 </ul></p>
 
-Here are some things to note:
+<p>Here are some things to note:</p>
 
 <p><ul>
     <li>You must accept input in either upper or lower case.</li>
-    <li>You will need to loop through the <c>cityList</c> twice; once in <c>statistics()</c> to get the total and average (if applicable), and again in <c>writeCountryFile()</c> to create the output file. This is a design decision<mdash/>I decided these are two separate tasks to be done by two methods, rather than combining both tasks into one method.</li>
+    <li>You will need to loop through the <c>cityList</c> twice; once in <c>statistics()</c> to get the total and average (if applicable), and again in <c>writeCountryFile()</c> to create the output file. This is a design decision<mdash/>we decided these are two separate tasks to be done by two methods, rather than combining both tasks into one method.</li>
 </ul></p>
 
+<p>
 Here is what the program output might look like. Your output does not have to look exactly like this, but it must reflect the same information.
+</p>
 
 <console><output>
 Reading city file...
@@ -307,7 +263,7 @@ File MX.dat written successfully.
 Enter a two-letter country code, or press ENTER to quit:
 </output></console>
 
-Here are the contents of the file <em>UA.dat</em>
+<p>Here are the contents of the file <em>UA.dat</em>:</p>
 
 <console><output>
 UA;Kiev;2797553
@@ -317,136 +273,15 @@ UA;Donets'k;1024700
 UA;Odessa;1001558
 </output></console>
 
+<p>
 Here is an example of the output you might get for an error while writing the file (I deliberately caused this error by changing my directory to be read-only).
+</p>
 
 <console><output>
 Error writing FR.dat
 FR.dat (Permission denied)
 </output></console>
 
-\end{exercise}
-
-\begin{exercise}
-In this exercise, you will write two classes: a class that represents a bank account and a program that works like an ATM for bank accounts. The code repository has some pseudocode in file <em>ch18/ATM\_Pseudocode.java</em> that may help you get the program organized and started.
-
-{\large\bf{The <c>Account</c> class}}
-
-First, create an <c>Account</c> class. An <c>Account</c> object has these properties:
-
-<p><ul>
-    <li><c>private int acctNumber</c>: the account number</li>
-    <li><c>private String name</c>: the account holder's name</li>
-    <li><c>private double balance</c>: the current balance in the account</li>
-</ul></p>
-
-Implement these methods:
-
-\begin{description}
-    \item[<c>public Account(int acctNumber, String name, double balance)</c>] \hfill \\ The constructor
-    \item[<c>public String toString()</c>] \hfill \\  Returns a string giving the account ID, name, and balance, separated by colons. Do not use <c>format()</c> on the balance; you want to keep the number as accurate as possible.
-    \item[<c>public void deposit(double amount)</c>] \hfill \\  Adds the given amount to the current balance. If the amount is negative, the balance must not be changed; otherwise, the <c>balance</c> property is updated to reflect the deposit.
-    \item[<c>public void withdraw(double amount)</c>] \hfill \\ Withdraws the given amount from the current balance. If the amount is negative or greater than the current balance, the balance must not be changed; otherwise, the <c>balance</c> is updated to reflect the withdrawal.
-\end{description}
-
-You must also write a getter and setter for the balance, and only a getter for the name and account number; once the account is constructed, the name and account number never change. The getters and setters must be <c>public</c>.
-
-Note that <c>deposit()</c> and <c>withdraw()</c> do not print error messages if they get incorrect input; they simply ignore it. It is up to the program that calls these functions to provide the error messages for the user of the program.
-
-{\large\bf{The <c>Customer</c> class}}
-
-Next, write a program named <c>Customer.java</c> that has a <c>main()</c> method. This class provides an ``ATM''-like interface to a set of bank accounts. Use the following <em>accounts.dat</em> file to set up the initial set of accounts. Each line of the text file has an account ID, name, and starting balance, separated by colons. Your program must first read the account data file and build an <c>ArrayList</c> of <c>Account</c> objects corresponding to each line. If the file does not exist, your program must output a reasonable error message and then quit.
-
-<console><output>
-15725:Christina Plaka:456.71
-23981:Roz Chast:1853.22
-57012:Georges Remi:3571.85
-46287:Raquel Corcoles:783.00
-31954:Eiichiro Oda:854.02
-84373:Scott McCloud:2733.96
-</output></console>
-
-If the file is read successfully, the program will repeatedly ask for an account number (or ENTER to quit). This is equivalent to inserting an ATM card. Repeat until the account number is valid. Hint: write a method like this:
-
-<console><output>
-public static int findIndex(ArrayList<Account> accountList,
-   int accountNumber)
-</output></console>
-
-This method will go through the <c>accountList</c> and return the index of the account with the given <c>accountNumber</c>, or -1 if the account number does not belong to any of the accounts in the array.
-
-Print a message that greets the customer by name. Then repeatedly ask the customer if they want to deposit, withdraw, or finish the transactions.
-
-<p><ul>
-    <li>If the customer wishes to deposit, ask for the amount until you get a number greater than or equal to zero; then perform the transaction and display the balance. Print an appropriate message for invalid input. You must handle exceptions here.</li>
-    <li>If the customer wishes to withdraw, ask for the amount until you get a number greater than or equal to zero and less than or equal to the current balance; then perform the transaction and display the balance. Print an appropriate message for invalid input. You must handle exceptions here.</li>
-    <li>If the customer is finished, print a message to say goodbye to the customer, write the entire account array back to disk, and return to the account number prompt. (This is equivalent to giving the customer their card back).</li>
-</ul></p>
-
-This program must print all monetary amounts preceded by a dollar sign and with two digits after the decimal point. This is where you <em>do</em> want to use <c>format</c> to round to two decimal places.
-
-{\large\bf{Handling Exceptions}}
-
-Your program must handle exceptions when opening the <em>accounts.dat</em> file. It must produce a reasonable error message and quit rather than crashing if the file doesn't exist.
-
-Your program must also handle exceptions if the user enters invalid input such as``fifteen'' for the account number or amount to deposit/withdraw.
-
-The exceptions you will probably want to use the most are <c>java.IO.IOException</c> for file errors and <c>NumberFormatException</c> for invalid numbers.
-
-Here is what you might see as output when you run your program:
-
-<console><output>
-Enter your account number: 12345
-Unknown account number
-Enter your account number: five
-five is not a number
-Enter your account number: 57012
-Hello, Georges Remi!
-Your current balance is $3571.85
-D)eposit, W)ithdraw, or F)inish? D
-Enter amount to deposit: $-20
-You cannot deposit a negative amount.
-D)eposit, W)ithdraw, or F)inish? D
-Enter amount to deposit: $fifty
-fifty is not a valid number.
-D)eposit, W)ithdraw, or F)inish? D
-Enter amount to deposit: $50
-Your current balance is $3621.85
-D)eposit, W)ithdraw, or F)inish? w
-Enter amount to withdraw: $-200
-You cannot withdraw a negative amount.
-D)eposit, W)ithdraw, or F)inish? w
-Enter amount to withdraw: $570.00
-Your current balance is $3051.85
-D)eposit, W)ithdraw, or F)inish? f
-Goodbye, Georges Remi.
-
-Enter your account number: 23981
-Hello, Roz Chast!
-Your current balance is $1853.22
-D)eposit, W)ithdraw, or F)inish? w
-Enter amount to withdraw: $1890
-You cannot withdraw more than you have.
-D)eposit, W)ithdraw, or F)inish? w
-Enter amount to withdraw: $80
-Your current balance is $1773.22
-D)eposit, W)ithdraw, or F)inish? f
-Goodbye, Roz Chast.
-
-Enter your account number:
-ATM program concludes.
-</output></console>
-
-After you finish running this program, the <em>accounts.dat</em> file will have the new balance(s):
-
-<console><output>
-15725:Christina Plaka:456.71
-23981:Roz Chast:1773.22
-57012:Georges Remi:3051.85
-46287:Raquel Corcoles:783.0
-31954:Eiichiro Oda:854.02
-84373:Scott McCloud:2733.96
-</output></console>
-
-\end{exercise}
--->
+</exercise>
+</exercises>
 </section>

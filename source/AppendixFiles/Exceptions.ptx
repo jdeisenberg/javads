@@ -168,33 +168,42 @@ All exceptions descend from the <c>Exception</c> class. This list shows many of 
 <aside><p><c>Exception</c> is a child of the <c>Throwable</c> class. Another child of <c>Throwable</c> is <c>Error</c>, which is used for serious, system-level problems. You will very rarely encounter one of these.</p></aside>
 
 <p><ul>
-    <li><c>Exception</c></li>
-        <p><ul>
-            <li><c>IOException</c></li>
-                <p><ul>
+    <li><p><c>Exception</c>
+        <ul>
+            <li>
+                <p><c>IOException</c>
+                <ul>
                     <li><c>FileNotFoundException</c></li>
                 </ul></p>
-            <li><c>RunTimeException</c></li>
-            <p><ul>
-                <li><c>ArithmeticException</c></li>
-                <li><c>IllegalArgumentException</c></li>
-                    <p><ul>
-                        <li><c>IllegalFormatException</c></li>
-                        <li><c>InvalidParameterException</c></li>
-                        <li><c>NumberFormatException</c></li>
-                    </ul></p>
-                <li><c>IndexOutOfBoundsException</c></li>
-                    <p><ul>
-                        <li><c>ArrayIndexOutOfBoundsException</c></li>
-                        <li><c>StringIndexOutOfBoundsException</c></li>
-                    </ul></p>
-                <li><c>NullPointerException</c></li>
-              </ul></p>
+            </li>
+            <li>
+                <p>
+                    <c>RunTimeException</c>
+                    <ul>
+                        <li><p><c>ArithmeticException</c></p></li>
+                    <li><p><c>IllegalArgumentException</c>
+                        <ul>
+                            <li><p><c>IllegalFormatException</c></p></li>
+                            <li><p><c>InvalidParameterException</c></p></li>
+                            <li><p><c>NumberFormatException</c></p></li>
+                        </ul></p>
+                    </li>
+                    <li><p><c>IndexOutOfBoundsException</c>
+                        <ul>
+                            <li><p><c>ArrayIndexOutOfBoundsException</c></p></li>
+                            <li><p><c>StringIndexOutOfBoundsException</c></p></li>
+                        </ul></p>
+                    </li>
+                    <li><p><c>NullPointerException</c></p></li>
+                </ul></p>
+            </li>
     </ul></p>
+    </li>
 </ul></p>
 
-If you put a <c>catch</c> for a parent class <em>before</em> a <c>catch</c> for a child class, the parent class will catch the error.
-Thus, in this code fragment:
+<p>
+If you put a <c>catch</c> for a parent class <em>before</em> a <c>catch</c> for a child class, the parent class will catch the error. Thus, in this code fragment:
+</p>
 
 <listing xml:id="lst_multiple_catch">
 <program language="java" line-numbers="yes">
@@ -212,9 +221,13 @@ catch (ArithmeticException ex) {
 </program>
 </listing>
 
+<p>
 You will see the <q>Something unexpected occurred.</q> message.  For this reason, always <c>catch</c> the more specific (child) exception classes before you <c>catch</c> the more general (parent) exception classes.
+</p>
 
+<p>
 Let's say you <c>catch</c> the most generic <c>Exception</c> possible, or one that could have many possible causes, such as <c>FileNotFoundException</c>. How can you give the user more information than just <q>something unexpected occurred</q>? You can use the variable that you declared in the <c>catch</c> clause. Here are some methods that you can use<fn><p>These methods are from the <c>Throwable</c> class, which is the parent of all Java exceptions.</p></fn>
+</p>
 
 <p>
 <dl>
@@ -250,7 +263,9 @@ catch (Exception ex) {
 </program>
 </listing>
 
+<p>
 You can see this in action in file <em>ErrorProneGeneralException.java</em> in the code repository. As you can see, the error messages are not as satisfactory as those you would write yourself when handling the specific exceptions.
+</p>
 </subsection>
 
 <subsection xml:id="exceptions_finally_clause">
@@ -339,7 +354,7 @@ In line 3, specify that this method <c>throws</c> an <c>IllegalArgumentException
 </p>
 
 <p>
-    In line 12, when the length of the array is zero, use the keyword <c>throw</c> and create a <c>new</c> <c>IllegalArgumentException</c>. The argument to the constructor is the value that will be returned when someone calls the exception's <c>getMessage</c> method.
+    In line 12, when the length of the array is zero, use the keyword <c>throw</c> and create a <c>new&#xA0;IllegalArgumentException</c>. The argument to the constructor is the value that will be returned when someone calls the exception's <c>getMessage</c> method.
 </p>
 
 <p>
