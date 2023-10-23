@@ -1,0 +1,14 @@
+@startuml
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide empty members
+hide circle
+Account <|-- SavingsAccount
+Account <|-- CreditCardAccount
+
+Customer *-- Account
+Customer *-- SavingsAccount
+Customer *-- CreditCardAccount
+@enduml

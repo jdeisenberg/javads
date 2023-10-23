@@ -1,0 +1,50 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classarrowcolor #000000
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+
+Item <|-- SaleItem
+
+class Item {
+    - name: String 
+    - sku: String
+    - price: double
+    
+    + Item(name: String, sku: String, price: double)
+    
+    + getName(): String 
+    + getSku(): String
+    + getPrice(): double
+    + setPrice(price: double): void
+    
+    + purchase(quantity: int): double
+    
+    + toString(): String
+    + equals(other: Item): boolean
+}
+
+class SaleItem {
+    - discount: double
+    
+    + SaleItem(name: String, sku: String, price: double,
+       discount: double)
+    
+    + getDiscount(): double
+    + setDiscount(discount: double): void
+    
+    + purchase(quantity: int): double
+    
+    + toString(): String
+    + equals(other: SaleItem): boolean
+}
+
+
+@enduml

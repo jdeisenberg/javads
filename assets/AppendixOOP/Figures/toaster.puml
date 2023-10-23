@@ -1,0 +1,46 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classarrowcolor #000000
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+
+Toaster "1" o-- "1" PowerSupply
+Toaster "1" o-- "1" Dial
+
+class PowerSupply {
+    - voltage: int 
+    - turnedOn: boolean
+    
+    + PowerSupply(voltage: int)
+    + setVoltage(voltage:int): void
+    + setTurnedOn(turnedOn: boolean): void
+}
+
+class Dial {
+    - dialValue: double
+    - minValue: int
+    - maxValue: int
+    
+    + Dial(minValue: int, maxValue: int)
+    + setDialValue(dialValue: double): void
+}
+
+class Toaster {
+    - nSlots: int
+    - nSlices: int
+    - power: PowerSupply
+    - darkness: Dial
+    
+    + Toaster(nSlots: int, voltage: int)
+    + insertBread(nSlices: int)
+    + popBread()
+}
+
+@enduml

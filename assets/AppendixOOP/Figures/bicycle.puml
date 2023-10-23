@@ -1,0 +1,41 @@
+@startuml
+/'
+	These lines choose the output font and
+	set the colors to black and white rather
+	than the default yellow and red.
+
+	You might want to use "Monaco" instead of
+	"Liberation Mono" to get the correct font on Mac.
+'/
+skinparam classbackgroundcolor #ffffff
+skinparam classarrowcolor #000000
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+
+class Bicycle {
+    - color: String 
+    - frameSize: double
+    - nGears: int
+    - currentGear: int
+    
+    + Bicycle(color: String, frameSize: double, nGears: int)
+    
+    + getColor(): String 
+    + getFrameSize(): double
+    + getNGears(): int
+    + getCurrentGear(): int
+    + setCurrentGear(int: currentGear): void
+
+		+ toString(): String
+		+ equals(other: Bicycle): boolean
+		+ {static} compareTo(bike1: Bicycle, bike2: Bicycle)
+}
+
+@enduml

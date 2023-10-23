@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="oop_extending_classes">
+    <title>Composition and Inheritance</title>
+
+<introduction>
+<p>
+Two important concepts in object-oriented programming are <em>composition</em> and <em>inheritance</em>. In <em>Think Java, 2nd Edition</em>, you have seen composition in Chapter 13 and inheritance in Chapter 14, but mostly by example. We're going to go into more detail on both of these concepts here.
+</p>
+</introduction>
+
+<subsection xml:id="oop_composition">
+    <title>Composition</title>
+<p>
+Composition happens when an object is made up of other objects. For example, in a card game, we might represent a <c>Deck</c> as made up of an array of <c>Card</c> objects:
+</p>
+
+<listing>
+  <program language="java">
+    <input>
+public class Deck {
+    private Card[] cards;
+    ...
+}
+    </input>
+  </program>
+</listing>
+
+<p>
+Composition is also known as a <term>Has-A relationship</term>.  (A <c>Deck</c> <em>has an</em> array of <c>Card</c>s).  Put formally, the <c>Deck</c> is the <term>aggregating class</term>, and the <c>Card</c> class is is the <term>aggregated class</term>.
+</p>
+
+<p>
+    When we draw a UML diagram involving composition, as in <xref ref="oop_fig-aggregation"/>, we use an arrow with a diamond head to indicate aggregation, and we can also add notation here that shows that one <c>Deck</c> contains many <c>Card</c> objects.
+</p>
+
+  <figure align="center" xml:id="oop_fig-aggregation">
+    <caption>UML Diagram Showing Aggregation - a Deck has Card(s)</caption>
+    <image source="AppendixOOP/Figures/aggregation.png" width="25%"/>
+  </figure>
+
+<p>
+Let's use composition to build a Java simulation of a toaster. What things is a toaster built from?
+</p>
+
+<p>
+    <ul>
+        <li><p>A chassis with a number of slots (at least one, at most four)</p></li>
+        <li><p>A lever to push bread down or pop it out</p></li>
+        <li><p>A power supply to turn the toaster on and off</p></li>
+        <li><p>A dial to control the darkness (1=light, 10=dark)</p></li>
+    </ul>
+</p>
+
+<p>
+The first two of these are built by the toaster company. But the company that makes toasters doesn't build the power supply or the dial (which has circuitry to control the current flow). Instead, those are parts they order from some other companies and put into the chassis.
+</p>
+
+<p>
+    That means that our <c>Toaster</c> <em>has-a</em> <c>PowerSupply</c> object and <em>has-a</em> <c>Dial</c> object. <xref ref="oop_fig-toasterComposition"/> shows the UML diagram. You can see the full code in the file <em>ch14/ToasterTest.java</em> in the repository.
+</p>
+
+
+  <figure align="center" xml:id="oop_fig-toasterComposition">
+    <caption>UML Diagram Showing a Toaster composed of a PowerSupply and Dial)</caption>
+    <image source="AppendixOOP/Figures/toaster.png" width="50%"/>
+  </figure>
+
+  <p>
+Before we see how composition affects the way we construct and manipulate objects, let's give a few more instances of composition (<em>has-a</em>) relationships. Using composition reflects the way objects are built out of other objects (parts). Each of the sub-parts has its own attributes and things that it can do (its methods). Notice that we sometimes need multiple instances of a sub-part when constructing the larger object.
+</p>
+
+<p>
+    <ul>
+        <li><p>A printer has a power supply, printer drum, and toner cartridge.</p></li>
+        <li><p>A bicycle has a gear assembly, handbrakes (2), and tires (2).</p></li>
+        <li><p>A refrigerator has a power supply, an icemaker, and a compressor.</p></li>
+        <li><p>A window in a word processor has a text area, a ribbon (icons for manipulating text), and two scroll bars (horizontal and vertical).</p></li>
+    </ul>
+</p>
+
+<p>
+Back to the toaster. <xref ref="oop_subpart-constructors"/> shows the constructors for the <c>PowerSupply</c> and <c>Dial</c> classes:
+</p>
+
+<listing xml:id="oop_subpart-constructors">
+    <caption>Constructors for <c>PowerSupply</c> and <c>Dial</c></caption>
+  <program language="java">
+    <input>
+public PowerSupply(int voltage) {
+    if (voltage == 220) {
+        this.voltage = voltage;
+    } else {
+        this.voltage = 110;
+    }
+
+    // new power supplies are always turned off
+    this.turnedOn = false;
+}
+
+public Dial(int minValue, int maxValue) {
+    this.minValue = minValue;
+    this.maxValue = maxValue;
+    // new dials are always set to lowest value
+    this.dialValue = minValue;
+}
+    </input>
+  </program>
+</listing>
+
+<p>
+Now, look at how the <c>Toaster</c> class starts, with line numbers for reference:
+</p>
+
+<listing>
+  <program language="java" line-numbers="yes">
+    <input>
+class Toaster {
+    private int nSlots;
+    private int nSlices;
+    private PowerSupply power;
+    private Dial darkness;
+
+    public Toaster(int nSlots, int voltage) {
+        this.nSlots = Math.max(1, Math.min(4, nSlots));
+        this.nSlices = 0;
+        this.power = new PowerSupply(voltage);
+        this.darkness = new Dial(1, 10);
+    }
+    // ...
+}
+    </input>
+  </program>
+</listing>
+
+<p>
+The constructor in line 7 has two parameters: the number of slots in the toaster and what voltage it should have. The number of slots and number of slices of bread currently in the toaster are attributes belonging to the <c>Toaster</c> class, and those get set directly.
+</p>
+
+<p>
+The power supply is an object, which is why line 10 has to call the <c>PowerSupply</c> constructor to build a power supply with the desired voltage. Think of this as the toaster company calling up the power supply company and telling them “send me a 110-volt power supply” and putting that power supply into the finished toaster.
+</p>
+
+<p>
+Similarly, line 11 has to call the <c>Dial</c> constructor to build a dial with a range of 1-10.
+</p>
+
+<p>
+Although a real-life toaster is composed of parts, all of the controls are on the toaster's exterior. We don't expect<mdash/>or want<mdash/>the customer to have to directly access the power supply to turn the toaster on! Similarly, we want to provide methods in the <c>Toaster</c> class that will give programs that use the class access to the private methods and attributes of <c>power</c> and <c>darkness</c>:
+</p>
+
+<listing>
+    <caption>Methods for Access to Composed Classes</caption>
+  <program language="java">
+    <input>
+public boolean isTurnedOn() {
+    return this.power.isTurnedOn();
+}
+
+public void setTurnedOn(boolean turnedOn) {
+    this.power.setTurnedOn(turnedOn);
+}
+
+public double getDialValue() {
+    return this.darkness.getDialValue();
+}
+
+public void setDialValue(double dialValue) {
+    this.darkness.setDialValue(dialValue);
+}
+    </input>
+  </program>
+</listing>
+
+<p>Now we can write a program that creates a <c>Toaster</c> object and makes it do things:</p>
+
+<listing>
+  <program language="java">
+    <input>
+public class ToasterTest {
+    public static void main(String[] args) {
+        Toaster euroFour = new Toaster(4, 220);
+
+        euroFour.setTurnedOn(true);
+        euroFour.setDialValue(4.5);
+        euroFour.insertBread(1);
+
+        System.out.println(euroFour);
+    }
+}
+    </input>
+  </program>
+</listing>
+
+<p>To summarize this discussion of composition:</p>
+
+<p>
+    <ul>
+        <li> Use composition when you have objects that are built up from other objects.</li>
+        <li> Provide methods in an object to give users access to <c>private</c> attributes and methods of the sub-objects.</li>
+    </ul>
+</p>
+</subsection>
+
+<subsection xml:id="oop_inheritance">
+    <title>Inheritance</title>
+    <p>
+An <em>Is\-A</em> relationship is known as <em>inheritance</em>:
+</p>
+
+<p>
+    <ul>
+        <li> An electric bicycle <em>is a</em> bicycle (with extra attributes and capabilities)</li>
+        <li> A trumpet <em>is a</em> bugle with valves (keys) that give the ability to play more notes</li>
+        <li> An alarm clock <em>is a</em> desk clock with extra attributes and capabilities</li>
+        <li> In a computer application, a <q>combo box</q> <em>is a</em> drop-down menu with extra capabilities (you can type the value as well as select it from the list)</li>
+    </ul>
+</p>
+
+<p>Without inheritance, we would have to represent the <c>Bicycle</c> and <c>ElectricBicycle</c> classes as shown in <xref ref="oop_fig-nonInheritedBikes"/>:</p>
+
+  <figure align="center" xml:id="oop_fig-nonInheritedBikes">
+      <caption>Separate Classes for <c>Bicycle</c> and <c>ElectricBicycle</c></caption>
+    <image source="AppendixOOP/Figures/non_inherited_bikes.png" width="70%"/>
+  </figure>
+
+
+  <p>
+      That's a lot of duplicated code when we translate it to Java. If we can use the <c>extends</c> keyword to say that
+<c>ElectricBicycle extends Bicycle</c>, that means that <c>ElectricBicycle</c> <em>inherits</em> all of <c>Bicycle</c>'s methods and attributes. All we have to include now in <c>ElectricBicycle</c> are the attributes and methods that add extra capabilities to an electric bicycle, as shown in <xref ref="oop_fig-inheritedBikes"/>:
+</p>
+
+  <figure align="center" xml:id="oop_fig-inheritedBikes">
+      <caption><c>ElectricBicycle</c> Extending the <c>Bicycle</c> Class</caption>
+    <image source="AppendixOOP/Figures/inherited_bikes.png" width="70%"/>
+  </figure>
+
+  <p>
+      In this example, <c>Bicycle</c> is called the <em>superclass</em> or <em>parent class</em>, and <c>ElectricBicycle</c> is called the <em>subclass</em> or <em>child class</em>. We use an open-headed arrow pointing from the subclass to the superclass in the UML diagram. As in the real world, the child inherits things from the parent<fn>With one exception: as the joke says, <q>Parents inherit their gray hair from their children.</q></fn>.
+      </p>
+
+      <p>Before we go into details about how to use inheritance in Java, let's take a break for a short exercise:</p>
+
+<exercise>
+    <p>
+    In this exercise, we will explore <em>has-a</em> and <em>is-a</em> relationships. First, state whether the relationship of the following classes is composition or inheritance, and draw the UML diagram showing that relationship. (You don't need to provide attributes or methods in the diagrams; the class name alone will be sufficient.)</p>
+
+<p>
+    <ul>
+            <li><p><c>Address</c> and <c>Student</c></p></li>
+            <li><p><c>Car</c> and <c>Vehicle</c></p></li>
+            <li><p><c>Account</c> and <c>SavingsAccount</c></p></li>
+            <li><p><c>State</c>, <c>Capital</c>, and <c>Country</c></p></li>
+            <li><p><c>Instructor</c>, <c>Course</c>, and <c>Textbook</c></p></li>
+            <li><p><c>Dog</c>, <c>Cat</c>, and <c>Animal</c></p></li>
+            <li><p><c>Rectangle</c>, <c>Circle</c>, <c>Square</c>, and <c>Shape</c></p></li>
+    </ul>
+</p>
+
+<p>
+For classes that exhibit the inheritance relationship, could you name a few data fields/attributes for the superclass? Could you name a few for the subclass only?
+</p>
+
+<p>
+    For example, <c>Teacher</c> (subclass) is-a <c>Person</c> (superclass).
+Data fields for <c>Person</c> are: name, age, address, etc.
+Data fields for <c>Teacher</c> are: school, hire date, etc.
+</p>
+</exercise>
+
+<p>
+    Let's use a smaller example for our continued discussion of inheritance.  We'll have an <c>Item</c> class, which represents an item in a store. An <c>Item</c> instance has a name, a SKU (stock keeping unit), and a price. This is the parent class. We also have a <c>SaleItem</c> class, which is a child class. In addition to a name, SKU, and price (which it inherits from the parent class), a <c>SaleItem</c> has a discount percentage (expressed as a decimal). <xref ref="oop_fig-itemObject"/> shows the UML diagram for these two classes:
+</p>
+
+<figure align="center" xml:id="oop_fig-itemObject">
+    <caption>UML Diagram of <c>Item</c> and <c>SaleItem</c> classes</caption>
+    <image source="AppendixOOP/Figures/item.png" width="50%"/>
+  </figure>
+
+<p>
+There are no setters for the <c>name</c> and <c>sku</c> attributes; once an item is created, those attributes should never change.
+</p>
+
+<p>
+<xref ref="oop_lst-item-class"/> shows the code for <c>Item</c>, which you will find in the repository.
+</p>
+
+<listing xml:id="oop_lst-item-class">
+  <program language="java">
+    <input>
+public class Item {
+    private String name;
+    private String sku;
+    private double price;
+
+    public Item(String name, String sku, double price)  {
+        this.name = name;
+        this.sku = sku;
+        this.price = Math.abs(price);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getSku() {
+        return this.sku;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(double price) {
+        this.price = Math.abs(price);
+    }
+
+    public double purchase(int quantity) {
+        return this.price * quantity;
+    }
+
+    public String toString() {
+        return String.format("%s (%s): $%.2f", this.name,
+            this.sku, this.price);
+    }
+
+    public boolean equals(Item other) {
+        return (this.name.equals(other.name) &amp;&amp;
+            this.sku.equals(other.sku) &amp;&amp;
+            this.price == other.price);
+    }
+}
+    </input>
+  </program>
+</listing>
+
+<p>
+    Let's start on the code for <c>SaleItem</c>. You might be tempted to write code like <xref ref="oop_lst-sale-item-start"/>:
+</p>
+
+<listing xml:id="oop_lst-sale-item-start">
+    <caption>Incorrect Code for <c>SaleItem</c> Constructor</caption>
+  <program language="java">
+    <input>
+public class SaleItem extends Item {
+    private double discount; // as a decimal
+
+    public SaleItem(String name, String sku, double price,
+       double discount)  {
+       this.name = name;
+       this.sku = sku;
+       this.price = Math.abs(price);
+       this.discount = Math.max(0,
+           Math.min(discount, 1.00));
+    }
+}
+    </input>
+  </program>
+</listing>
+
+<p>
+But that won't work, because <c>name</c>, <c>price</c>, and <c>sku</c> are <c>private</c> to the <c>Item</c> class.  We can't call the setter methods for <c>name</c> and <c>sku</c> because there aren't any. What we need to do is call the superclass constructor, which <em>can</em> set those attributes.  To call a superclass constructor, you use the keyword <c>super</c>:
+</p>
+
+<listing xml:id="oop_lst-using-super-constructor">
+    <caption>Using <c>super</c> in a Constructor</caption>
+  <program language="java">
+    <input>
+public class SaleItem extends Item {
+    private double discount; // as a decimal
+
+    public SaleItem(String name, String sku, double price,
+       double discount)  {
+       super(name, sku, price);
+       this.discount = Math.max(0,
+           Math.min(discount, 1.00));
+    }
+}
+    </input>
+  </program>
+</listing>
+
+<p>
+    Important: When calling a superclass constructor, the call to <c>super</c> <em>must</em> be the first non-comment line in the subclass's constructor.
+</p>
+
+<p>
+Here's the rest of the <c>SaleItem</c> code:
+</p>
+
+<listing xml:id="oop_lst-saleItem-part-two">
+  <program language="java">
+    <input>
+    public double getDiscount() {
+        return this.discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount =
+            Math.max(0, Math.min(discount, 1.00));
+    }
+
+    public double purchase(int quantity) {
+        return (this.getPrice() * quantity) *
+            (1 - discount);
+    }
+
+    public String toString() {
+        return String.format("%s (%s): $%.2f - %.1f%% discount",
+            this.getName(), this.getSku(), this.getPrice(),
+            this.discount * 100.0);
+    }
+
+    public boolean equals(SaleItem other) {
+        return (this.getName().equals(other.getName()) &amp;&amp;
+            this.getSku().equals(other.getSku()) &amp;&amp;
+            this.getPrice() == other.getPrice() &amp;&amp;
+            this.discount == other.discount);
+    }
+}
+    </input>
+  </program>
+</listing>
+
+<p>
+Again, because <c>name</c>, <c>sku</c>, and <c>price</c> are <c>private</c> to the <c>Item</c> class, the <c>purchase</c>, <c>toString</c> and <c>equals</c> methods must use the getter methods to access those private values.
+</p>
+
+<p>
+<xref ref="oop_lst-test-item"/> creates an <c>Item</c> and a <c>SaleItem</c>, prints them, and then purchases ten of each:
+</p>
+
+<listing xml:id="oop_lst-test-item">
+    <caption>Testing the <c>Item</c> and <c>SaleItem</c> Classes</caption>
+  <program language="java">
+    <input>
+public class ItemTest {
+
+    public static void main(String[] args) {
+        Item envelopes = new Item(
+            "Letter Size Envelopes - 100 count",
+            "LSE-0100", 5.75);
+        SaleItem marker = new SaleItem(
+            "Erasable marker - black", "EMB-913",
+            2.15, 0.10);
+
+        System.out.println(envelopes);
+        double envelopeTotal = envelopes.purchase(10);
+        System.out.printf("Ten boxes of envelopes cost $%.2f\n",
+            envelopeTotal);
+
+        System.out.println(marker);
+        double markerTotal = marker.purchase(10);
+        System.out.printf("Ten markers cost $%.2f\n",
+            markerTotal);
+    }
+}
+    </input>
+  </program>
+</listing>
+
+<p>
+When we run the program, we get the correct output:
+</p>
+
+<console>
+<output>
+Letter Size Envelopes - 100 count (LSE-0100): $5.75
+Ten boxes of envelopes cost $57.50
+Erasable marker - black (EMB-913): $2.15 - 10.0% discount
+Ten markers cost $19.35
+</output>
+</console>
+
+<p>
+    Congratulations! We've used inheritance, and our program works. Now it's time to do what Joe Armstrong said in his book <em>Erlang and OTP in Action</em>: <q>Make it work, then make it beautiful, then if you really, really have to, make it fast. 90 percent of the time, if you make it beautiful, it will already be fast. So really, just make it beautiful!</q>
+</p>
+
+<aside>
+    <p>
+        Joe Armstrong was the co-inventor of the Erlang programming language. It's totally different from Java, and it's  an incredibly interesting language.
+    </p>
+</aside>
+
+<p>
+Part of making a program beautiful is getting rid of unnecessary duplication. In that spirit, let's take a closer look at the <c>SaleItem</c> class's <c>purchase</c>, <c>toString</c> and <c>equals</c> methods. The calculation of the base price in <c>purchase</c> is the same as in <c>Item</c>. The part of <c>toString</c>'s format string for the name, sku, and price is the same as in <c>Item</c>. Similarly, the first three lines of <c>equals</c> are the same as in <c>Item</c>.
+</p>
+
+<p>
+    We can once again use the <c>super</c> keyword to call methods in a parent class. <xref ref="oop_lst-super-eliminates-duplication"/> is a rewrite that eliminates unnecessary duplication:
+</p>
+
+<listing xml:id="oop_lst-super-eliminates-duplication">
+  <program language="java">
+    <input>
+public double purchase(int quantity) {
+    return super.purchase(quantity) *
+        (1 - discount / 100.0);
+}
+
+public String toString() {
+    return String.format("%s - %.1f%% discount",
+        super.toString(),
+        this.discount * 100.0);
+}
+
+public boolean equals(SaleItem other) {
+    return (super.equals(other) &amp;&amp;
+        this.discount == other.discount);
+}
+    </input>
+  </program>
+</listing>
+
+<exercises>
+<exercise>
+
+    <p>
+Design a class named <c>Person</c> with two subclasses: <c>Employee</c> and <c>Customer</c>. The attributes for these classes are described in italics. A <c>Person</c> has a <em>name</em>, <em>address</em>, <em>phone number</em>, and  <em>email address</em>.
+</p>
+
+<p>
+An <c>Employee</c> has an <em>employee number</em>, <em>hire date</em>, and <em>salary</em>.
+</p>
+
+<p>
+The <c>Employee</c> class, in turn, has three subclasses: <c>Programmer</c>, <c>Tester</c>, and <c>Manager</c>.
+</p>
+
+<p>
+    <ul>
+        <li><p>A <c>Programmer</c> and a <c>Tester</c> have a <em>cubicle number</em>. Both will receive a <em>fixed bonus</em> at the end of the year.</p></li>
+        <li><p>A <c>Manager</c> has an <em>office number</em> and has a variable bonus based on the performance of their team. This means that a <c>Manager</c> should have attributes for the <em>target bonus amount</em> and the <em>performance percentage</em>.</p></li>
+    </ul>
+</p>
+
+<p>
+Finally, the <c>Customer</c> should have a <em>customer number</em> and <em>company</em> they work for.
+</p>
+
+<p>
+Draw the UML diagram showing the relationship of these classes, then code all these classes showing the data fields and attributes. Make meaningful names for the attributes and give them an appropriate data type. (You do not need to create constructors or other methods for the classes.)
+</p>
+</exercise>
+
+<exercise>
+    <p>
+The XYZZY Corporation wants to retain their most loyal customers. They launch a customer retention program and offer discount to customers who have been purchasing from the company for at least one year.
+</p>
+<p>
+Write a subclass <c>PreferredCustomer</c> that extends the <c>Customer</c> class from the preceding exercise. The <c>PrefCust</c> class should have two data fields: <em>average annual purchase amount</em> (average dollar amount purchased per year) and <em>years</em> (number of years they have been a customer). These are both private variables.
+</p>
+
+<p>
+Customers get a discount percentage based on their years as a customer and average purchase amount. There are three levels of Preferred Customers: bronze, silver, and gold.
+</p>
+
+<p>
+    <ul>
+        <li><p>Bronze: <m>\geq</m> 1 year and average purchase amount $\geq$ $5000 per year<mdash/>5% discount</p></li>
+        <li><p>Silver: <m>\geq</m> 2 years and average purchase amount $\geq$ $10000 per year<mdash/>7.5% discount</p></li>
+        <li><p>Gold: <m>\geq</m> 3 years and average purchase amount $\geq$ $15000 per year<mdash/>10% discount</p></li>
+    </ul>
+</p>
+
+<p>
+The discount percentage is a <em>derived attribute</em><mdash/>it is never set directly, but instead is computed based on other attributes.
+</p>
+
+<p>
+Write the <c>PrefCust</c> class with all its data fields. Please write all the getter and setter methods.  Write a method named <c>getDiscount</c> that uses the average annual purchase amount and years as a customer to return the discount percent (as a percentage).
+</p>
+
+</exercise>
+
+
+<exercise xml:id="oop_ex-account-inheritance">
+    <p>
+In this exercise, you will implement an <c>Account</c> class which represents a bank checking account. You will then create two classes that inherit from <c>Account</c>: <c>SavingsAccount</c> and <c>CreditCardAccount</c>.
+</p>
+
+<p>
+You will then use composition to create a <c>Customer</c> class which includes instances of each of these account classes.
+Finally, you will write a program with a <c>main</c> method that works with these classes.
+</p>
+
+<p>
+Part 1: Create a class named <c>Account</c>, which has the following private properties:
+</p>
+
+<p>
+    <ul>
+        <li><p><c>number: long</c></p></li>
+        <li><p><c>balance: double</c></p></li>
+    </ul>
+</p>
+
+<p>Here are the constructors and other methods:</p>
+<p>
+    <ul>
+        <li><p>Create a two-parameter constructor that takes an account number and balance. Make sure that the balance is always greater than zero (<em>Hint</em>: <c>Math.abs</c>)</p></li>
+
+        <li><p>Implement getters and setters: <c>getNumber()</c>, <c>getBalance()</c>, and \newline <c>setBalance(double newBalance)</c>. There is no <c>setNumber</c> method<mdash/>once an account is created, its account number cannot change.</p></li>
+
+        <li><p>Implement these methods: <c>void deposit(double amount)</c> and \newline <c>void withdraw(double amount)</c>. For both these methods, if the amount is less than zero, the account balance remains untouched. For the <c>withdraw</c> method, if the amount is greater than the balance, it remains untouched. <em>These methods do not print anything.</em></p></li>
+
+        <li><p>Implement a <c>toString</c> method that returns a string with the account number and balance, properly labeled.</p></li>
+        </ul>
+        </p>
+
+        <p>Part 2: Next, implement the <c>SavingsAccount</c> class. It inherits from <c>Account</c> and adds a private <c>apr</c> property, which is the annual percentage rate (APR) for interest.
+        </p>
+
+        <p><ul>
+        <li><p>Write a three-argument constructor that takes an account number, balance, and interest rate as a decimal (thus, a 3.5% interest rate is given as 0.035). Make sure that the interest rate is never less than zero.</p></li>
+
+        <li><p>Add a getter and setter: <c>getApr()</c> and <c>setApr(double apr)</c>. The setter must ensure that the APR is never less than zero.</p></li>
+
+        <li><p>Write a <c>calculateInterest</c> instance method that returns the annual interest, calculated as the current balance times the annual interest rate.</p></li>
+
+        <li><p>Modify <c>toString</c> to include the interest rate. IMPORTANT: The value returned by the <c>toString</c> method must <em>not</em> include the calculated annual interest.</p></li>
+        </ul></p>
+
+<p>Part 3: Next, implement the <c>CreditCardAccount</c> class, which inherits from <c>Account</c> and adds these <c>private</c> properties:</p>
+
+<p>
+    <ul>
+        <li><p><c>apr</c>, a <c>double</c> representing the annual interest rate charged on the balance.</p></li>
+        <li><p><c>creditLimit</c>, a <c>double</c> which gives the credit limit for the card.</p></li>
+    </ul>
+</p>
+
+<p>Then, implement the following:</p>
+
+<p>
+    <ul>
+        <li><p>A four-argument constructor that takes an account number, balance, interest rate as a decimal (thus, a 3.5% interest rate is given as 0.035), and credit limit. Make sure that neither the interest rate nor credit limit can be negative.</p></li>
+
+        <li><p> Write getters and setters for the <c>apr</c> and <c>creditLimit</c>. The apr setter should leave the APR untouched if given a negative value. The <c>creditLimit</c> setter should leave the credit limit untouched if given a negative value.</p></li>
+
+        <li><p> Modify <c>toString</c> to include the interest rate and credit limit. IMPORTANT: the value returned by the <c>toString</c> method must <em>not</em> include the monthly payment.</p></li>
+
+        <li><p>Override the <c>withdraw</c> method so that you can have a negative balance. If a withdrawal would push you over the credit limit, leave the balance untouched. Examples:</p>
+
+            <p>
+                <ul>
+                    <li><p>If your balance is $300 with a credit limit of $700, you can withdraw $900 (leaving a balance of $-600).</p></li>
+                    <li><p>If your balance is $-300 with a credit limit of $700, you can withdraw $350 (leaving a balance of $-650).</p></li>
+                    <li><p>If your balance is $-300 with a credit limit of $700, you can not withdraw $500, because that would then owe $800, which is more than your $700 limit.</p></li>
+                </ul>
+            </p>
+
+<p>In short, the maximum amount you can withdraw is your current balance plus the credit limit.</p></li>
+
+        <li><p>Implement a <c>calculatePayment</c> method that works as follows: If the balance is positive, the minimum amount you have to pay on your card per month is zero. Otherwise, your monthly payment is the minimum of 20 and $(apr/12) \cdot (−balance)$</p></li>
+
+        </ul>
+    </p>
+
+<p>Part 4: Now, write a <c>Customer</c> class that will use composition to include the preceding classes.</p>
+<p>
+    <ul>
+        <li><p>The <c>Customer</c> class has the following private attributes:</p>
+
+            <p>
+                <ul>
+                    <li><p><c>name: String</c></p></li>
+                    <li><p><c>acct: Account</c></p></li>
+                    <li><p><c>savings: SavingsAccount</c></p></li>
+                    <li><p><c>credit: CreditAccount</c></p></li>
+                </ul>
+            </p>
+        </li>
+
+        <li><p>Implement a four-argument constructor for this class.</p></li>
+
+        <li><p>Write getters and setters for all the fields.</p></li>
+</ul>
+</p>
+
+<p><xref ref="oop_fig-account-inheritance"/> shows the details of the <c>Account</c> class and its subclasses. <xref ref="oop_fig-account-classes"/> shows the relationships of all the classes in this exercise.</p>
+
+<figure align="center" xml:id="oop_fig-account-inheritance">
+    <caption><c>Account</c>, <c>SavingsAccount</c>, and <c>CreditCardAccount</c> classes</caption>
+    <image source="AppendixOOP/Figures/account_inheritance.png" width="50%"/>
+  </figure>
+
+<figure align="center" xml:id="oop_fig-account-classes">
+    <caption>Composition and Inheritance Among All Classes</caption>
+    <image source="AppendixOOP/Figures/account_classes.png" width="50%"/>
+  </figure>
+
+<p>Part 5: Finally, write a program named <em>TestCustomer.java</em> that creates a <c>Customer</c> named <q>Joe Doakes</q> with this data:
+</p>
+
+<p>
+    <ul>
+        <li> Regular account number 1037825 with a balance of $3,723.00</li>
+        <li> Savings account number 9016632 with a balance of $4,810.25 and an annual interest rate of 2.05%</li>
+        <li> Checking account number 85332162 with a balance of -$2500.00, an interest rate of 7.125%, and a credit limit of $3000.00.</li>
+    </ul>
+</p>
+
+<p>Then, do the following transactions:</p>
+
+<p>
+    <ul>
+        <li> Deposit $257.18 into the regular account, then withdraw $587.23.</li>
+        <li> Deposit $2,466.12 into the savings account, then withdraw $8,000.00.</li>
+        <li> Withdraw $480.00 from the credit card account.</li>
+        <li> Display the status of the regular account (number and balance).</li>
+        <li> Display the status of the savings account (number, balance, and annual interest amount).</li>
+        <li> Display the status of the credit card account (number, balance, interest rate, and monthly payment due).</li>
+    </ul>
+</p>
+</exercise>
+</exercises>
+</subsection>
+</section>

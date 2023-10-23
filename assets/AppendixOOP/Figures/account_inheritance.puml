@@ -1,0 +1,64 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classarrowcolor #000000
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+
+Account <|-- SavingsAccount
+Account <|-- CreditCardAccount
+
+class Account {
+    - number: long 
+    - balance: double
+    
+    + Account(number: long, balance: double)
+    
+    + getNumber(): long 
+    + getBalance(): double
+    + setBalance(balance: double): void
+    
+    + deposit(amount: double): void
+    + withdraw(amount: double): void
+    + toString(): String
+}
+
+class SavingsAccount {
+    - apr: double
+    
+    + SavingsAccount(number: long, balance: double,
+        apr: double)
+    
+    + getApr(): double
+    + setApr(apr: double): void
+    
+    + calculateInterest(): double
+    + toString(): String
+}
+
+class CreditCardAccount {
+    - apr: double
+    - creditLimit: double
+    
+    + CreditCardAccount(number: long, balance: double,
+        apr: double, creditLimit: double)
+    
+    + getApr(): double
+    + setApr(apr: double): void
+    
+    + getCreditLimit(): double
+    + setCreditLimit(creditLimit: double): void
+    
+    + withdraw(amount: double): void
+    + calculatePayment(): double
+    + toString(): String
+}
+
+
+@enduml

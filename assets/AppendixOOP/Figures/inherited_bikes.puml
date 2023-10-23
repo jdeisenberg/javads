@@ -1,0 +1,46 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classarrowcolor #000000
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+
+Bicycle <|-- ElectricBicycle
+
+class Bicycle {
+    - color: String 
+    - frameSize: double
+    - nGears: int
+    - currentGear: int
+    
+    + Bicycle(color: String, frameSize: double, nGears: int)
+    
+    + getColor(): String 
+    + getFrameSize(): double
+    + getNGears(): int
+    + getCurrentGear(): int
+    + setCurrentGear(int: currentGear): void
+}
+
+class ElectricBicycle {
+    - batteryCapacity: int
+    - currentCharge: double
+    - maxSpeed: double
+    
+    + ElectricBicycle(color: String, frameSize: double, nGears: int,
+       batteryCapacity: int, maxSpeed: double)
+    
+    + getBatteryCapacity(): int
+    + getCurrentCharge(): double
+    + setCurrentCharge(currentCharge: double): void
+    + getMaxSpeed(): double
+}
+
+
+@enduml
