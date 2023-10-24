@@ -318,7 +318,7 @@ Key Luanda has value 2,165,867.
 
 <subsection>
     <title>The Set Collection</title>
-    <p>The <c>Set</c> collection implements the mathematical version of a set. You can think of a <c>Set</c> as an unordered, well, set of numbers where no item appears more than once. In Java, <c>Set</c> is an <em>interface</em>; when we need an actual set, we will construct a <c>HashSet</c> (a set using a <c>HashMap</c> for its underlying storage).</p>
+    <p>The <c>Set</c> collection implements the mathematical version of a set. You can think of a <c>Set</c> as an unordered, well, set of elements where no item appears more than once. In Java, <c>Set</c> is an <em>interface</em>; when we need an actual set, we will construct a <c>HashSet</c> (a set using a <c>HashMap</c> for its underlying storage).</p>
 
     <p>Here are the commonly-used <c>Set</c> methods:</p>
 
