@@ -2,7 +2,7 @@
 <section xml:id="oop_inheritance_polymorphism">
   <title>Polymorphism and Dynamic Binding</title>
   <p>
-Let's return to the <c>Item</c> and <c>SaleItem</c> classes.  Try the following program and see what happens:
+    Let's return to the <c>Item</c> and <c>SaleItem</c> classes, which we defined starting in <xref ref="oop_lst-item-class"/>.  Try the following program and see what happens:
 </p>
 
 <listing>
@@ -300,7 +300,7 @@ if (myItem instanceof SaleItem) {
 </p>
 
 <exercises>
-  <exercise>
+  <exercise xml:id="oop_ex-bicycles">
     <p>This exercise will let you practice polymorphism and dynamic binding. Implement the <c>Bicycle</c>, <c>ElectricBicycle</c>, and <c>CargoBicycle</c> classes. (These are not defined in the same way as in the preceding text.) The parent <c>Bicycle</c> class has these attributes and methods:</p>
 
 <p>

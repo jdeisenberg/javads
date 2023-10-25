@@ -1,7 +1,346 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xml:id="oop_interfaces">
-  <title>Creating Interfaces</title>
+<section xml:id="oop_abstract_interfaces">
+  <title>Abstract Classes and Interfaces</title>
+  <introduction>
   <p>
-    TBD
+    To complete our discussion of object-oriented programming, we will discuss <term>abstract classes</term> and <term>interfaces</term>.
   </p>
+</introduction>
+
+<subsection xml:id="oop_abstract">
+  <title>Abstract Classes</title>
+  <p>Consider the class hierarchy shown in <xref ref="oop_fig-shape-inheritance"/>. The <c>Shape</c> class is the parent of the <c>Rectangle</c> and <c>Circle</c> child classes.</p>
+
+  <figure align="center" xml:id="oop_fig-shape-inheritance">
+    <caption><c>Shape</c>, <c>Rectangle</c>, and <c>Circle</c> classes</caption>
+    <image source="AppendixOOP/Figures/shape_inheritance.png" width="80%"/>
+  </figure>
+
+  <p>A <c>Shape</c> has an <em>x</em> and <em>y</em> location on the screen, you can calculate its area and perimeter, and you can use <c>toString</c> to convert it to a string. Let's start writing the code for this class.</p>
+
+  <listing xml:id="oop_lst-concrete-shape">
+    <program language="java">
+      <input>
+public class Shape {
+    private double x;
+    private double y;
+
+    public Shape(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public double getX() {
+        return this.x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return this.y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public double calcArea() {
+        // ?????
+    }
+
+    public double calcPerimeter() {
+        // ?????
+    }
+
+    public String toString() {
+        return String.format("(%.1f, %.1f)", this.x, this.y);
+    }
+}
+
+      </input>
+    </program>
+  </listing>
+
+  <p>Everything is going great until we reach the <c>calcArea</c> and <c>calcPerimeter</c> methods. How do we calculate the area and perimeter of a <q>shape</q>? We don't have that sort of problem with circles and rectangles. We know the formulas for calculating their area and perimeter (AKA circumference).  But a <q>shape</q> really doesn't exist. If I tell you <q>draw me a shape</q>, you'll ask me <q>which one?</q> Shapes are an abstraction.
+  </p>
+
+  <p>Here's how we'll solve the problem: we will use the keyword <c>abstract</c> on the class declaration. This tells Java that we will never directly instantiate a <c>Shape</c> object. If anyone tries something like the following, they will get an error message.</p>
+
+  <pre>Shape myShape = new Shape(3.0, 4.5);</pre>
+
+  <p>
+    We will also put the keyword <c>abstract</c> on the declarations of <c>calcArea</c> and <c>calcPerimeter</c>. And, <em>most important</em>, we will provide <em>only</em> the method header<mdash/>there will be no method body. <xref ref="oop_lst-abstract-shape"/> shows the changed lines:
+  </p>
+
+  <listing xml:id="oop_lst-abstract-shape">
+    <program language="java">
+      <input>
+public abstract class Shape {
+    private double x;
+    private double y;
+
+    // ...
+
+    public abstract double calcArea();
+
+    public abstract double calcPerimeter();
+
+    public String toString() {
+        return String.format("(%.1f, %.1f)", this.x, this.y);
+    }
+}
+</input>
+</program>
+</listing>
+
+<note>
+  <p>If you look closely at the UML diagram in <xref ref="oop_fig-shape-inheritance"/>, you will see that the class name and the two method names are in italics. This is how you signify an abstract entity in UML.</p>
+</note>
+
+<p>Now let's look at the code for the <c>Circle</c> class, which extends <c>Shape</c>. This is not an abstract class<mdash/>we know how to calculate a circle's area and perimeter (circumference):</p>
+
+<listing xml:id="oop_lst-circle-class">
+  <caption>The <c>Circle</c> Class</caption>
+  <program language="java" line-numbers="yes">
+    <input>
+public class Circle extends Shape {
+    private double radius;
+
+    public Circle(double x, double y, double radius) {
+        super(x, y);
+        this.radius = radius;
+    }
+
+    public double getRadius() {
+        return this.radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+     public double calcArea() {
+        return Math.PI * this.radius * this.radius;
+    }
+
+    public double calcPerimeter() {
+        return 2.0 * Math.PI * this.radius;
+    }
+
+    public double calcCircumference() {
+        return calcPerimeter();
+    }
+
+    public String toString() {
+        return String.format("Circle: %s [radius %.1f]", super.toString(),
+            this.radius);
+    }
+}
+    </input>
+  </program>
+</listing>
+
+<p>The class can still use the <c>super</c> keyword to call methods in the parent class. Because <c>Shape</c> never defined the body of the <c>calcArea</c> and <c>calcPerimeter</c> methods, the <c>Circle</c> class <em>must</em> override the methods and provide a method body (lines&#xA0;17&#x2013;23). If we omit a definition for <c>calcArea</c>, we get this error:</p>
+
+<console>
+  <output>
+Circle.java:1: error: Circle is not abstract and does not override
+abstract method calcArea() in Shape
+public class Circle extends Shape {
+       ^
+1 error
+  </output>
+</console>
+
+<note>
+  <p>Even though you cannot directly instantiate a <c>Shape</c>, you can use polymorphism to create, for example, an array of <c>Shape</c> and assign concrete (non-abstract) objects such as <c>Circle</c> and <c>Rectangle</c> to its elements, as in <xref ref="oop_lst-shape-example"/>.</p>
+
+<listing xml:id="oop_lst-shape-example">
+  <program language="java">
+    <input>
+public class ShapeExample {
+    public static void main(String[] args) {
+        Shape[] shapeList = {
+            new Circle(3.0, 4.0, 1.5),
+            new Rectangle(1.5, 2.5, 4.7, 8.3)
+        };
+        for (Shape s: shapeList) {
+            System.out.printf("%s area: %.2f perimeter: %.2f%n",
+                s, s.calcArea(), s.calcPerimeter());
+        }
+    }
+}
+</input>
+</program>
+</listing>
+</note>
+</subsection>
+
+<subsection>
+  <title>Interfaces</title>
+
+  <p>
+    Let's look at the simplified UML diagram showing the inheritance for the <c>Bicycle</c>, <c>ElectricBicycle</c>, and <c>CargoBicycle</c> classes from <xref ref="oop_ex-bicycles"/>.
+  </p>
+
+  <figure align="center" xml:id="oop_fig-simplified-bikes">
+    <caption>Inheritance of <c>Bicycle</c>, <c>ElectricBicycle</c>, and <c>CargoBicycle</c></caption>
+    <image source="AppendixOOP/Figures/simplified_bicycles.png" width="60%"/>
+  </figure>
+
+  <p>
+    What if we want to have an electric cargo bicycle? We would like to be able to say something like the following:
+  </p>
+
+  <pre>
+public class ElectricCargoBicycle extends ElectricBicycle, CargoBicycle {
+    // ...
+}
+</pre>
+
+<p>This is called <term>multiple inheritance</term>, and its UML diagram would look something like this:</p>
+
+  <figure align="center" xml:id="oop_fig-multi-inheritance-bikes">
+    <caption>Inheritance of <c>ElectricCargoBicycle</c></caption>
+    <image source="AppendixOOP/Figures/multiple_inheritance_bicycles.png" width="60%"/>
+  </figure>
+
+  <p><em>But we can't!</em> Java does not allow multiple inheritance.</p>
+
+  <p>One solution to this problem is to use an <term>interface</term>. It is somewhat like an abstract class, except that it consists of only methods. <xref ref="oop_lst-electrified"/> shows the <c>Electrified</c> interface:</p>
+
+  <listing xml:id="oop_lst-electrified">
+    <program language="java">
+      <input>
+interface Electrified {
+    public int getChargeCapacity();
+    public double getCurrentCharge();
+    public void setCurrentCharge(double charge);
+}
+</input>
+</program>
+</listing>
+
+<p>Let's look at the <c>Bicycle</c> class in <xref ref="oop_lst-bicycle-class"/>:</p>
+<listing xml:id="oop_lst-bicycle-class">
+  <program>
+    <input>
+class Bicycle {
+    private double frameSize;
+    private int nGears;
+    private int currentGear;
+
+    Bicycle(double frameSize, int nGears) {
+        this.frameSize = frameSize;
+        this.nGears = nGears;
+        setCurrentGear(nGears);
+    }
+
+    public double getFrameSize() {
+        return this.frameSize;
+    }
+
+    public int getNGears() {
+        return nGears;
+    }
+
+    public int getCurrentGear() {
+        return currentGear;
+    }
+
+    public void setCurrentGear(int currentGear) {
+        this.currentGear = Math.min(this.nGears, Math.max(currentGear, 1));
+    }
+}
+    </input>
+  </program>
+</listing>
+
+<p>Now, our <c>ElectricBicycle</c> class lookss like this:</p>
+
+<listing xml:id="oop_lst-electricBicycle">
+  <program language="java" line-numbers="yes">
+    <input>
+class ElectricBicycle extends Bicycle implements Electrified {
+    private int chargeCapacity;
+    private double currentCharge;
+
+    ElectricBicycle(double frameSize, int nGears, int chargeCapacity) {
+        super(frameSize, nGears);
+        this.chargeCapacity = chargeCapacity;
+    }
+
+    /* Implement the methods in the interface */
+    public int getChargeCapacity() {
+        return this.chargeCapacity;
+    }
+
+    public double getCurrentCharge() {
+        return this.currentCharge;
+    }
+
+    public void setCurrentCharge(double charge) {
+        this.currentCharge = Math.max(0, Math.min(charge, chargeCapacity));
+    }
+}
+    </input>
+  </program>
+</listing>
+
+<p>Line 1 is the key here: the class <c>implements</c> the interface. Because this class implements <c>Electrified</c>, it must provide method bodies for all the methods defined in the interface; those are in lines&#xa0;11&#x2013;21.</p>
+
+<p>We can now create our <c>ElectricCargoBicycle</c> by using an interface. We extend <c>CargoBicycle</c> and implement <c>Electrified</c>:</p>
+
+<listing>
+  <program language="java">
+    <input>
+class ElectricCargoBicycle extends CargoBicycle implements Electrified {
+    private int chargeCapacity;
+    private double currentCharge;
+
+    public ElectricCargoBicycle(double frameSize, int nGears,
+      double maxLoad, int chargeCapacity) {
+        super(frameSize, nGears, maxLoad);
+        this.chargeCapacity = chargeCapacity;
+        this.currentCharge = 0.0;
+    }
+
+    /* Implement the methods in the interface */
+    public int getChargeCapacity() {
+        return this.chargeCapacity;
+    }
+
+    public double getCurrentCharge() {
+        return this.currentCharge;
+    }
+
+    public void setCurrentCharge(double charge) {
+        this.currentCharge = Math.max(0, Math.min(charge, chargeCapacity));
+    }
+}
+</input>
+</program>
+</listing>
+<p><xref ref="oop_fig-interface-uml"/> shows the relationship among these classes.</p>
+  <figure align="center" xml:id="oop_fig-interface-uml">
+    <caption><c>Bicycle</c> and its Subclasses</caption>
+    <image source="AppendixOOP/Figures/bicycles_with_interfaces.png" width="80%"/>
+  </figure>
+
+  <note>
+    <p>In this particular example, we could also use composition to create a <c>Battery</c> class and put one of those objects into the electric bicycle and electric cargo bicycle classes.</p>
+  </note>
+
+  <p>Java makes extensive use of interfaces in much of its class library. For example, the <c>ArrayList</c> class implements these interfaces:</p>
+
+  <p>
+    <ul>
+      <li><p><c>Iterable</c>, which provides methods for enabling iteration via enhanced <c>for</c> loops</p></li>
+      <li><p><c>Collection</c>, which provides methods for adding and removing elements</p></li>
+      <li><p><c>List</c>, which provides methods for integer indexing</p></li>
+    </ul>
+  </p>
+</subsection>
 </section>

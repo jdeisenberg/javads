@@ -1,0 +1,68 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classarrowcolor #000000
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+
+Shape <|-- Rectangle
+Shape <|-- Circle
+
+abstract class Shape {
+    - x: double
+    - y: double
+    
+    + Shape(x: double, y: double)
+    
+    + getX(): double
+    + setX(x: double): void
+
+    + getY(): double
+    + setY(y: double): void
+
+    + {abstract} calcArea(): double
+    + {abstract} calcPerimeter(): double
+
+    + toString(): String
+}
+
+class Rectangle {
+    - width: double
+    - height: double
+    
+    + Rectangle(x: double, y: double, width: double, height: double)
+    
+    + getWidth(): double
+    + setWidth(width: double): void
+    
+    + getLength(): double
+    + setLength(length: double): void
+
+    + calcArea(): double
+    + calcPerimeter(): double
+
+    + toString(): String
+}
+
+class Circle {
+    - radius: double
+
+    + Circle(x: double, y: double, radius: double)
+
+    + getRadius(): double
+    + setRadius(radius: double): void
+
+    + calcArea(): double
+    + calcPerimeter(): double
+
+    + toString(): String
+}
+
+
+@enduml

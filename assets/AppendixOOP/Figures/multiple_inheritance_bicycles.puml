@@ -1,0 +1,43 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classarrowcolor #000000
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+
+class Bicycle {
+    - frameSize: double
+    - nGears: int
+    - currentGear: int
+    
+    + Bicycle(frameSize: double, nGears: int)
+    
+}
+
+class ElectricBicycle extends Bicycle {
+    - batteryCapacity: int
+    - currentCharge: double
+    
+    + ElectricBicycle(frameSize: double, nGears: int,
+       batteryCapacity: int)
+}
+
+class CargoBicycle extends Bicycle {
+    - maxLoad: double
+    - currentLoad: double
+    
+    + CargoBicycle(frameSize: double, nGears: int,
+        maxLoad: double)
+}
+
+class ElectricCargoBicycle extends ElectricBicycle, CargoBicycle {
+    + ElectricCargoBicycle(frameSize: double, nGears: int,
+        maxLoad: double, batteryCapacity: int)
+}
+@enduml
