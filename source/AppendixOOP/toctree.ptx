@@ -6,8 +6,5 @@
   <xi:include href="./InheritancePolymorphism.ptx"/>
   <xi:include href="./AbstractAndInterfaces.ptx"/>
   <xi:include href="./Generics.ptx"/>
-  <!--
-  <xi:include href="./Composition.ptx"/>
-  <xi:include href="./Exercises.ptx"/>
-  -->
+  <xi:include href="./KeyTerms.ptx"/>
 </appendix>

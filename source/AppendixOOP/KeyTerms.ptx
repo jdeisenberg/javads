@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<section xml:id="oop_key-terms">
+  <title>Key Terms</title>
+  <table>
+    <tabular>
+      <row>
+        <cell>abstract classes</cell>
+        <cell>Is-A relationship</cell>
+      </row>
+      <row>
+        <cell>aggregated class</cell>
+        <cell>polymorphism</cell>
+      </row>
+      <row>
+        <cell>aggregating class</cell>
+        <cell>simulation</cell>
+      </row>
+      <row>
+        <cell>dynamic binding</cell>
+        <cell>subclasses</cell>
+      </row>
+      <row>
+        <cell>generic types</cell>
+        <cell>superclasses</cell>
+      </row>
+      <row>
+        <cell>Has-A relationship</cell>
+        <cell>truth table</cell>
+      </row>
+      <row>
+        <cell>inheritance</cell>
+        <cell>type parameter</cell>
+      </row>
+      <row>
+        <cell>interface</cell>
+        <cell></cell>
+      </row>
+      </tabular>
+  </table>
+
+</section>
