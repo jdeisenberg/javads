@@ -2,6 +2,100 @@
 <section xml:id="oop_generics">
   <title>Java Generics</title>
   <p>
-    TBD
+    Consider the code for a sequential search through an array of <c>Integer</c> objects, returning the index where the object was found (or -1 if not found):
   </p>
+
+  <listing xml:id="oop_lst-searchInt">
+    <program language="java">
+      <input>
+public int search(Integer[] arr, Integer target) {
+    int index = 0;
+    while (index &lt; arr.length &amp;&amp;
+      !arr[index].equals(target) != 0) {
+        index++;
+    }
+    return (index != arr.length) ? index : -1;
+}
+
+      </input>
+    </program>
+  </listing>
+
+  <p>If we want a sequential search through an array of String, we need to make a completely new method that has a lot of the same code:</p>
+
+    <listing xml:id="oop_lst-searchString">
+    <program language="java">
+      <input>
+public int search(String[] arr, String target) {
+    int index = 0;
+    while (index &lt; arr.length &amp;&amp;
+      !arr[index].equals(target)) {
+        index++;
+    }
+    return (index != arr.length) ? index : -1;
+}
+      </input>
+    </program>
+  </listing>
+
+  <p>There must be a better way. Java solves this problem by using <term>generic types</term>. We use a class like this:</p>
+
+  <listing xml:id="oop_lst-generic-searcher">
+    <caption>The <c>Searcher</c> class</caption>
+    <program language="java">
+      <input>
+      public class Searcher&lt;T&gt; {
+        public int search(T[] arr, T target) {
+            int index = 0;
+            while (index &lt; arr.length &amp;&amp; !arr[index].equals(target)) {
+                index++;
+            }
+            return (index != arr.length) ? index : -1;
+        }
+      }
+      </input>
+    </program>
+  </listing>
+
+  <p>The <c>&lt;T&gt;</c> is a <term>type parameter</term>; we will fill it in with the type we want when creating a <c>Searcher</c> object, as in the following <c>main</c> method:</p>
+
+  <listing xml:id="oop_lst-generic-main">
+    <caption>Using the <c>Searcher</c> class</caption>
+    <program language="java">
+      <input>
+    public static void main(String[]  args) {
+        Searcher&lt;Integer&gt; searchInt = new Searcher&lt;&gt;();
+        Integer [] arr = {3, 5, 7, 2, 9};
+        int found = searchInt.search(arr, 9);
+        System.out.println(found);
+
+        Searcher&lt;String&gt; searchStr = new Searcher&lt;&gt;();
+        String[] words = {"cat", "elk", "dog", "fox"};
+        found = searchStr.search(words, "elk");
+        System.out.println(found);
+    }
+      </input>
+    </program>
+  </listing>
+
+  <p>Thus, just as you fill in a method's parameter between parentheses with an actual argument, you fill in the type parameter between the angle brackets with an actual type name.</p>
+
+  <p>All of Java's <c>Collection</c> framework uses type parameters. You can create an <c>ArrayList</c> of <c>Integer</c>, <c>String</c>, <c>Color</c>, <c>HttpRequest</c>, or any <c>Object</c> that you define yourself. All of the <c>ArrayList</c> methods will work on these lists, and there is no need for Java to have separate libraries for each data type.</p>
+  <aside>
+    <p>The <c>Color</c> class is part of Java's Abstract Windowing Toolkit (AWT).</p>
+  </aside>
+
+  <p>The only proviso is that the data type you provide <em>must</em> be an object type rather than a primitive type. You cannot write <c>ArrayList&lt;double&gt;</c>. Instead you must use the object wrapper class:  <c>ArrayList&lt;Double&gt;</c>.</p>
+
+  <p>Sometimes, you also need to specify limitations on the types that can used for a parameter. For example, if we wanted a <c>Sorter&lt;T&gt;</c> class, we could only sort objects that have a <c>compareTo</c> method. That is, they must implement the <c>Comparable&lt;T&gt;</c> interface. <c>String</c> and <c>Double</c> have such a method, but <c>Color</c> and <c>HttpRequest</c> don't.</p>
+
+  <p>The beginning of our hypothetical <c>Sorter</c> class would look like this:</p>
+
+  <pre>
+    public class Searcher&lt;T extends Comparable&lt;T&gt;&gt; {
+        // code...
+    }
+  </pre>
+
+  <p>There are many other important concepts for using generics. You can see a full tutorial at <url href="https://docs.oracle.com/javase/tutorial/java/generics/index.html"/>. However, this is a book about data structures rather than the deeper concepts of Java, so we will leave you with this brief introduction to generics, which should be sufficient to help you understand the programs in this book.</p>
 </section>
