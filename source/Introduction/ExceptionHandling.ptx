@@ -4,7 +4,7 @@
   <p>There are three types of errors that typically occur when writing
             programs. The first, known as a <em>syntax error</em>, simply means that the
             programmer has made a mistake in the structure of a statement or
-            expression. For example, put these arithmetic operators together</p>
+            expression. For example, putting these arithmetic operators together:</p>
   <pre>jshell&gt; int n = 2 + * 3;
 |  Error:
 |  illegal start of expression
@@ -15,7 +15,8 @@
             the processing of this statement since it does not conform to the
             rules of the language. Syntax errors are usually more frequent when you
             are first learning a language.</p>
-          <p>Another type of error, known as a <em>run time error</em>; the syntax is correct, but the program cannot execute correctly:</p>
+
+          <p>Another type of error, known as a <em>run time error</em>, happens when the syntax is correct, but the program cannot execute correctly:</p>
           <console><output>
 jshell&gt; int n = 12 / 0;
 |  Exception java.lang.ArithmeticException: / by zero
@@ -31,11 +32,11 @@ int area = length + width;
 System.out.println(area);
 </input></program>
 
-<p>In some cases, logic errors can lead to errors such as trying to divide by zero or trying to access an item in a list where the index of the item is outside the bounds of the list. In this case, the logic error leads to a runtime error that causes the program to terminate. These types of runtime errors are typically called <term>exceptions</term>.</p>
+<p>In some cases, logic errors can lead to errors such as trying to divide by zero or trying to access an item in an array where the index of the item is outside the bounds of the array. In this case, the logic error leads to a runtime error that causes the program to terminate. These types of runtime errors are typically called <term>exceptions</term>.</p>
 
-  <p>Most of the time, beginning programmers simply think of exceptions as fatal runtime errors that cause the end of execution. However, most programming languages provide a way to deal with these errors that will allow the programmer to have some type of intervention if they so choose. In addition, programmers can create their own exceptions if they detect a situation in the program execution that warrants it.</p>
+  <p>Most of the time, beginning programmers think of exceptions as fatal runtime errors that cause the end of execution. However, most programming languages provide a way to deal with these errors that will allow the programmer to have some type of intervention if they so choose. In addition, programmers can create their own exceptions if they detect a situation in the program execution that warrants it.</p>
 
-  <p>When an exception occurs, we say that it has been <em>raised</em>. You can
+  <p>When an exception occurs, we say that it has been <em>thrown</em> or <em>raised</em>. You can
             <em>handle</em> the exception that has been raised by using a <c>try</c>
             statement. For example, consider the following program that asks the
             user for an integer and then tries to access an array element at that index.</p>
@@ -103,7 +104,7 @@ public static double doCalculation(double n) {
         // a complicated calculation goes here
         return ...;
     } else {
-        throw new IllegalArgumentException("Argument " + n + " cannot be negative.");
+        throw new IllegalArgumentException(n + " cannot be negative.");
     }
   }
     </input></program>

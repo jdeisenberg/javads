@@ -81,11 +81,11 @@ System.out.println(Math.sqrt(n));
 
       </input></program>
 
-  <p>For iteration, Java provides a standard <c>while</c> statement and two varieties of the <c>for</c> statement. The <c>while</c> statement repeats a body of code as long as a condition evaluates to <c>true</c>. Generally, we use a <c>while</c> loop for <term>indeterminate loops</term>, where we do not know how many times the loop has to iterate. Consider this program, where we ask for a non-negative number. In this case, we have no idea how many times the user will persist in giving us bad data:</p>
+  <p>For iteration, Java provides a standard <c>while</c> statement and two varieties of the <c>for</c> statement. The <c>while</c> statement repeats a body of code as long as a condition evaluates to <c>true</c>. Generally, we use a <c>while</c> loop for <term>indeterminate loops</term>, where we do not know how many times the loop has to iterate. Consider this program, where we ask for numbers to add up. In this case, we have no idea how many times the user will give us before entering zero to let us know they are finished:</p>
   <program><input>
 import java.util.Scanner;
 
-class SumUntilNegative {
+class SumUntilZero {
 
     public static void main(String[] args) {
 
@@ -164,7 +164,7 @@ for (int index = 0; (index &lt; data.length) &amp;&amp; (data[index] &gt;= 0.0);
 </aside>
 
 
-<p>The preceding example doesn't use the index as a part of the calculation; its only use is to access the collection. In cases like this, you can use the <term>extended <c>for</c></term> loop:</p>
+<p>If you want to access every element in the collection but do not need to use the index as a part of the calculation, you can use the <term>extended <c>for</c></term> loop. The following example adds up all the items in the <c>data</c> array:</p>
 
 <program language="java"><input>
 double sum = 0.0;

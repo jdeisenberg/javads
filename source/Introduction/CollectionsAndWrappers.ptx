@@ -2,7 +2,7 @@
 <section xml:id="introduction_collections-and-wrappers">
   <title>Collections and Wrapper Classes</title>
   <introduction>
-  <p>While fixed-length arrays are very efficient, we will need to have array-like containers that allow us to easily add and delete elements. Java provides a large number of <term>collections</term>, some of which implement the data structures we will be looking at in this book. (We'll be implementing our own versions of these data structures rather than relying on the ones that Java gives us.)</p>
+  <p>While fixed-length arrays are very efficient, we will need array-like containers that allow us to easily add and delete elements. Java provides a large number of <term>collections</term>, some of which implement the data structures we will be looking at in this book. (We'll be implementing our own versions of these data structures rather than relying on the ones that Java gives us.)</p>
         </introduction>
   <subsection xml:id="introduction_arraylist" label="introduction_arraylist">
     <title>The ArrayList Class</title>
@@ -12,7 +12,11 @@
     </console>
     <p>Here, <c>ArrayList</c> is the name of the class. It belongs to the <c>java.util</c> <term>package</term>. Java uses packages to group together related data types.</p>
 
-    <p>Let's create an <c>ArrayList</c> of <c>String</c> elements by using the <c>new</c> method. The element data type is enclosed in angle brackets. As with arrays, all the elements in an <c>ArrayList</c> must be of the same data type.</p>
+    <p>Let's create an <c>ArrayList</c> of <c>String</c> elements by using the <c>new</c> method. The element data type is enclosed in angle brackets, and is a <term>generic</term>. As with arrays, all the elements in an <c>ArrayList</c> must be of the same data type.</p>
+
+    <aside>
+        <p>You can read more about generics in <xref ref="oop_generics"/>.</p>
+    </aside>
 
 <console prompt="jshell&gt; ">
 <input>ArrayList&lt;String&gt; animals = new ArrayList&lt;String&gt;();</input>
@@ -157,7 +161,7 @@
     While you can initialize an array using brace notation, as in the following:
     </p>
 
-    <pre>double discount_rates = {0.03, 0.07, 0.105, 0.15}</pre>
+    <pre>double discount_rates = {0.03, 0.07, 0.105, 0.15};</pre>
 
     <p>
     You cannot initialize an <c>ArrayList</c> the same way. Instead, you might do something like this:
@@ -191,7 +195,7 @@ ArrayList&lt;Double&gt; discount_rates = new ArrayList&lt;&gt;(
 </input>
 </program>
 
-<p>You need to <c>import</c> the <c>Arrays</c> class (line 2). Reading from the <q>inside out</q>, line 6 creates a new array of <c>Double</c> on the fly; this avoids needing a temporary variable. Line 5 converts it to a <c>List</c> (another one of Java's collections), and that becomes the arument to the <c>ArrayList</c> constructor on line 4.</p>
+<p>You need to <c>import</c> the <c>Arrays</c> class (line 2). Reading from the <q>inside out</q>, line 6 creates a new array of <c>Double</c> on the fly; this avoids needing a temporary variable. Line 5 converts it to a <c>List</c> (another one of Java's collections), and that becomes the argument to the <c>ArrayList</c> constructor on line 4.</p>
 
 </subsection>
 

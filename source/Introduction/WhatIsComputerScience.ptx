@@ -10,8 +10,8 @@
     solutions that come out of the problem-solving process. Given a problem,
     a computer scientist's goal is to develop an <term>algorithm</term>, a
     step-by-step list of instructions for solving any instance of the
-    problem that might arise. Algorithms are finite processes that if
-    followed will solve the problem. Algorithms are solutions.</p>
+    problem that might arise. Algorithms are finite processes that, if
+    followed, will solve the problem. Algorithms are solutions.</p>
   <p>Computer science can be thought of as the study of algorithms. However,
     we must be careful to include the fact that some problems may not have a
     solution. Although proving this statement is beyond the scope of this
@@ -61,7 +61,7 @@
     very different view of the computer. They must know the details of how
     operating systems work, how network protocols are configured, and how to
     code various scripts that control computer functionality. They must be able to control
-    the low-level details that a user simply assumes.</p>
+    the low-level details that a user takes for granted.</p>
 
   <p>The common point for both of these examples is that the user of the
     abstraction, sometimes also called the client, does not need to know the

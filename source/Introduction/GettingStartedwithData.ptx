@@ -2,7 +2,7 @@
 <section xml:id="introduction_getting-started-with-data">
   <title>Getting Started with Data</title>
   <introduction>
-  <p>We stated above that Java supports the object-oriented programming
+    <p>We stated in <xref ref="introduction_review-of-basic-java"/> that Java supports the object-oriented programming
             paradigm. This means that Java considers data to be the focal point of
             the problem-solving process. In Java, as well as in any other
             object-oriented programming language, we define a <term>class</term> to be a
@@ -43,11 +43,11 @@ Math.pow(2, 100) // 1.2676506002282294E30
     </program>
 
     <p>The Boolean data type, implemented as the Java <c>boolean</c> atomic data type, is
-    quite useful for re presenting truth values. The possible values
+    quite useful for representing truth values. The possible values
     for a <c>boolean</c> variable are <c>true</c> and <c>false</c>, with the standard
     Boolean operators, <c>&amp;&amp;</c> (and), <c>||</c> (or), and <c>!</c> (not).</p>
 
-    <p>Boolean values are also used as results for comparison operators such as equality (==) and greater than (<m>&gt;</m>). In addition, relational operators and logical operators can be combined together to form complex logical questions. <xref ref="introduction_tab-relational"/> shows the relational and logical operators.</p>
+    <p>Boolean values are also used as results for comparison operators such as equality (==) and greater than (<m>&gt;</m>). In addition, relational operators and logical operators can be combined together to form complex logical expressions. <xref ref="introduction_tab-relational"/> shows the relational and logical operators.</p>
 
     <table xml:id="introduction_tab-relational">
       <tabular>
@@ -115,7 +115,7 @@ Math.pow(2, 100) // 1.2676506002282294E30
 10 &gt; 5                    // true
 (5 &gt;= 1) &amp;&amp; (5 &lt;= 10)     // true
 (1 &lt; 5) || (10 &lt; 1)       // true
-(2 &lt; 7) &amp;&amp; (7 &lt; 12)      // true
+(2 &lt; 7) &amp;&amp; (7 &lt; 12)       // true
         </input>
     </program>
 

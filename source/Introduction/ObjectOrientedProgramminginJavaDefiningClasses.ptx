@@ -42,7 +42,7 @@
       this example,</p>
     <pre>public class Fraction {
   // properties and methods go here
-  }</pre>
+}</pre>
 
 <p>provides the framework for us to define the class. We normally start off by specifying the class's properties. These are declared inside the class, but not inside any method.</p>
       <program language="java"><input>
@@ -128,7 +128,7 @@ public String toString() {
 
     <p>Once we add this method and recompile, the output gives us <c>3/5</c>.</p>
 
-    <p>It is important to note that the <c>toString</c> method doesn't have parameters. It doesn't need any extra information beause it builds the string representation by using the object's internal state data to <q>fill in the blanks</q> in the format string.</p>
+    <p>It is important to note that the <c>toString</c> method doesn't have parameters. It doesn't need any extra information because it builds the string representation by using the object's internal state data to <q>fill in the blanks</q> in the format string.</p>
 
   </subsection>
   <subsection xml:id="introduction_add_fraction">
@@ -403,7 +403,7 @@ class Fraction {
     </program>
     </listing>
 
-    <p>This is what you need to know to create the classes we will use in this book. This is, after all, a review of <em>basic</em> Java, and our goal is to teach you data structures, not Java. However, if you want to write more advanced object-oriented Java, you will need to know about the concepts of inheritance, polymorphism, interfaces, and composition. See <xref ref="appendix_oop"/> for an overview of these concepts.</p>
+    <p>This is what you need to know to create most of the classes we will use in this book. This is, after all, a review of <em>basic</em> Java, and our goal is to teach you data structures, not Java. However, we will also need the more advanced concepts of inheritance, polymorphism, interfaces, composition, and generics. See <xref ref="appendix_oop"/> for an overview of these concepts. We have put them in an Appendix so that this section can be kept to a reasonable length.</p>
 
     <exercises>
       <title>Self Check</title>
