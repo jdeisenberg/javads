@@ -18,12 +18,14 @@
      <institution>Luther College</institution>
      </author>
      <author>
-     <personname>J David Eisenberg</personname>
+     <personname>J. David Eisenberg</personname>
+     <institution>Evergreen Valley College</institution>
    </author>
     </titlepage>
     <xi:include href="./FrontMatter/preface.ptx"/>
+    <xi:include href="./FrontMatter/older_preface.ptx"/>
     <colophon>
-    <p>The paper version of this book is available through Franklin Beedle &amp; Associates. We are greatful to them for their vision in allowing us to publish an interactive edition online for free.</p>
+    <p>The paper version of the Python version of this book is available through Franklin Beedle &amp; Associates. We are greatful to them for their vision in allowing us to publish an interactive edition online for free.</p>
        <copyright>
        <holder>Franklin Beedle &amp; Associates</holder>
        <year>2023</year>
