@@ -81,11 +81,12 @@ System.out.println(Math.sqrt(n));
 
       </input></program>
 
-  <p>For iteration, Java provides a standard <c>while</c> statement and two varieties of the <c>for</c> statement. The <c>while</c> statement repeats a body of code as long as a condition evaluates to <c>true</c>. Generally, we use a <c>while</c> loop for <term>indeterminate loops</term>, where we do not know how many times the loop has to iterate. Consider this program, where we ask for numbers to add up. In this case, we have no idea how many times the user will give us before entering zero to let us know they are finished:</p>
-  <program><input>
+  <p>For iteration, Java provides a standard <c>while</c> statement and two varieties of the <c>for</c> statement. The <c>while</c> statement repeats a body of code as long as a condition evaluates to <c>true</c>. Generally, we use a <c>while</c> loop for <term>indeterminate loops</term>, where we do not know how many times the loop has to iterate. Consider this program, where we ask the user repeatedly enter numbers they want to sum, entering zero when they are finished. In this case, we have no idea how many times the user will enter numbers before finishing:</p>
+  <program language="java">
+      <input>
 import java.util.Scanner;
 
-class SumUntilZero {
+class SumNumbers {
 
     public static void main(String[] args) {
 
@@ -103,8 +104,8 @@ class SumUntilZero {
         System.out.format("The sum is %.3f%n", sum);
     }
 }
-
-      </input></program>
+      </input>
+  </program>
 
   <p>The condition on the <c>while</c> statement is evaluated at the start of each repetition. If the condition evaluates to <c>true</c>, the body of the statement will execute. While Java does not require you to indent the body of the loop, we strongly suggest you do so to make your code more readable.</p>
 
