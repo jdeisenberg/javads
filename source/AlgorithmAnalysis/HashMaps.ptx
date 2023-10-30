@@ -3,7 +3,7 @@
   <title>HashMaps</title>
   <p>The second major Java data structure is the HashMap. As you
             probably recall, HashMaps differ from ArrayLists in that you can access
-            items in a dictionary by a key rather than a position. Later in this
+            items in a HashMap (also called a <q>map</q> for short) by a key rather than a position. Later in this
             book you will see that there are many ways to implement a HashMap.
             The thing that is most important to notice right now is that the <c>get</c> and <c>put</c> methods on a HashMap are <m>O(1)</m>. Another
             important HashMap operation is the <c>containsKey</c> operation. Checking to
@@ -11,14 +11,14 @@
             The efficiency of common HashMap operations is summarized in
             <xref ref="algorithm-analysis_tbl-hashmapbigo"/>. One important side note on dictionary performance
             is that the efficiencies we provide in the table are for average
-            performance. In some rare cases the <c>contains</c>, <c>get item</c>, and <c>set item</c>
+            performance. In some rare cases the <c>contains</c>, <c>get</c>, and <c>set</c>
             operations can degenerate into <m>O(n)</m> performance, but we will
             get into that in Chapter 8 when we talk about the different ways
             that a dictionary could be implemented.</p>
   <table xml:id="algorithm-analysis_tbl-hashmapbigo">
     <tabular>
       <title>
-        Table 3: Big O Efficiency of Python Dictionary Operations
+        Table 3: Big O Efficiency of Java Dictionary Operations
       </title>
       <row header="yes">
         <cell>Operation</cell>

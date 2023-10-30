@@ -11,6 +11,6 @@
             building blocks we will use as we implement other data structures in the
             remainder of the book. In this section we are not going to explain why
             the performance is what it is. In later chapters you will see some
-            possible implementations of both lists and dictionaries and how the
+            possible implementations of both lists and maps (also called dictionaries) and how the
             performance depends on the implementation.</p>
 </section>

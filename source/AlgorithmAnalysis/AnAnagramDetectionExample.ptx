@@ -88,7 +88,7 @@ public class Anagrams1 {
 
     <p>Another solution to the anagram problem will make use of the fact that even though <c>s1</c> and <c>s2</c> are different, they are anagrams only if they consist of exactly the same characters. So if we begin by sorting each string alphabetically from a to z, we will end up with the same string if the original two strings are anagrams. <xref ref="lst-ana2"/> shows this solution. Again, in Java we can use a <c>sort</c> method on arrays by converting each string to an array at the start.</p>
   <listing xml:id="lst-ana2">
-<program label="lst-ana2"   interactive="activecode" language="python">
+<program language="java" label="lst-ana2">
       <input>
 import java.util.Arrays; // note the "s" at the end!
 

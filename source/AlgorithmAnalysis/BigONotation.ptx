@@ -165,8 +165,8 @@
   <p><xref ref="fig-graphfigure2"/> shows a few of the common Big O functions as they
             compare with the <m>T(n)</m> function discussed above. Note that
             <m>T(n)</m> is initially larger than the cubic function. However, as
-            n grows, the cubic function quickly overtakes <m>T(n)</m>. It is easy
-            to see that <m>T(n)</m> then follows the quadratic function as
+            n grows, the cubic function quickly overtakes <m>T(n)</m>. We can also
+            see that <m>T(n)</m> then follows the quadratic function as
             <m>n</m> continues to grow.</p>
   <exercises>
     <title>Self Check</title>

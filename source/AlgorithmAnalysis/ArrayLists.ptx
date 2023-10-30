@@ -4,7 +4,8 @@
   <p>The designers of Java had many choices to make when they implemented
             the ArrayList data structure. Each of these choices could have an impact on
             how fast list operations perform. To help them make the right choices
-            they looked at the ways that people would most commonly use the list
+            they looked at the ways that people would most commonly use the ArrayList (which we shall
+            call <q>list</q> for short)
             data structure, and they optimized their implementation of a list so that
             the most common operations were very fast. Of course they also tried to
             make the less common operations fast, but when a trade-off had to be made
@@ -153,7 +154,7 @@ public class RemoveItem {
 </p>
 
 <p>
-  Line 19 introduces a very important concept. When Java allocates and re-allocates memory, it is possible to have an area of memory that is no longer referred to.  The Java Virtual Machine periodically goes through memory and collects these unused areas so they can be re-used. This process is called <term>garbage collection</term>, and it can take a fair amount of time. We don't want this to happen while we are in our timing loop, so we call <c>System.gc()</c> to explicitly invoke garbage collection. This is not a sure-fire cure; the documentation for <c>gc</c> says: <q>There is no guarantee that this effort will recycle any particular number of unused objects, reclaim any particular amount of space, or complete at any particular time, if at all, before the method returns or ever.</q> Nonetheless, calling <c>System.gc</c> is our best effort to avoid garbage collection at inopportune times.
+  Line 19 introduces a very important concept. When Java allocates and re-allocates memory, it is possible to have an area of memory that is no longer referred to.  The Java Virtual Machine periodically goes through memory and collects these unused areas so they can be re-used. This process is called <term>garbage collection</term>, and it can take a fair amount of time. We don't want this to happen while we are in our timing loop, so we call <c>System.gc()</c> to explicitly invoke garbage collection. This is not a sure-fire cure; the documentation for <c>gc</c> says: <q>There is no guarantee that this effort will recycle any particular number of unused objects, reclaim any particular amount of space, or complete at any particular time, if at all, before the method returns or ever.</q> Nonetheless, calling <c>System.gc()</c> is our best effort to avoid garbage collection at inopportune times.
 </p>
 
 <p>Finally, because the inner loop repeats a thousand times, it is also important to point out that the list is decreasing in size by one each time through the loop. But even in the shortest list of 100,000 elements, this only reduces the overall size by <m>1\%</m> (and only <m>0.05\%</m> in the case of the 2,000,000 element list).</p>
