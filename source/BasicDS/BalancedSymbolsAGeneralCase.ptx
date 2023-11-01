@@ -37,7 +37,7 @@ public class BalancedSymbols {
     }
 
     public static boolean balanceCheck(String symbolString) {
-        Stack&gt;Character&gt; symStack = new Stack&gt;&gt;();
+        Stack&lt;Character&gt; symStack = new Stack&lt;&gt;();
 
         for (int i = 0; i &lt; symbolString.length(); i++) {
             Character symbol = symbolString.charAt(i);

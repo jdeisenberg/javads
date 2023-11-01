@@ -2,7 +2,7 @@
 <section xml:id="basic-ds_implementing-a-deque">
   <title>Implementing a Deque in Java</title>
   <p>As we have done in previous sections, we will create a new class for the
-            implementation of the abstract data type deque. Again, the Java list
+            implementation of the abstract data type deque. Again, the Java ArrayList
             will provide a very nice set of methods upon which to build the details
             of the deque. Our implementation (<xref ref="lst-dequecode"/>) will assume that
             the tail of the deque is at position 0 in the list.</p>

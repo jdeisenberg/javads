@@ -32,7 +32,7 @@ list[j] = temp;</pre>
   <p>will exchange the <m>i</m>-th and <m>j</m>-th items in the list. Without the
             temporary storage, one of the values would be overwritten.</p>
           <aside>
-          <p>In some other languages such as Python, it is possible to use <em>simultaneous assignment</em> to do two assignments at the same time</p>
+          <p>In some other languages such as Python, it is possible to use <em>simultaneous assignment</em> to do the two assignments at the same time in one statement.</p>
         </aside>
   <!--<p>In Python, it is possible to perform simultaneous assignment. The
             statement <c>a, b = b, a</c> will result in two assignment statements being

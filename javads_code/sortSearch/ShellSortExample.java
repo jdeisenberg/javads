@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class ShellSortExample {
 
-    public static void insertionSort(int[] list) {
+    public static void shellSort(int[] list) {
         int sublistCount = list.length / 2;
         while (sublistCount > 0) {
             for (int startPos = 0; startPos < sublistCount; startPos++) {
@@ -29,7 +29,7 @@ public class ShellSortExample {
     public static void main(String[] args) {
         int[] testList = {54, 26, 93, 17, 77, 31, 44, 55, 20};
         System.out.println("Start point:  " + Arrays.toString(testList));
-        insertionSort(testList);
+        shellSort(testList);
         System.out.println("Final result: " + Arrays.toString(testList));
     }
 }

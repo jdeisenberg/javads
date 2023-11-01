@@ -3,12 +3,14 @@
   <title>The Merge Sort</title>
   <p>We now turn our attention to using a divide and conquer strategy as a
             way to improve the performance of sorting algorithms. The first
-            algorithm we will study is the <term>merge sort</term>. Merge sort is a recursive
+            algorithm we will study is the <term>merge sort</term>. </p>
+          <p>Merge sort is a recursive
             algorithm that continually splits a list in half. If the list is empty
             or has one item, it is sorted by definition (the base case). If the list
             has more than one item, we split the list and recursively invoke a merge
             sort on both halves. Once the two halves are sorted, the fundamental
-            operation, called a <term>merge</term>, is performed. Merging is the process of
+            operation, called a <term>merge</term>, is performed. </p>
+          <p>Merging is the process of
             taking two smaller sorted lists and combining them together into a
             single sorted new list. <xref ref="i16_id1fig-mergesorta"/> shows our familiar example
             list as it is being split by <c>mergeSort</c>. <xref ref="i16_id2fig-mergesortb"/> shows
@@ -36,7 +38,6 @@
             halves. It is important to note that the list may not have an even
             number of items. That does not matter, as the lengths will differ by at
             most one.</p>
-
 
 <listing xml:id="lst-mergesort">
   <caption>Merge Sort with Debug Output</caption>

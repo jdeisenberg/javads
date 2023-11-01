@@ -434,8 +434,9 @@ public static int hashString(String str, int tableSize) {
   </subsection>
   <subsection xml:id="sort-search_implementing-the-map-abstract-data-type">
     <title>Implementing the Map Abstract Data Type</title>
-    <p>One of the most useful Python collections is the dictionary. Recall that
-                a dictionary is an associative data type where you can store key-data
+    <p>One of the most useful Java collections is the HashMap (called a <em>dictionary</em> in other
+      languages such as Python). Recall that
+                a map is an associative data type where you can store key-data
                 pairs. The key is used to look up the associated data value. We often
                 refer to this idea as a <term>map</term>.</p>
     <p>The map abstract data type is defined as follows. The structure is an
@@ -466,7 +467,7 @@ public static int hashString(String str, int tableSize) {
         </li>
       </ul>
     </p>
-    <p>One of the great benefits of a dictionary is the fact that given a key,
+    <p>One of the great benefits of a map is the fact that given a key,
                 we can look up the associated data value very quickly. In order to
                 provide this fast look-up capability, we need an implementation that
                 supports an efficient search. We could use a list with sequential or
@@ -474,7 +475,8 @@ public static int hashString(String str, int tableSize) {
                 described above since looking up an item in a hash table can approach
                 <m>O(1)</m> performance.</p>
 
-              <p>In <xref ref="sort-search_lst-hashtablecodeconstructor"/> we use two arrays to create a <c>HashTable</c> class that implements the map abstract data type. One array, called <c>slots</c>, will hold the key items, which will be integers, and a parallel array, called <c>data</c>, will hold the data values, which will be strings. (Making a map with generic data types for both keys and values is a significantly more difficult task.)</p>
+              <p>While Java does provide the <c>HashMap</c> class, we will learn more by implementing our own version of it.
+                In <xref ref="sort-search_lst-hashtablecodeconstructor"/> we use two arrays to create a <c>HashTable</c> class that implements the map abstract data type. One array, called <c>slots</c>, will hold the key items, which will be integers, and a parallel array, called <c>data</c>, will hold the data values, which will be strings. (Making a map with generic data types for both keys and values is a significantly more difficult task.)</p>
 
     <p>When we look up a key, the
                 corresponding position in the data list will hold the associated data

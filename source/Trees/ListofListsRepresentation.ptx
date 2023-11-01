@@ -43,7 +43,7 @@
 
           <p>Note that the last item of the list is itself another list, again with heterogeneous data. The preceding representation of an array takes advantage of this. The first item in the list is a string; the other items are lists<mdash/>different data types.</p>
 
-          <p>Unfortunately, Java uses <term>static typing</term>. You have to declare a variable's data type, and it doesn't change. Moreover, arrays and ArrayLists cannot have heterogeneous data in them; every element must be of the same data type. There are statically typed languages such as OCaml and Haskell that can specify that a variable can have one of several different types<mdash/>a <q>union type</q><mdash/>, but, again, Java is not such a language.</p>
+          <p>Unfortunately, Java uses <term>static typing</term>. You have to declare a variable's data type, and it doesn't change. Moreover, arrays and ArrayLists cannot have heterogeneous data in them; every element must be of the same data type. There are statically typed languages such as OCaml and Haskell that can specify that a variable can have one of several different types<mdash/>a <q>union type</q><mdash/>but, again, Java is not such a language.</p>
 
           <p>Since we don't want to have to give an introduction to Python, we will have to bid a fond farewell to this representation and proceed to a second representation that is more amenable to implementation in Java: nodes and references.</p>
 <!--

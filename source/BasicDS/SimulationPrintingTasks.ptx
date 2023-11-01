@@ -31,7 +31,7 @@
     <caption>Computer Science Laboratory Printing Queue</caption>
     <image source="BasicDS/Figures/simulationsetup.png" width="50%"/>
   </figure>
-  <p>To model this situation we need to use some probabilities. For example,
+  <p>We need to use some probabilities to model this situation. For example,
             students may print a paper from 1 to 20 pages in length. If each length
             from 1 to 20 is equally likely, the actual length for a print task can
             be simulated by using a random number between 1 and 20 inclusive. This
@@ -44,12 +44,12 @@
   <p>
     <m>\frac {20\ tasks}{1\ hour} \times \frac {1\ hour}  {60\ minutes} \times \frac {1\ minute} {60\ seconds}=\frac {1\ task} {180\ seconds}</m>
   </p>
-  <p>For every second we can simulate the chance that a print task occurs by
+  <p>For every second, we can simulate the chance that a print task occurs by
             generating a random number between 1 and 180 inclusive. If the number is
             180, we say a task has been created. Note that it is possible that many
-            tasks could be created in a row or we may wait quite a while for a task
+            tasks could be created in a row, or we may wait quite a while for a task
             to appear. That is the nature of simulation. You want to simulate the
-            real situation as closely as possible given that you know general
+            real situation as closely as possible, given that you know general
             parameters.</p>
         </introduction>
   <subsection xml:id="basic-ds_main-simulation-steps">
@@ -97,8 +97,8 @@
                                 subtracts one second from the time required for that task.</p>
               </li>
               <li>
-                <p>If the task has been completed, in other words the time required
-                                has reached zero, the printer is no longer busy.</p>
+                <p>If the task has been completed<mdash/>in other words, the time required
+                                has reached zero<mdash/>the printer is no longer busy.</p>
               </li>
             </ul>
           </p>
@@ -295,7 +295,7 @@ public class PrintSimulation {
     <p>First, we will run the simulation for a period of 60 minutes (3,600
                 seconds) using a page rate of five pages per minute. In addition, we
                 will run 10 independent trials. Remember that because the simulation
-                works with random numbers each run will return different results.</p>
+                works with random numbers, each run will return different results.</p>
     <console>
       <output>
 Average wait  39.56 secs. 2 tasks remaining.
@@ -310,7 +310,7 @@ Average wait  43.18 secs. 0 tasks remaining.
 Average wait 138.00 secs. 1 tasks remaining.
 </output>
     </console>
-    <p>After running our 10 trials we can see that the mean average wait time
+    <p>After running our 10 trials, we can see that the mean average wait time
                 is (39.56 + 226.61 + 68.87 + 58.65 + 126.35 + 3.50 + 80.33 + 52.41 + 43.18 + 138.00) / 10 = 83.746 seconds. You can also see that there is a large variation in
                 the average wait time with a minimum average of 3.5 seconds and a
                 maximum of 226.62 seconds. You may also notice that in four of the
@@ -458,7 +458,7 @@ class Printer {
                 but slower page rate. The approach we took was to write a simulation
                 that modeled the printing tasks as random events of various lengths and
                 arrival times.</p>
-    <p>The output above shows that with 5 pages per minute printing, the
+    <p>The preceding output shows that with 5 pages per minute printing, the
                 average waiting time varied from a low of 4 seconds to a high of 226
                 seconds (about 3.75 minutes). With a faster printing rate, the low value
                 was 6 seconds with a high of only 40. In addition, in 4 out of 10 runs at

@@ -185,9 +185,9 @@ Is 300 in the list? false
     <caption>Searching an Ordered Linked List</caption>
     <image source="BasicDS/Figures/orderedsearch.png" width="50%"/>
   </figure>
-  <p><xref ref="basic-ds_lst-ordersearch"/> shows the complete <c>search</c> method. It is
-            easy to incorporate the new condition discussed above by adding another check (line 6).
-            We can continue to look forward in the list (line 3). If any node is ever discovered that
+  <p><xref ref="basic-ds_lst-ordersearch"/> shows the complete <c>search</c> method. We can
+            incorporate the new condition discussed above by adding another check (line 6).
+            We continue to look forward in the list (line 3). If any node is ever discovered that
             contains data greater than the item we are looking for, we will immediately return <c>false</c>.
             The remaining lines are identical to
             the unordered list search.</p>
@@ -295,7 +295,7 @@ public class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedL
     <p>You may also have noticed that the performance of this implementation
                 differs from the actual performance given earlier for ArrayLists. This
                 suggests that linked lists are not the way ArrayLists are implemented.
-                The actual implementation of a ArrayList is based on the notion of an array.
+                The actual implementation of an ArrayList is based on the notion of an array.
                 We discuss this in more detail in the last chapter.</p>
   </subsection>
 </section>

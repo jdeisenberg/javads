@@ -305,7 +305,7 @@
                 dictionary will map each operator to an integer that can be compared
                 against the precedence levels of other operators (we have arbitrarily
                 used the integers 3, 2, and 1). The left parenthesis will receive the
-                lowest value possible. This way any operator that is compared against it
+                lowest value possible. This way, any operator that is compared against it
                 will have higher precedence and will be placed on top of it.
                 Lines 17&#x2013;18 define the operands to be any upper-case character or digit.  Line 19
                 defines the valid operators</p>
@@ -390,7 +390,7 @@ public class ConvertToPostfix {
     </program>
   </listing>
 
-  <p>Some notes on the program: We want only one copy of the precedence HashMap, created in line 6. There's no way to declare and initialize a HashMap in one statement, so we need a method to do that (lines 8&#x2013;14).</p>
+  <p>Some notes on the program: We want only one copy of the precedence HashMap, created in line 6, which is why it is <c>static</c>. There's no trivial way to declare and initialize a HashMap in one statement, so we use a method to do that (lines 8&#x2013;14).</p>
   <p>The code uses a compound condition in lines 42&#x2013;44 to determine the condition for continuing the loop.</p>
 
   </subsection>

@@ -2,7 +2,7 @@
 <section xml:id="basic-ds_the-stack-abstract-data-type">
   <title>The Stack Abstract Data Type</title>
   <p>The stack abstract data type is defined by the following structure and
-            operations. A stack is structured, as described above, as an ordered
+    operations. A stack is structured, as described in <xref ref="basic-ds_stacks"/>, as an ordered
             collection of items where items are added to and removed from the end
             called the <em>top</em>. Stacks are ordered LIFO. The stack operations are
             given below.</p>

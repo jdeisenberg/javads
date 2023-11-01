@@ -37,8 +37,9 @@ public class BinaryTree&lt;T&gt; {
 
         </input></program></listing>
   <p>Notice that in <xref ref="trees_lst-nar"/>, the constructor expects to
-            get some kind of object to store in the root. Here, we will use generics so that
-            our trees are not restricted to holding values of a particular type. For our early examples, we will store the name
+            get some kind of object to store in the root. We will use generics so that
+            our trees are not restricted to holding values of only one particular type.
+            For our early examples, we will store the name
             of the node as the root value. Using nodes and references to represent
             the tree in <xref ref="i14_id1fig-treerec"/>, we would create six instances of the
             <c>BinaryTree</c> class.</p>

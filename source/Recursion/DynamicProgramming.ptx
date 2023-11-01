@@ -58,9 +58,9 @@ min
             recursive calls for each different coin value less than the amount of
             change we are trying to make. Line&#xA0;10 shows how we filter the
             list of coins to those less than the current value of change using a
-            list comprehension. The recursive call also reduces the total amount of
+            <c>while</c> loop. The recursive call also reduces the total amount of
             change we need to make by the value of the coin selected. The recursive
-            call is made in line&#xA0;11. Notice that on that same line we add 1
+            call is made in line&#xA0;13. Notice that on that same line we add 1
             to our number of coins to account for the fact that we are using a coin.
             Just adding 1 is the same as if we had made a recursive call asking
             where we satisfy the base case condition immediately.</p>

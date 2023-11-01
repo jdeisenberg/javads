@@ -16,7 +16,7 @@
     <title>Primitive Data Types</title>
     <p>We will begin our review by considering the <term>primitive</term> data types. Java
                 has two main built-in numeric data types that implement integers and
-                floating-point values. These Python classes are called <c>int</c> and
+                floating-point values. These Java types are called <c>int</c> and
                 <c>double</c>. The standard arithmetic operators, +, -, *, and / can be used with parentheses forcing the order of
                 operations away from normal operator precedence. Another very useful
                 operator is the remainder (modulo) operator (%).

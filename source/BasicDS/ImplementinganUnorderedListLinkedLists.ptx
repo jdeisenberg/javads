@@ -306,7 +306,7 @@ System.out.println(found); // prints true
     <p>The <c>remove</c> method requires two logical steps. First, we need to
                 traverse the list looking for the item we want to remove. Once we find
                 the item, we must remove it. If the item is not in the list, our method
-                should raise a <c>ValueError</c>.</p>
+                should throw a <c>NoSuchElementException</c>.</p>
     <p>The first step is very similar to <c>search</c>. Starting with an external
                 reference set to the head of the list, we traverse the links until we
                 discover the item we are looking for.</p>
@@ -339,7 +339,8 @@ System.out.println(found); // prints true
                 <xref ref="fig-removeinit"/>).</p>
     <p>In line 5 we decide whether to continue the loop or not. We continue if it we haven't reached the end of the list (the first condition) and the item at the current location isn't the one we're looking for (the second condition). If we
                 do not find the item, <c>previous</c> and <c>current</c> must both be moved
-                one node ahead. Again, the order of these two statements is crucial.
+                one node ahead.</p>
+        <p>Again, the order of these two statements is crucial.
                 <c>previous</c> must first be moved one node ahead to the location of
                 <c>current</c>. At that point, <c>current</c> can be moved. This process is
                 often referred to as <em>inchworming</em>, as <c>previous</c> must catch up to
@@ -404,7 +405,8 @@ System.out.println(found); // prints true
                 value <c>null</c> when the loop breaks. In that case,
                 the head of the list is modified to refer to the node after
                 the current node (line 15), in effect removing the first node from the linked
-                list. However, if <c>previous</c> is not <c>null</c>, the node to be removed is
+                list.</p>
+            <p>However, if <c>previous</c> is not <c>null</c>, the node to be removed is
                 somewhere down the linked list structure. In this case the <c>previous</c>
                 reference is providing us with the node whose next reference must be
                 changed. Line 17 modifies the <c>next</c> property of the <c>previous</c> to
@@ -418,7 +420,8 @@ System.out.println(found); // prints true
                 <title>Java Note</title>
                 <p>Line 5 of <c>remove</c> deserves a closer look:</p>
                 <pre>while (current != null &amp;&amp; (!current.getData().equals(item))) {</pre>
-                <p>We want to keep looping as long as we haven't hit the end of the list and haven't found the item we want to delete. But what if <c>current</c> <em>is</em> <c>null</c>? Why doesn't the <c>getData()</c> call fail? The answer is <term>short-circuit evaluation</term>. When Java evaluates boolean expressions, it works from left to right. As soon as a final result can be determined, Java stops.  When <c>current != null</c> is <c>true</c>, Java has to evaluate the second condition to determine the result. But when <c>current</c> is <c>null</c>, the first condition returns <c>false</c>. That means that, no matter what the second condition is, the result has to be <c>false</c> (it can only be true when <em>both</em> conditions are true). Java doesn't need to look at the second condition, and immediately yields <c>false</c> for the expression. The <c>getData</c> call never happens.</p>
+                <p>We want to keep looping as long as we haven't hit the end of the list and haven't found the item we want to delete. But what if <c>current</c> <em>is</em> <c>null</c>? Why doesn't the <c>getData()</c> call fail? The answer is <term>short-circuit evaluation</term>. When Java evaluates boolean expressions, it works from left to right. As soon as a final result can be determined, Java stops.</p>
+                <p>When <c>current != null</c> is <c>true</c>, Java has to evaluate the second condition to determine the result. But when <c>current</c> is <c>null</c>, the first condition returns <c>false</c>. That means that, no matter what the second condition is, the result has to be <c>false</c> (it can only be true when <em>both</em> conditions are true). Java doesn't need to look at the second condition, and immediately yields <c>false</c> for the expression. The <c>getData</c> call never happens.</p>
 
                 <p>In line 10, we wrote the <term>fully qualified name</term> <c>java.util.NoSuchElementException</c>. When a name is fully qualified, you don't need the <c>import</c> statement at the start of the file.</p>
             </note>

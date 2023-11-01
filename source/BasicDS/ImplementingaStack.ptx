@@ -5,7 +5,7 @@
             will turn our attention to using Java to implement the stack. Recall
             that when we give an abstract data type a physical implementation, we
             refer to the implementation as a <em>data structure</em>.</p>
-  <p>As we described in Chapter 1, in Java, as in any object-oriented
+  <p>As we described in <xref ref="introduction_object-oriented-programming-in-java-defining-classes"/>, in Java, as in any object-oriented
             programming language, the implementation of choice for an abstract data
             type such as a stack is the creation of a new class. The stack
             operations are implemented as methods. Further, to implement a stack,

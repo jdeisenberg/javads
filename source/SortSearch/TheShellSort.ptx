@@ -47,13 +47,13 @@
   </figure>
 
   <p>We said earlier that the way in which the increments are chosen is the
-            unique feature of the Shell sort. The function shown in <xref ref="lst-shell"/>
+            unique feature of the Shell sort. The method shown in <xref ref="lst-shell"/>
             uses a different set of increments. In this case, we begin with
             <m>\frac {n}{2}</m> sublists. On the next pass,
             <m>\frac {n}{4}</m> sublists are sorted. Eventually, a single list is
             sorted with the basic insertion sort. <xref ref="fig-incrementsd"/> shows the
             first sublists for our example using this increment.</p>
-  <p>The following invocation of the <c>shell_sort</c> function shows the
+  <p>The following invocation of the <c>shellSort</c> method shows the
             partially sorted lists after each increment, with the final sort being
             an insertion sort with an increment of one.</p>
 <listing xml:id="lst-shell">
@@ -64,7 +64,7 @@ import java.util.Arrays;
 
 public class ShellSortExample {
 
-    public static void insertionSort(int[] list) {
+    public static void shellSort(int[] list) {
         int sublistCount = list.length / 2;
         while (sublistCount &gt; 0) {
             for (int startPos = 0; startPos &lt; sublistCount; startPos++) {
@@ -91,7 +91,7 @@ public class ShellSortExample {
     public static void main(String[] args) {
         int[] testList = {54, 26, 93, 17, 77, 31, 44, 55, 20};
         System.out.println("Start point:  " + Arrays.toString(testList));
-        insertionSort(testList);
+        shellSort(testList);
         System.out.println("Final result: " + Arrays.toString(testList));
     }
 }
