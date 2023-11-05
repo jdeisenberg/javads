@@ -74,10 +74,10 @@
             <m>T(n)</m> function, we must see how they compare with one another
             as <em>n</em> gets large.</p>
   <table xml:id="algorithm-analysis_tbl-fntable">
-    <tabular>
       <title>
-        Table 1: Common Functions for Big O
+        Common Functions for Big O
       </title>
+    <tabular>
       <row header="yes">
         <cell>f(n)</cell>
         <cell>Name</cell>

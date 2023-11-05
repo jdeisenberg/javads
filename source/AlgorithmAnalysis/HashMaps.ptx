@@ -16,10 +16,10 @@
             get into that in Chapter 8 when we talk about the different ways
             that a dictionary could be implemented.</p>
   <table xml:id="algorithm-analysis_tbl-hashmapbigo">
-    <tabular>
       <title>
-        Table 3: Big O Efficiency of Java Dictionary Operations
+        Big O Efficiency of Java HashMap Operations
       </title>
+    <tabular>
       <row header="yes">
         <cell>Operation</cell>
         <cell>Big O Efficiency</cell>

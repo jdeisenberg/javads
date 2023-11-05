@@ -53,6 +53,7 @@ Your age in days is approximately 9855.</output>
 <p>The <c>Scanner</c> class reads <term>tokens</term> from the input; it skips over any leading white space (blanks, tabs, and newlines), and reads up to, but not including, the next blank, tab, or newline.)  Here are other <c>Scanner</c> methods:</p>
 
     <table>
+      <title><c>Scanner</c> Methods</title>
       <tabular>
         <col width="25%"/>
         <col width="75%"/>
@@ -159,10 +160,10 @@ You are about 10585 days old, Kim.
                 <c>e</c>, <c>g</c>, <c>c</c>, or <c>%</c>. <xref ref="introduction_tab-fmta"/> summarizes all of the
                 various type specifications.</p>
     <table xml:id="introduction_tab-fmta" label="introduction_tab-fmta">
-      <tabular>
         <title>
           String Formatting Conversion Characters
         </title>
+      <tabular>
         <row header="yes">
           <cell>Character</cell>
           <cell>Output Format</cell>
@@ -214,10 +215,10 @@ You are about 10585 days old, Kim.
                 modifier between the <c>%</c> and the format character. Format modifiers can be used to specify the field width along with a number of digits after the decimal point. <xref ref="introduction_tab-fmtaddsa"/>
                 explains these format modifiers.</p>
     <table xml:id="introduction_tab-fmtaddsa">
-      <tabular>
         <title>
-          Table 10: Additional formatting options
+          Additional formatting options
         </title>
+      <tabular>
         <row header="yes">
           <cell>Modifier</cell>
           <cell>Example</cell>

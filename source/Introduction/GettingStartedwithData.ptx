@@ -50,10 +50,10 @@ Math.pow(2, 100) // 1.2676506002282294E30
     <p>Boolean values are also used as results for comparison operators such as equality (==) and greater than (<m>&gt;</m>). In addition, relational operators and logical operators can be combined together to form complex logical expressions. <xref ref="introduction_tab-relational"/> shows the relational and logical operators.</p>
 
     <table xml:id="introduction_tab-relational">
-      <tabular>
-        <title>
-          Table 1: Relational and Logical Operators
+      <title>
+          Relational and Logical Operators
         </title>
+      <tabular>
         <row header="yes">
           <cell>Operation Name</cell>
           <cell>Operator</cell>
@@ -200,10 +200,10 @@ word4 ==> "eyesight 2020"</pre>
 
     <p>Some of the methods available for Strings are shown in <xref ref="introduction_tab-stringmethods"/>.</p>
     <table xml:id="introduction_tab-stringmethods">
-      <tabular>
         <title>
-          Table 4: Methods Provided by the Java String Class
+          Methods Provided by the Java String Class
         </title>
+      <tabular>
         <row header="yes">
           <cell>Method Name</cell>
           <cell>Use</cell>
