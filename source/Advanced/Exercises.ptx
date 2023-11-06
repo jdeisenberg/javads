@@ -45,7 +45,7 @@
         <p>
           <ul>
             <li>
-              <p><c>__delitem__</c>: Delete the item at the given index from the list.</p>
+              <p><c>remove</c>: Delete the item at the given index from the list.</p>
             </li>
             <li>
               <p><c>pop</c>: Implement the pop method with and without a positional
@@ -56,9 +56,6 @@
                             its position in the list if it is found and -1 if the item is not
                             present.</p>
             </li>
-            <li>
-              <p><c>__iter__</c>: Make the <c>ArrayList</c> iterable.</p>
-            </li>
           </ul>
         </p>
       </exercise>
@@ -66,11 +63,6 @@
       <exercise>
         <p>Modify <c>encrypt</c> method of the Caesar cipher (<xref ref="lst_enc"/>)
                     to accept a parameter that specifies the encryption key.</p>
-      </exercise>
-
-      <exercise>
-        <p>The Python list supports both concatenation and repetition. Add
-                    support for the <c>+</c> and <c>*</c> operators to the <c>ArrayList</c>.</p>
       </exercise>
 
       <exercise>
@@ -84,7 +76,7 @@
         <p>
           <ul>
             <li>
-              <p><c>__contains__()</c> will return a boolean result as to whether a
+              <p><c>contains()</c> will return a boolean result as to whether a
                             key is present in the map.</p>
             </li>
             <li>
@@ -98,7 +90,7 @@
       </exercise>
 
       <exercise>
-        <p>Implement the <c>__getitem__()</c> and the <c>__setitem__()</c> methods for a skip
+        <p>Implement the <c>getItem()</c> and the <c>setItem()</c> methods for a skip
                     list.</p>
       </exercise>
 
@@ -129,7 +121,7 @@
       <exercise>
         <p>Modify the graph implementation from <xref ref="chapter-graphs"/>
                     so that it can be used to represent KMP graphs. Using the
-                    <c>mismatched_links</c> method, write a method that will take a pattern
+                    <c>mismatchedLinks</c> method, write a method that will take a pattern
                     and create the complete KMP graph. With the graph complete, write a
                     program that will run an arbitrary text against the KMP graph and
                     return whether a match exists.</p>

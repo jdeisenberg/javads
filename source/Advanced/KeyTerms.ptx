@@ -13,10 +13,10 @@
       </row>
       <row>
         <cell>DFA graph</cell>
-        <cell>pixel</cell>
+        <cell>pixels</cell>
       </row>
       <row>
-        <cell>dictionary</cell>
+        <cell>dictionaries</cell>
         <cell>public key encryption</cell>
       </row>
       <row>
@@ -33,12 +33,12 @@
       </row>
       <row>
         <cell>Knuth-Morris-Pratt (KMP)</cell>
-        <cell>substring</cell>
+        <cell>substrings</cell>
       </row>
       <row>
         <cell>level</cell>
-        <cell>tower</cell>
+        <cell>towers</cell>
       </row>
-    </tabular>
+      </tabular>
   </table>
 </section>

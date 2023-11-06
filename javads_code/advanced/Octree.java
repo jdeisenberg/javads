@@ -117,7 +117,7 @@ public class Octree {
                 } else {
                     System.err.printf(
                         "No leaf node to represent RGB(%d, %d, %d)%n",
-                        r, g, b);
+                            r, g, b);
                     return null;
                 }
             } else {

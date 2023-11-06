@@ -9,16 +9,16 @@
             perform some type of search that can identify at least the first
             occurrence of the pattern.
             We can also consider an extension of this problem to find all such occurrences.</p>
-  <p>Python includes a built-in substring method called <c>find</c> that returns
+  <p>Java includes a built-in substring method called <c>indexOf</c> that returns
             the location of the first occurrence of a pattern in a given string. For
             example,</p>
-  <pre>&gt;&gt;&gt; "ccabababcab".find("ab")
-2
-&gt;&gt;&gt; "ccabababcab".find("xyz")
--1
-&gt;&gt;&gt;</pre>
+  <pre>jshell&gt; "ccabababcab".indexOf("ab");
+$1 ==&gt; 2
+
+jshell&gt; "ccabababcab".indexOf("xyz");
+$2 ==&gt; -1</pre>
   <p>shows that the substring <c>"ab"</c> occurs for the first time starting at
-            index position <c>2</c> in the string <c>"ccabababcab"</c>. <c>find</c> also returns
+            index position <c>2</c> in the string <c>"ccabababcab"</c>. <c>indexOf</c> also returns
             a <c>-1</c> if the pattern does not occur.</p>
         </introduction>
   <subsection xml:id="advanced_biological-strings">
@@ -65,27 +65,42 @@
     <p>In this example, we have found a match on the sixth attempt, starting at
                 position 5. The shaded characters denote the partial matches that
                 occurred as we moved the pattern. <xref ref="lst_simplematcher"/>
-                shows the Python
+                shows the Java
                 implementation for this method. It takes the pattern and the text as
                 parameters. If there is a pattern match, it returns the position of the
                 starting text character. Otherwise, it returns <c>-1</c> to signal that the
                 search failed.</p>
               <listing xml:id="lst_simplematcher">
-    <pre>def simple_matcher(pattern, text):
-   i = j = 0
+                <caption>Simple Match</caption>
+                <program language="java">
+                  <input>
+public static int simpleMatcher(String pattern, String text) {
+    int i = 0;
+    int j = 0;
+    int result = -1;
 
-   while True:
-      if text[i] == pattern[j]:
-            j = j + 1
-      else:
-            j = 0
-      i = i + 1
+    while (i &lt; text.length() &amp;&amp; j &lt; pattern.length()) {
+        if (text.charAt(i) == pattern.charAt(j)) {
+            j++;
+        } else {
+            j = 0;
+        }
+        i++;
+    }
+    if (j == pattern.length()) {
+        System.out.println("Hit end of pattern");
+        result = i - j;
+    }
+    else if (i == text.length()) {
+        System.out.println("Hit end of text");
+        result = -1;
+    }
+    return result;
+}
+                  </input>
+                </program>
+              </listing>
 
-      if i == len(text):
-            return -1
-      if j == len(pattern):
-            return i - j</pre>
-        </listing>
     <p>The variables <c>i</c> and <c>j</c> serve as indices into the text and pattern
                 respectively. The loop repeats until either the text or the pattern
                 ends.</p>
@@ -94,15 +109,13 @@
                 pattern character. If the match occurs, pattern index is incremented. If
                 the match fails, we reset the pattern back to its beginning
                 (<c>j = 0</c>).
-                In both cases we move to the next position in the text. At every
-                iteration of the loop, we check if there is more text to process
-                (<c>i == len(text)</c>)
-                and return -1 if not.
-                The code then checks (<c>j == len(pattern)</c>)
-                to see if every character in the pattern has been processed. If
-                so, a match has been found and we return its starting index.</p>
+              </p>
+
+              <p>When the loop exits, we check if we hit the end of the pattern.
+                If so, a match has been found and we return its starting index, which is the text index minus the pattern length.</p>
+              <p>Otherwise, we hit the end of the string before reaching the end of the pattern, and the pattern is not in the string. We return -1.</p>
     <p>If we assume that the length of the text is <m>n</m> characters and the
-                length of the pattern is <m>m</m> characters, then it is easy to see
+                length of the pattern is <m>m</m> characters, then we can see
                 that the complexity of this approach is <m>O(nm)</m>. For each of the
                 <m>n</m> characters we may have to compare against almost all <m>m</m>
                 of the pattern characters. This is not so bad if the size of <m>n</m>
@@ -239,23 +252,37 @@
                 note that new text characters are not processed when a mismatched link is
                 used.</p>
               <listing xml:id="lst_mismatchedlinks">
-    <pre>def mismatched_links(pattern):
-    aug_pattern = "0" + pattern
-    links = {1: 0}
-    for k in range(2, len(aug_pattern)):
-        s = links[k - 1]
-        while s &gt;= 1:
-            if aug_pattern[s] == aug_pattern[k - 1]:
-                break
-            else:
-                s = links[s]
-        links[k] = s + 1
-        return links</pre></listing>
+                <caption>The <c>mismatchedLinks</c> Method</caption>
+                <program language="java">
+                  <input>
+public class MismatchedLinks {
+    public static HashMap&lt;Integer, Integer&gt; mismatchedLinks(String pattern) {
+        String aug_pattern = "0" + pattern;
+        HashMap&lt;Integer, Integer&gt; links = new HashMap&lt;&gt;();
+        links.put(1, 0);
+        for (int k = 2; k &lt; aug_pattern.length(); k++) {
+            int s = links.get(k - 1);
+            while (s &gt;= 1 &amp;&amp; aug_pattern.charAt(s) != aug_pattern.charAt(k - 1)) {
+                if (aug_pattern.charAt(s) != aug_pattern.charAt(k - 1)) {
+                    s = links.get(s);
+                }
+            }
+            links.put(k, s + 1);
+        }
+        return links;
+    }
+
+    public static void main(String[] args) {
+        HashMap&lt;Integer, Integer&gt; result = mismatchedLinks("ACATA");
+        System.out.println(result);
+    }
+}                  </input>
+                </program>
+              </listing>
+
     <p>Here is the example pattern as it is being processed by the
-                <c>mismatched_links</c> method:</p>
-    <pre>&gt;&gt;&gt; mismatched_links("ACATA")
-{1: 0, 2: 1, 3: 1, 4: 2, 5: 1}
-&gt;&gt;&gt;</pre>
+                <c>mismatchedLinks</c> method:</p>
+    <pre>{1=0, 2=1, 3=1, 4=2, 5=1}</pre>
     <p>The value returned by the method is a dictionary containing key-value
                 pairs where the key is the current vertex (state) and the value is its
                 destination vertex for the mismatched link. It can be seen that each
@@ -268,7 +295,7 @@
                 state is state 0, we have used the <c>'0'</c> symbol as a placeholder. Now the
                 characters 1 to <m>m</m> in the augmented pattern correspond directly
                 with the states 1 to <m>m</m> in the graph.</p>
-              <p>The line <c>links = {1: 0}</c>
+              <p>The line <c>links.put(1, 0);</c>
                 creates the first dictionary entry, which is always a transition from
                 vertex 1 back to the initial state where a new character is
                 automatically read from the text string. The iteration that follows

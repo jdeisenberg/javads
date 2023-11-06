@@ -6,10 +6,8 @@
   <xi:include href="./RecursionRevisited.ptx"/>
   <xi:include href="./DictionariesRevisited.ptx"/>
   <xi:include href="./TreesRevisited.ptx"/>
-  <!--
   <xi:include href="./GraphsRevisited.ptx"/>
   <xi:include href="./Summary.ptx"/>
   <xi:include href="./KeyTerms.ptx"/>
   <xi:include href="./Exercises.ptx"/>
-  -->
 </chapter>
