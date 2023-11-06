@@ -163,8 +163,8 @@ public class SimpleQuantize {
 
 <p>The <c>main</c> method prompts you for file names until you press ENTER without giving a file name. Line 36 creates a new <c>ImageComponent</c>, given a file name. This is a class we have also written. It is listed in <xref ref="lst_image-component"/> for your reference:</p>
 <listing xml:id="lst_image-component">
-  <caption>The ImageComponent Class</caption>
-  <program language="java">
+  <caption>The <c>ImageComponent</c> Class</caption>
+  <program language="java" line-numbers="yes">
     <input>
 import java.awt.Graphics;
 import java.awt.Dimension;
@@ -385,7 +385,7 @@ class ImageComponent extends JComponent {
 </program>
 </listing>
 
-    <p>The <c>octreeQuant</c> function method the basic process just described.
+    <p>The <c>octreeQuant</c> method implements the basic process just described.
       First, the loops in lines&#xA0;6&#x2013;14 <xref ref="lst_octreeQuant"/>
                 read each pixel and add it to the octree.
                 Second, the
@@ -396,7 +396,7 @@ class ImageComponent extends JComponent {
 
               <listing xml:id="lst_octreedef">
                 <caption>The <c>Octree</c> Class</caption>
-                <program language="java">
+                <program language="java" line-numbers="yes">
                   <input>
 import java.util.ArrayList;
 
@@ -479,7 +479,7 @@ public class Octree {
               <p>The <c>reduce</c> method is defined on line&#xa0;31 of <xref ref="lst_octreedef"/>. This method loops
                 until the number of leaves in the leaf list is less than the total
                 number of colors we want to have in the final image (defined by the
-                parameter <c>maxCubes</c>). <c>reduce</c> makes use of a helper function
+                parameter <c>maxCubes</c>). <c>reduce</c> makes use of a helper method
                 <c>findMinCube</c> to find the node in the octree with the smallest
                 reference count. Once the node with the smallest reference count is
                 found, that node is merged into a single node with all of its siblings
@@ -510,13 +510,13 @@ public class Octree {
                 of the node simply indicates its depth in the tree. The most interesting
                 of these three parameters is the <c>outer</c> parameter, which is a
                 reference to the instance of the <c>octree</c> class that created this
-                node. <c>outer</c> will function like <c>self</c> in that it will allow the
+                node. <c>outer</c> will function like <c>this</c> in that it will allow the
                 instances of <c>OTNode</c> to access attributes of an instance of
                 <c>Octree</c>.</p>
     <p>The other attributes that we want to remember about each node in an
                 <c>octree</c> include the reference <c>count</c> and the red, green, and blue
                 components of the color represented by this tree. As you will note in
-                the <c>insert</c> function, only a leaf node of the tree will have values
+                the <c>insert</c> method, only a leaf node of the tree will have values
                 for <c>red</c>, <c>green</c>, <c>blue</c>, and <c>count</c>. Also note that since
                 each node can have up to eight children we initialize a list of eight
                 references to keep track of them all. Rather than a left and right child
@@ -755,7 +755,7 @@ public int[] find(int r, int g, int b, int level) {
                 process by which different colors are placed near each other so that
                 the eye blends the colors together, forming a more realistic image. This
                 is an old trick used by newspapers for doing color printing using just
-                black plus three different colors of ink. Again you can research
+                black plus three different colors of ink. Again, you can research
                 dithering and try to apply it to some images on your own.</p>
   </subsection>
 </section>
