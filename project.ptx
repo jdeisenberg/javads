@@ -26,6 +26,12 @@
       <publication>publication/publication.ptx</publication>
       <output-dir>output/print-latex</output-dir>
     </target>
+	<target name="runestone">
+      <format>html</format>
+      <source>source/main.ptx</source>
+      <publication>publication/publication-academy.ptx</publication>
+      <output-dir>published/javads</output-dir>
+    </target>
     <target name="subset">
       <!-- Usage: to build starting at XMLID, -->
       <!-- pretext build subset -x XMLID      -->
