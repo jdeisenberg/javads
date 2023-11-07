@@ -73,7 +73,7 @@ public class Fraction {
         </input>
       </program>
     </listing>
-    <p>In line 5, you see that we have named the constructor parameters the same as the properties. That is why, on lines 6 and 7, , we use the keyword <c>this</c> to <term>qualify</term> the variables on the left hand side of the assignment. You can think of <c>this</c> as meaning <q>the object currently under consideration</q>.  Thus, <c>this.numerator&#160;=&#160;numerator;</c> means <q>assign the <c>numerator</c> parameter to the <c>numerator</c> property of the object currently being constructed</q>.</p>
+    <p>In line 5, you see that we have named the constructor parameters the same as the properties. That is why, on lines&#xa0;6&#xa0;and&#xa0;7, we use the keyword <c>this</c> to <term>qualify</term> the variables on the left hand side of the assignment. You can think of <c>this</c> as meaning <q>the object currently under consideration</q>.  Thus, <c>this.numerator&#160;=&#160;numerator;</c> means <q>assign the <c>numerator</c> parameter to the <c>numerator</c> property of the object currently being constructed</q>.</p>
     </p>
     <p>To create an instance of the <c>Fraction</c> class, we must invoke the
       constructor. This happens by using the <c>new</c> operator with the name of the class and passing
@@ -165,11 +165,11 @@ public Fraction add(Fraction other) {
       Let's add this code to our <c>main()</c> method to test addition:
     </p>
 
-    <pre>Fraction f1 = new Fraction(1, 4);
+    <program language="java">Fraction f1 = new Fraction(1, 4);
 Fraction f2 = new Fraction(1, 2);
 Fraction f3 = f1.add(f2);
 System.out.println(f3);
-</pre>
+</program>
 
 <p>On the third line, the call <c>f1.add(f2)</c> will use <c>f1</c> as <c>this</c> (the object we are currently working with), and <c>f2</c> will be the value for the formal parameter <c>other</c>.</p>
 

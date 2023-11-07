@@ -281,6 +281,8 @@ Key Dhaka has value 8,906,039.
 Key Luanda has value 2,165,867.
 </output></console>
 
+<p>(You will learn more about the <c>String.format</c> method in <xref ref="introduction_string-formatting"/>.)</p>
+
 <p>Here are the commonly-used <c>HashMap</c> methods:</p>
 
 <table xml:id="table-hashmap-methods" label="table-hashmap-methods">

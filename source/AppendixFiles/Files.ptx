@@ -293,7 +293,7 @@ Just like <c>System.out</c>, the <c>PrintWriter</c> object <c>output</c> we have
     <ol>
         <li>
             <p>
-    When you open a <c>PrintWriter</c> to a <c>File</c> that does not exist, it will be created for you. If you open a <c>PrintWriter</c> to a <c>File</c> that <em>does</em> exist, {\bf the existing file will be deleted and re-created}. Any information that was in the file will be gone, even if you never write anything to the <c>PrintWriter</c>.
+                When you open a <c>PrintWriter</c> to a <c>File</c> that does not exist, it will be created for you. If you open a <c>PrintWriter</c> to a <c>File</c> that already exists, <em>the existing file will be deleted and re-created</em>. Any information that was in the file will be gone, even if you never write anything to the <c>PrintWriter</c>.
 </p>
 
 <p>

@@ -114,7 +114,7 @@ Your new price is $12.011125.</output>
 </console>
 
 <aside>
-<p>Line 6 introduces the <c>final</c> keyword, used to declare values that are constant. Once initialized, a <c>final</c> variable's value cannot be change. By convention, names of <c>final</c> variables are all upper case, with underscores used to separate words.</p>
+<p>Line 6 introduces the <c>final</c> keyword, used to declare values that are constant. Once initialized, a <c>final</c> variable's value cannot be changed. By convention, names of <c>final</c> variables are all upper case, with underscores used to separate words.</p>
 </aside>
 
 <p>It is often useful to have more control over the look of your output. Fortunately, Java provides us with an alternative called <term>formatted printing</term>. The <c>System.out.format()</c> method as its first argument a <term>format string</term><mdash/> a template in which words or spaces that will remain constant are combined with placeholders for variables that will be inserted into the string. Let's expand on our <q>age in days</q> program to ask the user's name:</p>

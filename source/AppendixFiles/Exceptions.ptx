@@ -403,7 +403,7 @@ public static void example(int n) throws IllegalArgumentException,
 </p>
 
 <p>
-    For many operations that could throw an unchecked exception, you are better off using an <c>if</c> statement to avoid the error in the first place. You can, for example, use an <c>if</c> to check if an index is within array bounds, a divisor is non-zero, or if the user has actually entered data that can be converted to integer. This also gives you greater control over the program flow and structure. See, for example, the {\it NormalErrorChecking.java} file in the code repository.
+    For many operations that could throw an unchecked exception, you are better off using an <c>if</c> statement to avoid the error in the first place. You can, for example, use an <c>if</c> to check if an index is within array bounds, a divisor is non-zero, or if the user has actually entered data that can be converted to integer. This also gives you greater control over the program flow and structure. See, for example, the <em>NormalErrorChecking.java</em> file in the code repository.
 </p>
 
 <p>

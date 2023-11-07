@@ -4,7 +4,7 @@
 
 <introduction>
 <p>
-Two important concepts in object-oriented programming are <em>composition</em> and <em>inheritance</em>. In <em>Think Java, 2nd Edition</em>, you have seen composition in Chapter 13 and inheritance in Chapter 14, but mostly by example. We're going to go into more detail on both of these concepts here.
+Two important concepts in object-oriented programming are <em>composition</em> and <em>inheritance</em>. Let's examine them in detail.
 </p>
 </introduction>
 

@@ -187,7 +187,7 @@ for (double item: data) {
     </exercise>
 
     <exercise>
-        <p>Write a Java program that takes an array of integers and produces the sum of the odd-indexed numbers and the sum of the even-indexed numbers. For example, in this array: {4, 2, 8, 5, 9}, the even-numbered index elements are 4, 8, and 89, which add up to 21. The odd-numbered index elements are 2 and 5, which sum to 7. Your program must work with any array, not just this example array. Try to do it with only one loop (hint: <c>if</c> is your friend).</p>
+        <p>Write a Java program that takes an array of integers and produces the sum of the odd-indexed numbers and the sum of the even-indexed numbers. For example, in this array: {4, 2, 8, 5, 9}, the even-numbered index elements are 4, 8, and 9, which add up to 21. The odd-numbered index elements are 2 and 5, which sum to 7. Your program must work with any array, not just this example array. Try to do it with only one loop (hint: <c>if</c> is your friend).</p>
     </exercise>
   </exercises>
 </section>
