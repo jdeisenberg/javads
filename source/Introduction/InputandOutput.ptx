@@ -257,8 +257,8 @@ You are about 10585 days old, Kim.
 
     <listing xml:id="io_format-examples">
       <caption>Examples of Formatted Output</caption>
-      <program language="java" line-numbers="yes"><input>
-class FormatExamples {
+      <program interactive="activecode" language="java" line-numbers="yes"><input>
+public class FormatExamples {
 
     public static void main(String[] args) {
         String word = "Java";

@@ -11,9 +11,9 @@
 
   <p>Here's the minimal prototypical Java program:</p>
 
-<program language="java" line-numbers="yes">
+<program interactive="activecode" language="java" line-numbers="yes">
 <input>
-class ExampleProgram {
+public class ExampleProgram {
 
     public static void main(String[] args) {
         System.out.println("Java works!");

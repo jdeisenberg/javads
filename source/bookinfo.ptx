@@ -27,7 +27,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
   <!-- the other option is "long" which will produce an -->
   <!-- entire front matter section with more headings   -->
   <author-biographies length="short"/>
-  <document-id edition="4">pswadsup</document-id>
+  <document-id edition="1">javads</document-id>
   <brandlogo url="https://runestone.academy"  visual="runestone.academy" source="cover.jpg"/>
   <!-- Prefix to enhance Sage notebook contents -->
   <initialism>DS</initialism>

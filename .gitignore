@@ -5,6 +5,9 @@
 # don't track unpublished builds
 output
 
+# don't track runestone's published folder
+published
+
 # don't track assets generated from source
 generated-assets
 
