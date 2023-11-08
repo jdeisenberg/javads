@@ -16,8 +16,7 @@
             large the list becomes. When an operation like this is independent of
             the size of the list, it is <m>O(1)</m>.</p>
   <p>Another very common programming task is to grow an ArrayList by using the <c>add</c> method, which
-    is <m>O(n)</m>, but in a very special way that we will examine in <xref ref="chapter-advanced-topics"/>
-    <em>update this to refer to <c>advanced_java-arraylists-revisited</c> when that section is rewritten</em>.
+    is <m>O(n)</m>, but in a very special way that we will examine in <xref ref="advanced_java-arraylists-revisited"/>.
   </p>
 
   <p>Here is a table of common ArrayList operations and their Big O efficiency:</p>
