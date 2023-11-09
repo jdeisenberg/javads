@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_infix-prefix-and-postfix-expressions">
+<section xml:id="basic-ds_infix-prefix-and-postfix-expressions" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Infix, Prefix, and Postfix Expressions</title>
   <introduction>
   <p>When you write an arithmetic expression such as B &#xB7; C, the form of the
@@ -311,11 +311,13 @@
                 defines the valid operators</p>
   <listing xml:id="lst-intopost">
     <caption>Converting Infix Expressions to Postfix Expressions</caption>
-<program label="prog-intopost" line-numbers="yes" language="java">
+<program label="prog-intopost" line-numbers="yes" language="java" interactive="activecode">
       <input>
 import java.util.HashMap;
 import java.util.ArrayList;
-
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Stack.java"/>
+^^^^
 public class ConvertToPostfix {
 
     static HashMap&lt;String, Integer&gt; precedence = new HashMap&lt;&gt;();
@@ -465,11 +467,13 @@ public class ConvertToPostfix {
                 operator and then perform the proper arithmetic operation.</p>
   <listing xml:id="lst-postfixeval">
     <caption>Postfix Evaluation</caption>
-<program label="prog-postfixeval"  xml:id="prog-postfixeval" language="java">
+<program label="prog-postfixeval"  xml:id="prog-postfixeval" language="java" interactive="activecode">
       <input>
 import java.util.HashMap;
 import java.util.ArrayList;
-
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Stack.java"/>
+^^^^
 public class PostfixEvaluator {
 
     public static Integer postfixEval(String postfixExpr) {

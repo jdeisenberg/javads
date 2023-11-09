@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_implementing-a-stack">
+<section xml:id="basic-ds_implementing-a-stack"
+   xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Implementing a Stack in Java</title>
   <p>Now that we have clearly defined the stack as an abstract data type, we
             will turn our attention to using Java to implement the stack. Recall
@@ -19,14 +20,15 @@
             the end of the list will hold the top element of the stack. As the stack
             grows (as <c>push</c> operations occur), new items will be added on the end
             of the list. <c>pop</c> operations will manipulate that same end.</p>
+
 <listing xml:id="lst-stackcode1">
   <caption>Implementing a Stack class using Java ArrayLists</caption>
-<program label="prog-stackcode1" language="java" line-numbers="yes">
+<program xml:id="prog-stackcode1" label="prog-stackcode1" language="java" line-numbers="yes">
     <input>
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class Stack&lt;T&gt; {
+class Stack&lt;T&gt; {
 
     /*
      * The top of the stack is at the end
@@ -108,13 +110,17 @@ public class Stack&lt;T&gt; {
   <p>Now we must write a program that creates a <c>Stack</c> object and then uses it.
             <xref ref="lst-stacktest"/> shows the <c>Stack</c> class in
             action as we perform the sequence of operations from
-            <xref ref="basic-ds_the-stack-abstract-data-type"/>.  We don't need to <c>import</c> the <c>Stack</c> class as long as its source file is in the same directory as our test program.</p>
-          <p><em>Do we want to have a github repository where people can download the <c>Stack</c> class?</em></p>
-
+            <xref ref="basic-ds_the-stack-abstract-data-type"/>.  We don't need to <c>import</c> the <c>Stack</c> class as long as its source file is in the same directory as our test program. (The interactive code in <xref ref="lst-stacktest"/> has been set up properly for this to work.)</p>
 <listing xml:id="lst-stacktest">
   <caption>Program to Test the Stack Class</caption>
-  <program xml:id="prog-stacktest" language="java">
+  <program xml:id="prog-stacktest" language="java" interactive="activecode">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include
+   parse="text"
+href="./Stack.java"/>
+^^^^
 public class StackTest {
 
     public static void main(String[] args) {
@@ -339,15 +345,17 @@ while (!m.isEmpty()) {
     </exercise>
     <p>Write a method named <c>reverseString</c> that takes a string as input and uses a stack to reverse the
                 characters in that string.</p>
-    <program xml:id="stack_stringrev" language="java">
+    <program xml:id="stack_stringrev" language="java" interactive="activecode"
+             include="prog-stackcode1">
       <input>
 public class StringReverser {
 
     public static String reverseString(String str) {
         // your code here; returns a String
+        return ""; // placeholder
     }
 
-    public void testEqual(String str1, String str2) {
+    public static void testEqual(String str1, String str2) {
         if (str1.equals(str2)) {
             System.out.printf("%s and %s are equal.%n", str1, str2);
         } else {
@@ -356,12 +364,12 @@ public class StringReverser {
     }
 
     public static void main(String[] args) {
-        testEqual(revString("apple"), "elppa");
-        testEqual(revString("x"), "x");
-        testEqual(revString("1234567890", "0987654321");
+        testEqual(reverseString("apple"), "elppa");
+        testEqual(reverseString("x"), "x");
+        testEqual(reverseString("1234567890"), "0987654321");
     }
 }
-        </input>
+      </input>
     </program>
   </exercises>
   <!--<video xml:id="stack1_video" youtube="fZtLSM7k_54" width="auto"/>-->

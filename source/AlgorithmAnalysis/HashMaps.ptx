@@ -68,7 +68,8 @@
   <p><xref ref="algorithm-analysis_lst-listvdict"/> implements this comparison. Notice that we are
             performing exactly the same operation, even though they have different names:
             <c>list.contains(number)</c> and <c>map.containsKey(number)</c>. </p>
-  <listing xml:id="algorithm-analysis_lst-listvdict"><program language="java">
+  <listing xml:id="algorithm-analysis_lst-listvdict">
+    <program language="java" interactive="activecode">
     <input>
 import java.util.ArrayList;
 import java.util.HashMap;

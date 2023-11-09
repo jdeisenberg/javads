@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_simple-balanced-parentheses">
+<section xml:id="basic-ds_simple-balanced-parentheses" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Basic Balanced Parentheses</title>
   <p>We now turn our attention to using stacks to solve real computer science
             problems. You have no doubt written arithmetic expressions such as</p>
@@ -64,8 +64,15 @@
             this algorithm is shown in <xref ref="lst-parcheck1"/>.</p>
 <listing xml:id="lst-parcheck1">
   <caption>Solving the Balanced Parentheses Problem</caption>
-<program label="lst-parcheck1" line-numbers="yes" language="java">
+<program label="lst-parcheck1" line-numbers="yes" language="java" interactive="activecode"
+         include="prog-stackcode1">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include
+   parse="text"
+href="./Stack.java"/>
+^^^^
 public class Parentheses {
     public static boolean parenCheck(String symbolString) {
         Stack&lt;Character&gt; symStack = new Stack&lt;&gt;();
@@ -96,6 +103,7 @@ public class Parentheses {
         System.out.println(parenCheck(")("));  // expected false
     }
 }
+
         </input>
   </program>
 </listing>

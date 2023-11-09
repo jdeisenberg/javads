@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_converting-decimal-numbers-to-binary-numbers">
+<section xml:id="basic-ds_converting-decimal-numbers-to-binary-numbers" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Converting Decimal Numbers to Binary Numbers</title>
   <p>In your study of computer science, you have probably been exposed in one way or another to the idea of a binary number. Binary representation is important in computer science since all values stored within a computer exist as a string of binary digits, a string of 0s and 1s. Without the ability to convert back and forth between common representations and binary numbers, we would need to interact with computers in very awkward ways.</p>
 
@@ -42,8 +42,12 @@
             right-hand end of the string. The binary string is then returned.</p>
 <listing xml:id="lst-binconverter">
   <caption>Converting from Decimal to Binary</caption>
-<program label="lst-binconverter" language="java" line-numbers="yes">
+<program label="lst-binconverter" language="java" line-numbers="yes" interactive="activecode">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Stack.java"/>
+^^^^
 public class DecimalToBinary {
     public static String divideBy2(int decimal) {
         Stack&lt;Integer&gt; digitStack = new Stack&lt;Integer&gt;();
@@ -92,8 +96,12 @@ public class DecimalToBinary {
 
 <listing xml:id="lst-baseconverter">
   <caption>Converting from Decimal to any Base</caption>
-<program label="prog-baseconverter" language="java" line-numbers="yes">
+<program label="prog-baseconverter" language="java" line-numbers="yes" interactive="activecode">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Stack.java"/>
+^^^^
 public class DecimalToBaseN {
 
     public static String baseConvert(int decimal, int base) {

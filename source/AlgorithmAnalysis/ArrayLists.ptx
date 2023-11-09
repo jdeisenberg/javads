@@ -76,7 +76,7 @@ Remove last time: 0.0000017 sec</pre>
 <p><xref ref="lst_analysis_time_remove"/> is the program that we used, and there are some important things to note:</p>
 
   <listing xml:id="lst_analysis_time_remove">
-    <program xml:id="prog_analysis_time_remove" language="java" line-numbers="yes">
+    <program xml:id="prog_analysis_time_remove" language="java" line-numbers="yes" interactive="activecode">
       <input>
 import java.util.Scanner;
 import java.util.ArrayList;

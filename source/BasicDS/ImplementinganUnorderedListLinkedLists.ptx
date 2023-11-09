@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_implementing-an-unordered-list-linked-lists">
+<section xml:id="basic-ds_implementing-an-unordered-list-linked-lists" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Implementing an Unordered List: Linked Lists</title>
   <introduction>
   <p>In order to implement an unordered list, we will construct what is
@@ -38,10 +38,10 @@
         <caption>The Node Class</caption>
         <program language="java">
       <input>
-public class Node&lt;T&gt; {
+class Node&lt;T&gt; {
 
     private T data;
-    private Node next;
+    private Node&lt;T&gt; next;
 
     public Node(T data) {
         this.data = data;
@@ -119,7 +119,7 @@ public class Node&lt;T&gt; {
         <caption>The UnorderedList Class</caption>
         <program language="java">
       <input>
-public class UnorderedList&lt;T&gt; {
+class UnorderedList&lt;T&gt; {
 
     private Node&lt;T&gt; head;
 
@@ -431,7 +431,7 @@ System.out.println(found); // prints true
         <caption>The Node and UnorderedList Classes</caption>
     <program xml:id="unorderedlistcomplete" language="java">
       <input>
-public class UnorderedList&lt;T&gt; {
+class UnorderedList&lt;T&gt; {
 
     private Node&lt;T&gt; head;
 
@@ -540,7 +540,13 @@ public class UnorderedList&lt;T&gt; {
 
     <listing xml:id="lst_unorderedlist_test">
         <caption>Test of UnorderedList Methods</caption>
-        <program xml:id="prog_unorderedlist_test" language="java"><input>
+        <program xml:id="prog_unorderedlist_test" language="java" interactive="activecode">
+            <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Node.java"/>
+<xi:include parse="text" href="./UnorderedList.java"/>
+^^^^
 public class TestUnorderedList {
     public static void main(String[] args) {
         UnorderedList&lt;Integer&gt; myList = new UnorderedList&lt;&gt;();

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_implementing-a-deque">
+<section xml:id="basic-ds_implementing-a-deque" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Implementing a Deque in Java</title>
   <p>As we have done in previous sections, we will create a new class for the
             implementation of the abstract data type deque. Again, the Java ArrayList
@@ -13,7 +13,7 @@
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class Deque&lt;T&gt; {
+class Deque&lt;T&gt; {
 
     /*
      * The tail of the deque is at the beginning
@@ -124,8 +124,12 @@ public class Deque&lt;T&gt; {
             <xref ref="basic-ds_the-deque-abstract-data-type"/>.</p>
         <listing xml:id="lst_deqtest">
             <caption>Test of Deque Operation</caption>
-  <program xml:id="deqtest" language="java">
+  <program xml:id="deqtest" language="java" interactive="activecode">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Deque.java"/>
+^^^^
 public class DequeTest {
 
     /*

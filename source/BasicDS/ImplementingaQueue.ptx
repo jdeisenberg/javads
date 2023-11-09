@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_implementing-a-queue">
+<section xml:id="basic-ds_implementing-a-queue" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Implementing a Queue in Java</title>
   <p>It is again appropriate to create a new class for the implementation of
             the abstract data type queue. As before, we will use the power and
@@ -85,7 +85,6 @@ public class Queue&lt;T&gt; {
 
         if (!this.items.isEmpty()) {
             String arrString = this.items.toString();
-            // remove open and closing bracket
             return "tail -&gt;" + arrString + "-&gt; head";
         } else {
             return "&lt;&lt;empty queue&gt;&gt;";
@@ -99,8 +98,12 @@ public class Queue&lt;T&gt; {
             <xref ref="basic-ds_the-queue-abstract-data-type"/>.</p>
           <listing xml:id="lst-queuetest">
             <caption>Example Queue Operations</caption>
-            <program xml:id="prog-queuetest" language="java">
+            <program xml:id="prog-queuetest" language="java" interactive="activecode">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Queue.java"/>
+^^^^
 public class QueueTest {
 
     public static void main(String[] args) {

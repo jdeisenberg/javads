@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_implementing-an-ordered-list">
+<section xml:id="basic-ds_implementing-an-ordered-list" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Implementing an Ordered List</title>
   <introduction>
   <p>In order to implement the ordered list, we must remember that the
@@ -36,7 +36,7 @@ $3 ==> 0
             the <c>extends</c> keyword. Here is the start of the class and the constructor:</p>
 
         <program language="java" line-numbers="yes"><input>
-public class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedList&lt;T&gt; {
+class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedList&lt;T&gt; {
     public OrderedList() {
         super();
     }
@@ -51,7 +51,15 @@ public class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedL
 
 <listing xml:id="basicds_lst-test-ordered-list">
     <caption>Testing <c>OrderedList</c> Methods</caption>
-<program xml:id="basicds_prog-test-ordered-list" language="java" line-numbers="yes"><input>
+<program xml:id="basicds_prog-test-ordered-list" language="java" line-numbers="yes"
+  interactive="activecode">
+    <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Node.java"/>
+<xi:include parse="text" href="./UnorderedList.java"/>
+<xi:include parse="text" href="./OrderedList.java"/>
+^^^^
 public class TestOrderedList {
 
     public static void main(String[] args) {
@@ -218,7 +226,7 @@ Is 300 in the list? false
             <caption>The Complete <c>OrderedList</c> Class</caption>
             <program xml:id="orderedlistclass" language="java">
     <input>
-public class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedList&lt;T&gt; {
+class OrderedList&lt;T extends Comparable&lt;T&gt;&gt; extends UnorderedList&lt;T&gt; {
 
     // No extra properties in this class; they are inherited from
     // UnorderedList.

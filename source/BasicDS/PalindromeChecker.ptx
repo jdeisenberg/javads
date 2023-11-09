@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_palindrome-checker">
+<section xml:id="basic-ds_palindrome-checker" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Palindrome Checker</title>
   <p>An interesting problem that can be easily solved using the deque data
             structure is the classic palindrome problem. A <term>palindrome</term> is a
@@ -26,8 +26,12 @@
             <xref ref="lst-palchecker"/>.</p>
 <listing xml:id="lst-palchecker">
     <caption>Implementation of Palindrome Checker</caption>
-<program label="prog-palchecker" language="java">
+<program label="prog-palchecker" language="java" interactive="activecode">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Deque.java"/>
+^^^^
 public class Palindrome {
 
     public static boolean isPalindrome(String str) {

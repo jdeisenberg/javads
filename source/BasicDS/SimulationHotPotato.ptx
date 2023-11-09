@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="basic-ds_queue-simulation-hot-potato">
+<section xml:id="basic-ds_queue-simulation-hot-potato" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Queue Simulation: Hot Potato</title>
   <p>One of the typical applications for showing a queue in action is to
             simulate a real situation that requires data to be managed in a FIFO
@@ -47,8 +47,12 @@
             <c>hotPotato</c> method using 7 as the counting constant returns <c>"Susan"</c>.</p>
 <listing  xml:id="lst-josephussim">
   <caption>Hot Potato Simulation</caption>
-  <program language="java">
+  <program language="java" interactive="activecode">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Queue.java"/>
+^^^^
 public class HotPotatoSimulation {
 
     public static String hotPotato(String[] nameList, int num) {
