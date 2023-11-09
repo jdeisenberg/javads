@@ -66,7 +66,7 @@ min
             where we satisfy the base case condition immediately.</p>
   <listing xml:id="lst-change1">
       <caption>Recursive Algorithm for Making Change</caption>
-<program label="lst-change1"  language="java" line-numbers="yes">
+<program label="lst-change1"  language="java" line-numbers="yes" interactive="activecode">
     <input>
 import java.util.ArrayList;
 
@@ -132,7 +132,7 @@ public class ChangeExample1 {
             algorithm to incorporate our table lookup scheme.</p>
 <listing xml:id="lst-change2">
     <caption>Recursive Algorithm for Change with Table Lookup</caption>
-<program label="lst-change2" language="java" line-numbers="yes">
+<program label="lst-change2" language="java" line-numbers="yes" interactive="activecode">
     <input>
 import java.util.ArrayList;
 
@@ -223,7 +223,7 @@ public class ChangeExample2 {
             minimum number of coins for 11 cents.</p>
   <listing xml:id="recursion_fig-dpcoins">
       <caption>Making Change with Dynamic Progamming</caption>
-      <program language="java" line-numbers="yes">
+      <program language="java" line-numbers="yes" interactive="activecode">
     <input>
 import java.util.ArrayList;
 
@@ -296,7 +296,7 @@ public class ChangeExample3 {
             array also contains 21, giving us the three 21 cent pieces.</p>
 <listing xml:id="lst-dpremember">
     <caption>Making Change and Printing Coin Values</caption>
-<program label="lst-dpremember"  language="java" line-numbers="yes">
+<program label="lst-dpremember"  language="java" line-numbers="yes" interactive="activecode">
     <input>
 import java.util.ArrayList;
 

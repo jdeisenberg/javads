@@ -63,7 +63,7 @@
             outlined above for any base between 2 and 16.</p>
 <listing xml:id="lst-rectostr">
   <caption>Recursively Converting from Integer to String</caption>
-<program label="prg-rectostr"  language="java" line-numbers="yes">
+<program label="prg-rectostr"  language="java" line-numbers="yes" interactive="activecode">
     <input>
 public class RecursiveBaseConversion {
     public static String convert(int n, int base) {
@@ -111,7 +111,7 @@ public class RecursiveBaseConversion {
     <title>Self Check</title>
     <exercise>
     <p>Write a method that takes a string as a parameter and returns a new string that is the reverse of the old string. Use this as your starting point.</p>
-    <program xml:id="recursion_sc_1" language="java">
+    <program xml:id="recursion_sc_1" language="java" interactive="activecode">
       <input>
 public class ReverseString {
     public static String reverse(String s) {
@@ -169,7 +169,7 @@ public class ReverseString {
     </p>
     <p>Here is a starting point for your program. Hint: the <c>Character.isLetter(ch)</c> method returns <c>true</c> if its argument is a letter, <c>false</c> otherwise.  <c>Character.toLowerCase(ch)</c> converts letters to their lower case versions, leaving non-letters unchanged.</p>
 
-    <program xml:id="recursion_sc_2" language="java">
+    <program xml:id="recursion_sc_2" language="java" interactive="activecode">
       <input>
 public class RecursivePalindromes {
 

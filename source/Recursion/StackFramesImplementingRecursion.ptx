@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="recursion_stack-frames-implementing-recursion">
+<section xml:id="recursion_stack-frames-implementing-recursion" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Stack Frames: Implementing Recursion</title>
   <p>Suppose that instead of concatenating the result of the recursive call
             to <c>convert</c> with the string from <c>digitStrings</c>, we modified our
@@ -8,8 +8,12 @@
             <xref ref="lst-recstack"/>.</p>
 <listing xml:id="lst-recstack">
     <caption>Converting an Integer to a String Using a Stack</caption>
-<program label="lst-recstack" language="java" line-numbers="yes">
+<program label="lst-recstack" language="java" line-numbers="yes" interactive="activecode">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Stack.java"/>
+^^^^
 public class ConvertViaStack {
 
     public static String convert(int n, int base) {

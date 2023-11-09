@@ -10,7 +10,7 @@
             by starting with <m>0</m> and adding each number in the array.</p>
 <listing  xml:id="lst-itsum">
   <caption>Iterative Summation</caption>
-  <program language="java">
+  <program language="java" interactive="activecode">
     <input>
 public class SumWithLoop {
     public static int arraySum(int [] numArray) {
@@ -65,7 +65,7 @@ public class SumWithLoop {
             </p>
 <listing xml:id="lst-recsum">
   <caption>Recursive Summation</caption>
-<program label="lst-recsum" language="java" line-numbers="yes">
+<program label="lst-recsum" language="java" line-numbers="yes" interactive="activecode">
     <input>
 import java.util.Arrays;
 
