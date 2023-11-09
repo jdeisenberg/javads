@@ -19,7 +19,7 @@
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class Queue&lt;T&gt; {
+class Queue&lt;T&gt; {
 
     /*
      * The tail of the queue is at the beginning
