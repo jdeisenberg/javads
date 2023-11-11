@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="trees_tree-traversals">
+<section xml:id="trees_tree-traversals" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Tree Traversals</title>
   <p>Now that we have examined the basic functionality of our
             tree data structure, it is time to look at some additional usage
@@ -71,7 +71,7 @@
             The static method is particularly elegant because our base case is
             simply to check if the tree exists. If the tree parameter is <c>null</c>,
             then the function returns without taking any action.</p>
-          <listing xml:id="trees_lst-preorder1"><pre>
+          <listing xml:id="trees_lst-preorder1"><program language="java"><input>
 public static void preorder(BinaryTree&lt;String&gt; tree) {
     if (tree != null) {
         System.out.println(tree.getRootValue());
@@ -79,7 +79,7 @@ public static void preorder(BinaryTree&lt;String&gt; tree) {
         preorder(tree.getRightChild());
     }
 }
-</pre></listing>
+</input></program></listing>
 
   <p>We can also implement <c>preorder</c> as a method of the <c>BinaryTree</c>
             class. The code for implementing <c>preorder</c> as an internal method is
@@ -89,7 +89,7 @@ public static void preorder(BinaryTree&lt;String&gt; tree) {
             access the fields. However, we also need to modify the base case. The
             internal method must check for the existence of the left and the right
             children <em>before</em> making the recursive call to <c>preorder</c>.</p>
-  <listing xml:id="trees_lst-preorder2"><pre>
+  <listing xml:id="trees_lst-preorder2"><program language="java"><input>
 public void preorder() {
     System.out.println(this.key);
     if (this.leftChild != null) {
@@ -99,7 +99,7 @@ public void preorder() {
         this.rightChild.preorder();
     }
 }
-  </pre></listing>
+</input></program></listing>
   <p>Which of these two ways to implement <c>preorder</c> is best? The answer is
             that implementing <c>preorder</c> as an external method is probably
             better in this case. The reason is that you very rarely want to just
@@ -113,7 +113,7 @@ public void preorder() {
   <p>The algorithm for the <c>postorder</c> traversal, shown in
             <xref ref="trees_lst-postorder1"/>, is nearly identical to <c>preorder</c> except that
             we move the call to print to the end of the function.</p>
-          <listing xml:id="trees_lst-postorder1" language="java"><pre>
+          <listing xml:id="trees_lst-postorder1"><program language="java"><input>
 public static void postorder(BinaryTree&lt;String&gt; tree) {
     if (tree != null) {
         postorder(tree.getLeftChild());
@@ -121,7 +121,7 @@ public static void postorder(BinaryTree&lt;String&gt; tree) {
         System.out.println(tree.getKeyValue());
     }
 }
-          </pre></listing>
+</input></program></listing>
 
   <p>We have already seen a common use for the postorder traversal, namely
             evaluating a parse tree. Look back at <xref ref="trees_parse-tree"/> again.
@@ -131,7 +131,7 @@ public static void postorder(BinaryTree&lt;String&gt; tree) {
             Assuming our binary tree is going to store only expression tree data,
             we rewrite the evaluation function, but model it even more closely on
             the postorder code in <xref ref="trees_lst-postorder1"/>.</p>
-  <listing xml:id="trees_lst-postordereval"><pre>
+  <listing xml:id="trees_lst-postordereval"><program language="java"><input>
     public static Double postorderEvaluate(BinaryTree&gt;String&gt; tree) {
         Double leftValue = null;
         Double rightValue = null;
@@ -157,7 +157,7 @@ public static void postorder(BinaryTree&lt;String&gt; tree) {
             return null;
         }
     }
-</pre></listing>
+    </input></program></listing>
 
   <p>Notice that the form in <xref ref="trees_lst-postorder1"/> is the same as the form
             in <xref ref="trees_lst-postordereval"/>, except that instead of printing the key at

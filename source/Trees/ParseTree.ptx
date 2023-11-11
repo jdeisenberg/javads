@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="trees_parse-tree">
+<section xml:id="trees_parse-tree" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Parse Tree</title>
   <p>With the implementation of our tree data structure
             complete, we now look at an example of how a tree can be used to solve
@@ -163,7 +163,7 @@
 <listing xml:id="lst-buildparse">
 <program label="prog-buildparse" language="java" line-numbers="yes">
     <input>
-public class ParseTreeExample {
+class ParseTreeBuilder {
     /*
      * Given a fully-parenthesized expression, return its
      * parse tree.
@@ -212,10 +212,6 @@ public class ParseTreeExample {
             return false;
         }
     }
-
-    public static void main(String[] args) {
-        BinaryTree&lt;String&gt; parseTree = buildParseTree("( 3 + ( 4 * 5 ) )");
-    }
 }
 </input>
   </program>
@@ -260,8 +256,15 @@ public class ParseTreeExample {
             a leaf node, get the operator in the current node and apply it to
             the results from recursively evaluating the left and right children (lines&#xA0;6&#x2013;9) We do this in the <c>apply</c> method (lines&#xA0;15&#x2013;30), which we have made into a separate method so that the flow of <c>evaluate</c>is easier to read.</p>
   <listing xml:id="trees_lst-eval">
-<program label="trees_prog-eval" language="java" line-numbers="yes">
+<program label="trees_prog-eval" language="java" line-numbers="yes" interactive="activecode">
     <input>
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./Stack.java"/>
+<xi:include parse="text" href="./BinaryTree.java"/>
+<xi:include parse="text" href="./ParseTreeBuilder.java"/>
+^^^^
+public class ParseTreeExample {
     public static Double evaluate(BinaryTree&lt;String&gt; parseTree) {
         BinaryTree&lt;String&gt; leftChild = parseTree.getLeftChild();
         BinaryTree&lt;String&gt; rightChild = parseTree.getRightChild();
@@ -292,19 +295,16 @@ public class ParseTreeExample {
         }
         return result;
     }
+
+    public static void main(String[] args) {
+        BinaryTree&lt;String&gt; parseTree =
+          ParseTreeBuilder.buildParseTree("( 3 + ( 4 * 5 ) )");
+        System.out.println(evaluate(parseTree));
+    }
+}
 </input>
   </program>
   </listing>
-
-  <p>Now, update the <c>main</c> to call the <c>evaluate</c> method:</p>
-
-  <program language="java">
-    <input>
-    public static void main(String[] args) {
-        BinaryTree&lt;String&gt; parseTree = buildParseTree("( 3 + ( 4 * 5 ) )");
-        System.out.println(evaluate(parseTree));
-    }
-    </input></program>
 
   <p>Let's finish this topic by tracing the <c>evaluate</c> function on the parse tree we
             created in <xref ref="fig-bldexpstep"/>. When we first call <c>evaluate</c>, we
@@ -317,7 +317,7 @@ public class ParseTreeExample {
             <c>evaluate</c> function is given the left subtree. We find that the node
             has no left or right children, so we are in a leaf node. When we are in
             a leaf node, we return the value stored in the leaf node as the
-            result of the evaluation (line 24). In this case we return the integer 3.</p>
+            result of the evaluation (line 12). In this case we return the value 3.</p>
 
   <p>At this point we have one operand evaluated for the operation. But we are not done yet. Continuing the left-to-right
             evaluation of the parameters, we now make a recursive call to evaluate
@@ -326,8 +326,8 @@ public class ParseTreeExample {
             evaluate <em>its</em> left and right children as the parameters.
             At this point, you can see that both recursive calls will be to leaf
             nodes, which will evaluate to the numbers 4 and 5 respectively.
-            With the two operands evaluated, we return the result of mutliplying them (lines 17&#x2013;18). At this point we have evaluated the operands for
+            With the two operands evaluated, we return the result of mutliplying them (lines 25&#x2013;26). At this point we have evaluated the operands for
             the top level <c>"+"</c> operator, and all that is left to do is finish the
-            addition of the numbers (lines 13&#x2013;14). The result of the evaluation of the
+            addition of the numbers (lines 21&#x2013;22). The result of the evaluation of the
             entire expression tree for <m>(3 + (4 * 5))</m> is 23.</p>
 </section>

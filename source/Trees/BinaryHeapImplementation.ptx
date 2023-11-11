@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="trees_binary-heap-implementation">
+<section xml:id="trees_binary-heap-implementation" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Binary Heap Implementation</title>
   <subsection xml:id="trees_the-structure-property">
     <title>The Structure Property</title>
@@ -58,7 +58,7 @@
             <listing xml:id="trees_lst-heap1a"><program language="java"><input>
 import java.util.ArrayList;
 
-public class BinaryHeap&lt;T&gt; {
+class BinaryHeap&lt;T&gt; {
     ArrayList&lt;T&gt; items;
 
     public BinaryHeap() {
@@ -265,7 +265,7 @@ i = 0  [2, 3, 5, 6, 9]</pre>
       <input>
 import java.util.ArrayList;
 
-public class BinaryHeap&lt;T extends Comparable&lt;T&gt;&gt; {
+class BinaryHeap&lt;T extends Comparable&lt;T&gt;&gt; {
     ArrayList&lt;T&gt; heap;
 
     public BinaryHeap() {
@@ -364,6 +364,30 @@ public class BinaryHeap&lt;T extends Comparable&lt;T&gt;&gt; {
     </program>
 </listing>
 
+<p>Here is the program we saw in <xref ref="trees_binary-heap-operations"/>:</p>
+<program label="lst-heap1" language="java" interactive="activecode">
+    <input>
+import java.util.ArrayList;
+<xi:include parse="text" href="./BinaryHeap.java"/>
+^^^^
+public class BinaryHeapTest {
+    public static void main(String[] args) {
+        BinaryHeap&lt;Integer&gt; myHeap = new BinaryHeap&lt;&gt;();
+        myHeap.insert(5);
+        myHeap.insert(7);
+        myHeap.insert(3);
+        myHeap.insert(11);
+        System.out.println("Min value: " + myHeap.getMin());
+
+        System.out.println("Deleting items: ");
+        System.out.println(myHeap.delete());
+        System.out.println(myHeap.delete());
+        System.out.println(myHeap.delete());
+        System.out.println(myHeap.delete());
+    }
+}
+        </input>
+  </program>
     <p>The assertion that we can build the heap in <m>O(n)</m> may seem a
                 bit mysterious at first, and a proof is beyond the scope of this book.
                 However, the key to understanding that you can build the heap in

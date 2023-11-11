@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="trees_avl-tree-implementation">
+<section xml:id="trees_avl-tree-implementation" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>AVL Tree Implementation</title>
   <p>Now that we have demonstrated that keeping an AVL tree in balance is
             going to be a big performance improvement, let's look at how we will
@@ -345,7 +345,11 @@ rotationRoot.balanceFactor = rotationRoot.balanceFactor + 1 -
 
           <listing xml:id="lst_balanced-example">
             <caption>Example of Inserting into an AVL Tree</caption>
-            <program language="java"><input>
+            <program language="java" interactive="activecode"><input>
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./AVLTree.java"/>
+^^^^
 public class AVLTreeExample {
 
     public static void main(String[] args) {

@@ -48,7 +48,7 @@ list[j] = temp;</pre>
           <p>The following example shows the complete <c>bubbleSort</c> function working on the preceding list. We have put <c>System.out.printf</c> calls in the code so you can see how it works.</p>
 <listing xml:id="lst-bubble">
   <caption>The Bubble Sort Implementation</caption>
-<program label="prog-bubble" language="java" line-numbers="yes">
+<program label="prog-bubble" language="java" line-numbers="yes" interactive="activecode">
     <input>
 import java.util.Arrays;
 
@@ -141,7 +141,8 @@ public class BubbleSortExample {
             <xref ref="lst-shortbubble"/> shows this modification, which is often referred
             to as the <term>short bubble</term>.</p>
 <listing xml:id="lst-shortbubble">
-<program label="lst-shortbubble" language="java" line-numbers="yes">
+<program label="lst-shortbubble" language="java" line-numbers="yes"
+         interactive="activecode">
     <input>
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-<section xml:id="trees_search-tree-implementation">
+<section xml:id="trees_search-tree-implementation" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Search Tree Implementation</title>
   <introduction>
   <p>A binary search tree (BST) relies on the property that
@@ -51,7 +51,7 @@
   <input>
 import java.util.Iterator;
 
-public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;,
+class BinarySearchTree&lt;K extends Comparable&lt;K&gt;,
   V extends Comparable&lt;V&gt;&gt; {
 
     TreeNode root;
@@ -422,7 +422,11 @@ if (condition) {
     <p>At this point we have enough to implement a program to test our tree, shown in <xref ref="lst_bst-example1"/>:</p>
 <listing xml:id="lst_bst-example1">
 <caption>Sample Binary Search Tree Program</caption>
-<program language="java"><input>
+<program language="java" interactive="activecode"><input>
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./BinarySearchTree.java"/>
+^^^^
 public class BinarySearchTreeExample {
 
     public static void main(String[] args) {
@@ -580,7 +584,9 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
     <program language="java" line-numbers="yes">
     <input>
 import java.util.Iterator;
-
+import java.util.NoSuchElementException;
+<xi:include parse="text" href="./BinarySearchTree.java"/>
+^^^^
 public class BinarySearchTreeExample {
 
     public static void main(String[] args) {

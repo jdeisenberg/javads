@@ -45,7 +45,7 @@
             studies, insertion sort will show very good performance.</p>
 <listing xml:id="lst-insertion">
   <caption>The Insertion Sort</caption>
-<program label="lst-insertion" language="java">
+<program label="lst-insertion" language="java" interactive="activecode">
     <input>
 import java.util.Arrays;
 

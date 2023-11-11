@@ -58,7 +58,7 @@
             an insertion sort with an increment of one.</p>
 <listing xml:id="lst-shell">
   <caption>The Shell Sort</caption>
-<program label="lst-shell" language="java">
+<program label="lst-shell" language="java" interactive="activecode">
     <input>
 import java.util.Arrays;
 

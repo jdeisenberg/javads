@@ -24,7 +24,8 @@
 
           <listing xml:id="lst-seqsearch">
             <caption>Sequential Search of an Unordered List</caption>
-            <program xml:id="prog-seqsearch" label="prog-seqsearch" language="java"> <!--  -->
+            <program xml:id="prog-seqsearch" label="prog-seqsearch" language="java"
+                     interactive="activecode">
     <input>
 public class SequentialSearchExample {
 
@@ -128,7 +129,8 @@ public class SequentialSearchExample {
     </figure>
     <listing xml:id="lst-seqsearch2">
       <caption>Sequential Search of an Ordered List</caption>
-<program xml:id="prog-seqsearch2" label="prog-seqsearch2" language="java">
+<program xml:id="prog-seqsearch2" label="prog-seqsearch2" language="java"
+         interactive="activecode">
   <input>
 public class OrderedSequentialSearchExample {
 

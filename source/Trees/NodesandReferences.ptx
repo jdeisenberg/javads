@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="trees_nodes-and-references">
+<section xml:id="trees_nodes-and-references" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Nodes and References</title>
   <p>Our second method to represent a tree uses nodes and references. In this
             case we will define a class that has attributes for the root value as
@@ -22,7 +22,7 @@
   <listing xml:id="trees_lst-nar">
     <caption>Binary Tree Constructor</caption>
     <program language="java"><input>
-public class BinaryTree&lt;T&gt; {
+class BinaryTree&lt;T&gt; {
     T key;
     BinaryTree&lt;T&gt; leftChild;
     BinaryTree&lt;T&gt; rightChild;
@@ -118,8 +118,11 @@ public class BinaryTree&lt;T&gt; {
             tree as a binary tree itself.</p>
 <listing xml:id="lst-comptest">
   <caption>Test Program for <c>BinaryTree</c> Class</caption>
-<program label="lst-comptest" language="java">
+<program label="lst-comptest" language="java" interactive="activecode">
   <input>
+
+<xi:include parse="text" href="./BinaryTree.java"/>
+^^^^
 public class BinaryTreeTest {
 
     public static void main(String[] args) {

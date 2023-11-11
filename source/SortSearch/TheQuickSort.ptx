@@ -62,7 +62,7 @@
             implements the process described earlier.</p>
 <listing xml:id="lst-quick">
   <caption>The Quicksort Program</caption>
-<program label="lst-quick" language="java">
+<program label="lst-quick" language="java" interactive="activecode">
     <input>
 import java.util.Arrays;
 

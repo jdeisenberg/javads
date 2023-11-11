@@ -25,7 +25,8 @@
     <image source="SortSearch/Figures/binsearch.png" width="50%"/>
   </figure>
   <listing xml:id="lst-binarysearch">
-<program label="prog-binarysearch" language="java" line-numbers="yes">
+<program label="prog-binarysearch" language="java" line-numbers="yes"
+         interactive="activecode">
     <input>
 public class BinarySearchExample {
 
@@ -70,7 +71,8 @@ public class BinarySearchExample {
             shows this recursive version.</p>
           <listing xml:id="lst-recbinarysearch">
             <caption>Binary Search<mdash/>Recursive Version</caption>
-<program label="prog-recbinarysearch"  language="java" line-numbers="yes">
+<program label="prog-recbinarysearch"  language="java" line-numbers="yes"
+         interactive="activecode">
     <input>
 import java.util.Arrays;
 

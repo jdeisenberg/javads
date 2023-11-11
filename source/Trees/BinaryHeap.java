@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 class BinaryHeap<T extends Comparable<T>> {
     ArrayList<T> heap;
     

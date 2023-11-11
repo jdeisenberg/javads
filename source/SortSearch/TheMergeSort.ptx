@@ -41,7 +41,8 @@
 
 <listing xml:id="lst-mergesort">
   <caption>Merge Sort with Debug Output</caption>
-<program label="prog-mergesort" language="java" line-numbers="yes">
+<program label="prog-mergesort" language="java" line-numbers="yes"
+         interactive="activecode">
     <input>
 import java.util.Arrays;
 

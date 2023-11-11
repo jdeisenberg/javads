@@ -20,7 +20,7 @@
   </figure>
   <listing xml:id="lst-selectionsortcode">
     <caption>The Selection Sort</caption>
-<program label="lst-selectionsortcode" language="java">
+<program label="lst-selectionsortcode" language="java" interactive="activecode">
     <input>
 import java.util.Arrays;
 

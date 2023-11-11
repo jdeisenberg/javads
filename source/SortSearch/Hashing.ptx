@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="sort-search_hashing">
+<section xml:id="sort-search_hashing" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Hashing</title>
   <introduction>
   <p>In previous sections we were able to make improvements in our search
@@ -489,7 +489,7 @@ public static int hashString(String str, int tableSize) {
     <listing xml:id="sort-search_lst-hashtablecodeconstructor">
       <caption>HashTable constructor</caption>
       <program xml:id="sort-search_prog-hashtablecodeconstructor" language="java">
-<input>public class HashTable {
+<input>class HashTable {
     int size;
     Integer[] slots;
     String[] data;
@@ -603,8 +603,11 @@ public static int hashString(String str, int tableSize) {
                 string data values, then access and modify values.</p>
               <listing xml:id="sort-search_lst-hashtabletest">
                 <caption>Testing the <c>HashTable</c> Implementation</caption>
-    <program language="java">
+    <program language="java"
+             interactive="activecode">
       <input>
+<xi:include parse="text" href="HashTable.java"/>
+^^^^
 public class HashTableTest{
 
     public static void main(String[] args) {
@@ -639,7 +642,7 @@ public class HashTableTest{
       <caption>Complete <c>HashTable</c> Code</caption>
     <program xml:id="sort-search_prog-hashtablecomplete" language="java">
       <input>
-public class HashTable {
+class HashTable {
     int size;
     Integer[] slots;
     String[] data;
