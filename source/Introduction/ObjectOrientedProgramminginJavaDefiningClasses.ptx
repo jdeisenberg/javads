@@ -40,13 +40,13 @@
     <p>In Java, we define a new class by providing a name and a set of method
       definitions. For
       this example,</p>
-    <pre>public class Fraction {
+    <pre>class Fraction {
   // properties and methods go here
 }</pre>
 
 <p>provides the framework for us to define the class. We normally start off by specifying the class's properties. These are declared inside the class, but not inside any method.</p>
       <program language="java"><input>
-public class Fraction {
+class Fraction {
     int numerator;
     int denominator;
 }
@@ -61,7 +61,7 @@ public class Fraction {
     <listing xml:id="introduction_listing-frac-constructor">
 <program label="introduction_frac-onstructor" language="java" line-numbers="yes">
         <input>
-public class Fraction {
+class Fraction {
     int numerator;
     int denominator;
 
@@ -93,14 +93,28 @@ public class Fraction {
 
   <subsection xml:id="introduction_printing_fraction">
     <title>Printing a Fraction</title>
-    <p>The next thing we need to do is implement the behavior that the data type requires. To begin, consider what happens when we try to print a <c>Fraction</c> object.</p>
+    <p>The next thing we need to do is implement the behavior that the data type requires. To begin, consider what happens when we try to print a <c>Fraction</c> object in this program:</p>
 
     <program language="java"><input>
+public class FractionTest {
     public static void main(String[] args) {
         Fraction myFraction = new Fraction(3, 5);
         System.out.println(myFraction);
     }
+}
     </input></program>
+
+<note>
+  <p>
+    This class starts with the keyword <c>public</c>. The class containing your <c>main</c> method must be declared <c>public</c>.
+    </p>
+    <p>The <c>Fraction</c> class, on the other hand, is not declared <c>public</c>. This means that the class has <em>default access</em>; other classes and subclasses in the same package (in this case, in the same directory as this file) can access the class.
+  </p>
+
+  <p>
+    You can put each class in its own file, or you can put as many classes as you want into a single file. If you choose the latter, only one class can be <c>public</c>, and its name determines the file name.
+  </p>
+</note>
 
 <p>We get this output:</p>
 <console><output>Fraction@1dbd16a6</output></console>
@@ -112,7 +126,7 @@ public class Fraction {
     <p>There are two ways we can solve this problem. One is to define a method
       called <c>show</c> that will allow the <c>Fraction</c> object to print itself
       as a string. Unfortunately, writing a <c>show()</c> method does not work in general. In order to make
-      printing work properly, we need to override Java's default method for converting a <c>Fraction</c> to a string. We do this by writing a method named <c>toString()</c> that has no parameters and returns a <c>String</c>:</p>
+      printing work properly, we need to override Java's default method for converting a <c>Fraction</c> to a string. We do this by writing a method named <c>toString()</c> that has no parameters and returns a <c>String</c>. This goes into the <c>Fraction</c> class:</p>
 
     <listing xml:id="introduction_lst-toString">
 <program label="introduction_prog-toString" language="java">
@@ -137,7 +151,7 @@ public String toString() {
       way to make sure they have the same denominator is to use the
       product of the two denominators as a common denominator so that
       <m>\frac {a}{b} + \frac {c}{d} = \frac {ad}{bd} + \frac {cb}{bd} = \frac{ad+cb}{bd}</m>.
-      The implementation is shown in
+      The implementation, which is part of the <c>Fraction</c> class, is shown in
       <xref ref="introduction_lst-addmethod" />.
     </p>
  <listing xml:id="introduction_lst-addmethod">
@@ -162,7 +176,7 @@ public Fraction add(Fraction other) {
     </p>
 
     <p>
-      Let's add this code to our <c>main()</c> method to test addition:
+      Let's add this code to our <c>main()</c> method in <c>FractionTest</c> to test addition:
     </p>
 
     <program language="java">Fraction f1 = new Fraction(1, 4);
@@ -247,7 +261,7 @@ public Fraction add(Fraction other) {
   <subsection xml:id="introduction_compare_fraction">
     <title>Comparing Fractions</title>
     <p>An additional method that we need to
-      include in our example <c>Fraction</c> class will allow two fractions to
+      include in our example <c>FractionTest</c> class will allow two fractions to
       compare themselves to one another. Consider this code:</p>
 
     <program language="java"><input>
@@ -287,7 +301,7 @@ public boolean equals(Fraction other) {
 </input></program>
 
     </listing>
-    <p>If we now evaluate <c>f4.equals(f6)</c>, the <c>equals()</c> method will do a deep equality comparison and evalute as <c>true</c>.</p>
+    <p>If we now evaluate <c>f4.equals(f6)</c> in our <c>FractionTest</c> program, the <c>equals()</c> method will do a deep equality comparison and evalute as <c>true</c>.</p>
 
   </subsection>
   <subsection xml:id="introduction_static_method">
@@ -302,7 +316,7 @@ Fraction f9 = add(f7, f8);
 System.out.println(f9);
 </input></program>
 
-<p>We want this new <c>add</c> method to also belong to the <c>Fraction</c> class, but <em>not</em> require dot notation. We can do this by making a <c>static</c> method<mdash/>it belongs to the class as a whole, not to any particular instance:</p>
+<p>We want this new <c>add</c> method to also belong to the <c>Fraction</c> class, but not require an instance to use it. We can do this by making a <c>static</c> method<mdash/>it belongs to the class as a whole, not to any particular instance:</p>
 
 <program language="java"><input>
 public static Fraction add(Fraction fracA, Fraction fracB) {
@@ -316,7 +330,7 @@ public static Fraction add(Fraction fracA, Fraction fracB) {
 </p>
 <aside><p>A method <em>can</em> call itself; this is called <term>recursion</term>, and it is the topic of <xref ref="chapter_recursion"/>, but that's not what we want here!</p></aside>
 
-<p>We can now complete our code fragment with one additional change: because our two-argument <c>add</c> method belongs to the class, we must prefix it with the class name:</p>
+<p>We can now complete our <c>FractionTest</c> program with one additional change: because our two-argument <c>add</c> method belongs to the class, we must prefix it with the class name:</p>
 
     <program language="java"><input>
 Fraction f7 = new Fraction(1, 2);
@@ -329,11 +343,11 @@ System.out.println(f9);
   <subsection xml:id="introduction_object_summary">
     <title>Summary</title>
 
-    <p>The complete <c>Fraction</c> class, up to this point, is shown in
+    <p>The complete <c>Fraction</c> and <c>FractionTest</c> classes, up to this point, are shown in
       <xref ref="lst-fractioncode" />.
     </p>
     <listing xml:id="lst-fractioncode">
-<program label="prog-fractioncode" language="java">
+<program label="prog-fractioncode" language="java" interactive="activecode">
       <input>
 class Fraction {
 
@@ -365,6 +379,10 @@ class Fraction {
             newDenominator / common);
     }
 
+    public static Fraction add(Fraction fracA, Fraction fracB) {
+        return fracA.add(fracB);
+    }
+
     public String toString() {
       return String.format("%d/%d", this.numerator, this.denominator);
     }
@@ -375,7 +393,9 @@ class Fraction {
 
         return product1 == product2;
     }
+}
 
+public class FractionTest {
     public static void main(String[] args) {
         Fraction myFraction = new Fraction(3, 5);
         System.out.println(myFraction);
@@ -395,7 +415,7 @@ class Fraction {
 
         Fraction f7 = new Fraction(1, 2);
         Fraction f8 = new Fraction(1, 3);
-        Fraction f9 = add(f7, f8);
+        Fraction f9 = Fraction.add(f7, f8);
         System.out.println(f9);
     }
 }

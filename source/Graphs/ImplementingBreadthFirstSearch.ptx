@@ -38,7 +38,7 @@
           <listing xml:id="lst_vertex-color">
             <caption>The <c>VertexColor</c> Enumeration</caption>
             <program language="java"><input>
-public enum VertexColor {
+enum VertexColor {
     WHITE, GRAY, BLACK
 }
 </input></program></listing>

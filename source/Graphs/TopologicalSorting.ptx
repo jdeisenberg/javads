@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<section xml:id="graphs_topological-sorting">
+<section xml:id="graphs_topological-sorting" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Topological Sorting</title>
   <p>To demonstrate that computer scientists can turn just about anything
             into a graph problem, let's consider the difficult problem of stirring
@@ -62,11 +62,21 @@
 
   <p><xref ref="lst_graph-pancakes"/> gives the corresponding code for this example:</p>
   <listing xml:id="lst_graph-pancakes">
-    <program language="java" line-numbers="yes">
+    <program language="java" line-numbers="yes" interactive="activecode">
       <input>
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.NoSuchElementException;
 
+<xi:include parse="text" href="./Graph.java"/>
+<xi:include parse="text" href="./Vertex.java"/>
+<xi:include parse="text" href="./Queue.java"/>
+<xi:include parse="text" href="./VertexColor.java"/>
+<xi:include parse="text" href="./DFSGraph.java"/>
+^^^^
 public class Pancakes {
 
     public static void main(String[] args) {

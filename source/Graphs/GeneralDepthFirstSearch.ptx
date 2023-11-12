@@ -35,7 +35,7 @@
     <caption>The <c>DFSGraph</c> Class</caption>
     <program language="java" line-numbers="yes">
     <input>
-public class DFSGraph&lt;T extends Comparable&lt;T&gt;&gt; extends Graph&lt;T&gt; {
+class DFSGraph&lt;T extends Comparable&lt;T&gt;&gt; extends Graph&lt;T&gt; {
     int time;
 
     public DFSGraph() {

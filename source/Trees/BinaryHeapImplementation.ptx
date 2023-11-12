@@ -365,7 +365,7 @@ class BinaryHeap&lt;T extends Comparable&lt;T&gt;&gt; {
 </listing>
 
 <p>Here is the program we saw in <xref ref="trees_binary-heap-operations"/>:</p>
-<program label="lst-heap1" language="java" interactive="activecode">
+<program label="lst-heapOps" language="java" interactive="activecode">
     <input>
 import java.util.ArrayList;
 <xi:include parse="text" href="./BinaryHeap.java"/>
