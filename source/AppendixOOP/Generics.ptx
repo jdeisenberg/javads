@@ -44,7 +44,7 @@ public int search(String[] arr, String target) {
     <caption>The <c>Searcher</c> class</caption>
     <program language="java">
       <input>
-      public class Searcher&lt;T&gt; {
+      class Searcher&lt;T&gt; {
         public int search(T[] arr, T target) {
             int index = 0;
             while (index &lt; arr.length &amp;&amp; !arr[index].equals(target)) {
@@ -61,19 +61,31 @@ public int search(String[] arr, String target) {
 
   <listing xml:id="oop_lst-generic-main">
     <caption>Using the <c>Searcher</c> class</caption>
-    <program language="java">
+    <program language="java" interactive="activecode">
       <input>
+      class Searcher&lt;T&gt; {
+        public int search(T[] arr, T target) {
+            int index = 0;
+            while (index &lt; arr.length &amp;&amp; !arr[index].equals(target)) {
+                index++;
+            }
+            return (index != arr.length) ? index : -1;
+        }
+      }
+^^^^
+public class SearcherTest {
     public static void main(String[]  args) {
         Searcher&lt;Integer&gt; searchInt = new Searcher&lt;&gt;();
         Integer [] arr = {3, 5, 7, 2, 9};
         int found = searchInt.search(arr, 9);
-        System.out.println(found);
+        System.out.println("9 found at index " + found);
 
         Searcher&lt;String&gt; searchStr = new Searcher&lt;&gt;();
         String[] words = {"cat", "elk", "dog", "fox"};
         found = searchStr.search(words, "elk");
-        System.out.println(found);
-    }
+        System.out.println("elk found at index " + found);
+      }
+  }
       </input>
     </program>
   </listing>
@@ -92,10 +104,39 @@ public int search(String[] arr, String target) {
   <p>The beginning of our hypothetical <c>Sorter</c> class would look like this:</p>
 
   <pre>
-    public class Searcher&lt;T extends Comparable&lt;T&gt;&gt; {
+    public class Sorter&lt;T extends Comparable&lt;T&gt;&gt; {
         // code...
     }
   </pre>
+
+  <p>It is also possible to introduce generic types for the duration of a single method. Presume we wanted a static method named <c>search</c> without having to create a <c>Searcher</c> class. We could write a program like <xref ref="lst_generic-method"/> that uses this technique. The <c>&lt;T&gt;</c> specification on line&#xA0;3 declares the generic type for the <c>search</c> method:</p>
+
+  <listing xml:id="lst_generic-method">
+    <program language="java" interactive="activecode" line-numbers="yes">
+      <input>
+public class GenericSearchMethod {
+
+    public static &lt;T&gt; int search(T[] arr, T target) {
+        int index = 0;
+        while (index &lt; arr.length &amp;&amp; !arr[index].equals(target)) {
+            index++;
+        }
+        return (index != arr.length) ? index : -1;
+    }
+
+    public static void main(String[]  args) {
+        Integer [] arr = {3, 5, 7, 2, 9};
+        int found = search(arr, 9);
+        System.out.println("9 found at index " + found);
+
+        String[] words = {"cat", "elk", "dog", "fox"};
+        found = search(words, "elk");
+        System.out.println("elk found at index " + found);
+    }
+}
+</input>
+</program>
+</listing>
 
   <p>There are many other important concepts for using generics. You can see a full tutorial at <url href="https://docs.oracle.com/javase/tutorial/java/generics/index.html"/>. However, this is a book about data structures rather than the deeper concepts of Java, so we will leave you with this brief introduction to generics, which should be sufficient to help you understand the programs in this book.</p>
 </section>
