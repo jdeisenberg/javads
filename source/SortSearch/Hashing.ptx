@@ -717,7 +717,7 @@ class HashTable {
   <exercises>
     <exercise label="HASH_REMAINING">
         <statement>
-          <p>Implement the <c>remove</c>, <c>size</c>, and <c>containsKey</c> methods as described at the beginning of <xref ref="sort-search_implementing-the-map-abstract-data-type"/>. As you do this, you may notice that you are duplicating the code involved in finding a key's slot. Hint: implement a <c>findSlot(key)</c> method that returns a slot number for the key (or -1 if the key is not found), and then rewrite some of the existing code to make use of this new method. This is known as <em>refactoring</em> your code, and that's what we did when <em>we</em> implemented those methods (do you think the authors would ask you to do something they couldn't do themselves?).</p>
+          <p>Implement the <c>remove</c>, <c>size</c>, and <c>containsKey</c> methods as described at the beginning of <xref ref="sort-search_implementing-the-map-abstract-data-type"/>. As you do this, you may notice that you are duplicating the code involved in finding a key's slot. Hint: implement a <c>findSlot(key)</c> method that returns a slot number for the key (or -1 if the key is not found), and then rewrite some of the existing code to make use of this new method. This is known as <em>refactoring</em> your code, and that's what we did when <em>we</em> implemented those methods.</p>
         </statement>
       </exercise>
       <exercise label="HASH_PRIVATE">
