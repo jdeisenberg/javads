@@ -120,7 +120,7 @@ public class ChangeExample1 {
             results.</p>
   <figure align="center" xml:id="i19_id1fig-c1ct">
     <caption>Partial Call Tree for 26 Cents</caption>
-    <image source="Recursion/Figures/callTree.png" width="100%%" alt="image"/>
+    <image source="Recursion/Figures/callTree.png" width="100%" alt="image"/>
   </figure>
   <p>The key to cutting down on the amount of work we do is to remember some
             of the past results so we can avoid recomputing results we already know.
@@ -200,9 +200,18 @@ public class ChangeExample2 {
             that the number of coins needed to make change for four cents is four,
             plus one more penny to make five, equals five coins. Or we can look at
             zero cents plus one more nickel to make five cents equals one coin. Since
-            the minimum of one and five is one, we store 1 in the table. Fast forward
+            the minimum of one and five is one, we store 1 in the table.</p>
+         <figure align="center" xml:id="recursion_fig-dpcoins">
+    <caption>Minimum Number of Coins Needed to Make Change</caption>
+    <image source="Recursion/Figures/changeTable.png" width="100%" alt="image"/>
+  </figure>
+        <p>Fast forward
             again to the end of the table and consider 11 cents.
-            shows the three options that we have to consider:</p>
+            <xref ref="recursion_fig-11-cents"/> shows the three options that we have to consider:</p>
+                <figure align="center" xml:id="recursion_fig-11-cents">
+    <caption>Three Options to Consider for the Minimum Number of Coins for Eleven Cents</caption>
+    <image source="Recursion/Figures/elevenCents.png" width="100%" alt="image"/>
+  </figure>
   <p>
     <ol marker="1">
       <li>
@@ -221,7 +230,10 @@ public class ChangeExample2 {
   </p>
   <p>Either option 1 or 3 will give us a total of two coins which is the
             minimum number of coins for 11 cents.</p>
-  <listing xml:id="recursion_fig-dpcoins">
+
+        <p><xref ref="recursion_list-dpcoins"/> is a dynamic programming algorithm to solve our change-making problem. <c>make_change_3</c> takes three parameters: a list of valid coin values, the amount of change we want to make, and a list of the minimum number of coins needed to make each value. When the function is done, <c>min_coins</c> will contain the solution for all values from 0 to the value of change.</p>
+
+  <listing xml:id="recursion_list-dpcoins">
       <caption>Making Change with Dynamic Progamming</caption>
       <program language="java" line-numbers="yes" interactive="activecode">
     <input>

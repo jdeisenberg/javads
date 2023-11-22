@@ -63,7 +63,7 @@ public class Shape {
     </program>
   </listing>
 
-  <p>Everything is going great until we reach the <c>calcArea</c> and <c>calcPerimeter</c> methods. How do we calculate the area and perimeter of a <q>shape</q>? We don't have that sort of problem with circles and rectangles. We know the formulas for calculating their area and perimeter (AKA circumference).  But a <q>shape</q> really doesn't exist. If I tell you <q>draw me a shape</q>, you'll ask me <q>which one?</q> Shapes are an abstraction.
+  <p>Everything is going great until we reach the <c>calcArea</c> and <c>calcPerimeter</c> methods. How do we calculate the area and perimeter of a <q>shape</q>? We don't have that sort of problem with circles and rectangles. We know the formulas for calculating their area and perimeter (AKA circumference).  But a <q>shape</q> really doesn't exist. If I tell you to draw me a shape, you'll ask me <q>which one?</q> Shapes are an abstraction.
   </p>
 
   <p>Here's how we'll solve the problem: we will use the keyword <c>abstract</c> on the class declaration. This tells Java that we will never directly instantiate a <c>Shape</c> object. If anyone tries something like the following, they will get an error message.</p>

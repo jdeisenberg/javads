@@ -556,9 +556,9 @@ Customers get a discount percentage based on their years as a customer and avera
 
 <p>
     <ul>
-        <li><p>Bronze: <m>\geq</m> 1 year and average purchase amount $\geq$ $5000 per year<mdash/>5% discount</p></li>
-        <li><p>Silver: <m>\geq</m> 2 years and average purchase amount $\geq$ $10000 per year<mdash/>7.5% discount</p></li>
-        <li><p>Gold: <m>\geq</m> 3 years and average purchase amount $\geq$ $15000 per year<mdash/>10% discount</p></li>
+        <li><p>Bronze: <m>\geq</m> 1 year and average purchase amount <m>\geq</m> $5000 per year<mdash/>5% discount</p></li>
+        <li><p>Silver: <m>\geq</m> 2 years and average purchase amount <m>\geq</m> $10000 per year<mdash/>7.5% discount</p></li>
+        <li><p>Gold: <m>\geq</m> 3 years and average purchase amount <m>\geq</m> $15000 per year<mdash/>10% discount</p></li>
     </ul>
 </p>
 

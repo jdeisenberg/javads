@@ -49,7 +49,7 @@ The compiler will (correctly) complain:
 <output>
 Polymorphism.java:7: error: incompatible types:
   Item cannot be converted to SaleItem
-        SaleItem badNews = new Item("Oops", "X-001", 6.66);
+        SaleItem badNews = new Item("Oops", "X-000", 6.66);
 </output>
 </console>
 
