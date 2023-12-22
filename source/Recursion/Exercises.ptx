@@ -58,7 +58,7 @@
    include the sizes of each jug and the final amount of water to be
    left in the larger jug.</p></exercise>
 
-            <exercise><p>Write a program that solves the following problem. Three constructor robots and three demolition robots must cross a canyon in a cable car. The cable car will hold only two of the robots, and it will not move unless there is at least one robot in the car. All the robots must get across the canyon to continue the journey. However, if the demolition robots ever outnumber the constructor robots on either side of the canyon, the demolition robots will destroy the constructor robots. (This is a bad decision by whoever designed the demolition robots, but that's a totally different problem to solve.) Find a series of crossings that will get all the robots safely to the other side of the canyon.</p></exercise>
+            <exercise><p>Write a program that solves the following problem. Three construction robots and three demolition robots must cross a canyon in a cable car. The cable car will hold only two of the robots, and it will not move unless there is at least one robot in the car. All the robots must get across the canyon to continue the journey. However, if the demolition robots ever outnumber the construction robots on either side of the canyon, the demolition robots will destroy the constructor robots. (This is a bad decision by the designers of the demolition robots, but that's a totally different problem to solve.) Find a series of crossings that will get all the robots safely to the other side of the canyon.</p></exercise>
 
             <exercise><p>Modify the Tower of Hanoi program using <c>turtle</c> graphics to animate
    the movement of the disks. Hint: you can make multiple turtles and
