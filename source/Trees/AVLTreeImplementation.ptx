@@ -74,7 +74,7 @@
 </listing>
   <p>The new <c>updateBalance</c> method is where most of the work is done. This
             implements the recursive procedure we just described. It first checks to see if the current node is out
-            of balance enough to require rebalancing (line&#xA0;20). If that
+            of balance enough to require rebalancing (line&#xA0;22). If that
             is the case then the rebalancing is done and no further updating to
             parents is required. If the current node does not require rebalancing
             then the balance factor of the parent is adjusted. If the balance factor
@@ -166,7 +166,7 @@
             lot of complicated bookkeeping, so we encourage you to trace through
             this function while looking at <xref ref="i18_id1fig-unbalsimple"/>.</p>
   <listing xml:id="trees_lst-leftrotation">
-<program label="trees_prog-leftrotation" language="java">
+<program label="trees_prog-leftrotation" language="java" line-numbers="yes">
     <input>
     void rotateLeft(AVLTreeNode rotationRoot) {
         AVLTreeNode newRoot = rotationRoot.rightChild;
@@ -194,7 +194,7 @@
 </input>
   </program>
   </listing>
-  <p>Finally, lines&#xA0;18-22 require some explanation. In
+  <p>Finally, lines&#xA0;19-22 require some explanation. In
             these lines we update the balance factors of the old and the new
             root. Since all the other moves involve moving entire subtrees, the
             balance factors of all other nodes are unaffected by the rotation. But
