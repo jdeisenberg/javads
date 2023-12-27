@@ -42,7 +42,7 @@ Math.pow(2, 100) // 1.2676506002282294E30
         </input>
     </program>
 
-    <p>The Boolean data type, implemented as the Java <c>boolean</c> atomic data type, is
+    <p>The Boolean data type, implemented as the Java <c>boolean</c> primitive data type, is
     quite useful for representing truth values. The possible values
     for a <c>boolean</c> variable are <c>true</c> and <c>false</c>, with the standard
     Boolean operators, <c>&amp;&amp;</c> (and), <c>||</c> (or), and <c>!</c> (not).</p>

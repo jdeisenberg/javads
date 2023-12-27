@@ -4,10 +4,14 @@
   <p>The earlier example of procedural abstraction called upon a Java
     method called <c>sqrt</c> from the <c>Math</c> module to compute the square
             root. In general, we can hide the details of any computation by defining
-            a function. A method definition requires a name, a group of
+            a method. A method definition requires a name, a group of
             parameters, and a body. It may also explicitly return a value. For
             example, the method defined below returns the square of the
             value you pass into it.</p>
+
+          <aside>
+            <p>Methods are often called <em>functions</em> or <em>procedures</em> in other programming languages.</p>
+    </aside>
 
           <console><output>
 jshell&gt; public static double square(double n) {
@@ -37,7 +41,7 @@ $2 ==&gt; 6.25
   <p>We could implement our own square root function by using a well-known technique called Newton's method or the Newton&#x2013;Raphson method, named after Isaac Newton and Joseph Raphson. The Newton&#x2013;Raphson method for approximating square roots performs an iterative computation that converges on the correct value. The equation <m>newguess = \frac {1}{2} * (oldguess + \frac {n}{oldguess})</m> takes a value <m>n</m> and repeatedly guesses the square root by making each <m>newguess</m> the <m>oldguess</m> in the subsequent iteration. The initial guess used here is <m>\frac {n}{2}</m>. <xref ref="introduction_lst-root"/> shows a program with a method definition that accepts a value <m>n</m> and returns the square root of <m>n</m> after making 20 guesses. Again, the details of the Newton&#x2013;Raphson method are hidden inside the method definition and the user does not have to know anything about the implementation to use the method for its intended purpose. <xref ref="introduction_lst-root"/> also shows the use of the <c>//</c> characters as a comment marker. Any characters that follow the <c>//</c> on a line are ignored.</p>
 
 <listing xml:id="introduction_lst-root">
-<program label="introduction_lst-root"  language="java">
+<program label="introduction_lst-root"  language="java" interactive="activecode">
     <input>
 public class MySquareRoot {
 
@@ -66,11 +70,11 @@ public class MySquareRoot {
     <p>A third function will repeatedly call generate and score, then if 100% of the letters are correct we are done.  If the letters are not correct then we will generate a whole new string.To make it easier to follow your program's progress this third function should print out the best string generated so far and its score every 1000 tries.</p>
     <p>In order to do this program, you will need to know how to generate random numbers. The following program generates ten random numbers in the range 0 up to (but not including) 100:</p>
 
-    <program language="java" line-numbers="yes">
+    <program language="java" line-numbers="yes" interactive="activecode">
       <input>
 import java.util.Random;
 
-class TenRandomIntegers {
+public class TenRandomIntegers {
     public static void main(String[] args) {
         Random generator = new Random();
 
@@ -86,7 +90,7 @@ class TenRandomIntegers {
 <p>In line 5, we create an instance of the <c>Random</c> class, naming it <c>generator</c>. (It could have any name, but the one we chose is meaningful).</p>
 <p>Lines 7-10 produce the random numbers by calling the random number generator's <c>nextInt</c> method. The argument is the exclusive upper bound on the random integer; thus, this statement will generate a number from 0 (inclusive) up to, but not including, 100 (exclusive).</p>
 
-<p>Though you do not need it for this prorgram, for the sake of completeness: If you need to generate a <c>double</c>, call the <c>nextDouble()</c> method, which returns a <c>double</c> value from 0.0 (inclusive) up to, but not including, 1.00 (exclusive).</p>
+<p>Though you do not need it for this program, for the sake of completeness: If you need to generate a <c>double</c>, call the <c>nextDouble()</c> method, which returns a <c>double</c> value from 0.0 (inclusive) up to, but not including, 1.00 (exclusive).</p>
 
   </exercises>
   <exercises>

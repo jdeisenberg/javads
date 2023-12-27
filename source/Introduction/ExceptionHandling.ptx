@@ -22,7 +22,7 @@ jshell&gt; int n = 12 / 0;
 |  Exception java.lang.ArithmeticException: / by zero
 |        at (#1:1)
 </output></console>
-<p>The last type of error, known as a <em>logic error</em>, denotes a situation where the program executes but gives the wrong result. This can be due to an error in the underlying algorithm or an error in your translation of that algorithm. For example, the following code for computing the area of a rectangle uses correct Java syntax, and the arithmetic will not cause a run-time error, but the logic is wrong; area is length times width, not length plus width:</p>
+<p>The last type of error, known as a <em>logic error</em> or <em>semantic error</em>, denotes a situation where the program executes but gives the wrong result. This can be due to an error in the underlying algorithm or an error in your translation of that algorithm. For example, the following code for computing the area of a rectangle uses correct Java syntax, and the arithmetic will not cause a run-time error, but the logic is wrong; area is length times width, not length plus width:</p>
 
 <program language="java">
   <input>
