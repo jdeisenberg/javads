@@ -325,11 +325,11 @@ rotationRoot.balanceFactor = rotationRoot.balanceFactor + 1 -
 </input>
   </program></listing>
 
-  <p>The <xref ref="trees_key-terms"/> provide you the opportunity to rebalance a tree
+  <!--<p>The <xref ref="trees_key-terms"/> provide you the opportunity to rebalance a tree
             that requires a left rotation followed by a right. In addition the
             discussion questions provide you with the opportunity to rebalance some
             trees that are a little more complex than the tree in
-            <xref ref="fig-rotatelr"/>.</p>
+            <xref ref="fig-rotatelr"/>.</p>-->
 
   <p>By keeping the tree in balance at all times, we can ensure that the
             <c>get</c> method will run in order <m>O(log_2(n))</m> time. But the

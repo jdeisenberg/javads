@@ -1,10 +1,6 @@
 <preface xml:id="front-back-matter_preface-to-the-first-and-second-editions">
- <title>Preface to the Interactive Editions</title>
+ <title>Preface to the Python Interactive Editions</title>
  <paragraphs>
- <title>Preface to the Java Edition</title>
- <p>This version of the book has been translated to Java for use in the Data Structures course at
- Evergreen Valley College in San José, California. We hope it will be useful to you.</p>
-
  <title>To the Student</title>
 <p>Since you have started to read this book, we can only assume that you have an interest
 in computer science.  You may also be interested in the programming language Python and
