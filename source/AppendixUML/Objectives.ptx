@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="uml_objectives">
+  <title>Objectives</title>
+  <p>
+    <ul>
+      <li>
+        <p>To understand the concept of a UML Diagram.</p>
+      </li>
+      <li>
+        <p>Given an Object design, draw the corresponding UML diagram.</p>
+      </li>
+      <li>
+        <p>Given a UML diagram, write the corresponding Java declarations.</p>
+      </li>
+      <li>
+        <p>Represent inheritance, aggregation, and composition in a UML diagram.</p>
+      </li>
+    </ul>
+  </p>
+</section>

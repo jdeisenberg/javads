@@ -33,6 +33,10 @@ Composition is also known as a <term>Has-A relationship</term>.  (A <c>Deck</c> 
     When we draw a UML diagram involving composition, as in <xref ref="oop_fig-aggregation"/>, we use an arrow with a diamond head to indicate aggregation, and we can also add notation here that shows that one <c>Deck</c> contains many <c>Card</c> objects.
 </p>
 
+<aside>
+    <p>If you are unfamiliar with UML (Unified Modeling Language) diagrams, see <xref ref="appendix_uml"/> for a brief introduction.</p>
+</aside>
+
   <figure align="center" xml:id="oop_fig-aggregation">
     <caption>UML Diagram Showing Aggregation - a Deck has Card(s)</caption>
     <image source="AppendixOOP/Figures/aggregation.png" width="25%"/>

@@ -178,7 +178,7 @@ public class ShapeExample {
 </note>
 </subsection>
 
-<subsection>
+<subsection xml:id="oop_interfaces">
   <title>Interfaces</title>
 
   <p>

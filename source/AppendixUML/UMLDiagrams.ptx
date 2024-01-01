@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="uml_diagram">
+  <title>UML Diagrams</title>
+  <introduction xml:id="uml_diagram_intro">
+  <p>
+    Back in <xref ref="introduction_add_fraction"/>, we saw the following diagram for the <c>Fraction</c> class:
+</p>
+
+<figure align="center" xml:id="repeated-fig-fraction2">
+      <caption>An Instance of the <literal>Fraction</literal> Class with Two Methods</caption>
+      <image source="Introduction/Figures/fraction2.png" width="50%" />
+    </figure>
+
+    <p>
+      This figure was a great way to show how an object's attributes are encapsulated, using methods to allow users to access them. However, it's not exactly a compact or easy-to-draw representation. (Imagine the diagram for an object with five attributes and twelve methods!) There must be a better way, and it's <term>Unified Modeling Language</term> diagrams, also called <term>UML</term> diagrams.
+    </p>
+    <aside><p>UML lets you draw many kinds of diagrams, but we'll concentrate on the ones that depict objects.</p></aside>
+
+    <p>Let's look at the UML diagram for the <c>Fraction</c> class as written in <xref ref="introduction_object_summary"/>:</p>
+
+    <figure align="center" xml:id="fraction_uml_diagram">
+      <caption>UML Diagram of the <literal>Fraction</literal> Class</caption>
+      <image source="AppendixUML/Figures/fraction.png" width="50%" />
+    </figure>
+
+    <p>UML diagrams for objects are divided into three sections. The top section gives the name of the class. If the class is abstract, its name appears in italics. If there are any generics, they will also appear in the upper right corner of the top section.</p>
+
+    <p>The middle section lists the attributes. Unlike Java, where the data type precedes the attribute name, the attribute name comes first, followed by a colon and the data type.</p>
+
+    <p>The bottom section lists methods. Again, data types follow the parameter names, and the return type is last.  The plus sign preceding each item means that the method is <c>public</c>. If an attribute or method is <c>private</c> (as the attributes in this class <em>should</em> have been), they are preceded by a minus sign. Of special note is the second <c>add</c> method. It is a <c>static</c> method, and thus it is underlined in the UML diagram.</p>
+
+    <p>That's pretty much it as far as creating a diagram for an object. Where things get interesting is when we want to make diagrams that show the relationships between objects, such as inheritance, composition, and aggregation.</p>
+
+  </introduction>
+
+  <subsection xml:id="uml_inheritance">
+    <title>Inheritance and Interfaces</title>
+    <p>To show inheritance, draw an arrow with an open head from the child class to the parent class. To show that a class implements an interface, draw a dotted-line arrow with an open head from the implemented class to the implementing class.</p>
+
+    <p>Here is the diagram from <xref ref="oop_interfaces"/> showing that <c>ElectricBicycle</c> and <c>CargoBicycle</c> inherit from <c>Bicycle</c>. <c>ElectricCargoBicycle</c> inherits from <c>CargoBicycle</c>. Both <c>ElectricBicycle</c> and <c>ElectricCargoBicycle</c> implment the <c>Electrified</c> interface.</p>
+
+<figure align="center" xml:id="uml_fig-interface-uml">
+    <caption><c>Bicycle</c> and its Subclasses</caption>
+    <image source="AppendixOOP/Figures/bicycles_with_interfaces.png" width="90%"/>
+  </figure>
+
+  <p>Notice that the attributes for these classes are private; they are preceded by minus signs in the diagram.</p>
+</subsection>
+
+<subsection xml:id="uml_aggregate_compose">
+  <title>Aggregation and Composition</title>
+  <p>The concepts of <term>aggregation</term> and <term>composition</term> are somewhat similar. The following description from <url href="https://en.wikipedia.org/wiki/Object_composition">Wikipedia</url> (retrieved 30 Dec 2023) sums it up nicely:</p>
+
+  <blockquote>
+  <p>
+    <ul>
+      <li><p>An aggregation is a kind of association that models a part/whole relationship between an aggregate (whole) and a group of related components (parts).</p></li>
+      <li><p>A composition, also called a composite aggregation, is a kind of aggregation that models a part/whole relationship between a composite (whole) and a group of exclusively owned parts.</p></li>
+    </ul>
+  </p>
+  <p>Aggregation differs from ordinary composition in that it does not imply ownership. In composition, when the owning object is destroyed, so are the contained objects. In aggregation, this is not necessarily true. For example, a university owns various departments (e.g., chemistry), and each department has a number of professors. If the university closes, the departments will no longer exist, but the professors in those departments will continue to exist. Therefore, a university can be seen as a composition of departments, whereas departments have an aggregation of professors. In addition, a professor could work in more than one department, but a department could not be part of more than one university.</p>
+</blockquote>
+
+  <p>Here is a UML diagram of the preceding paragraph. Aggregation is shown as an open diamond; composition as a closed diamond. The numbers show how many of each class can be aggregated (or composed). In this diagram, one university consists of from one to twenty departments. Each department (which can have zero or more instances) can have zero to five professors.</p>
+
+   <figure align="center" xml:id="uml_fig-agg_vs_comp">
+      <caption>Aggregation and Composition in UML</caption>
+    <image source="AppendixUML/Figures/agg_vs_comp.png" width="70%"/>
+  </figure>
+
+  <p>Don't worry if you have trouble determining whether a particular situation calls for aggregation or composition; it is not always a clear-cut choice, and it can depend on the exact specification of the relationship between classes.</p>
+
+  <p>However, there is one very important point: as part of the design process, you draw your UML diagrams <em>first</em>, and generate the corresponding Java classes <em>later</em>. There are tools such as <url href="https://plantuml.com/">PlantUML</url> that will help you draw UML diagrams from a text file description.</p>
+
+</subsection>
+
+</section>

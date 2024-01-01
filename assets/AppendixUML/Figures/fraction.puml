@@ -1,0 +1,28 @@
+@startuml
+skinparam classbackgroundcolor #ffffff
+skinparam classarrowcolor #000000
+skinparam classdiamondbackgroundcolor #ffffff
+skinparam classdiamondbordercolor #000000
+skinparam classbordercolor #000000
+skinparam classfontsize 18
+skinparam classfontname "Liberation Mono"
+skinparam classattributefontsize 18
+skinparam classattributefontname "Liberation Mono"
+skinparam classAttributeIconSize 0
+hide circle
+
+class Fraction {
+    numerator: int
+    denominator: int
+
+    + Fraction(numerator:int, denominator: int)
+
+    + gcd(m: int, n:int): int
+    + add(other: Fraction): Fraction
+    + {static} add(fracA: Fraction, fracB: Fraction): Fraction
+
+    + toString(): String
+    + equals(other: Fraction): boolean
+}
+
+@enduml
