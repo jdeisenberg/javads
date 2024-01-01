@@ -80,6 +80,7 @@
     <backmatter>
       <xi:include href="./AppendixOOP/toctree.ptx"/>
       <xi:include href="./AppendixFiles/toctree.ptx"/>
+      <xi:include href="./AppendixUML/toctree.ptx"/>
       <index>
         <index-list/>
       </index>
