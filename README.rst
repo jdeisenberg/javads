@@ -8,17 +8,15 @@ The current repository has been translated to Java by J. David Eisenberg for a c
 Getting Started
 ===============
 
-We have tried to make it as easy as possible for you to build and use this book.  
+1. You can see and read this book online at `runestone.academy <https://runestone.academy/ns/books/published/javads/javads.html?mode=browsing>`_
 
-1. You can see and read this book online at `runestone.academy <https://runestone.academy/ns/books/published/javads/javads.html?mode=browsing>`
-
-2.  You can build it and host it yourself by following the instructions at `runestone-monorepo.readthedocs.io <https://runestone-monorepo.readthedocs.io/en/latest/index.html>`
+2.  You can build it and host it yourself by following the instructions at `runestone-monorepo.readthedocs.io <https://runestone-monorepo.readthedocs.io/en/latest/index.html>`_
 
 .. raw:: html
-<p>
-   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Problem Solving with Algorithms and Data Structures using Python</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://interactivepython.org/runestone/static/pythonds/index.html" property="cc:attributionName" rel="cc:attributionURL">Brad Miller and David Ranum</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-</p>
+    <p>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Problem Solving with Algorithms and Data Structures using Python</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://interactivepython.org/runestone/static/pythonds/index.html" property="cc:attributionName" rel="cc:attributionURL">Brad Miller and David Ranum</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+    </p>
 
-<p>
-   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Problem Solving with Algorithms and Data Structures using Java: The Interactive Edition</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://interactivepython.org/runestone/static/pythonds/index.html" property="cc:attributionName" rel="cc:attributionURL">Bradley N. Miller, David L. Ranum, Roman Yasinovskyy, and J. David Eisenberg</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-</p>
+    <p>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Problem Solving with Algorithms and Data Structures using Java: The Interactive Edition</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://interactivepython.org/runestone/static/pythonds/index.html" property="cc:attributionName" rel="cc:attributionURL">Bradley N. Miller, David L. Ranum, Roman Yasinovskyy, and J. David Eisenberg</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+    </p>
