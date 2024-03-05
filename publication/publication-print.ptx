@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<publication>
+    <!-- directories are relative to the main source PreTeXt file -->
+    <source>
+        <directories external="../assets" generated="../generated-assets"/>
+    </source>
+	<common>
+		<exercise-inline answer="no" solution="no"/>
+		<exercise-reading answer="no" solution="no"/>
+		<exercise-divisional answer="no" solution="no"/>
+	</common>
+    <html>
+        <platform host="web"/>
+        <knowl exercise-inline="no" example="no" listing="no" />
+        <index-page ref="javads" />
+        <css style="oscarlevin" colors="blue_red" toc="crc" banner="crc" navbar="crc" shell="crc"/>
+		<tableofcontents focused="yes"/>
+    </html>
+</publication>
