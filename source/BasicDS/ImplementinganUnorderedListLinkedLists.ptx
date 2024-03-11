@@ -359,15 +359,12 @@ System.out.println(found); // prints true
             previous = current;
             current = current.getNext();
         }
-        if (current == null) {
-            throw new java.util.NoSuchElementException(
-                item + " is not in  the list.");
-        }
-
-        if (previous == null) {
-            this.head = current.getNext();
-        } else {
-            previous.setNext(current.getNext());
+        if (current != null) {
+            if (previous == null) {
+                this.head = current.getNext();
+            } else {
+                previous.setNext(current.getNext());
+            }
         }
     }
 </input>
@@ -390,8 +387,8 @@ System.out.println(found); // prints true
                 reference needs to be modified in order to complete the removal. In this
                 case, it is not <c>previous</c> but rather the head of the list that needs
                 to be changed (see <xref ref="fig-removehead"/>). Another special case occurs if
-                the item is not in the list. In that case <c>current == null</c> evaluates to <c>true</c>
-                and an error is raised.</p>
+                the item is not in the list. In that case <c>current != null</c> evaluates to <c>false</c>
+                and we leave the list unchanged.</p>
     <figure align="center" xml:id="fig-removepic1">
       <caption>Removing an Item from the Middle of the List</caption>
       <image source="BasicDS/Figures/remove.png" width="50%"/>
@@ -503,15 +500,13 @@ class UnorderedList&lt;T&gt; {
             previous = current;
             current = current.getNext();
         }
-        if (current == null) {
-            throw new java.util.NoSuchElementException(
-                item + " is not in  the list.");
-        }
 
-        if (previous == null) {
-            this.head = current.getNext();
-        } else {
-            previous.setNext(current.getNext());
+        if (current != null) {
+            if (previous == null) {
+                this.head = current.getNext();
+            } else {
+                previous.setNext(current.getNext());
+            }
         }
     }
 
@@ -570,11 +565,8 @@ public class TestUnorderedList {
         myList.remove(54); // test removal of last item
         System.out.println("after removing 54: " + myList);
 
-        try {
-            myList.remove(1066);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        myList.remove(1066); // remove non-existent item
+        System.out.println("after removing 1066: " + myList);
     }
 
 }

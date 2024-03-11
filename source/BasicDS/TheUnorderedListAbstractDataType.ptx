@@ -16,7 +16,7 @@
       </li>
       <li>
         <p><c>remove(item)</c> removes the item from the list. It needs the item
-                    and modifies the list. Throw an exception if the item is not present in the list.</p>
+                    and modifies the list. If the item is not present in the list, we leave the list unchanged.</p>
       </li>
       <li>
         <p><c>search(item)</c> searches for the item in the list. It needs the item
