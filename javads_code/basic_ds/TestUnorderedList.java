@@ -24,11 +24,8 @@ public class TestUnorderedList {
         myList.remove(31); // test removal of last item
         System.out.println("after removing 31: " + myList);
         
-        try {
-            myList.remove(1066);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        myList.remove(1066);
+        System.out.println("after removing 1066: " + myList);
     }
 
 }

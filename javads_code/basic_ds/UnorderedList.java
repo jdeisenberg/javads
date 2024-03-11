@@ -60,7 +60,7 @@ public class UnorderedList<T> {
 
     /*
      * Remove the given item from the list.
-     * Throws a NoSuchElementException if the item is not in the list
+     * Leave list unchanged if the item is not in the list
      */
     public void remove(T item) {
         Node<T> current = this.head;
@@ -70,16 +70,14 @@ public class UnorderedList<T> {
             previous = current;
             current = current.getNext();
         }
-        if (current == null) {
-            throw new java.util.NoSuchElementException(
-                item + " is not in  the list.");
-        }
         
-        if (previous == null) {
-            this.head = current.getNext();
-        } else {
-            previous.setNext(current.getNext());
-        }
+        if (current != null) {
+			if (previous == null) {
+				this.head = current.getNext();
+			} else {
+				previous.setNext(current.getNext());
+			}
+		}
     }
 
     /*
