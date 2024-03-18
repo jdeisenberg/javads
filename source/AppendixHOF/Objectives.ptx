@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="hof_objectives">
+  <title>Objectives</title>
+  <p>
+    <ul>
+      <li>
+        <p>To understand the concept of a higher-order function (HOF).</p>
+      </li>
+      <li>
+        <p>Implement methods that use a <c>Predicate</c> HOF.</p>
+      </li>
+      <li>
+        <p>Implement methods that use a <c>Function</c> HOF.</p>
+      </li>
+    </ul>
+  </p>
+</section>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="higher_order_functions">
+  <title>Higher Order Functions</title>
+  <introduction>
+  <p>
+    Consider the following program that implements three methods for creating a new <c>ArrayList</c> that retains only specific
+    elements of a given <c>ArrayList</c>:
+  </p>
+
+<listing>
+  <program language="java" interactive="activecode" label="hof_keep-with-normal-methods">
+    <input>
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+public class KeepItems {
+
+	public static ArrayList&lt;Integer&gt; keepEven(ArrayList&lt;Integer&gt; data) {
+		ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+		for (Integer item: data) {
+			if (item % 2 == 0) {
+				result.add(item);
+			}
+		}
+		return result;
+	}
+
+	public static ArrayList&lt;Integer&gt; keepNegative(ArrayList&lt;Integer&gt; data) {
+		ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+		for (Integer item: data) {
+			if (item &lt; 0) {
+				result.add(item);
+			}
+		}
+		return result;
+	}
+
+	public static ArrayList&lt;Integer&gt; keepTwoDigit(ArrayList&lt;Integer&gt; data) {
+		ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+		for (Integer item: data) {
+			if (Math.abs(item) &gt; 9 &amp;&amp; Math.abs(item) &lt; 100) {
+				result.add(item);
+			}
+		}
+		return result;
+	}
+
+	public static void main(String[] args) {
+		Integer[] data = {10, 47, -311, 66, 254, -99, 140};
+		ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;(Arrays.asList(data));
+
+		ArrayList&lt;Integer&gt; evens = keepEven(numbers);
+		System.out.println("Even elements: " + evens);
+
+		ArrayList&lt;Integer&gt; negative = keepNegative(numbers);
+		System.out.println("Negative elements: " + negative);
+
+		ArrayList&lt;Integer&gt; twoDigit = keepTwoDigit(numbers);
+		System.out.println("Two-digit numbers: " + twoDigit);
+	}
+}
+    </input>
+  </program>
+</listing>
+
+<p>That's a lot of duplicated code! Wouldn't it be nice if there were some way to have a program like this, where we pass the <q>testing</q> code as a parameter:</p>
+
+<listing>
+  <program language="java" label="hof_keep-pseudo-code">
+    <input>
+	public static ArrayList&lt;Integer&gt; keep(ArrayList&lt;Integer&gt; data,
+	  «booleanMethod») {
+		ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+
+		for (Integer item: data) {
+			if («booleanMethod»(item)) {
+				result.add(item);
+			}
+		}
+		return result;
+	}
+
+	//... and then, in the main() method
+
+
+	ArrayList&lt;Integer&gt; evens = keep(numbers,
+        boolean isEven(n) { return n % 2 = 0; });
+
+    ArrayList&lt;Integer&gt; negative = keep(numbers,
+        boolean isNegative(n) {return n < 0; });
+	</input>
+    </program>
+</listing>
+
+<p>Spoiler alert: Yes, it would be nice. And that's what we're going to examine in this section: <term>Higher Order Functions</term>, which give us the ability to pass methods as parameters to other methods.  Higher order functions are a core concept in <term>functional programming</term>. </p>
+<note>
+The preceding pseudo-code is just an example. We'll use different notation when we write it in a real Java program, but the idea is the same: we're passing a method as a parameter to another method.
+</note>
+
+</introduction>
+
+</section>
