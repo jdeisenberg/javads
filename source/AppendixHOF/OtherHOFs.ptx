@@ -177,4 +177,53 @@ second parameter, and returns a result type. This is, indeed, what happens in li
 </listing>
 
 
+<p>And here it is in the context of a program that does both sums and products:</p>
+
+<listing>
+    <program language="java" label="hof_reduce-lambda">
+        <input>
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.BiFunction;
+
+public class FunctionalReduce {
+
+    public static &lt;T, R&gt; R reduce(ArrayList&lt;T&gt; data, R start,
+        BiFunction&lt;R, T, R&gt; f) {
+        R result = start;
+
+        for (T item: data) {
+            result = f.apply(result, item);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Integer[] data = {1, 5, 2, 3, 4};
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;(Arrays.asList(data));
+
+        BiFunction&lt;Integer, Integer, Integer&gt; reduceSum =
+          (Integer result, Integer n)  -&gt; {
+            result += n;
+            return result;
+        };
+
+        BiFunction&lt;Integer, Integer, Integer&gt; reduceProduct =
+          (Integer result, Integer n)  -&gt; {
+            result *= n;
+            return result;
+        };
+
+        Integer sum = reduce(numbers, 0, reduceSum);
+        System.out.println("sum: " + sum);
+
+        Integer product = reduce(numbers, 1, reduceProduct);
+        System.out.println("product: " + product);
+    }
+}
+        </input>
+    </program>
+</listing>
+
+
 </section>
