@@ -3,4 +3,5 @@
   <title>Higher Order Functions</title>
   <xi:include href="./Objectives.ptx"/>
   <xi:include href="./HigherOrderFunctions.ptx"/>
+  <xi:include href="./OtherHOFs.ptx"/>
 </appendix>

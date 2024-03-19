@@ -2,9 +2,13 @@
 <section xml:id="higher_order_functions">
   <title>Higher Order Functions</title>
   <introduction>
+      <p>
+          When processing a collection of data, we often want to keep only certain items from that collection. For example, we might want to keep only negative values and discard non-negative values when going through a list of debits and credits. Or, we might want to keep only strings that have more than ten characters when selecting a password. This process is also called <term>filtering</term>; we are <q>filtering out</q> the values we don't want.
+      </p>
   <p>
-    Consider the following program that implements three methods for creating a new <c>ArrayList</c> that retains only specific
-    elements of a given <c>ArrayList</c>:
+      Consider the following program that implements three methods that take an <c>ArrayList</c> and create a new <c>ArrayList</c> that retains only specific
+    elements of the original list. The first method will keep only the even elements. The second
+    method keeps only the negative elements, and the third method keeps only the two-digit numbers from the original list:
   </p>
 
 <listing>
@@ -16,83 +20,83 @@ import java.util.Arrays;
 
 public class KeepItems {
 
-	public static ArrayList&lt;Integer&gt; keepEven(ArrayList&lt;Integer&gt; data) {
-		ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+    public static ArrayList&lt;Integer&gt; keepEven(ArrayList&lt;Integer&gt; data) {
+        ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
 
-		for (Integer item: data) {
-			if (item % 2 == 0) {
-				result.add(item);
-			}
-		}
-		return result;
-	}
+        for (Integer item: data) {
+            if (item % 2 == 0) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
 
-	public static ArrayList&lt;Integer&gt; keepNegative(ArrayList&lt;Integer&gt; data) {
-		ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+    public static ArrayList&lt;Integer&gt; keepNegative(ArrayList&lt;Integer&gt; data) {
+        ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
 
-		for (Integer item: data) {
-			if (item &lt; 0) {
-				result.add(item);
-			}
-		}
-		return result;
-	}
+        for (Integer item: data) {
+            if (item &lt; 0) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
 
-	public static ArrayList&lt;Integer&gt; keepTwoDigit(ArrayList&lt;Integer&gt; data) {
-		ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+    public static ArrayList&lt;Integer&gt; keepTwoDigit(ArrayList&lt;Integer&gt; data) {
+        ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
 
-		for (Integer item: data) {
-			if (Math.abs(item) &gt; 9 &amp;&amp; Math.abs(item) &lt; 100) {
-				result.add(item);
-			}
-		}
-		return result;
-	}
+        for (Integer item: data) {
+            if (Math.abs(item) &gt; 9 &amp;&amp; Math.abs(item) &lt; 100) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
 
-	public static void main(String[] args) {
-		Integer[] data = {10, 47, -311, 66, 254, -99, 140};
-		ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;(Arrays.asList(data));
+    public static void main(String[] args) {
+        Integer[] data = {10, 47, -311, 66, 254, -99, 140};
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;(Arrays.asList(data));
 
-		ArrayList&lt;Integer&gt; evens = keepEven(numbers);
-		System.out.println("Even elements: " + evens);
+        ArrayList&lt;Integer&gt; evens = keepEven(numbers);
+        System.out.println("Even elements: " + evens);
 
-		ArrayList&lt;Integer&gt; negative = keepNegative(numbers);
-		System.out.println("Negative elements: " + negative);
+        ArrayList&lt;Integer&gt; negative = keepNegative(numbers);
+        System.out.println("Negative elements: " + negative);
 
-		ArrayList&lt;Integer&gt; twoDigit = keepTwoDigit(numbers);
-		System.out.println("Two-digit numbers: " + twoDigit);
-	}
+        ArrayList&lt;Integer&gt; twoDigit = keepTwoDigit(numbers);
+        System.out.println("Two-digit numbers: " + twoDigit);
+    }
 }
     </input>
   </program>
 </listing>
 
-<p>That's a lot of duplicated code! Wouldn't it be nice if there were some way to have a program like this, where we pass the <q>testing</q> code as a parameter:</p>
+<p>That's a lot of duplicated code! Wouldn't it be nice if there were some way to have a program like this, where we pass the <q>testing</q> code as a parameter (and also use a generic type so that we can use it on an <c>ArrayList</c> of any type):</p>
 
 <listing>
   <program language="java" label="hof_keep-pseudo-code">
     <input>
-	public static ArrayList&lt;Integer&gt; keep(ArrayList&lt;Integer&gt; data,
-	  «booleanMethod») {
-		ArrayList&lt;Integer&gt; result = new ArrayList&lt;Integer&gt;();
+    public static &lt;T&gt; ArrayList&lt;t&gt; keep(ArrayList&lt;t&gt; data,
+      «booleanMethod») {
+        ArrayList&lt;T&gt; result = new ArrayList&lt;T&gt;();
 
-		for (Integer item: data) {
-			if («booleanMethod»(item)) {
-				result.add(item);
-			}
-		}
-		return result;
-	}
+        for (T item: data) {
+            if («booleanMethod»(item)) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
 
-	//... and then, in the main() method
+    //... and then, in the main() method
 
 
-	ArrayList&lt;Integer&gt; evens = keep(numbers,
+    ArrayList&lt;Integer&gt; evens = keep(numbers,
         boolean isEven(n) { return n % 2 = 0; });
 
     ArrayList&lt;Integer&gt; negative = keep(numbers,
-        boolean isNegative(n) {return n < 0; });
-	</input>
+        boolean isNegative(n) {return n &lt; 0; });
+    </input>
     </program>
 </listing>
 
@@ -103,4 +107,172 @@ The preceding pseudo-code is just an example. We'll use different notation when 
 
 </introduction>
 
+<subsection xml:id="hof_predicates" label="hof_predicates">
+    <title>Predicates</title>
+
+    <p>We will use the <c>Predicate</c> class to implement our higher order function. A <term>predicate</term> is another name for a boolean method. (This isn't like a predicate in an English sentence; it means something is conditional, or <em>predicated</em> on something else.)</p>
+
+    <p>Let's start with the code for our new <c>keep</c> method. It will have two parameters: an <c>ArrayList&lt;T&gt;</c> and a <c>Predicate&lt;T&gt;</c>, which will be our boolean method.  We'll have to import <c>java.util.function.Predicate</c>. The <c>Predicate</c> class uses a generic to specify what kind of value is being tested, and it contains a <c>test</c> method that invokes the method passed to it:</p>
+
+<listing>
+  <program language="java" label="hof_keep-predicate">
+    <input>
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
+public class KeepItemsFunctional {
+    public static &lt;T&gt; ArrayList&lt;T&gt; keep(ArrayList&lt;T&gt; data,
+      Predicate&lt;T&gt; p) {
+
+        ArrayList&lt;T&gt; result = new ArrayList&lt;T&gt;();
+
+        for (T item: data) {
+            if (p.test(item)) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
+</input>
+</program>
+</listing>
+
+<note>
+    <p>Although we usually want meaningful variable names, the predicate can be virtually <em>anything</em>, so there is really no good descriptive name for it. Thus we'll go with <c>p</c>. We could also have used <c>pred</c> to be a bit more specific; use whichever name you prefer in your code.</p>
+</note>
+</subsection>
+
+<subsection xml:id="hof_lambda-expressions" label="hof_lambda-expressions">
+    <title>Lambda Expressions</title>
+
+    <p>Now that we have a method that requires a <c>Predicate&lt;T&gt;</c>, let's look at the <c>main</c> method. This is where we will use <term>lambda expressions</term> to specify the code we want to pass to a method.</p>
+
+    <aside><p>The term comes from the <em>lambda calculus</em>, a formal system in mathematical logic developed by Alonzo Church in the 1930s.</p></aside>
+
+    <p>In essence, a lambda expression is a method without a name. There are many different ways to write a lambda expression, but we'll stick with one format for the sake of simplicity and not go into all the possible shortcuts. Let's look at a boolean method for determining whether a number is even or not:</p>
+
+<listing>
+  <program language="java" label="hof_even-or-odd">
+    <input>
+boolean isEven(Integer n) {
+    return n % 2 == 0;
+}
+    </input>
+    </program>
+</listing>
+
+    <p>To convert this method into a lambda expression, we get rid of the return type and the name, and insert an arrow operator <c>-&gt;</c> before the opening brace:</p>
+
+    <listing>
+  <program language="java" label="hof_anonymous-even-or-odd">
+    <input>
+(Integer n) -&gt; {
+    return n % 2 == 0;
+}
+    </input>
+    </program>
+</listing>
+
+<p>We can now put that into our <c>main</c> method:</p>
+
+<listing>
+    <program language="java" label="hof_pass-lambda" line-numbers="yes">
+        <input>
+    public static void main(String[] args) {
+        Integer[] data = {10, 47, -311, 66, 254, -99, 140};
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;(Arrays.asList(data));
+
+        ArrayList&lt;Integer&gt; evens = keep(numbers,
+            (Integer n) -&gt; {
+                return n % 2 == 0;
+            });
+        System.out.println("Even elements: " + evens);
+    }
+}
+    </input>
+</program>
+</listing>
+
+<p>You may have noticed that it's a bit tricky to keep track of the braces and parentheses in the call to <c>keep</c> in lines 5-8.
+    Let's do the lambda expression for testing negative numbers as a separate entity. We'll have to assign it to a
+    <c>Predicate&lt;Integer&gt;</c> variable, because that is what <c>keep</c> expects. Add this code before the end of
+    <c>main</c>:</p>
+
+<listing>
+    <program language="java" label="hof_keep-negative">
+        <input>
+    Predicate&lt;Integer&gt; isNegative = (Integer n) -&gt; {
+        return (n &lt; 0);
+    };
+    ArrayList&lt;Integer&gt; negatives = keep(numbers, isNegative);
+    System.out.println("Negative elements: " + negatives);
+    </input>
+</program>
+</listing>
+
+<p>And we'll do the same for our lambda expression to test if the number is a two-digit number or not:</p>
+<listing>
+    <program language="java" label="hof_keep-two-digit">
+        <input>
+    Predicate&lt;Integer&gt; isTwoDigits = (Integer n) -&gt; {
+        return (Math.abs(n) &gt; 9 &amp;&amp; Math.abs(n) &lt; 100);
+    };
+    ArrayList&lt;Integer&gt; twoDigits = keep(numbers, isTwoDigits);
+    System.out.println("Two-digit elements: " + twoDigits);
+    </input>
+</program>
+</listing>
+
+<p>Here's the entire program:</p>
+<listing>
+    <program language="java" interactive="activecode" label="hof_functional-keep">
+        <input>
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
+public class FunctionalKeepItems {
+    public static &lt;T&gt; ArrayList&lt;T&gt; keep(ArrayList&lt;T&gt; data,
+      Predicate&lt;T&gt; p) {
+
+        ArrayList&lt;T&gt; result = new ArrayList&lt;T&gt;();
+
+        for (T item: data) {
+            if (p.test(item)) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Integer[] data = {10, 47, -311, 66, 254, -99, 140};
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;(Arrays.asList(data));
+
+        ArrayList&lt;Integer&gt; evens = keep(numbers,
+            (Integer n) -&gt; {
+                return n % 2 == 0;
+            });
+        System.out.println("Even elements: " + evens);
+
+        Predicate&lt;Integer&gt; isNegative = (Integer n) -&gt; {
+            return (n &lt; 0);
+        };
+        ArrayList&lt;Integer&gt; negatives = keep(numbers, isNegative);
+        System.out.println("Negative elements: " + negatives);
+
+        Predicate&lt;Integer&gt; isTwoDigits = (Integer n) -&gt; {
+            return (Math.abs(n) &gt; 9 &amp;&amp; Math.abs(n) &lt; 100);
+        };
+        ArrayList&lt;Integer&gt; twoDigits = keep(numbers, isTwoDigits);
+        System.out.println("Two-digit elements: " + twoDigits);
+    }
+}
+</input>
+</program>
+</listing>
+</subsection>
+
 </section>
+

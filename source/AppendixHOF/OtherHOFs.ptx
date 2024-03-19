@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="other_higher_order_functions">
+  <title>Other Higher Order Functions</title>
+  <introduction>
+  <p>
+    Predicates aren't the only game in town. The <c>java.util.function</c> package contains a large number of classes for use with lambda expressions (see <url href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/function/package-summary.html">the Java API</url> as of version 21 for a complete list. We won't go through all of them, but there are two more that are very useful:
+  </p>
+    </introduction>
+
+<subsection xml:id="hof_function" label="hof_function">
+    <title>The <c>Function</c> class</title>
+
+    <p>We use this class when we want to process a list, applying a function to each element of the original list to create a new list. For example, we might want to apply the <c>Math.sqrt</c> method to each element of a list of integers to create a new list of the square roots. Or we might want to apply the <c>length()</c> method to each element of a list of strings to create a new list of the string lengths. This is called a <term>map</term> operation.</p>
+
+    <note>
+    <p>This use of <em>map</em> is slightly different from the usage when we talk about a <c>HashMap</c> class.  In this case, we are using <em>map</em> in the mathematical sense, where a function is said to maps its domain to its range.</p>
+    </note>
+
+    <p>To accomplish these task, we use the <c>Function&lt;T, R&gt;</c> class. It takes a value of one type and returns a value of another type (or the same type).</p>
+
+    <p>Here's the start of a program that uses <c>Function</c> to implement the <c>map</c> method:</p>
+
+<listing>
+    <program language="java" label="hof_map-function" line-numbers="yes">
+        <input>
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Function;
+
+public class FunctionalMapping {
+    public static &lt;T, R&gt; ArrayList&lt;R&gt; map(ArrayList&lt;T&gt; data,
+      Function&lt;T, R&gt; f) {
+
+        ArrayList&lt;R&gt; result = new ArrayList&lt;R&gt;();
+
+        for (T item: data) {
+            result.add(f.apply(item));
+        }
+        return result;
+    }
+</input>
+</program>
+</listing>
+
+<p>On line 12, you use <c>apply</c> to invoke the <c>Function</c> that was passed to <c>map</c>.</p>
+
+<p>Here's the whole program, including the <c>main</c> method that uses our <c>map</c> method:</p>
+
+<listing>
+    <program language="java" label="hof_map-usage" interactive="activecode">
+        <input>
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Function;
+
+public class FunctionalMapping {
+    public static &lt;T, R&gt; ArrayList&lt;R&gt; map(ArrayList&lt;T&gt; data,
+      Function&lt;T, R&gt; f) {
+
+        ArrayList&lt;R&gt; result = new ArrayList&lt;R&gt;();
+
+        for (T item: data) {
+            result.add(f.apply(item));
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Integer[] data = {16, 144, 25, 2};
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;
+          (Arrays.asList(data));
+
+        ArrayList&lt;Double&gt; roots = map(numbers,
+            (Integer n) -&gt; {
+                return Math.sqrt(Math.abs(n));
+            });
+        System.out.println("Square roots: " + roots);
+
+        String[] wordArr = {"Java", "C++", "Python", "COBOL"};
+        ArrayList&lt;String&gt; words = new ArrayList&lt;&gt;(Arrays.asList(wordArr));
+
+        Function&lt;String, Integer&gt; strLen = (String str) -&gt; {
+            return str.length();
+        };
+        ArrayList&lt;Integer&gt; lengths = map(words, strLen);
+        System.out.println("Word lengths: " + lengths);
+    }
+}
+        </input>
+    </program>
+</listing>
+</subsection>
+
+<subsection xml:id="hof_function" label="hof_bifunction">
+    <title>The <c>BiFunction</c> class</title>
+
+    <p>When we implemented our <c>keep</c> and <c>map</c> methods, we transformed a list into another list. Sometimes, though, we want to process a list and get a single data element as a result. For example, we may want to find the sum of the elements in a list (or the product, or the sum of squares). We might want to join all the strings in a list with a delimiter.  The process of reducing a list to a single value is called a <term>reduce</term> operation.</p>
+
+    <p>Let's look at the typical code for adding up the elements in a list of integers:</p>
+
+<listing>
+    <program language="java" label="hof_ordinary-sum" interactive="activecode">
+        <input>
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class SumArrayList {
+
+    public static Integer reduceSum(ArrayList&lt;Integer&gt; data, Integer start) {
+        Integer result = start;
+
+        for (Integer item: data) {
+            result = result + item;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Integer[] data = {1, 5, 2, 3, 4};
+        ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;(Arrays.asList(data));
+
+        Integer sum = reduceSum(numbers, 0);
+        System.out.println("sum: " + sum);
+    }
+}
+
+    </input>
+</program>
+</listing>
+
+<p>There are two things to note in this code. First, rather than setting <c>result</c> to zero inside the <c>reduceSum</c> method, we are passing zero as the starting value for the sum. This makes our general case easier to write. If we wanted a product, the starting value would be one; in the case of joining strings, our starting value is the empty string.</p>
+
+<aside><p>The result variable is often named <c>accumulator</c> to make it clear that this is where the accumulated result will go.</p></aside>
+
+<p>Second, unlike our mapping operations, we need to keep track of <em>two</em> values: the current item from the list and the accumulated result so far. This means we can't use <c>Function.apply</c>, which has only one parameter. Instead, we need the <c>BiFunction</c> class; its <c>apply</c> method takes two parameters.</p>
+
+<p>Here's our functional reduce method that uses <c>BiFunction</c>:</p>
+
+<listing>
+    <program language="java" label="hof_functional-reduce" line-numbers="yes">
+    <input>
+    public static &lt;T, R&gt; R reduce(ArrayList&lt;T&gt; data, R start,
+        BiFunction&lt;R, T, R&gt; f) {
+        R result = start;
+
+        for (T item: data) {
+            result = f.apply(result, item);
+        }
+        return result;
+    }
+    </input>
+    </program>
+</listing>
+
+<p>Here, we are using two generic types: one type <c>T</c> for the elements of the list, and another type <c>R</c> for
+the starting value and accumulated result, which must both be of the same type. (The definition of <c>BiFunction</c> uses
+three different generic types if you need to have different data types for the two parameters, but we don't need that
+capability here.)</p>
+<p>On line 2, we specify that our reducing bi-function <c>f</c> has the result type as its first parameter, the list type as its
+second parameter, and returns a result type. This is, indeed, what happens in line 6.</p>
+
+<p>This is what the lambda expression and its usage looks like:</p>
+
+<listing>
+    <program language="java" label="hof_sum-lambda">
+        <input>
+        BiFunction&lt;Integer, Integer, Integer&gt; reduceSum =
+          (Integer result, Integer n)  -&gt; {
+            result += n;
+            return result;
+        };
+
+        // using the preceding lambda:
+        Integer sum = reduce(numbers, 0, reduceSum);
+        </input>
+    </program>
+</listing>
+
+
+</section>
