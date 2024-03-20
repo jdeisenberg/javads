@@ -91,7 +91,7 @@ public class FunctionalMapping {
 </listing>
 </subsection>
 
-<subsection xml:id="hof_function" label="hof_bifunction">
+<subsection xml:id="hof_bifunction" label="hof_bifunction">
     <title>The <c>BiFunction</c> class</title>
 
     <p>When we implemented our <c>keep</c> and <c>map</c> methods, we transformed a list into another list. Sometimes, though, we want to process a list and get a single data element as a result. For example, we may want to find the sum of the elements in a list (or the product, or the sum of squares). We might want to join all the strings in a list with a delimiter.  The process of reducing a list to a single value is called a <term>reduce</term> operation.</p>
@@ -180,7 +180,7 @@ second parameter, and returns a result type. This is, indeed, what happens in li
 <p>And here it is in the context of a program that does both sums and products:</p>
 
 <listing>
-    <program language="java" label="hof_reduce-lambda">
+    <program language="java" label="hof_reduce-lambda" interactive="activecode">
         <input>
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -224,6 +224,6 @@ public class FunctionalReduce {
         </input>
     </program>
 </listing>
-
+</subsection>
 
 </section>
