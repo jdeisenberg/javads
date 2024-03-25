@@ -13,7 +13,7 @@
     <p>We use this class when we want to process a list, applying a function to each element of the original list to create a new list. For example, we might want to apply the <c>Math.sqrt</c> method to each element of a list of integers to create a new list of the square roots. Or we might want to apply the <c>length()</c> method to each element of a list of strings to create a new list of the string lengths. This is called a <term>map</term> operation.</p>
 
     <note>
-    <p>This use of <em>map</em> is slightly different from the usage when we talk about a <c>HashMap</c> class.  In this case, we are using <em>map</em> in the mathematical sense, where a function is said to maps its domain to its range.</p>
+    <p>This use of <em>map</em> is slightly different from the usage when we talk about a <c>HashMap</c> class.  In this case, we are using <em>map</em> in the mathematical sense, where a function is said to map its domain to its range.</p>
     </note>
 
     <p>To accomplish these task, we use the <c>Function&lt;T, R&gt;</c> class. It takes a value of one type and returns a value of another type (or the same type).</p>
