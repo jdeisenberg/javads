@@ -80,11 +80,11 @@ public class Maze {
         t.setFillColor(color);
         t.beginFill();
         t.goTo(x + 1, y - 1);
-        t.setHeading(90);
+        t.setHeading(-90);
         t.penDown();
         for (int i = 0; i < 4; i++) {
             t.forward(1);
-            t.turnRight(90);
+            t.turnLeft(90);
         }
         t.endFill();
     }

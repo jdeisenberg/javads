@@ -6,7 +6,7 @@ public class FractalTree {
         World habitat = new World(300, 300);
         Turtle t = new Turtle(habitat);
         
-        final Color DARK_GREEN = new Color(0.0, 0.5, 0.0);
+        final Color DARK_GREEN = new Color(0, 128, 0);
         t.setDelay(0.1);
         
         t.turnLeft(90);

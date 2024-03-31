@@ -75,7 +75,7 @@ public class Turtle {
     
 	/**
 	 * Makes a new turtle at the specified point within the world.
-	 * @param x the x coordinate, in pixels; 0 is the center; bigger numbers to left
+	 * @param x the x coordinate, in pixels; 0 is the center; bigger numbers to right
 	 * @param y the y coordinate, in pixels; 0 is the center; bigger numbers down
 	 * @param w the world
 	 */
@@ -87,7 +87,7 @@ public class Turtle {
 	/**
 	 * Makes a new turtle at the specified point within the world.
 	 * @param w the world
-	 * @param x the x coordinate, in pixels; 0 is the center; bigger numbers to left
+	 * @param x the x coordinate, in pixels; 0 is the center; bigger numbers to right
 	 * @param y the y coordinate, in pixels; 0 is the center; bigger numbers down
 	 */
 	public Turtle(World w, double x, double y) {
@@ -121,7 +121,7 @@ public class Turtle {
 	 */
 	public void forward(double d) {
 		this.cornerGoTo(this.turtleCoords.x + Math.cos(this.theta) * d,
-            this.turtleCoords.y + Math.sin(this.theta) * d);
+            this.turtleCoords.y - Math.sin(this.theta) * d);
 	}
 
 	/**
