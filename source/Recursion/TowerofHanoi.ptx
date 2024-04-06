@@ -113,13 +113,13 @@ public class TowerOfHanoi {
 
   <p>Here's the output from the program:</p>
   <console><output>
+Moving disk from A to B.
 Moving disk from A to C.
-Moving disk from A to C.
-Moving disk from B to A.
-Moving disk from A to C.
-Moving disk from B to A.
-Moving disk from B to A.
+Moving disk from B to C.
+Moving disk from A to B.
+Moving disk from C to A.
 Moving disk from C to B.
+Moving disk from A to B.
 </output></console>
 
   <p>Now that you have seen the code for both <c>moveTower</c> and <c>moveDisk</c>,
