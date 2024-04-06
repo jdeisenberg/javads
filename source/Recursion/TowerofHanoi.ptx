@@ -48,14 +48,15 @@
     <caption>Java Code for the Tower of Hanoi</caption>
 <program language="java" line-numbers="yes">
     <input>
-public static void moveTower(int height, String fromPole, String toPole,
-  String withPole) {
+public static void moveTower(int height, String fromPole,
+  String toPole, String withPole) {
     if (height &gt;= 1) {
         moveTower(height - 1, fromPole, withPole, toPole);
         moveDisk(fromPole, toPole);
         moveTower(height - 1, withPole, toPole, fromPole);
     }
 }
+
 </input>
   </program></listing>
   <p>Notice that the code in <xref ref="recursion_lst-recursion_hanoi"/> is almost identical to the
@@ -89,7 +90,7 @@ public static void moveDisk(String fromPole, String toPole) {
     <input>
 public class TowerOfHanoi {
     public static void moveTower(int height, String fromPole,
-      String withPole, String toPole) {
+      String toPole, String withPole) {
         if (height &gt;= 1) {
             moveTower(height - 1, fromPole, withPole, toPole);
             moveDisk(fromPole, toPole);
@@ -103,10 +104,9 @@ public class TowerOfHanoi {
     }
 
     public static void main(String[] args) {
-        moveTower(3, "A", "C", "B");
+        moveTower(3, "A", "B", "C");
     }
 }
-
         </input>
   </program>
   </listing>
