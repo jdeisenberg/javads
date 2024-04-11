@@ -35,7 +35,8 @@ public class SierpinskiTriangles {
         t.penUp();
         t.goTo(points[0].x, points[0].y);
         t.penDown();
-        t.beginFill(color);
+        t.setColor(color);
+        t.beginFill();
         t.goTo(points[1].x, points[1].y);
         t.goTo(points[2].x, points[2].y);
         t.goTo(points[0].x, points[0].y);
