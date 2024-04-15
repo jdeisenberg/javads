@@ -124,7 +124,7 @@ The address
 
           <note>
             <title>Java Note</title>
-            <p>We cannot create a generic array in line 15, so we create an array of <c>Object</c>, which is the superclass of all object types. This allows us to assign any object value to an <c>Object</c> variable.</p>
+            <p>We cannot create a generic array in line 15, so we create an array of <c>Object</c>, which is the superclass of all object types. This allows us to assign a value of any object type to an <c>Object</c> variable (because of polymorphism).</p>
           </note>
 
   <listing xml:id="lst_arraylistinit">
@@ -231,7 +231,7 @@ public class MiniArrayList&lt;T&gt; {
             any one insertion averages out to <m>O(1)</m>. For example, consider
             the case where you have already appended 16 items. Each of these 16
             appends costs you just one operation to store in the array that was
-            already allocated to hold 116 items. When the 17th item is added, a new
+            already allocated to hold 16 items. When the 17th item is added, a new
             array of size 32 is allocated and the 16 old items are copied. But now
             you have room in the array for 16 additional low cost appends.
             Mathematically we can show this as follows:</p>
