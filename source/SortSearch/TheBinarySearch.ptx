@@ -47,7 +47,7 @@ public class BinarySearchExample {
     }
 
     public static void main(String[] args) {
-        int[] testList = {0, 1, 2, 8, 13, 17, 19, 32, 42};
+        int[] testList = {1, 2, 8, 13, 17, 19, 32, 47};
 
         System.out.println("Binary search for 3 returns " +
             binarySearch(testList, 3));
@@ -96,7 +96,7 @@ public class RecursiveBinarySearchExample {
     }
 
     public static void main(String[] args) {
-        int[] testList = {0, 1, 2, 8, 13, 17, 19, 32, 42};
+        int[] testList = {1, 2, 8, 13, 17, 19, 32, 47};
 
         System.out.println("Binary search for 3 returns " +
             binarySearchRecursive(testList, 3));
