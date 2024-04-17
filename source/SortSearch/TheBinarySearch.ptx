@@ -37,7 +37,7 @@ public class BinarySearchExample {
             int midpoint = (first + last) / 2;
             if (list[midpoint] == item) {
                 return true;
-            } else if (list[midpoint] &lt; item) {
+            } else if (item &lt; list[midpoint]) {
                 last = midpoint - 1;
             } else {
                 first = midpoint + 1;
