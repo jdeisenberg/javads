@@ -727,6 +727,15 @@ class HashTable {
       </exercise>
     </exercises>
   </subsection>
+  <subsection xml:id="sort-search-java-hashcode">
+    <title>The Java <c>hashCode</c> Method</title>
+    <p>
+      In order to make implementation of data structures such as <c>HashMap</c> easier, every Java object has a <c>hashCode</c> method that returns an integer value. When two objects are equal (as evaluated by the <c>equals</c> method), they are guaranteed to have the same value for their hash codes. There is no guarantee that two different objects will <em>not</em> hash to the same value, but, as the documentation says: <q>As far as is reasonably practical, the <c>hashCode</c> method defined by class <c>Object</c> returns distinct integers for distinct objects.</q>
+      </p>
+      <p>
+        For the <c>Integer</c> class, <c>hashCode</c> returns the integer value. This guarantees distinct integers for distinct objects.  For the <c>String</c> class, <c>hashCode</c> uses a formula based on the individual characters in the string.
+    </p>
+  </subsection>
   <subsection xml:id="sort-search_analysis-of-hashing">
     <title>Analysis of Hashing</title>
     <p>We stated earlier that in the best case hashing would provide an
