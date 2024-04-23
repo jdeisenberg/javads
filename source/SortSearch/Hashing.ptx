@@ -528,13 +528,13 @@ public static int hashString(String str, int tableSize) {
                 resolution technique is linear probing with a <q>plus 1</q> rehash value.
                 The <c>put</c> method (see <xref ref="sort-search_lst-hashtablecodestore"/>) assumes that
                 there will eventually be an empty slot unless the key is already present
-                in the <c> slots</c>. It computes the original hash value and if that
+                in the <c>slots</c>. It computes the original hash value and if that
                 slot is not empty, iterates the <c>rehash</c> function until an empty slot
-                occurs (lines 8&#x2013;10). If a nonempty slot already contains the key, the old data value
+                occurs (lines 7&#x2013;9). If a nonempty slot already contains the key, the old data value
                 is replaced with the new data value.</p>
     <listing xml:id="sort-search_lst-hashtablecodestore">
       <caption>The <c>put</c> method</caption>
-      <program xml:id="sort-search_prog-hashtablecodestore" language="java">
+      <program xml:id="sort-search_prog-hashtablecodestore" language="java" line-numbers="yes">
         <input>
     public void put(Integer key, String value) {
         int hashSlot = hashFunction(key, slots.length);
@@ -542,15 +542,14 @@ public static int hashString(String str, int tableSize) {
             slots[hashSlot] = key;
             data[hashSlot] = value;
         } else {
-            int nextSlot = rehash(hashSlot, slots.length);
-            while (slots[nextSlot] != null &amp;&amp; slots[nextSlot] != key) {
-                nextSlot = rehash(nextSlot, slots.length);
+            while (slots[hashSlot] != null &amp;&amp; !(slots[hashSlot].equals(key))) {
+                hashSlot = rehash(hashSlot, slots.length);
             }
-            if (slots[nextSlot] == null) {
-                slots[nextSlot] = key;
-                data[nextSlot] = value;
+            if (slots[hashSlot] == null) {
+                slots[hashSlot] = key;
+                data[hashSlot] = value;
             } else {
-                data[nextSlot] = value;
+                data[hashSlot] = value;
             }
         }
     }
@@ -585,7 +584,7 @@ public static int hashString(String str, int tableSize) {
         int position = startSlot;
 
         while (slots[position] != null) {
-            if (slots[position] == key) {
+            if (slots[position].equals(key)) {
                 return data[position];
             } else {
                 position = rehash(position, slots.length);
@@ -599,8 +598,9 @@ public static int hashString(String str, int tableSize) {
 </input>
     </program></listing>
     <p><xref ref="sort-search_lst-hashtabletest"/> shows the <c>HashTable</c> class in action. First we
-                will create a hash table and store some items with integer keys and
-                string data values, then access and modify values.</p>
+                will create a hash table and store some items with integer keys (US postal codes) and
+                string data values (the city with that code), then access and modify values. For each postal
+                code, we show the initial hash value.</p>
               <listing xml:id="sort-search_lst-hashtabletest">
                 <caption>Testing the <c>HashTable</c> Implementation</caption>
     <program language="java"
@@ -612,27 +612,29 @@ public class HashTableTest{
 
     public static void main(String[] args) {
         HashTable table = new HashTable();
-        table.put(54, "cat");
-        table.put(26, "dog");
-        table.put(93, "lion");
-        table.put(17, "tiger");
-        table.put(77, "bird");
-        table.put(31, "cow");
-        table.put(44, "goat");
-        table.put(55, "pig");
-        table.put(20, "chicken");
+        table.put(61820, "Champaign IL");  // % 11 = 0
+        table.put(48658, "Stanidsh MI");   // % 11 = 5
+        table.put(18222, "Drums PA");      // % 11 = 6
+        table.put(75394, "Dallas TX");     // % 11 = 0
+        table.put(83344, "Murtaugh ID");   // % 11 = 8
+        table.put(32157, "Lake Como FL");  // % 11 = 4
+        table.put(25101, "Cumberland MD"); // % 11 = 10
+        table.put(74457, "Proctor OK");    // % 11 = 9
+        table.put(24002, "Roanoke VA");    // % 11 = 0
+        table.put(46957, "Matthews IN");   // % 11 = 9
         System.out.println(table);
         System.out.println();
 
         /* Access and modify elements in the table */
-        System.out.println("key 20, value " + table.get(20)); // chicken
-        System.out.println("key 17, value " + table.get(17)); // tiger
-        System.out.println("key 99, value " + table.get(99)); // null
+        System.out.println("key 32157, value " + table.get(32157)); // Lake Como
+        System.out.println("key 61820, value " + table.get(61820)); // Champaign
+        System.out.println("key 95135, value " + table.get(95135)); // null
 
-        table.put(20, "duck");
-        System.out.println("key 20, value " + table.get(20)); // duck
+        table.put(48658, "Standish MI"); // correct a misspelling
+        System.out.println("key 48658, value " + table.get(48658)); // Standish
     }
 }
+
 
 </input>
     </program>

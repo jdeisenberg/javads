@@ -1,4 +1,4 @@
-public class HashTable {
+class HashTable {
     int size;
     Integer[] slots;
     String[] data;
@@ -29,15 +29,14 @@ public class HashTable {
             slots[hashSlot] = key;
             data[hashSlot] = value;
         } else {
-            int nextSlot = rehash(hashSlot, slots.length);
-            while (slots[nextSlot] != null && slots[nextSlot] != key) {
-                nextSlot = rehash(nextSlot, slots.length);
+            while (slots[hashSlot] != null && !(slots[hashSlot].equals(key))) {
+                hashSlot = rehash(hashSlot, slots.length);
             }
-            if (slots[nextSlot] == null) {
-                slots[nextSlot] = key;
-                data[nextSlot] = value;
+            if (slots[hashSlot] == null) {
+                slots[hashSlot] = key;
+                data[hashSlot] = value;
             } else {
-                data[nextSlot] = value;
+                data[hashSlot] = value;
             }
         }
     }
@@ -56,7 +55,7 @@ public class HashTable {
         int position = startSlot;
         
         while (slots[position] != null) {
-            if (slots[position] == key) {
+            if (slots[position].equals(key)) {
                 return data[position];
             } else {
                 position = rehash(position, slots.length);
