@@ -195,7 +195,7 @@ public class OrderedSequentialSearchExample {
       <title>Self Check</title>
       <exercise label="question_SRCH_1">
         <statement>
-          <p>Suppose you are doing a sequential search of the list [15, 18, 2, 19, 18, 0, 8, 14, 19, 14].  How many comparisons would you need to do in order to find the key 18?</p>
+          <p>Suppose you are doing a sequential search of the list [15, 18, 2, 19, 18, 0, 8, 14, 19, 14].  How many comparisons would you need to do in order to search for the key 18?</p>
         </statement>
         <choices>
           <choice>
@@ -234,7 +234,7 @@ public class OrderedSequentialSearchExample {
       </exercise>
       <exercise label="question_SRCH_2">
         <statement>
-          <p>Suppose you are doing a sequential search of the ordered list [3, 5, 6, 8, 11, 12, 14, 15, 17, 18].  How many comparisons would you need to do in order to find the key 13?</p>
+          <p>Suppose you are doing a sequential search of the ordered list [3, 5, 6, 8, 11, 12, 14, 15, 17, 18].  How many comparisons would you need to do in order to search for the key 13?</p>
         </statement>
         <choices>
           <choice>
