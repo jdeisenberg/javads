@@ -470,7 +470,7 @@ null
   <p>
     <ul>
         <li><c>findSuccessor(node)</c> takes a node as its argument and returns the next node with the next-largest key, called the <term>successor</term>. This will move us through the tree one node at a time.</li>
-        <li><c>findMinimmChild(node)</c> returns the minimum key in a subtree whose root is the given node. We need this to find the smallest key in the tree as our starting point for the iterator, and also when finding a succesor.</li>
+        <li><c>findMinimumChild(node)</c> returns the minimum key in a subtree whose root is the given node. We need this to find the smallest key in the tree as our starting point for the iterator, and also when finding a succesor.</li>
     </ul>
 </p>
 
