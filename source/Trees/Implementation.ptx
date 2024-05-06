@@ -12,7 +12,7 @@
         <p><c>getRootValue()</c> returns the object stored in the current node.</p>
       </li>
       <li>
-        <p><c>setRootValue(value)</c> stores the object in parameter <c>val</c> in the current node.</p>
+        <p><c>setRootValue(value)</c> stores the object in parameter <c>value</c> in the current node.</p>
       </li>
       <li>
         <p><c>getLeftChild()</c> returns the binary tree corresponding to the left child of the current node.</p>
@@ -29,6 +29,6 @@
     </ul>
   </p>
   <p>The key decision in implementing a tree is choosing a good internal storage technique.
-            Java allows us two very interesting possibilities, and we will examine both
-            before choosing one.  We call them <em>array of arrays</em> and <em>nodes and references</em>.</p>
+            There are two very interesting possibilities, and we will examine both
+            before choosing the one that is more suited to use in Java.  We call them <em>array of arrays</em> and <em>nodes and references</em>.</p>
 </section>

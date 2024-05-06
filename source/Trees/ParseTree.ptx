@@ -85,7 +85,7 @@
       </li>
     </ol>
   </p>
-  <p>Before writing the Python code, let's look at an example of the rules
+  <p>Before writing the Java code, let's look at an example of the rules
             outlined above in action. We will use the expression
             <m>(3 + (4 * 5))</m>. We will parse this expression into the
             following array of character tokens: <c>["(", "3", "+", "(", "4", "*", "5", ")", ")"]</c>.
