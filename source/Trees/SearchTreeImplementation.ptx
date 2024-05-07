@@ -580,8 +580,8 @@ public class BinarySearchTree&lt;K extends Comparable&lt;K&gt;, V extends Compar
     <p>At last! We can now write the program in <xref ref="lst_bst-example2"/> that tests insertion, accessing nodes,  and traversal of a binary search tree. In lines&#xA0;18&#x2013;21 we iterate through the tree with a <c>for</c> loop; in lines&#xA0;25&#x2013;31 we set up an iterator of our own for use with a <c>while</c> loop.</p>
 
     <listing xml:id="lst_bst-example2">
-    <caption>Using the Binary Searh Tree</caption>
-    <program language="java" line-numbers="yes">
+    <caption>Using the Binary Search Tree</caption>
+    <program label="trees_bst_example" language="java" line-numbers="yes" interactive="activecode">
     <input>
 import java.util.Iterator;
 import java.util.NoSuchElementException;
