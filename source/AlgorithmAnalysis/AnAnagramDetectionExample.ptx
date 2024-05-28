@@ -26,9 +26,9 @@
               <p>We will get each character
                 from the first string by using the <c>charAt()</c> method and check it against the characters in
                 the array formed from the second string. If a letter is found, we check it off by setting the
-                array element to <c>-</c>. <xref ref="lst-anagramsolution"/> shows this method.</p>
-<listing xml:id = "lst-anagramsolution">
-    <program language="java" interactive="activecode">
+                array element to <c>-</c>. <xref ref="lst-ana-1"/> shows this method.</p>
+<listing xml:id = "lst-ana-1">
+    <program  label="lst-ana-1" language="java" interactive="activecode">
       <input>
 public class Anagrams1 {
 
@@ -73,7 +73,7 @@ public class Anagrams1 {
     <p>To analyze this algorithm, we need to note that each of the <em>n</em>
                 characters in <c>s1</c> will cause an iteration through up to <em>n</em>
                 characters in the list from <c>s2</c>. Each of the <em>n</em> positions in the
-                array will be visited once to match a character from <c>s1</c>. The number
+                <c>s2</c> array will be visited once to match a character from <c>s1</c>. The number
                 of visits then becomes the sum of the integers from 1 to <em>n</em>. We stated
                 earlier that this can be written as</p>
               <md><mrow>\sum_{i=1}^{n} i &amp;= \frac {n(n+1)}{2}</mrow>
@@ -81,14 +81,15 @@ public class Anagrams1 {
     <p>As <m>n</m> gets large, the <m>n^{2}</m> term will dominate the
                 <m>n</m> term and the <m>\frac {1}{2}</m> can be ignored.
                 Therefore, this solution is <m>O(n^{2})</m>.</p>
+              <p>This is a worst-case analysis, and it happens when the strings are anagrams<mdash/>the algorithm has to compare every pair of characters. If the words are not anagrams, the algorithm will exit before all the comparisons are done (as soon as a mismatch is found).</p>
   </subsection>
 
   <subsection xml:id="algorithm-analysis_anagram-detection-solution-2-sort-and-compare">
     <title>Anagram Detection Solution 2: Sort and Compare</title>
 
-    <p>Another solution to the anagram problem will make use of the fact that even though <c>s1</c> and <c>s2</c> are different, they are anagrams only if they consist of exactly the same characters. So if we begin by sorting each string alphabetically from a to z, we will end up with the same string if the original two strings are anagrams. <xref ref="lst-ana2"/> shows this solution. Again, in Java we can use a <c>sort</c> method on arrays by converting each string to an array at the start.</p>
-  <listing xml:id="lst-ana2">
-<program language="java" label="lst-ana2" interactive="activecode">
+    <p>Another solution to the anagram problem will make use of the fact that even though <c>s1</c> and <c>s2</c> are different, they are anagrams only if they consist of exactly the same characters. So if we begin by sorting each string alphabetically from a to z, we will end up with the same string if the original two strings are anagrams. <xref ref="lst-ana-2"/> shows this solution. Again, in Java we can use a <c>sort</c> method on arrays by converting each string to an array at the start.</p>
+  <listing xml:id="lst-ana-2">
+<program language="java" label="lst-ana-2" interactive="activecode">
       <input>
 import java.util.Arrays; // note the "s" at the end!
 
@@ -167,9 +168,9 @@ public class Anagrams2 {
                 particular character, we will increment the counter at that position. In
                 the end, if the two lists of counters are identical, the strings must be
                 anagrams. We will take advantage of the fact that <c>char</c> variables in Java are stored
-                as integers, and Java allows us to evaluate an expression like <c>'c'&#160;-&#160;'a'</c>, which evaluates to 2. <xref ref="lst-ana4"/> shows this solution.</p>
-<listing xml:id="lst-ana4">
-<program label="lst-ana4" language="java" interactive="activecode">
+                as integers, and Java allows us to evaluate an expression like <c>'c'&#160;-&#160;'a'</c>, which evaluates to 2. <xref ref="lst-ana-4"/> shows this solution.</p>
+<listing xml:id="lst-ana-4">
+<program label="lst-ana-4" language="java" interactive="activecode">
       <input>
 import java.util.Arrays;
 
